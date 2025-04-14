@@ -7,6 +7,8 @@ Most scripts are taken from [this](https://github.com/adam-rumpf/social-transit)
 
 To do this, GTFS data about bus travel in the Netherlands is included. Scripts that weed out data that is irrelevent for my scope are going to be made and included.
 
+_Currently, the GTFS files are to large to upload to GitHub, so will need to be processed locally. The script included will be written to work on general GTFS files taken from [this website](https://gtfs.ovapi.nl/nl/)._
+
 # Input files
 
 The C++ script uses certain inputfiles to work correctly. We will construct these files by using a python script called _TBD.py_. This file condenses the GTFS data to be only the usefull parts. The input files are structured as follows:
