@@ -8,9 +8,46 @@ To do this, GTFS data about bus travel in the Netherlands is included. Scripts t
 
 _Currently, the GTFS files are to large to upload to GitHub, so will need to be processed locally. The script included will be written to work on general GTFS files taken from [this website](https://gtfs.ovapi.nl/nl/)._
 
+
 # Input files
 
 The C++ script uses certain inputfiles to work correctly. We will construct these files by using a python script called `preprocessing.py`. This file condenses the GTFS data to be only the usefull parts. As the bulk of the code is taken from Adam Rumpf, the explantation of the code and the ouline of the input files can be found [here](https://github.com/adam-rumpf/social-transit-solver). 
+
+## GTFS data
+
+As mentioned before, the GTFS data on bus travel in the Netherlands is too large to be included. An example dataset is included in this repository to illustrate how the raw data is formatted. This dataset is created by trimming the large files and only keeping the first ~400 lines of data. The arbitrary deletion of data will probably make this dataset not functional, because routes, lines, trips, and bus-stops can not be cross-refferenced between files. It is solely included to get a vague understanding of the raw data that is used. Below is a short overview of what each file is used for, the official documentation of general GTFS data can be found [here](https://gtfs.org/documentation/schedule/reference/). 
+
+###  `agency`
+
+Lists all transit agencies that are included in the dataset. In Leiden there are two bus agencies: EBS and Qbuzz. EBS runs regional routes between cities and has a couple stops in Leiden, Qbuzz also runs regional busses, but has special lines that are completely contained within Leiden.
+
+###  `calendar_dates`
+
+Lists dates where bus service is different, like national holidays or during maintenance. As we are concerned with general planning, this file is omitted later.
+
+###  `feed_info`
+
+Contains information about the dataset, like the author and where it was found.
+
+###  `routes`
+
+Lists all routes, with certain properties like operating agency, route name and route color.
+
+###  `shapes`
+
+Lists all shapes a route can take. A shape consist of a series of points that are connected by straight lines. The order in which the points are entered in the file is the order of travel.
+
+###  `stops`
+
+Lists all bus stops with their ID, name and other properties. Exact location via coordinates is included. 
+
+###  `transfers`
+
+Connects stops or trips when transfers are possible, can give minimum transfer time for a given transfer.
+
+###  `trips`
+
+Lists all trips. Note that a route may be serviced multiple times a day, giving multiple unique trips. Contains direction and shape of trip, among other properties.
 
 
 # Output files
