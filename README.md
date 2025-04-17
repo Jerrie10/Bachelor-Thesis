@@ -11,7 +11,7 @@ _Currently, the GTFS files are to large to upload to GitHub, so will need to be 
 
 # Input files
 
-The C++ script uses certain inputfiles to work correctly. We will construct these files by using a python script called _TBD.py_. This file condenses the GTFS data to be only the usefull parts. The input files are structured as follows:
+The C++ script uses certain inputfiles to work correctly. We will construct these files by using a python script called `preprocessing.py`. This file condenses the GTFS data to be only the usefull parts. The input files are structured as follows:
 
 ## File 1
 
