@@ -8,6 +8,9 @@ To do this, GTFS data about bus travel in the Netherlands is included. Scripts t
 
 _Currently, the GTFS files are to large to upload to GitHub, so will need to be processed locally. The script included will be written to work on general GTFS files taken from [this website](https://gtfs.ovapi.nl/nl/)._
 
+# General Idea
+
+The goal of making health services more accessible by bus is reached by changing the number of busses assigned to each bus line. This has a direct effect on the frequencies each bus stop is serviced, thus having an effect on the waiting times between transfers. Because the amount of people using busses to travel to their health service is small relative to the overall amount of people using the bus for commuting, a constraint is added to limit the extra travel time for the general population. The C++ program uses a hybrid between Tabu- and Simulated anealing local search algorithms. 
 
 # Input files
 
