@@ -14,7 +14,24 @@ The goal of making health services more accessible by bus is reached by changing
 
 # Input files
 
-The C++ script uses certain inputfiles to work correctly. We will construct these files by using a python script called `preprocessing.py`. This file condenses the GTFS data to be only the usefull parts. As the bulk of the code is taken from Adam Rumpf, the explantation of the code and the ouline of the input files can be found [here](https://github.com/adam-rumpf/social-transit-solver). 
+The C++ script uses certain inputfiles to work correctly. We will construct these files by using a python script called `preprocessing.py`. This file condenses the GTFS data to be only the usefull parts. As the bulk of the code is taken from Adam Rumpf, the explantation of the code and the ouline of the input files can be found [here](https://github.com/adam-rumpf/social-transit-solver). All input files should be put in a `data/` folder. Most datafiles contain ID's to identify their entries, these are assumed to be consecutive numbers starting at `0`.
+
+### `node_data.txt`
+
+Information related to all nodes. Due to the internal network storage all population center and primary care facility nodes (types 2 and 3) must be listed in a contiguous block at the end of the node list.
+
+Contains the following columns:
+
++ `ID`: Unique identifying number. Used to reference specific nodes in the other data files.
++ `Name`: Name of the node. Most stops are simply called "Stop" followed by their ID number. Boarding nodes also append the name of their line. Population centers and primary care facilities use their real names.
++ `Type`: Node type ID. The types in use are:
+    + `0`: stop node
+    + `1`: boarding node
+    + `2`: population center
+    + `3`: primary care facility
++ `Line`: Line ID of a boarding node, and -1 otherwise.
++ `Value`: Population of a population center, facility weight of a primary care facility, and -1 otherwise
+
 
 ## GTFS data
 
