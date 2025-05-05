@@ -1,0 +1,51 @@
+﻿ID;name;frequency;starttime;number;direction
+1;1 - De Vink;2;24;1;De Vink
+2;1 - Leyhof;2;25;1;Leyhof
+3;2 - De Vink;2;2;2;De Vink
+4;2 - Oranjewijk;2;3;2;Oranjewijk
+5;3 - Leyhof;2;7;3;Leyhof
+6;3 - Broekweg;2;9;3;Broekweg
+7;4 - De Vink;2;24;4;De Vink
+8;4 - Broekweg;2;26;4;Broekweg
+9;14 - Leiden Centraal;2;11;14;Leiden Centraal
+10;14 - De Vink;2;11;14;De Vink
+11;20 - Leiden Centraal;2;17;20;Leiden Centraal
+12;20 - Vuurtorenplein;2;5;20;Vuurtorenplein
+13;21 - Leiden Centraal;2;2;21;Leiden Centraal
+14;21 - Vuurtorenplein;2;20;21;Vuurtorenplein
+15;22 - Leiden Centraal;2;21;22;Leiden Centraal
+16;22 - Nieuw Vennep, Station;2;4;22;Nieuw Vennep, Station
+17;23 - Leiden Centraal;2;9;23;Leiden Centraal
+18;23 - Picképlein;2;16;23;Picképlein
+19;30 - Leiden Centraal;1;21;30;Leiden Centraal
+20;30 - Willem vd Bergh;1;40;30;Willem vd Bergh
+21;31 - Leiden Centraal;1;51;31;Leiden Centraal
+22;31 - Willem vd Bergh;1;10;31;Willem vd Bergh
+23;38 - Leiden Centraal;1;17;38;Leiden Centraal
+24;38 - Hangaar 1;1;31;38;Hangaar 1
+25;50 - Leiden Centraal;2;24;50;Leiden Centraal
+26;50 - Meer en Duin;2;28;50;Meer en Duin
+27;55 - Starrenburg;2;18;55;Starrenburg
+28;55 - Voorhout Station;2;2;55;Voorhout Station
+29;56 - Stationsstraat;2;8;56;Stationsstraat
+30;56 - Sassenheim;2;3;56;Sassenheim
+31;169 - Leiden Centraal;2;5;169;Leiden Centraal
+32;169 - Alphen ad Rijn;2;3;169;Alphen ad Rijn
+33;182 - Leiden Centraal;2;3;182;Leiden Centraal
+34;182 - Alphen ad Rijn;2;2;182;Alphen ad Rijn
+35;183 - Corpus;1;19;183;Corpus
+36;183 - Alphen ad Rijn;1;56;183;Alphen ad Rijn
+37;187 - Leiden Centraal;2;9;187;Leiden Centraal
+38;187 - Boskoop;2;21;187;Boskoop
+39;250 - Leiden Centraal;4;7;250;Leiden Centraal
+40;250 - Haarlem;4;4;250;Haarlem
+41;365 - Leiden Centraal;2;28;365;Leiden Centraal
+42;365 - Schiphol;2;14;365;Schiphol
+43;366 - Leiden Centraal;2;8;366;Leiden Centraal
+44;366 - Leimuiden;2;4;366;Leimuiden
+45;400 - ESA Estec;4;11;400;ESA Estec
+46;400 - Zoetermeer;4;8;400;Zoetermeer
+47;401 - Boulevard Zuid;4;3;401;Boulevard Zuid
+48;401 - Zoetermeer;4;1;401;Zoetermeer
+49;410 - Leiden Centraal;4;11;410;Leiden Centraal
+50;410 - Ziekenhuis;4;9;410;Ziekenhuis

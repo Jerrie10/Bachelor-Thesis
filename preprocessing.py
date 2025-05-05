@@ -5,7 +5,13 @@ import requests
 import json
 
 
-def health_coords(inputfile, outputfile):
+def address_to_coords(inputfile, outputfile):
+    """Uses the MapQuestAPI to get coordinates of locations, based on adress
+    """
+    private = json.load(open("private.json", 'r'))
+    api_key = private['MapQuest']
+    
+    
     df = pd.read_csv(inputfile, sep=';')
     pd.set_option('display.max_rows', None)
 
@@ -13,7 +19,7 @@ def health_coords(inputfile, outputfile):
         apiAddress = str(df.at[i,'Adres'])
         
         parameters = {
-            "key": "huVtHgCHgRNOzWrZAE9bl7bN9Eak6Utz",
+            "key": api_key,
             "location": apiAddress
         }
 
@@ -46,6 +52,7 @@ def distance(x, y, taxicab=False):
 
 
 def main():
-    health_coords("healthlocations.csv", "Data/healthdata.csv")
+    address_to_coords("RawData/healthlocations.csv", "Data/healthdata.csv")
+
 
 main()
