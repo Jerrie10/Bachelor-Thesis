@@ -41,7 +41,35 @@ km_walk_time = 60/4  # minutes to walk 1km when walking 4km/h
 
 
 # Misc. data
+finite_infinity = 10000000000 # large value to use in place of infinity
+bus_capacity = 39 # seating capacity of New Flyer D40LF, could be updated to dutch standard
+type_bus = 0 # type ID to use for buses
+cost_bus = -1 # operating cost for a bus
+op_coef_names = ["Operating_Cost", "Fares"] # operator cost term names
+op_coef = [1, 1] # operator cost term coefficients
+us_coef_names = ["Riding", "Walking", "Waiting"] # user cost term names
+us_coef = [1, 1, 1] # user cost term coefficients
+assignment_fw_epsilon = -1 # assignment model cutoff epsilon
+assignment_fw_change1 = -1 # assignment model flow change cutoff
+assignment_fw_change2 = -1 # assignment model waiting change cutoff
+assignment_fw_max = 1000 # maximum assignment model iterations
+latency_names = ["alpha", "beta"] # list of latency function parameter names
+alpha = 4.0
+beta = (2*alpha-1)/(2*alpha-2)
+latency_parameters = [alpha, beta] # list of latency function parameters
+obj_names = ["Lowest", "Gravity Falloff", "Multiplier"] # obj fun par names
+obj_parameters = [8, 1.0, 1000000000] # objective function parameters
+uc_percent = 0.01 # allowed relative increase in user cost
+oc_percent = 0.01 # allowed relative increase in operator cost
+misc_names = ["Horizon"] # misc parameter names
+misc_parameters = [1440.0] # misc parameters
 
+vehicle_file = "Data/vehicle_data.txt"
+oc_file = "Data/operator_cost_data.txt"
+uc_file = "Data/user_cost_data.txt"
+assignment_file = "Data/assignment_data.txt"
+objective_file = "Data/objective_data.txt"
+problem_file = "Data/problem_data.txt"
 
 #==============================================================================
 # Functions
@@ -571,23 +599,90 @@ def network_assemble(input_stop_nodes, input_line_arcs, input_pop_nodes,
                       str(fac_links[i][j])+"\t"+str(fac_nodes[i])+"\t"+
                       str(fac_link_times[i][j]), file=fout)
 
-#TODO ---------------------------------------------------------------------------------------------
-#def transit_finalization
-#def misc_files
 # -------------------------------------------------------------------------------------------------
+def transit_finalization(transit_input, transit_output):
+    """Converts the intermediate transit data file into the final version.
+
+    Requires the names of the intermediate transit data file and the final
+    transit data file.
+
+    Data fields to be added for the final file include boarding fare, upper and
+    lower fleet size bounds, and the values of the initial line frequency and
+    capacity.
+    """
+
+    with open(transit_output, 'w') as fout:
+        # Comment line
+        print("ID\tName\tType\tFleet\tCircuit\tScaling\tLB\tUB\tFare\t"+
+              "Frequency\tCapacity", file=fout)
+        
+        routes_df = pd.read_csv(transit_input, sep=';')
+        for i, row in routes_df.iterrows():
+            labels = row['name']
+            line_type = type_bus
+            fleet = row['frequency']
+
+            # Set bounds
+            lb = min(2, fleet)
+            ub = finite_infinity
+            vcap = bus_capacity
+            # Calculate initial frequency and line capacity
+            freq = fleet/1
+            cap = vcap*freq*(1440*1)
+            # Write line
+            print(labels+"\t"+str(line_type)+"\t"+str(fleet)+"\t"+
+                    str(1)+"\t"+str(1)+"\t"+str(lb)+"\t"+
+                    str(ub)+"\t"+str(1)+"\t"+str(freq)+"\t"+
+                    str(cap), file=fout)
+
+# -------------------------------------------------------------------------------------------------
+def misc_files(vehicle_output, operator_output, user_output, assignment_output,
+               objective_output, problem_output, transit_input):
+    """Assembles various miscellaneous problem parameter files.
+
+    Requires the following output file names (and one input file) in order:
+        vehicle data
+        operator cost data
+        user cost data
+        assignment model data
+        objective function data
+        miscellaneous problem data
+        (input) transit data
+
+    Most of this process consists of simply formatting the parameters defined
+    above into the necessary output file format.
+
+    The operator and user cost data files both include placeholders for the
+    initial values of their respective functions, to be determined after
+    evaluating them for the initial network.
+    """
+
+
+    
+    pass
+
 
 def main():
     #(un)comment lines based on what needs to be processed-----------------------------------------
     # TODO rerun everything to avoid duplicate arcs/nodes
+    
     #address_to_coords(facility_raw, facility_in)
-    #facility_processing(facility_in, facility_out)
+    
+    #facility_processing(facility_in, facility_out) #redundant
+    
     #stop_processing(stop_data, time_data, route_times)
     
     #transit_processing(stop_data, route_data, route_times, line_nodes, line_arcs)
+    
     #add_walking(stop_data, line_arcs)
+        
+    #network_assemble(line_nodes, line_arcs, population_clustered, facility_in,
+    #             stop_data, final_node_data, final_arc_data)
     
+    #transit_finalization(route_data, final_transit_data)
     
-    network_assemble(line_nodes, line_arcs, population_clustered, facility_in,
-                 stop_data, final_node_data, final_arc_data)
+    misc_files(vehicle_file, oc_file, uc_file, assignment_file, objective_file,
+           problem_file, route_data)
+    
     pass
 main()
