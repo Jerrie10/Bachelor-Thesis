@@ -1,0 +1,2 @@
+Type	Name	UB	Capacity	Cost
+0	Bus_New_Flyer_D40LF	108	39	-1

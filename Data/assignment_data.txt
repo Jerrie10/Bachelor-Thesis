@@ -1,0 +1,8 @@
+Field	Value
+FW_Epsilon	-1
+FW_Flow_Epsilon	-1
+FW_Waiting_Epsilon	-1
+FW_Cutoff	1000
+Parameters	2
+alpha	4.0
+beta	1.1666666666666667

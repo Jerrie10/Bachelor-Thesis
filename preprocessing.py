@@ -657,14 +657,78 @@ def misc_files(vehicle_output, operator_output, user_output, assignment_output,
     evaluating them for the initial network.
     """
 
+    # Read transit data to calculate vehicle totals
+    bus_total = 0
+    routes_df = pd.read_csv(transit_input, sep=';')
+    for i, row in routes_df.iterrows():
+        bus_total += row['frequency']
+    print("Total of "+str(bus_total)+" buses")
 
+    # Vehicle file
+    with open(vehicle_output, 'w') as f:
+        # Comment line
+        print("Type\tName\tUB\tCapacity\tCost", file=f)
+        print(str(type_bus)+"\tBus_New_Flyer_D40LF\t"+str(bus_total)+"\t"+
+              str(bus_capacity)+"\t"+str(cost_bus), file=f)
+        
+     # Operator cost file
+    with open(operator_output, 'w') as f:
+        print("Field\tValue", file=f)
+        print("Initial\t-1", file=f)
+        print("Percent\t"+str(oc_percent), file=f)
+        print("Elements\t"+str(len(op_coef)), file=f)
+
+        # Print cost coefficients
+        for i in range(len(op_coef)):
+            print(str(op_coef_names[i])+"\t"+str(op_coef[i]), file=f)
+
+    # User cost file
+    with open(user_output, 'w') as f:
+        print("Field\tValue", file=f)
+        print("Initial\t-1", file=f)
+        print("Percent\t"+str(uc_percent), file=f)
+        print("Elements\t"+str(len(us_coef)), file=f)
+
+        # Print cost coefficients
+        for i in range(len(us_coef)):
+            print(str(us_coef_names[i])+"\t"+str(us_coef[i]), file=f)
+
+    # Assignment model parameter file
+    with open(assignment_output, 'w') as f:
+        print("Field\tValue", file=f)
+        print("FW_Epsilon\t"+str(assignment_fw_epsilon), file=f)
+        print("FW_Flow_Epsilon\t"+str(assignment_fw_change1), file=f)
+        print("FW_Waiting_Epsilon\t"+str(assignment_fw_change2), file=f)
+        print("FW_Cutoff\t"+str(assignment_fw_max), file=f)
+        print("Parameters\t"+str(len(latency_parameters)), file=f)
+
+        # Print latency function parameters
+        for i in range(len(latency_parameters)):
+            print(str(latency_names[i])+"\t"+str(latency_parameters[i]),
+                  file=f)
+
+    # Objective function parameter file
+    with open(objective_output, 'w') as f:
+        print("Field\tValue", file=f)
+        print("Elements\t"+str(len(obj_parameters)), file=f)
+
+        # Print objective function parameters
+        for i in range(len(obj_parameters)):
+            print(str(obj_names[i])+"\t"+str(obj_parameters[i]), file=f)
+
+    # Miscellaneous problem parameter file
+    with open(problem_output, 'w') as f:
+        print("Field\tValue", file=f)
+        print("Elements\t"+str(len(misc_parameters)), file=f)
+
+        # Print parameters
+        for i in range(len(misc_parameters)):
+            print(str(misc_names[i])+"\t"+str(misc_parameters[i]), file=f)
     
-    pass
 
 
 def main():
     #(un)comment lines based on what needs to be processed-----------------------------------------
-    # TODO rerun everything to avoid duplicate arcs/nodes
     
     #address_to_coords(facility_raw, facility_in)
     
@@ -681,8 +745,8 @@ def main():
     
     #transit_finalization(route_data, final_transit_data)
     
-    misc_files(vehicle_file, oc_file, uc_file, assignment_file, objective_file,
-           problem_file, route_data)
+    #misc_files(vehicle_file, oc_file, uc_file, assignment_file, objective_file, 
+    #           problem_file, route_data)
     
     pass
 main()

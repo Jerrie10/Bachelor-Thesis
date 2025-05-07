@@ -1,38 +1,38 @@
-,Name,Hoeveelheid artsen,Adres,lat,lng
-0,Wiersma-van der Hulst Huisartsen,2,"Haagweg 60, Leiden",52.15778,4.47419
-1,Huisartspraktijk Vreehof – Backes & Dekker,2,"Witte Rozenstraat 21A, Leiden",52.15357,4.48262
-2,Huisartsenpraktijk Cazander,2,"Bloemistenlaan 45A, Leiden",52.15246,4.49356
-3,Huisartsenpraktijk op 11,3,"Reina Prinsen Geerligspad 11, Leiden",52.15184,4.4537
-4,Huisartspraktijk Bevrijdingsplein,2,"Bevrijdingsplein 31, Leiden",52.1463,4.47757
-5,"Huisartsencentrum Leiden, Huisartsenpraktijk R.A. van Randeraat",1,"Oosterkerkstraat 1, Leiden",52.15898,4.50051
-6,"Jonkers en Otten, huisartsenzorg",2,"Vondellaan 35a, Leiden",52.1614,4.47292
-7,Huisartsenpraktijk W.E. Schrader,1,"Zoeterwoudsesingel 11, Leiden",52.15325,4.49153
-8,Zuiderpraktijk,3,"Lammenshansweg 15b, Leiden",52.15214,4.49412
-9,Huisartsenpraktijk Minken,4,"Bronkhorststraat 43-45, Leiden",52.16537,4.49644
-10,Huisartsenpraktijk Roomburgh,4,"Hof van Roomburgh 4, Leiden",52.15128,4.51384
-11,"De Singel Huisartsen, Praktijk Sanders",2,"Lusthoflaan 2, Leiden",52.16351,4.50396
-12,"Huisartsencentrum Leiden, Huisartsenpraktijk Bloem en Van Berkel",2,"Oosterkerkstraat 1, Leiden",52.15898,4.50051
-13,Huisartsenpraktijk Zwaan,1,"Rijnsburgerweg 163, Leiden",52.17349,4.47352
-14,Huisartsenpraktijk Meskers,2,"Robijnstraat 2b, Leiden",52.15646,4.46499
-15,"Huisartsencentrum Leiden, Huisartsenpraktijk Boels",1,"Oosterkerkstraat 1, Leiden",52.15898,4.50051
-16,Huisartsenpraktijk Stevenshof,4,"Theda Mansholtstraat 3, Leiden",52.15043,4.45544
-17,Huisartsenpraktijk Pluimgras,2,"Pluimgras 44, Leiden",52.18006,4.50288
-18,Huisartsenpraktijk Piest,2,"Cornelis Schuytlaan 9, Leiden",52.14962,4.47333
-19,Huisartspraktijk A.M. van den Braken,3,"Dieperpoelllaan 28k, Leiden",52.17281,4.48243
-20,Huisartsenpraktijk Boender,1,"Dieperpoelllaan 28, Leiden",52.17281,4.48243
-21,"Gezondheidscentrum Vondellaan, Huisartsenpraktijk De Vondel",2,"Vondellaan 35a, Leiden",52.1614,4.47292
-22,Huisartsen Centrum Roodenburg,3,"Roodenburgerstraat 1a, Leiden",52.15162,4.49858
-23,Huisartsen De Laat de Kanterstraat,3,"De Laat de Kanterstraat 32, Leiden",52.15148,4.50302
-24,Huisartsenpraktijk Vernhout,2,"Dahliastraat 26, Leiden",52.14785,4.49155
-25,Huisartsenpraktijk 't Joppe,4,"Zwartemeerlaan 44, Leiden",52.17883,4.51421
-26,Huisartsenpraktijk Wendel en van Heezik,2,"Lammenshansweg 15c, Leiden",52.15202,4.49415
-27,Huisartspraktijk A. Goslinga,1,"Lusthoflaan 2, Leiden",52.16351,4.50396
-28,Huisartsenpraktijk Zuidwest,2,"Brahmslaan 12, Leiden",52.14183,4.47082
-29,Praktijk Boshuizen,2,"Aaltje Noordewierlaan 58, Leiden",52.15019,4.47302
-30,"Gezondheidscentrum Merenwijk, Huisartsen",6,"Rosmolen 2, Leiden",52.17699,4.50479
-31,"De Singel Huisartsen, Praktijk Weijenborg",2,"Lusthoflaan 2, Leiden",52.16351,4.50396
-32,Huisartsenpraktijk Prinsenstraat,2,"Prinsenstraat 5, Leiden",52.16372,4.50274
-33,"Huisartsencentrum Leiden, Huisartsenpraktijk Siegman",3,"Oosterkerkstraat 1, Leiden",52.15898,4.50051
-34,Huisartsenpraktijk Hortus,4,"Rijn en Schiekade 16, Leiden",52.15845,4.48007
-35,Huisartsenpraktijk Vrijheidslaan,3,"Vrijheidslaan 37, Leiden",52.14804,4.48346
-36,Huisartspraktijk J. Lindenhovius,2,"Arubapad 52, Leiden",52.16645,4.50865
+Name,Hoeveelheid artsen,Adres,lat,lng
+Wiersma-van der Hulst Huisartsen,2,"Haagweg 60, Leiden",52.15778,4.47419
+Huisartspraktijk Vreehof – Backes & Dekker,2,"Witte Rozenstraat 21A, Leiden",52.15357,4.48262
+Huisartsenpraktijk Cazander,2,"Bloemistenlaan 45A, Leiden",52.15246,4.49356
+Huisartsenpraktijk op 11,3,"Reina Prinsen Geerligspad 11, Leiden",52.15184,4.4537
+Huisartspraktijk Bevrijdingsplein,2,"Bevrijdingsplein 31, Leiden",52.1463,4.47757
+"Huisartsencentrum Leiden, Huisartsenpraktijk R.A. van Randeraat",1,"Oosterkerkstraat 1, Leiden",52.15898,4.50051
+"Jonkers en Otten, huisartsenzorg",2,"Vondellaan 35a, Leiden",52.1614,4.47292
+Huisartsenpraktijk W.E. Schrader,1,"Zoeterwoudsesingel 11, Leiden",52.15325,4.49153
+Zuiderpraktijk,3,"Lammenshansweg 15b, Leiden",52.15214,4.49412
+Huisartsenpraktijk Minken,4,"Bronkhorststraat 43-45, Leiden",52.16537,4.49644
+Huisartsenpraktijk Roomburgh,4,"Hof van Roomburgh 4, Leiden",52.15128,4.51384
+"De Singel Huisartsen, Praktijk Sanders",2,"Lusthoflaan 2, Leiden",52.16351,4.50396
+"Huisartsencentrum Leiden, Huisartsenpraktijk Bloem en Van Berkel",2,"Oosterkerkstraat 1, Leiden",52.15898,4.50051
+Huisartsenpraktijk Zwaan,1,"Rijnsburgerweg 163, Leiden",52.17349,4.47352
+Huisartsenpraktijk Meskers,2,"Robijnstraat 2b, Leiden",52.15646,4.46499
+"Huisartsencentrum Leiden, Huisartsenpraktijk Boels",1,"Oosterkerkstraat 1, Leiden",52.15898,4.50051
+Huisartsenpraktijk Stevenshof,4,"Theda Mansholtstraat 3, Leiden",52.15043,4.45544
+Huisartsenpraktijk Pluimgras,2,"Pluimgras 44, Leiden",52.18006,4.50288
+Huisartsenpraktijk Piest,2,"Cornelis Schuytlaan 9, Leiden",52.14962,4.47333
+Huisartspraktijk A.M. van den Braken,3,"Dieperpoelllaan 28k, Leiden",52.17281,4.48243
+Huisartsenpraktijk Boender,1,"Dieperpoelllaan 28, Leiden",52.17281,4.48243
+"Gezondheidscentrum Vondellaan, Huisartsenpraktijk De Vondel",2,"Vondellaan 35a, Leiden",52.1614,4.47292
+Huisartsen Centrum Roodenburg,3,"Roodenburgerstraat 1a, Leiden",52.15162,4.49858
+Huisartsen De Laat de Kanterstraat,3,"De Laat de Kanterstraat 32, Leiden",52.15148,4.50302
+Huisartsenpraktijk Vernhout,2,"Dahliastraat 26, Leiden",52.14785,4.49155
+Huisartsenpraktijk 't Joppe,4,"Zwartemeerlaan 44, Leiden",52.17883,4.51421
+Huisartsenpraktijk Wendel en van Heezik,2,"Lammenshansweg 15c, Leiden",52.15202,4.49415
+Huisartspraktijk A. Goslinga,1,"Lusthoflaan 2, Leiden",52.16351,4.50396
+Huisartsenpraktijk Zuidwest,2,"Brahmslaan 12, Leiden",52.14183,4.47082
+Praktijk Boshuizen,2,"Aaltje Noordewierlaan 58, Leiden",52.15019,4.47302
+"Gezondheidscentrum Merenwijk, Huisartsen",6,"Rosmolen 2, Leiden",52.17699,4.50479
+"De Singel Huisartsen, Praktijk Weijenborg",2,"Lusthoflaan 2, Leiden",52.16351,4.50396
+Huisartsenpraktijk Prinsenstraat,2,"Prinsenstraat 5, Leiden",52.16372,4.50274
+"Huisartsencentrum Leiden, Huisartsenpraktijk Siegman",3,"Oosterkerkstraat 1, Leiden",52.15898,4.50051
+Huisartsenpraktijk Hortus,4,"Rijn en Schiekade 16, Leiden",52.15845,4.48007
+Huisartsenpraktijk Vrijheidslaan,3,"Vrijheidslaan 37, Leiden",52.14804,4.48346
+Huisartspraktijk J. Lindenhovius,2,"Arubapad 52, Leiden",52.16645,4.50865
