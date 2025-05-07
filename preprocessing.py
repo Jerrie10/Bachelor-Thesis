@@ -332,7 +332,244 @@ def add_walking(stop_file, arc_file, cutoff = 0.25):
 #def od_matrix          (need user data)
 
 # -------------------------------------------------------------------------------------------------
-#def network_assemble()
+def network_assemble(input_stop_nodes, input_line_arcs, input_pop_nodes,
+                     input_fac_nodes, input_stops, output_nodes, output_arcs, cutoff=0.25):
+    """Assembles most of the intermediate files into the final network files.
+
+    Requires the following file names in order:
+        core network nodes (stops and boarding)
+        core network arcs (line, boarding, alighting, and walking)
+        population center nodes
+        facility nodes
+        cluster coordinates
+        community area names
+        final node output
+        final arc output
+
+    Accepts an optional keyword "cutoff" for use in generating walking arcs
+    between population centers/facilities/stops. Defaults to 0.5. Represents
+    taxicab distance (miles) within wich to generate walking arcs.
+
+    The network assembly process consists mostly of incorporating the
+    population centers and facilities into the main network. This is done in
+    mostly the same way as the walking arc script, except that each facility
+    and population center is guaranteed to receive at least one walking arc,
+    which is connected to the nearest stop node if none were within the cutoff.
+    """
+
+    # Read in lists of stop IDs and coordinates
+    stop_ids = []
+    stop_coords = []
+    stop_df = pd.read_csv(input_stops, sep=';')
+    for i, row in stop_df.iterrows():
+        stop_ids.append(row['ID'])
+        stop_coords.append((float(row['lat'].replace(',', '.')), 
+                            float(row['lng'].replace(',', '.'))))
+        
+    # Read in dictionaries indexed by population center IDs to contain the
+    # population values, center names, and coordinates
+    pop_names = {}
+    populations = {}
+    pop_coords = {}
+    pop_df = pd.read_csv(input_pop_nodes, sep=';')
+    pop_id = -1
+    for i, row in pop_df.iterrows():
+        pop_id = pop_id + 1
+        populations[pop_id]=int(str(row['Inwoners']).replace('.',''))
+        pop_names[pop_id] = row['ID']
+        pop_coords[pop_id] =((float(row['lat'].replace(',', '.')), 
+                            float(row['lng'].replace(',', '.'))))
+
+    # Go through each population center and generate a dictionary of stop IDs
+    # that should be linked to each center
+    count = 0
+    pop_links = {}
+    pop_link_times = {}
+    for i in pop_coords:
+        print("Population center "+str(i))
+
+        # Continue searching until we find at least one link to add
+        effective_cutoff = cutoff
+        pop_links[i] = []
+        pop_link_times[i] = []
+        while len(pop_links[i]) == 0:
+
+            for j in range(len(stop_coords)):
+                # Calculate pairwise distance
+                dist = distance(pop_coords[i], stop_coords[j], taxicab=True)
+                if dist <= effective_cutoff:
+                    keep = True # whether to keep the current pair
+
+                    # Define corners of quadrangle
+                    lat_min = min(pop_coords[i][0], stop_coords[j][0])
+                    lat_max = max(pop_coords[i][0], stop_coords[j][0])
+                    lon_min = min(pop_coords[i][1], stop_coords[j][1])
+                    lon_max = max(pop_coords[i][1], stop_coords[j][1])
+
+                    # Scan entire stop list for stops within the quadrangle
+                    for k in range(len(stop_coords)):
+                        if k != j:
+                            if ((lat_min <= stop_coords[k][0] <= lat_max) and
+                                (lon_min <= stop_coords[k][1] <= lon_max)):
+                                # Stop found in quadrangle, making pair invalid
+                                keep = False
+                                break
+
+                    # If no stops were found in the quadrangle, then we add the
+                    # pair along with their walking time to the dictionary
+                    if keep == True:
+                        count += 1
+                        pop_links[i].append(stop_ids[j])
+                        pop_link_times[i].append(dist*km_walk_time)
+
+            # Double the effective cutoff in case the search was unsuccessful
+            # and must be repeated
+            if len(pop_links[i]) == 0:
+                effective_cutoff *= 2
+                print("No links found. Trying again with cutoff "+
+                      str(effective_cutoff))
+
+    print("Adding a total of "+str(count)+" population walking arcs.")
+
+    # Read in lists to contain the facility names, coordinates and quality
+    fac_names = []
+    fac_coords = []
+    fac_qual = []
+    fac_df = pd.read_csv(input_fac_nodes)
+    for i, row in fac_df.iterrows():
+        fac_names.append(row['Name'])
+        fac_coords.append((row['lat'], row['lng']))
+        fac_qual.append(row['Hoeveelheid artsen'])
+    
+    # Go through each facility and generate a dictionary of stop IDs that
+    # should be linked to each facility
+    count = 0
+    fac_links = {}
+    fac_link_times = {}
+    for i in range(len(fac_coords)):
+        print("Facility center "+str(i+1)+" / "+str(len(fac_coords)))
+
+        # Continue searching until we find at least one link to add
+        effective_cutoff = cutoff
+        fac_links[i] = []
+        fac_link_times[i] = []
+        while len(fac_links[i]) == 0:
+
+            for j in range(len(stop_coords)):
+                # Calculate pairwise distance
+                dist = distance(fac_coords[i], stop_coords[j], taxicab=True)
+                if dist <= effective_cutoff:
+                    keep = True # whether to keep the current pair
+
+                    # Define corners of quadrangle
+                    lat_min = min(fac_coords[i][0], stop_coords[j][0])
+                    lat_max = max(fac_coords[i][0], stop_coords[j][0])
+                    lon_min = min(fac_coords[i][1], stop_coords[j][1])
+                    lon_max = max(fac_coords[i][1], stop_coords[j][1])
+
+                    # Scan entire stop list for stops within the quadrangle
+                    for k in range(len(stop_coords)):
+                        if k != j:
+                            if ((lat_min <= stop_coords[k][0] <= lat_max) and
+                                (lon_min <= stop_coords[k][1] <= lon_max)):
+                                # Stop found in quadrangle, making pair invalid
+                                keep = False
+                                break
+
+                    # If no stops were found in the quadrangle, then we add the
+                    # pair along with their walking time to the dictionary
+                    if keep == True:
+                        count += 1
+                        fac_links[i].append(stop_ids[j])
+                        fac_link_times[i].append(dist*km_walk_time)
+
+            # Double the effective cutoff in case the search was unsuccessful
+            # and must be repeated
+            if len(fac_links[i]) == 0:
+                effective_cutoff *= 2
+                print("No links found. Trying again with cutoff "+
+                      str(effective_cutoff))
+
+    print("Adding a total of "+str(count)+" facility walking arcs.")
+
+     # Write new nodes to final output files
+    with open(output_nodes, 'w') as fout:
+        # Comment line
+        print("ID\tName\tType\tLine\tValue", file=fout)
+
+        # Copy old node file contents
+        with open(input_stop_nodes, 'r') as fin:
+            i = -1
+            nodenum = -1
+            for line in fin:
+                i += 1
+                if i > 0:
+                    # Skip comment line
+                    dum = line.split()
+                    # ID, Name, Type, Line
+                    if int(dum[0]) > nodenum:
+                        nodenum = int(dum[0])
+                    print(dum[0]+"\t"+dum[1]+"\t"+dum[2]+"\t"+dum[3]+"\t-1",
+                          file=fout)
+
+        # Write population center nodes
+        pop_nodes = {}
+        for i in pop_names:
+            nodenum += 1
+            pop_nodes[i] = nodenum
+            print(str(nodenum)+"\t"+str(i)+"_"+str(pop_names[i])+"\t"+
+                  str(nid_pop)+"\t-1\t"+str(populations[i]), file=fout)
+
+        # Write facility nodes
+        fac_nodes = []
+        for i in range(len(fac_names)):
+            nodenum += 1
+            fac_nodes.append(nodenum)
+            print(str(nodenum)+"\t"+str(fac_names[i])+"\t"+str(nid_fac)+
+                  "\t-1\t"+str(fac_qual[i]), file=fout)
+    
+    # Write new arcs to output files
+    with open(output_arcs, 'w') as fout:
+        # Comment line
+        print("ID\tType\tLine\tTail\tHead\tTime", file=fout)
+
+        # Copy old arc file contents
+        with open(input_line_arcs, 'r') as fin:
+            i = -1
+            arcnum = -1
+            for line in fin:
+                i += 1
+                if i > 0:
+                    # Skip comment line
+                    dum = line.split()
+                    # ID, Type, Line, Tail, Head, Time
+                    if int(dum[0]) > arcnum:
+                        arcnum = int(dum[0])
+                    print(line.strip(), file=fout)
+
+        # Write population center walking arcs
+        for i in pop_links:
+            for j in range(len(pop_links[i])):
+                arcnum += 1
+                print(str(arcnum)+"\t"+str(aid_walk_health)+"\t-1\t"+
+                      str(pop_nodes[i])+"\t"+str(pop_links[i][j])+"\t"+
+                      str(pop_link_times[i][j]), file=fout)
+                arcnum += 1
+                print(str(arcnum)+"\t"+str(aid_walk_health)+"\t-1\t"+
+                      str(pop_links[i][j])+"\t"+str(pop_nodes[i])+"\t"+
+                      str(pop_link_times[i][j]), file=fout)
+
+        # Write facility walking arcs
+        for i in fac_links:
+            for j in range(len(fac_links[i])):
+                arcnum += 1
+                print(str(arcnum)+"\t"+str(aid_walk_health)+"\t-1\t"+
+                      str(fac_nodes[i])+"\t"+str(fac_links[i][j])+"\t"+
+                      str(fac_link_times[i][j]), file=fout)
+                arcnum += 1
+                print(str(arcnum)+"\t"+str(aid_walk_health)+"\t-1\t"+
+                      str(fac_links[i][j])+"\t"+str(fac_nodes[i])+"\t"+
+                      str(fac_link_times[i][j]), file=fout)
 
 #TODO ---------------------------------------------------------------------------------------------
 #def transit_finalization
@@ -340,7 +577,7 @@ def add_walking(stop_file, arc_file, cutoff = 0.25):
 # -------------------------------------------------------------------------------------------------
 
 def main():
-    #(un)comment lines based on what needs to be processed
+    #(un)comment lines based on what needs to be processed-----------------------------------------
     # TODO rerun everything to avoid duplicate arcs/nodes
     #address_to_coords(facility_raw, facility_in)
     #facility_processing(facility_in, facility_out)
@@ -348,6 +585,9 @@ def main():
     
     #transit_processing(stop_data, route_data, route_times, line_nodes, line_arcs)
     #add_walking(stop_data, line_arcs)
-
+    
+    
+    network_assemble(line_nodes, line_arcs, population_clustered, facility_in,
+                 stop_data, final_node_data, final_arc_data)
     pass
 main()
