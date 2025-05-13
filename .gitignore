@@ -1,3 +1,4 @@
 *.code-workspace
 gtfs-nl/
 private.json
+.vscode/
