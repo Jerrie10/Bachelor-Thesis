@@ -1,13 +1,8 @@
 import numpy as np
 import pandas as pd
-import geopy.distance as gpd
 from scipy.spatial import Voronoi, voronoi_plot_2d
-import scipy.ndimage as ndimage
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-from matplotlib.transforms import Affine2D
 import os
-#from PIL import Image
 
 """ Program that can make illustrations of the multiple graphs 
 and maps
