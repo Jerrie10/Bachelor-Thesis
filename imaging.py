@@ -3,10 +3,13 @@ import pandas as pd
 from scipy.spatial import Voronoi, voronoi_plot_2d
 import matplotlib.pyplot as plt
 import os
+import networkx as nx
 
 """ Program that can make illustrations of the multiple graphs 
 and maps
 """
+
+
 
 # -------------------------------------------------------------------------------------------------
 def get_coords(file: str) -> list:
@@ -50,11 +53,22 @@ def draw_voronoi():
     
     plt.show()
 
-def draw_buslines():
+# -------------------------------------------------------------------------------------------------
+def make_graph() -> nx.Graph:
+    G = nx.MultiDiGraph() # Directed graph, allowing multiple arrows between vertices
+
+
+    return G
+
+# -------------------------------------------------------------------------------------------------
+def draw_graph(G: nx.Graph, outputfile: str):
     pass
 
+
+# -------------------------------------------------------------------------------------------------
 def main():
-    
+    df = pd.read_csv("Intermediate/stopID_times.csv")
+    print(df)
 
     pass
 
