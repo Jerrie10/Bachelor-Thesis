@@ -185,10 +185,19 @@ def teken_graaf(G: nx.Graph, naam: str):
 
 
 # -------------------------------------------------------------------------------------------------
-def main():
+def draw_buslines():
     import_haltes()
     import_lijnen("Intermediate/stopID_times.csv")
     G = make_graph()
     teken_graaf(G, "Images/buslijnen_pc4")
+
+
+
+# -------------------------------------------------------------------------------------------------
+def main():
+    #draw_voronoi()
+    #draw_buslines()
+    
+    pass
 
 main()
