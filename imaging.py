@@ -147,9 +147,7 @@ def draw_voronoi():
 
     points = np.array(busstop_coords)
     vor = Voronoi(points)
-    forceAspect(ax)
     voronoi_plot_2d(vor, point_size=10, ax=ax, show_vertices =False)
-    forceAspect(ax)
     plt.show()
 
 # -------------------------------------------------------------------------------------------------
@@ -222,8 +220,8 @@ def draw_buslines():
 
 # -------------------------------------------------------------------------------------------------
 def main():
-    #draw_voronoi()
-    draw_buslines()
+    draw_voronoi()
+    #draw_buslines()
     
     pass
 
