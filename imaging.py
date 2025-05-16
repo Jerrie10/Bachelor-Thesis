@@ -147,8 +147,9 @@ def draw_voronoi():
 
     points = np.array(busstop_coords)
     vor = Voronoi(points)
+    forceAspect(ax)
     voronoi_plot_2d(vor, point_size=10, ax=ax, show_vertices =False)
-    
+    forceAspect(ax)
     plt.show()
 
 # -------------------------------------------------------------------------------------------------
@@ -184,7 +185,8 @@ def teken_graaf(G: nx.Graph, naam: str):
     node_size = 10
     nx.draw_networkx_nodes(G, 
                      pos = node_pos, 
-                     node_size = node_size)
+                     node_size = node_size,
+                     node_color='k')
     
     # Teken randen 
     edges = list(G.edges(data=True, keys=True))
