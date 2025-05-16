@@ -59,6 +59,7 @@ class Buslijn:
         self.frequentie = frequentie
         '''
         self.haltes = haltes
+        self.color = tuple(np.random.random(size=3))
         Buslijn.instanties.append(self)
 
     def __str__(self):
@@ -90,17 +91,20 @@ def import_busrit(csv_bestand, naam_buslijn: str) -> dict:
 def import_lijnen(csv_bestand):
     # CSV bestand met alle buslijnen importeren
     routes = {}
-    df = pd.read_csv(csv_bestand)
-    for i, row in df.iterrows():
+    routes_df = pd.read_csv(csv_bestand)
+    for i, row in routes_df.iterrows():
         if row['route_ID'] not in routes.keys():
             routes[row['route_ID']] = {}
         routes[row['route_ID']][row['StopID']] =row['traveltime to next stop']
 
-    for lijnID in routes.keys():
-        lijn = Buslijn(row['route_ID'], row['name'], routes[lijnID])
-        for halteID in routes[lijnID].keys(): 
+    lijnen_df = pd.read_csv("Rawdata/routes.csv", sep=';')
+    for i, row in lijnen_df.iterrows():
+        ID = row['ID']
+        lijn = Buslijn(ID, row['name'], routes[ID])
+        for halteID in routes[ID].keys(): 
             halte = zoek_bushalte(halteID)
             halte.lijnen.append(lijn)
+              
         
 
 
@@ -138,7 +142,7 @@ def draw_voronoi():
     
     img = plt.imread('Images/pc4_cropped.png')
     fig, ax = plt.subplots()
-    ax.imshow(img, extent=[4.435435, 4.55486, 52.116441, 52.18667])
+    ax.imshow(img, extent=[4.435435, 4.550754, 52.116441, 52.18667])
     forceAspect(ax)
 
     points = np.array(busstop_coords)
@@ -158,28 +162,48 @@ def make_graph() -> nx.Graph:
         for i in range(1, len(halte_namen)):
             b = zoek_bushalte(halte_namen[i])
             gewicht = lijn.haltes[halte_namen[i-1]]
-            G.add_edge(a, b, weight= gewicht)
+            G.add_edge(a, b, weight= gewicht, color=lijn.color)
             a = b
 
+    
     return G
 
 # -------------------------------------------------------------------------------------------------
 def teken_graaf(G: nx.Graph, naam: str):
-    img = plt.imread('Images/pc4_cropped.png')
-    fig, ax = plt.subplots()
-    ax.imshow(img, extent=[4.435435, 4.55486, 52.116441, 52.18667])
-    forceAspect(ax)
-    
+    # Draw background
     node_pos = {}
     for h in Bushalte.instanties: node_pos.update({h : (h.plek[0], h.plek[1])})
 
+    img = plt.imread('Images/pc4_cropped.png')
+    fig, ax = plt.subplots()
+    ax.imshow(img, extent=[4.435435, 4.550754, 52.116441, 52.18667]) 
+    forceAspect(ax)
+    
+    
     # Teken knopen
+    node_size = 10
     nx.draw_networkx_nodes(G, 
                      pos = node_pos, 
-                     node_size = 20)
+                     node_size = node_size)
     
     # Teken randen 
-    nx.draw_networkx_edges(G, node_pos, arrows=False)
+    edges = list(G.edges(data=True, keys=True))
+    con_style = []
+    colors = nx.get_edge_attributes(G, 'color').values()
+    for i, (u, v, key, data) in enumerate(edges):
+        offset = 0.2 * (key + 1)
+        con_style.append(f"arc3,rad={offset}")
+        #print(f"{(u, v, key)}, Offset: {offset}")
+        #data['connectionstyle'] = f'arc3,rad={offset}'
+        #print(f"{(u, v, key, data['connectionstyle'])}")
+    nx.draw_networkx_edges(G, 
+                           node_pos, 
+                           arrows=True, 
+                           edge_color=colors, 
+                           connectionstyle=con_style,
+                           arrowstyle='-',
+                           node_size= node_size
+                            )
     
     plt.savefig(naam + ".png")
 
@@ -191,12 +215,13 @@ def draw_buslines():
     G = make_graph()
     teken_graaf(G, "Images/buslijnen_pc4")
 
+    
 
 
 # -------------------------------------------------------------------------------------------------
 def main():
     #draw_voronoi()
-    #draw_buslines()
+    draw_buslines()
     
     pass
 
