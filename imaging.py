@@ -104,10 +104,6 @@ def import_lijnen(csv_bestand):
         for halteID in routes[ID].keys(): 
             halte = zoek_bushalte(halteID)
             halte.lijnen.append(lijn)
-              
-        
-
-
 
 # -------------------------------------------------------------------------------------------------
 def get_coords(file: str) -> list:
@@ -124,6 +120,23 @@ def get_coords(file: str) -> list:
     for i, row in df.iterrows():
         coords.append([float(row['lng'].replace(",", ".")), 
                        float(row['lat'].replace(",", "."))])
+    
+    return coords
+
+def get_coords_csv(file: str) -> list:
+    """ Converts csv file to list of coordinates, needs csv file
+    with , separator and columns named 'lat', 'lng'
+    """
+    filename, file_extension = os.path.splitext(file)
+    if (file_extension) != ".csv":
+        print(f"{file} is not a csv file!")
+        return -1
+    
+    coords = []
+    df = pd.read_csv(file)
+    for i, row in df.iterrows():
+        coords.append([float(row['lng']), 
+                       float(row['lat'])])
     
     return coords
 
@@ -148,6 +161,22 @@ def draw_voronoi():
     points = np.array(busstop_coords)
     vor = Voronoi(points)
     voronoi_plot_2d(vor, point_size=10, ax=ax, show_vertices =False)
+    plt.show()
+
+def draw_gp():
+    """ Draws the locations of the different GP practices on a map of Leiden"""
+    health_coords = get_coords_csv("Intermediate/healthdata.csv")
+    img = plt.imread("Images/Gemeente_Leiden.png")
+    fig, ax = plt.subplots()
+    ax.set_xlim([4.42753, 4.53527])
+    ax.set_ylim([52.11850, 52.18488])
+    ax.imshow(img, extent=[4.42753, 4.53527, 52.11850, 52.18488])
+    forceAspect(ax)
+    
+    
+
+    points = np.array(health_coords)
+    ax.scatter(points[:, 0], points[:, 1])
     plt.show()
 
 # -------------------------------------------------------------------------------------------------
@@ -220,9 +249,9 @@ def draw_buslines():
 
 # -------------------------------------------------------------------------------------------------
 def main():
-    draw_voronoi()
+    #draw_voronoi()
     #draw_buslines()
-    
+    draw_gp()
     pass
 
 main()
