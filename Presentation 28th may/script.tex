@@ -1,0 +1,49 @@
+\documentclass{article}
+
+
+\usepackage{graphics}
+\graphicspath{{graphics/}}
+
+
+\usepackage{dsfont}
+\usepackage{amsmath}
+\newcommand{\N}{\mathds{N}}
+
+% uncomment next line to let framesubtitle have palette primary color
+%\setbeamercolor{framesubtitle}{use={palette primary},fg=palette primary.bg}
+
+% uncomment next line to remove navigation symbols from the pdf
+%\setbeamertemplate{navigation symbols}{}
+
+\title{Accessing Leiden via bus - Script}
+\author{Jeroen Ockers}
+\date{May 28th, 2025}   
+
+
+\begin{document}
+\maketitle
+The goal of my study is to make the GP's of Leiden more accessible. When a person wants to travel to their GP, they could choose to use  different modes of transport. Most people would probably take the bike or walk there, but what if one can't do that, because they have a disabbility or are old? Then one is forced to take the bus or car. In cases like this we would like to encourage bus use, because it is more sustainable and space efficient.
+
+To get to this goal we are using a study done by Rumpf and Kaul, that does the same thing, but for chicago. They made an algorithm that uses a set of origin points, given by regions, and a set of destination points, given by the GP's, and tweaks the bus schedule to maximize the accesibility of the worst regions. The new schedule should not increase the cost for users (traveltime) and travel company (operating costs). For the sake of time, i will not repeat the mathematics behind it, as i already explained in my previous presentation.
+
+\section{Applying the algortihm}
+To apply the algorithm, we need a couple of things. First, the origins and destinations of our trips. The destinations are quite easy, as the locations and qualities of the practices in Leiden is known. \emph{(The quality of a practice is taken to be the amount of huisartsen that work there. A practice with 3 GP's can process more patients per hour than a practice with only 1.)} The locations of the different practices can be seen here: img. Note that the hospitals (LUMC, Alrijne) are not included as they provide more tailored care than the general care a GP provides. 
+
+As for the origins, we deviate a bit from the methodology of Rumpf. They use the greater Chicago region into its 'sides' \emph{(img of sides)} that have their own population, given by a census poll. Each of the 31 regions has its own 'population center' where the trips originate. Each trip then needs to walk to a nearby bus stop. The problem with this is that the regions are quite large \emph{(img of Randstad, to scale)} so the amount of walkable bus stops is not representative.
+
+\subsection{PC4}
+To fix this, we compare two methods of making the regions. The first is using the pc4 regions \emph{(img of pc4)}. For these regions the population data is known. The population centers are roughly in the middle of the region. Note that these regions are quite large, but still a lot smaller than the regions chosen by Rumpf.
+
+\subsection{Voronoi}
+We can also divide these regions even more by using a Voronoi diagram, as seen here \emph{(img of voronoi)}. A voronoi diagram divides a plane in regions based on a set of weight points, we use the bus stops. Each region contains a single weight point and all other points in a given region have that weight point as the nearest weight point. This way of dividing Leiden gives an equal number of regions as bus stops. Some of the voronoi regions go over the borders of pc4 regions, so the populations needs to be calculated. We can either set each region to have an equal population, or we can assign a population amount based on their area. Note that while each trip originates at a bus stop, the trip can begin by walking to another nearby bus stop for a more optimal route, but this requires different bus stops to be close to each other.
+
+These two different regions can be used in the algorithm to see if they give different schedules and what the difference in computing time is. Choosing different origin regions ultimatly comes down to striking a balance between solution accuracy and computing time. 
+
+\section{Next steps}
+A part of the data that i could not get from the internet is user travel data. How many people travel between bus stops on an ordinary day? This data is necessary because ordinary travel time can not rise too much after rescheduling. I sent an email to Qbuzz with a request for this data and they have not yet replied. If they do not reply soon I will have to approximate this data, basing my approximation either on the current bus schedule or randomly/uniformly assigning travel demand.
+
+After getting/making data, the program can be run for the larger pc4 regions. This will give some schedule that will (hopefully) be different from the current schedule.
+
+The last research step will be to run the program for the voronoi regions, for this the populations for these regions needs to be determined.
+
+\end{document}
