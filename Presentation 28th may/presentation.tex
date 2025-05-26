@@ -55,16 +55,16 @@
   \begin{columns}
     \begin{column}{0.48\textwidth}
       \begin{itemize}
-        \item Origin - Destination points
+        \item Origin \& Destination points
         \item Small increase in cost
       \end{itemize}
     \end{column}
-
     \begin{column}{0.48\textwidth}
-    \begin{figure}
-      \centering
-      \includegraphics[width=\textwidth]{Chicago_Community_Areas.png}
-    \end{figure}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{Chicago_Community_Areas.png}
+        \caption{Chicago community areas}
+      \end{figure}
     \end{column}
   \end{columns}
 \end{frame}
@@ -85,27 +85,114 @@
 
 \end{frame}
 
-
 \begin{frame}
   \frametitle{Destinations}
-  \begin{itemize}
-    \item GP locations
-    \item Quality 
-    \item No hospitals
-  \end{itemize}
-
+  \begin{columns}
+    \begin{column}{0.28\textwidth}
+      \begin{itemize}
+        \item <1->GP locations
+        \item <2->Quality 
+        \item <3->No hospitals
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.68\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{GP_locations.png}
+        \caption{GP locations in Leiden}
+      \end{figure}
+    \end{column}
+  \end{columns}
 \end{frame}
-\subsection{PC4}
 
+\begin{frame}
+  \frametitle{Origins}
+
+  \begin{columns}
+    \begin{column}{0.38\textwidth}
+    \begin{itemize}
+      \item Chicago regions too large
+      \item <3>Two methods
+    \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics<1->[height=0.3\textheight]{Chicago_Community_Areas.png}
+        %\caption{Chicago community areas}
+      \end{figure}
+      \begin{figure}
+        \centering
+        \includegraphics<1>[height=0.3\textheight]{Gemeente_Leiden.png}
+        %\caption{<1>Leiden municipality}
+        \includegraphics<2->[height=0.3\textheight]{randstad.png}
+        %\caption{<2>Part of the Randstad to scale}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+%---------------------------------------------------------------------
+\subsection{PC4}
+\begin{frame}
+  \frametitle{PC4}
+\begin{columns}
+  \begin{column}{0.38\textwidth}
+    \begin{itemize}
+      \item <1->Postcode
+      \item <2->Origin points
+      \item <3->Population known
+      \item <4->Still quite large
+    \end{itemize}
+  \end{column}
+  \begin{column}{0.68\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics<1>[width=0.7\textwidth]{pc4_cropped.png}
+        \includegraphics<2->[width=0.7\textwidth]{center_locations.png}
+        \caption{The different postcode regions of Leiden}
+      \end{figure}
+  \end{column}
+\end{columns}
+\end{frame}
 
 \subsection{Voronoi}
-
+\begin{frame}
+  \frametitle{Voronoi}
+  \begin{columns}
+    \begin{column}{0.38\textwidth}
+      \begin{itemize}
+        \item <1>Weight points
+        \item <1>Shortest distance
+        \item <2->Busstops
+        \item <3->Approximate populations
+        \item <3->Trips start at busstop
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.68\textwidth}
+      \begin{figure}
+        \centering 
+        \includegraphics<1>[width=0.7\textwidth]{voronoi.png}
+        \includegraphics<2>[width=0.7\textwidth]{stop_locations.png}
+        \includegraphics<3>[width=0.7\textwidth]{voronoi_on_pc4_v3.png}
+        \only<2->{\caption{Busstops in Leiden}}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
 
 % ====================================================================
 \section{Next steps}
 \begin{frame}{Next steps}
     \begin{itemize}
-        \item asdf
+        \item <1->Travel data 
+        \begin{itemize}
+          \item <2->Acquire
+          \item <3->Approximate 
+        \end{itemize}
+        \item <4->Run on PC4 regioins
+        \item <5->Estimate voronoi populations
+        \item <6->Run on voronoi regions
     \end{itemize}
 \end{frame}
 

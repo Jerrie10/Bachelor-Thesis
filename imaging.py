@@ -157,7 +157,8 @@ def draw_voronoi():
     fig, ax = plt.subplots()
     ax.imshow(img, extent=[4.435435, 4.550754, 52.116441, 52.18667])
     forceAspect(ax)
-
+    plt.xticks([]) 
+    plt.yticks([]) 
     points = np.array(busstop_coords)
     vor = Voronoi(points)
     voronoi_plot_2d(vor, point_size=10, ax=ax, show_vertices =False)
@@ -174,11 +175,43 @@ def draw_gp():
     forceAspect(ax)
     
     
-
+    plt.xticks([]) 
+    plt.yticks([]) 
     points = np.array(health_coords)
     ax.scatter(points[:, 0], points[:, 1])
     plt.show()
 
+def draw_haltes():
+    """ Draws the locations of the different busstops on a map of Leiden"""
+    stop_coords = get_coords("RawData/busstops.csv")
+    img = plt.imread("Images/pc4_cropped.png")
+    fig, ax = plt.subplots()
+    #ax.set_xlim([4.42753, 4.53527])
+    #ax.set_ylim([52.11850, 52.18488])
+    ax.imshow(img, extent=[4.435435, 4.550754, 52.116441, 52.18667])
+    forceAspect(ax)
+    
+    points = np.array(stop_coords)
+    ax.scatter(points[:, 0], points[:, 1], s=15)
+    plt.xticks([]) 
+    plt.yticks([]) 
+    plt.show()
+
+def draw_comcenters():
+    """ Draws the locations of the different pc4 community centers on a map of Leiden"""
+    stop_coords = get_coords("RawData/pc4.csv")
+    img = plt.imread("Images/pc4_cropped.png")
+    fig, ax = plt.subplots()
+    #ax.set_xlim([4.42753, 4.53527])
+    #ax.set_ylim([52.11850, 52.18488])
+    ax.imshow(img, extent=[4.435435, 4.550754, 52.116441, 52.18667])
+    forceAspect(ax)
+    
+    points = np.array(stop_coords)
+    ax.scatter(points[:, 0], points[:, 1], s=15)
+    plt.xticks([]) 
+    plt.yticks([]) 
+    plt.show()
 # -------------------------------------------------------------------------------------------------
 def make_graph() -> nx.Graph:
     G = nx.MultiDiGraph() # Directed graph, allowing multiple arrows between vertices
@@ -251,7 +284,9 @@ def draw_buslines():
 def main():
     #draw_voronoi()
     #draw_buslines()
-    draw_gp()
+    #draw_gp()
+    #draw_haltes()
+    draw_comcenters()
     pass
 
 main()
