@@ -6,7 +6,11 @@
 
 \usepackage{dsfont}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{comment}
+\usepackage{mathtools}
 \newcommand{\N}{\mathds{N}}
+\newcommand{\hs}{\hspace{2mm}}
 
 % uncomment next line to let framesubtitle have palette primary color
 %\setbeamercolor{framesubtitle}{use={palette primary},fg=palette primary.bg}
@@ -46,20 +50,38 @@
 \section{Introduction}
 \begin{frame}{Make Leiden more accesible}
   \begin{itemize}
-    \item Less mobile people
-    \item Encourage bus use
+    \item <1->Current system focusses on commuters
+    \item <2->Less mobile people
+    \item <3->Encourage bus use
+    \item <4->Small proportion
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Rumpf and Kaul}
+\begin{frame}
+  \frametitle{Rumpf and Kaul}
   \begin{columns}
-    \begin{column}{0.48\textwidth}
+    \begin{column}{0.68\textwidth}
       \begin{itemize}
-        \item Origin \& Destination points
-        \item Small increase in cost
+        \item <1->Set of buslines $L$
+        \item <2->Distribution of vehicles $y$
+        \item <3->Origin \& Destination points $V^+, V^-$
+        \item <4->Small increase in cost $\varepsilon$
       \end{itemize}
+      \only<5->{
+      \begin{flalign*}
+        \text{max}_y \hspace{2mm}& \text{Access}(y)&\\
+        \text{s.t.}\hspace{2mm}
+        & \sum_{l\in L}y_l \leq \sum_{l\in L}y_l^*&\\
+        &y_l^{\text{min}} \leq y_l \leq y_l^{\text{max}} \hspace{2mm} \forall l \in L&\\
+        &y_l \in \N \hspace{15mm} \forall l\in L\only<6->{&\\
+        & x = \text{TransitAssignment}(y)&\\
+        & \text{OperatorCost}(y,x) \leq \text{OperatorCost}(y^*,x^*)&\\
+        & \text{UserCost}(x) \leq (1+\varepsilon)\text{UserCost}(x^*)&
+        }
+      \end{flalign*}
+      }
     \end{column}
-    \begin{column}{0.48\textwidth}
+    \begin{column}{0.3\textwidth}
       \begin{figure}
         \centering
         \includegraphics[width=\textwidth]{Chicago_Community_Areas.png}
@@ -71,6 +93,7 @@
 % ====================================================================
 \section{Applying the algorithm}
 % ====================================================================
+\begin{comment}
 \begin{frame}
   \frametitle{Applying the algorithm}
 
@@ -84,36 +107,43 @@
   \end{itemize}
 
 \end{frame}
+\end{comment}
 
 \begin{frame}
-  \frametitle{Destinations}
+  \frametitle{Access function}
   \begin{columns}
-    \begin{column}{0.28\textwidth}
-      \begin{itemize}
-        \item <1->GP locations
-        \item <2->Quality 
-        \item <3->No hospitals
-      \end{itemize}
-    \end{column}
     \begin{column}{0.68\textwidth}
+      \begin{align*}
+        \text{Access}(y) =& \sum_{\substack{\mathcal{K} \text{ minimum elements of }\\ {\{A_i(y)| i\in \tilde V^+\}}}} A_i(y)\\
+        A_i(y) =& \sum_{j\in\tilde V^-} \frac{S_j d_{ij}^{-\beta}(y)}{F_j(y)}  \hspace{4mm} i\in V^+\\
+        S_j, F_j(y) :& \text{ destination attributes}\\
+        d_{ij}(y):& \text{ travel time from $i$ to $j$}\\
+        \beta >&0 \text{, gravity decay parameter}
+      \end{align*}
+    \end{column}
+    \begin{column}{0.3\textwidth}
       \begin{figure}
         \centering
-        \includegraphics[width=0.9\textwidth]{GP_locations.png}
-        \caption{GP locations in Leiden}
+        \includegraphics[width=\textwidth]{Chicago_Community_Areas.png}
+        \caption{Chicago community areas}
       \end{figure}
     \end{column}
   \end{columns}
+
 \end{frame}
 
-\begin{frame}
-  \frametitle{Origins}
 
+\begin{frame}
+  \frametitle{Choosing origins}
   \begin{columns}
     \begin{column}{0.38\textwidth}
-    \begin{itemize}
-      \item Chicago regions too large
-      \item <3>Two methods
-    \end{itemize}
+      \begin{equation*}
+        \text{Access}(y) = \sum_{\substack{\mathcal{K} \text{ minimum elements of }\\ {\{A_i(y)| i\in \tilde V^+\}}}} A_i(y)
+      \end{equation*}
+      \begin{itemize}
+        \item Chicago regions too large
+        \item <3>Two methods
+      \end{itemize}
     \end{column}
     \begin{column}{0.58\textwidth}
       \begin{figure}
@@ -124,9 +154,9 @@
       \begin{figure}
         \centering
         \includegraphics<1>[height=0.3\textheight]{Gemeente_Leiden.png}
-        %\caption{<1>Leiden municipality}
+        \only<1>{\caption{Leiden municipality}}
         \includegraphics<2->[height=0.3\textheight]{randstad.png}
-        %\caption{<2>Part of the Randstad to scale}
+        \only<2->{ \caption{Part of the Randstad to scale}}
       \end{figure}
     \end{column}
   \end{columns}
@@ -138,6 +168,9 @@
   \frametitle{PC4}
 \begin{columns}
   \begin{column}{0.38\textwidth}
+    \begin{equation*}
+        \text{Access}(y) = \sum_{\substack{\mathcal{K} \text{ minimum elements of }\\ {\{A_i(y)| i\in \tilde V^+\}}}} A_i(y)
+      \end{equation*}
     \begin{itemize}
       \item <1->Postcode
       \item <2->Origin points
@@ -161,6 +194,9 @@
   \frametitle{Voronoi}
   \begin{columns}
     \begin{column}{0.38\textwidth}
+      \begin{equation*}
+        \text{Access}(y) = \sum_{\substack{\mathcal{K} \text{ minimum elements of }\\ {\{A_i(y)| i\in \tilde V^+\}}}} A_i(y)
+      \end{equation*}
       \begin{itemize}
         \item <1>Weight points
         \item <1>Shortest distance
@@ -181,12 +217,45 @@
   \end{columns}
 \end{frame}
 
+
+% ==========================================================================
+\begin{frame}
+  \frametitle{Destinations: GP locations}
+  \begin{columns}
+    \begin{column}{0.38\textwidth}
+      \begin{align*}
+        A_i(y) =& \sum_{j\in\tilde V^-} \frac{S_j d_{ij}^{-\beta}(y)}{F_j(y)}  \hspace{4mm} i\in V^+
+        \only<2->{\\
+        S_j :& \text{ facility quality}}
+        \only<3->{\\
+        F_j(y) =& \sum_{i\in\tilde V^+} P_id_{ij}^{-\beta}(y) \hspace{4mm} \forall j \in\tilde V^-}
+        \only<4->{\\
+        P_i :& \text{ population region } i}
+        \only<5->{\\
+        d_{ij}(y):& \text{ travel time from $i$ to $j$}\\
+        \beta >&0 \text{, gravity decay parameter}}
+      \end{align*}
+      \begin{itemize}
+        \item <6->No hospitals 
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{GP_locations.png}
+        \caption{GP locations in Leiden}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
 % ====================================================================
 \section{Next steps}
 \begin{frame}{Next steps}
     \begin{itemize}
-        \item <1->Travel data 
+        \item <1->Travel data $x^*$
         \begin{itemize}
+          \item <1->Needed for UserCost$(x^*)$, OperatorCost$(y^*, x^*)$, TransitAssignment$(y)$
           \item <2->Acquire
           \item <3->Approximate 
         \end{itemize}
