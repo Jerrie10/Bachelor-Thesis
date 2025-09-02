@@ -75,7 +75,7 @@
         &y_l^{\text{min}} \leq y_l \leq y_l^{\text{max}} \hspace{2mm} \forall l \in L&\\
         &y_l \in \N \hspace{15mm} \forall l\in L\only<6->{&\\
         & x = \text{TransitAssignment}(y)&\\
-        & \text{OperatorCost}(y,x) \leq \text{OperatorCost}(y^*,x^*)&\\
+        & \text{OperatorCost}(y,x) \leq (1+\varepsilon)\text{OperatorCost}(y^*,x^*)&\\
         & \text{UserCost}(x) \leq (1+\varepsilon)\text{UserCost}(x^*)&
         }
       \end{flalign*}
@@ -259,7 +259,7 @@
           \item <2->Acquire
           \item <3->Approximate 
         \end{itemize}
-        \item <4->Run on PC4 regioins
+        \item <4->Run on PC4 regions
         \item <5->Estimate voronoi populations
         \item <6->Run on voronoi regions
     \end{itemize}
