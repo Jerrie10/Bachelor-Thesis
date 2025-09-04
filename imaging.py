@@ -267,7 +267,7 @@ def teken_graaf(G: nx.Graph, naam: str):
                            node_size= node_size
                             )
     
-    plt.savefig(naam + ".png")
+    plt.savefig(naam + "_new.png")
 
 
 # -------------------------------------------------------------------------------------------------
@@ -282,10 +282,10 @@ def draw_buslines():
 
 # -------------------------------------------------------------------------------------------------
 def main():
-    #draw_voronoi()
-    #draw_buslines()
-    #draw_gp()
-    #draw_haltes()
+    draw_voronoi()
+    draw_buslines()
+    draw_gp()
+    draw_haltes()
     draw_comcenters()
     pass
 
