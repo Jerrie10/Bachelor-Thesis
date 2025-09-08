@@ -110,12 +110,14 @@ def get_coords(file: str) -> list:
     """ Converts csv file to list of coordinates, needs csv file
     with ; separator and columns named 'lat', 'lng'
     """
+    
+    coords = []
+
     filename, file_extension = os.path.splitext(file)
     if (file_extension) != ".csv":
         print(f"{file} is not a csv file!")
-        return -1
-    
-    coords = []
+        return coords
+        
     df = pd.read_csv(file, sep=';')
     for i, row in df.iterrows():
         coords.append([float(row['lng'].replace(",", ".")), 
@@ -127,12 +129,14 @@ def get_coords_csv(file: str) -> list:
     """ Converts csv file to list of coordinates, needs csv file
     with , separator and columns named 'lat', 'lng'
     """
+
+    coords = []
+
     filename, file_extension = os.path.splitext(file)
     if (file_extension) != ".csv":
         print(f"{file} is not a csv file!")
-        return -1
+        return coords
     
-    coords = []
     df = pd.read_csv(file)
     for i, row in df.iterrows():
         coords.append([float(row['lng']), 
@@ -282,11 +286,11 @@ def draw_buslines():
 
 # -------------------------------------------------------------------------------------------------
 def main():
-    draw_voronoi()
-    draw_buslines()
-    draw_gp()
-    draw_haltes()
-    draw_comcenters()
+    #draw_voronoi()
+    #draw_buslines()
+    #draw_gp()
+    #draw_haltes()
+    #draw_comcenters()
     pass
 
 main()

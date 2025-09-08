@@ -212,9 +212,9 @@ def calculate_surface(region_file, vertices_file, output_file):
         Vertices is a list of ints and area is a float in square kilometers.
     """
 
-    vertices = pd.read_csv(vertices_file)
     regions = pd.read_csv(region_file, sep=";", skipinitialspace=True)
-    
+    vertices = pd.read_csv(vertices_file, skipinitialspace=True, index_col='ID')
+
     # Using edges of picture as ruler
     # Cornerpoints: [4.435435, 4.550754, 52.116441, 52.18667]
     # 810 pixels wide = 7,5 km = 0.115319 degrees -> 0.01537587 degrees per km
@@ -335,6 +335,81 @@ def overlay_pc4_voronoi():
     plt.show()
 
 
+def overlay_border_voronoi():
+    vor_region = pd.read_csv("./Voronoi regions/vorRegionsTemp.csv", sep=';', skipinitialspace=True)
+    #vor_vertex = pd.read_csv("./Voronoi regions/voronoiVertices.csv", skipinitialspace=True)
+    vor_weightpoints = pd.read_csv("./Voronoi regions/vorPoints.csv", skipinitialspace=True)
+    #border_points = pd.read_csv("./Voronoi regions/extraVertices.csv", skipinitialspace=True)
+    pc4_region = pd.read_csv("./Voronoi regions/pc4Regions.csv", sep=';', skipinitialspace=True)
+    #pc4_vertex = pd.read_csv("./Voronoi regions/pc4Verticeslatlng.csv", sep=';')
+    vertices = pd.read_csv("./Voronoi regions/vertices.csv",
+                            skipinitialspace=True, 
+                            index_col='ID')
+
+    # Plot voronoi, with ID on weightpoints and vertices -------------------------------------------
+    fig, ax = plt.subplots()
+    ## Voronoi vertices and weightpoints
+    Xbus, Ybus, IDbus = vor_weightpoints['lat'], vor_weightpoints['lng'], vor_weightpoints['ID']
+    Xver, Yver, IDver = vertices['lat'], vertices['lng'], vertices.index
+    ax.scatter(Xver, Yver, color='lightblue')
+    for i in IDver:
+        ax.text(vertices.at[i, 'lat'], vertices.at[i, 'lng'], i, color='black', fontsize=8)
+    ax.scatter(Xbus, Ybus, color='blue')
+    for i in range(len(Ybus)):
+        ax.text(Xbus[i], Ybus[i], vor_weightpoints.at[i, 'region'], color='black', fontsize=8)
+    
+    ## Voronoi edges
+    for i, region in vor_region.iterrows():
+        points = ast.literal_eval(region['Vertices'])
+        if points == []: 
+            # Empty list representing a point at infinity
+            continue
+        X, Y = [[],[]]
+        for v in points:
+            if v == -1:
+                print(f"Found -1 in region {region}")
+                ax.plot(X, Y, c='darkgrey', alpha=1)
+                X, Y = [[],[]]
+                continue
+            X.append(vertices.at[v, 'lat'])
+            Y.append(vertices.at[v, 'lng']) 
+        X.append(vertices.at[points[0], 'lat'])
+        Y.append(vertices.at[points[0], 'lng'])
+        ax.plot(X, Y, c='darkgrey', alpha=1)
+    """
+    # Plot borderpoints over voronoi, with ID on vertices ------------------------------------------
+    Xborder, Yborder = border_points['lat'], border_points['lng']
+    ax.scatter(Xborder, Yborder, color='orange')
+    for i in range(len(Yborder)):
+        ax.text(Xborder[i], Yborder[i], str(i + 301), color='black', fontsize=8)
+    
+    # Plot pc4 over voronoi, with ID on vertices ---------------------------------------------------
+    Xpc4, Ypc4 = pc4_vertex['lat'], pc4_vertex['lng']
+    ax.scatter(Xpc4, Ypc4, color='red')
+    for i in range(len(Ypc4)):
+        ax.text(Xpc4[i], Ypc4[i], str(i + 200), color='black', fontsize=8)
+    
+    ## pc4 edges
+    for i, region in pc4_region.iterrows():
+        points = ast.literal_eval(region['Vertices'])
+        if points == []: 
+            # Empty list representing a point at infinity
+            continue
+        X, Y = [[],[]]
+        for v in points:
+            if v == -1: 
+                continue
+            X.append(pc4_vertex.at[v, 'lat'])
+            Y.append(pc4_vertex.at[v, 'lng']) 
+        X.append(pc4_vertex.at[points[0], 'lat'])
+        Y.append(pc4_vertex.at[points[0], 'lng'])
+        ax.plot(X, Y, c='dimgrey', alpha=1)
+    """
+
+    plt.ylim(52.1195913, 52.18385562)
+    plt.xlim(4.439670482, 4.52402989)
+    plt.show()
+    
 # Main =============================================================================================
 def main():
     #draw_voronoi()
@@ -344,8 +419,12 @@ def main():
     #calculate_surface("./Voronoi regions/pc4Regions.csv", 
     #                  "./Voronoi regions/pc4Verticeslatlng.csv", 
     #                  "./Voronoi regions/pc4surface.csv")
+    calculate_surface("./Voronoi regions/vorRegionsTemp.csv", 
+                      "./Voronoi regions/vertices.csv", 
+                      "./Voronoi regions/vorsurface.csv")
     #draw_regions("./Voronoi regions/pc4Regions.csv", "./Voronoi regions/pc4VerticesPixels.csv")
-    overlay_pc4_voronoi()
+    #overlay_pc4_voronoi()
+    #overlay_border_voronoi()
     pass
 
 main()
