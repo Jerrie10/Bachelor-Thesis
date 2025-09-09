@@ -50,6 +50,13 @@ def get_coords_csv(file: str) -> list:
     return coords
 
 # -------------------------------------------------------------------------------------------------
+def forceAspect(ax,aspect=1):
+    im = ax.get_images()
+    extent =  im[0].get_extent()
+    ax.set_aspect(abs((extent[1]-extent[0])/(extent[3]-extent[2]))/aspect)
+
+
+# -------------------------------------------------------------------------------------------------
 def draw_voronoi():
     """ Draws a voronoi diagram on a map of Leiden. Busstops are used as 'weightpoints' in diagram.
     Alignment is close enough, could be better.
@@ -92,7 +99,6 @@ def draw_voronoi():
      """   
     voronoi_plot_2d(vor, point_size=10, show_points=False, show_vertices =True)
     plt.show()
-
 
 # PC4 Gebieden tekenen =============================================================================
 def get_pc4_vertices():
@@ -174,31 +180,54 @@ def plot_points():
 def draw_regions(region_file, vertices_file):
     """Function that visualizes the regions made with plot_points. Does everything plot_points does
     and more."""
-    coords = get_coords_csv(vertices_file)
+    
+    regions = pd.read_csv(region_file, sep=';', skipinitialspace=True)
+    vertices = pd.read_csv(vertices_file, skipinitialspace=True, index_col='ID')
+    
+    #coords = get_coords_csv(vertices_file, sep=';', skipinitialspace=True)
     fig, ax = plt.subplots()
     img = plt.imread("./Images/pc4_cropped.png")
-    ax.imshow(img)
-    Y, X = zip(*coords)
-    
+    ax.imshow(img, extent=(4.435435, 4.550754, 52.116441, 52.18667))
+    X, Y, ID = vertices['lat'], vertices['lng'], vertices.index
+
     # Drawing point numbers
-    ax.scatter(X, Y, c='red')
-    for i in range(len(Y)):
-        ax.text(X[i], Y[i], str(i), color='black', fontsize=8)
+    ax.scatter(X, Y, c='skyblue')
+    for i in ID:
+        ax.text(vertices.at[i, 'lat'], vertices.at[i, 'lng'], i, color='black', fontsize=8)
     
     # Drawing used edges
-    regions = pd.read_csv(region_file, sep=";", skipinitialspace=True)
-    vertices = pd.read_csv(vertices_file)
-    
-    
     for i, region in regions.iterrows():
         points = ast.literal_eval(region['Vertices'])
+        if points == []: 
+            # Empty list representing a point at infinity
+            continue
         X, Y = [[],[]]
         for v in points:
+            if v == -1:
+                print(f"Found -1 in region {region}")
+                ax.plot(X, Y, c='darkgrey', alpha=1)
+                X, Y = [[],[]]
+                continue
             X.append(vertices.at[v, 'lat'])
             Y.append(vertices.at[v, 'lng']) 
         X.append(vertices.at[points[0], 'lat'])
         Y.append(vertices.at[points[0], 'lng'])
-        ax.plot(X, Y, c='blue')
+        ax.plot(X, Y, c='darkgrey', alpha=1)
+    
+    # Drawing Voronoi weight points
+    vor_weightpoints = pd.read_csv("./Voronoi regions/vorPoints.csv", skipinitialspace=True)
+    vor_surface = pd.read_csv("./Voronoi regions/vorsurface.csv", sep=';', skipinitialspace=True)
+    Xbus, Ybus, IDbus = vor_weightpoints['lat'], vor_weightpoints['lng'], vor_weightpoints['ID']    
+    ax.scatter(Xbus, Ybus, color='maroon')
+    for i in range(len(Ybus)):
+        id = vor_weightpoints.at[i, 'region']
+        if vor_surface.at[id, 'Accounted'] == 1:
+            continue
+        ax.text(Xbus[i], Ybus[i], id, color='black', fontsize=8)
+    
+    
+    plt.ylim(52.1195913, 52.18385562)
+    plt.xlim(4.439670482, 4.52402989)
     plt.show()
     
     
@@ -419,10 +448,7 @@ def main():
     #calculate_surface("./Voronoi regions/pc4Regions.csv", 
     #                  "./Voronoi regions/pc4Verticeslatlng.csv", 
     #                  "./Voronoi regions/pc4surface.csv")
-    calculate_surface("./Voronoi regions/vorRegionsTemp.csv", 
-                      "./Voronoi regions/vertices.csv", 
-                      "./Voronoi regions/vorsurface.csv")
-    #draw_regions("./Voronoi regions/pc4Regions.csv", "./Voronoi regions/pc4VerticesPixels.csv")
+    draw_regions("./Voronoi regions/vorRegionsTemp.csv","./Voronoi regions/vertices.csv")
     #overlay_pc4_voronoi()
     #overlay_border_voronoi()
     pass
