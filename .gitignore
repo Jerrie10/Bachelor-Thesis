@@ -12,3 +12,4 @@ private.json
 *.synctex.gz
 *.toc
 *.xdv
+*.bbl

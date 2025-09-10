@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{amsmath}
+\usepackage{comment}
+
+
+
+
+\usepackage[
+    backend=biber,
+    style=alphabetic
+]{biblatex}
+\addbibresource{bibliography.bib}
+
+
+
+\begin{document}
+\thispagestyle{empty}
+\include{sections/titlepage}
+
+\tableofcontents
+\newpage
+\include{sections/introduction}
+
+
+\section{Algorithm}
+This section summarizes the algorithm developed by Rumpf and Kaul in \cite{rumpf}
+
+\include{sections/acquiring data}
+
+
+
+
+\section{Results}
+
+\section{Discussion}
+
+\printbibliography
+\end{document}

@@ -1,0 +1,35 @@
+\section{Acquiring data}
+To run the algorithm, some data needs to be acquired.
+\subsection{Busstops}
+
+\subsection{Busschedule}
+
+\subsection{Destination points}
+The destination points are given by the location of general practitioners (GP's) in Leiden. The GP-offices have a location and a quality metric. A full list of GP's in Leiden can be found on \cite{zorgkaart}, including a link for each individual office's website. This also gives the location and amount of full-time employed doctors. The latter was taken as the quality of a GP-office, where more doctors would imply a higher capacity of patients and thus a higher quality.
+
+\subsection{Population}
+All trips originate from a community center. Each community center is a point, representing a region. All trips within a region are assumed to originate from that regions community center. From this center, walking arcs are made connecting nearby bus stops. Each community center has a location and a population. The location determines which busstops can be connected by a walking arc and the population is used by the algorithm to determine the amount of trips originating from a community. Two methods of dividing the municipality into regions are used and compared, namely the PC4 regions and voronoi regions.
+\subsubsection{PC4}
+Each adress in the Netherlands has a postcode, consisting of four numbers and two letters. If one only uses the four numbers, the Netherlands can be divided into pc4 regions. This division roughly resembles which areas were built at the same time.
+
+The location of each community center is taken as the rough middlepoint of the region, and the population is taken from \cite{allecijfers}.
+
+\subsubsection{Voronoi regions}
+According to \cite{wang}, travelers prefer to take a bus at the nearest bus stop, even when that involves a transfer instead of a direct route. To apply this effect on our study, the regions we choose should reflect trips that start at the closest bus stop. A voronoi diagram is the ideal method for this.
+
+A voronoi diagram is created by using a set of weightpoints in a plane, we use the busstops as weightpoints. Via an algorithm, the plane is divided in polygons. Each polygon contains exactly one weightpoint and all points in a polygon have that weightpoint as their closest weightpoint.
+
+When the plane is infinite, the outer voronoi regions will also be infinite. For this study, a border had to be drawn to limit all voronoi regions to be within the municipality of Leiden.
+
+We again need a community center location and a population. Since each bus stop is taken as a weightpoint, these also serve as the community center location. To approximate the population of each voronoi region we estimate the overlap between a voronoi- and a pc4 region. Let
+\begin{align*}
+    V       & \text{ set of voronoi regions},               \\
+    P       & \text{ set of postcode regions},              \\
+    s_v     & \text{ surface area for } v\in V,             \\
+    d_p     & \text{ population density for } p\in P,       \\
+    f(v, p) & \text{ fraction of }v \text{ that lies in }p.
+\end{align*}
+Then, the population of a voronoi region $v$ is given by
+\begin{equation*}
+    s_v \sum_{p\in P} d_p f(v,p).
+\end{equation*}
