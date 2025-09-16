@@ -1,8 +1,16 @@
 \section{Acquiring data}
-To run the algorithm, some data needs to be acquired.
-\subsection{Busstops}
+To run the algorithm, some data needs to be acquired. This section will provide the methodology of how this data was acquired, full tables of data can be found in the appendix.
+\subsection{Busses}
 
-\subsection{Busschedule}
+\subsubsection{Buslines}
+Only buslines that travel at least partially through the study area are taken into account for this study. Lines that are not entirely inside the study area are truncated to only have stops within it. The stop were such lines enter or leave the municipality are treated as starting- or ending stops, respectivily. This gives that some lines that differ outside the municipality appear identical in our study.
+\subsubsection{Busschedule}
+After the buslines were selected, a schedule was retreived from \cite{Qbuzz}. The chosen schedule was for monday the 10th of february of 2025, between 14:00 and 15:00 in the afternoon. This weekday and timeframe was chosen as a ordinary, non-rush hour time, that represents ordinary bus travel.
+
+The infromation given by a schedule is average traveltime between stops, wait time at a stop and amount of busses per line per hour. The algorithm used takes busses per line per timeframe and averages this out to arrive at the frequency of a line, where more busses per timeframe would mean a higher frequency of service.
+
+\subsubsection{Busstops}
+Traveltime between busstops was extracted from the schedule, as was their name. The other information needed was their location, so that distances between origin or destination points can be found and walking arcs could be connected between busstops, GP offices and community centers. As most busstops consist of a pair of physical locations, one for each direction, their midpoint is taken as the location of the pair overall.
 
 \subsection{Destination points}
 The destination points are given by the location of general practitioners (GP's) in Leiden. The GP-offices have a location and a quality metric. A full list of GP's in Leiden can be found on \cite{zorgkaart}, including a link for each individual office's website. This also gives the location and amount of full-time employed doctors. The latter was taken as the quality of a GP-office, where more doctors would imply a higher capacity of patients and thus a higher quality.

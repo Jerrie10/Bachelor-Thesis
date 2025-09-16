@@ -1,11 +1,14 @@
 \documentclass{article}
 \usepackage{graphicx}
 \graphicspath{{./images/}}
+\usepackage{dsfont}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{comment}
+\usepackage{mathtools}
 
-
-
+\newcommand{\hs}{\hspace{2mm}}
+\newcommand{\N}{\mathds{N}}
 
 \usepackage[
     backend=biber,
@@ -22,15 +25,9 @@
 \tableofcontents
 \newpage
 \include{sections/introduction}
-
-
-\section{Algorithm}
-This section summarizes the algorithm developed by Rumpf and Kaul in \cite{rumpf}
+\include{sections/algortithm}
 
 \include{sections/acquiring data}
-
-
-
 
 \section{Results}
 

@@ -1,0 +1,39 @@
+\section{Algorithm}
+This section summarizes the algorithm developed by Rumpf and Kaul in \cite{rumpf}. As the model and algorithm is made by them, a more detailed explanation can be found in their paper. In this section we will give a summary so the later parts of this study can be understood.
+\subsection{SAMP}
+The algorithm made by Rumpf and Kaul in \cite{rumpf} was made to solve the \emph{social access maximization problem} (SAMP). The formulation of the problem is very general as to be aplicable to many situations.
+
+Let $L$ be the set of considered transitlines, where a transitline $l\in L$ is a series of stops with a given traveltime between each stop. A schedule $y$ is a vector with $y_l \in \N$ the amount of vehicles assigned to line $l$ in a given time period. The vehicles are distributed evenly over the time period, so 5 vehicles in an hour gives 1 trip every 12 minutes.
+
+The initial schedule is denoted as $y^*$. The model has upper and lower bounds $y_l^{\text{min}} \leq y_l \leq y_l^{\text{max}} \hspace{2mm}$ for all $l\in L$. These can be set to 0 and infinity if no ristriction is needed, or both to $y^*_l$ if no change is wanted.
+
+Let $x$ be the user flow vector for the transit network, $x^*$ the initial flow vecor. User flow represents how busy parts of the network are, which is influenced by the schedule $y$ and found by the TransitAssignment$(y)$ function, which will be explained further in Section \ref{assignment}.
+
+Other restraints of the model are given by operating- and user costs with upper bounds $B_{operator},B_{user}$ respectively. Operating costs are mostly made up by monetary costs of running the transit network and monetary gain of users paying to use the service. User costs are made up of difficulty in traversing the network, be that in monetary cost or time spent in the system. More on these costs in Sections \ref{costs}.
+
+Let Access$(y)$ be a function describing the social access objective. This value only depends on the design of the network $y$ and not on user flow $x$, because the model is designed for a small group of individuals following assumption \ref{smallgroup} Different choices for Access$(y)$ are given in \ref{access}.
+
+\subsection{Transit Assignment}\label{assignment}
+
+
+\subsection{Costs}\label{costs}
+
+\subsection{Access}\label{access}
+
+\subsection{The model}
+The SAMP model then takes the shape of the following nonlinear program
+\begin{flalign}\label{model}
+    \text{max}_y \hspace{2mm}
+     & \text{Access}(y)                                                             \\
+    \text{s.t.}\hspace{2mm}
+     & \sum_{l\in L}y_l \leq \sum_{l\in L}y_l^*                                     \\
+     & y_l^{\text{min}} \leq y_l \leq y_l^{\text{max}} \hspace{2mm} \forall l \in L \\
+     & y_l \in \mathds{N}\hspace{15mm}  \forall l\in L                              \\
+     & x = \text{TransitAssignment}(y)                                              \\
+     & \text{OperatorCost}(y,x) \leq (1+\varepsilon)\text{OperatorCost}(y^*,x^*)    \\
+     & \text{UserCost}(x) \leq (1+\varepsilon)\text{UserCost}(x^*)
+\end{flalign}
+
+\subsection{TODO}
+The algortithm was designed to solve a general \textbf{Social Access Maximization Problem} or SAMP, given by
+
