@@ -6,10 +6,11 @@
 \usepackage{amssymb}
 \usepackage{comment}
 \usepackage{mathtools}
+\usepackage{hyperref}
 
 \newcommand{\hs}{\hspace{2mm}}
 \newcommand{\N}{\mathds{N}}
-
+\newcommand{\R}{\mathds{R}}
 \usepackage[
     backend=biber,
     style=alphabetic
@@ -25,13 +26,24 @@
 \tableofcontents
 \newpage
 \include{sections/introduction}
-\include{sections/algortithm}
-
+\include{sections/relevantmath}
+\include{sections/generalmodel}
+\include{sections/application}
 \include{sections/acquiring data}
 
+\section{Explanation of experiment}
 \section{Results}
 
 \section{Discussion}
+
+\begin{itemize}
+    \item intro
+    \item math theory (voronoi, tabu search)
+    \item Rumpf kaul general model (with applicationof chicago)
+    \item application on Leiden (with differences )
+    \item data used
+    \item results5
+\end{itemize}
 
 \printbibliography
 \end{document}
