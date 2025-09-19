@@ -1,6 +1,6 @@
-\section{General model}\label{sec:generalmodel}
+\chapter{General model}\label{sec:generalmodel}
 This section summarizes the general model and algorithm developed by Rumpf and Kaul in \cite{rumpf}. As the model and algorithm is made by them, a more detailed explanation can be found in their paper. In this section we will give a summary so the later parts of this study can be understood.
-\subsection{SAMP}
+\section{SAMP}
 The algorithm made by Rumpf and Kaul in \cite{rumpf} was made to solve the \emph{social access maximization problem} (SAMP). The formulation of the problem is very general as to be aplicable to many situations.
 
 Let $L$ be the set of considered transitlines, where a transitline $l\in L$ is a series of stops with a given traveltime between each stop. A schedule $y$ is a vector with $y_l \in \N$ the amount of vehicles assigned to line $l$ in a given time period. The vehicles are distributed evenly over the time period, so 5 vehicles in an hour gives 1 trip every 12 minutes.
@@ -13,7 +13,7 @@ Other restraints of the model are given by operating- and user costs with upper 
 
 Let Access$(y)$ be a function describing the social access objective. This value only depends on the design of the network $y$ and not on user flow $x$, because the model is designed for a small group of individuals following assumption \ref{assum:smallgroup} Different choices for Access$(y)$ are given in \ref{sec:access}.
 
-\subsection{Network structure}
+\section{Network structure}
 The model uses a representation of the transit network to calculate traveltime and routechoises. For this, a directed graph $G = (V,A)$ is used. $V$ is the set of all relevant nodes, be that origin-, destination-, transitstopnodes. $A$ is the set of arrows linking the nodes together, these represent different modes of travel like walking, bus- or trainriding.
 
 The node set is partitioned in subsets, each containing specific nodes. Let $V_{stop}\subset V$ contian nodes representing the physical location of transitstops. Let $V_{board}\subset V$ be the set of boarding nodes. Each stopnode $i\in V_{stop}$ has boardingnodes $j\in V_{board}$ for every line $l\in L$ that stops at that stop. Boarding nodes are used to distinguish between transitlines. Let $V^+, V^- \subset V$ be origin- and destination nodes, respectively. These represent the physical places where trips begin and end. To calculate social access, subsets $\tilde V^+, \tilde V^-\subset V$ are added, representing community and facility nodes, respectively.
@@ -27,12 +27,12 @@ Just like the node set, the arc set $A$ is partitioned in subsets. Let $A_{line}
     \caption{Example of network representation containing two lines and three stops. Each stop has nodes in $V_{stop}$. Line 1 stops at all stops and thus has three boarding nodes, line 2 only has boarding nodes at stop A and stop C. Boarding nodes are conected to their stops with boarding arcs and alighting arcs. Boarding nodes are connected by line arcs if a transitline connects their respective stops. Stop A and stop B are connected by walking arc, because they are close enough. Figure taken from \cite{rumpf}.}
 \end{figure}
 
-\subsection{Transit Assignment}\label{sec:assignment}
+\section{Transit Assignment}\label{sec:assignment}
 The transit aassignment model, TransitAssignment$(y)$, models the way daily users interact with a given schedule $y$. It assumes users try to take their optimal route, wich may not be the fastest due to overcrowdedness. The flow produced by the model is called \emph{user-optimal flow} and is often less optimal then when all flow is controlled directly.
 
 There are many such models, but Rumpf and Kaul choose the nonlinear model by Spiess and Florian in \cite{spiess}. This model increases arc cost based on crowdedness, discouraging flows from exceeding line capacity. The user-optimal flow output can not be changed in a way that individual users benefit from changes in only their route. The model is relatively simple, a desired property, as the model is run many times during the algorithm.
 
-\subsection{Costs}\label{sec:costs}
+\section{Costs}\label{sec:costs}
 Generally, operator costs are monetary costs relevant to running the transit system. Things like purchasing and maintaining vehicles, employing drivers and other staff and other costs. In this study, we restrict the total number of busses to not increase. This gives no reason to purchase new vehicles or employ more drivers, so we assume that operator costs will not increase with a new schedule. This means that we can omit the operator cost constraint from the model.
 
 User costs are time costs made by using the system. Things like travel time, wait time, number of transfers and discomfort. All the user costs can be weighted based on transfer mode, 5 minutes of walking may weigh more than 5 minutes of busriding for example. For each $(i,j)\in A$ a flow amount $x_{ij}$ and cost $c_{ij}$ can be implemented. Flow amount represents the amount of users taking that arc, while cost represents some penalty in using that arc, like time needed to traverse it. The user cost function takes the form
@@ -49,10 +49,10 @@ Due to assumption \ref{assum:smallgroup} we do not want the total user cost to i
 \end{equation*}
 When choosing $\varepsilon$, a balance needs to be found between a large increase, giving a larger set of possible solutions and possibly a more optimal one at the cost of daily user experience.
 
-\subsection{Access}\label{sec:access}
+\section{Access}\label{sec:access}
 The objective function Access$(y)$ should describe how easy it is to travel from a general community to a general facility, with a focus on equity of access. To do this, a metric is made to measure the accessibility for a specific community $i\in \tilde V^+$.
 
-The chosen metric $A_i(y)$ is \emph{gravity-based}, meaning that the attractiveness of facilities reduces gradually as distance increases. An alternative is a discrete distance based approach, where facilities $j\in \tilde V^-$ are considered only if they are within a certain distance from the source community $i$. This approach is not preferred, as facilities that lie just inside the considered radius are weighted equally to facilities that are nextdoor, and facilities that lie just a bit further are not considered at all. This is solved by including a distance function $d_{ij}(y)$, measuring time traveled from $i$ to $j$, and a gravity decay parameter $\beta >0$. A larger $\beta$ will result in a higher penalty for further travel. % Add figure to illustrate the point?
+The chosen metric $A_i(y)$ is \emph{gravity-based}, meaning that the attractiveness of facilities reduces gradually as distance increases. An alternative is a discrete distance based approach, where facilities $j\in \tilde V^-$ are considered only if they are within a certain distance from the source community $i$. This approach is not preferred, as facilities that lie just inside the considered radius are weighted equally to facilities that are nextdoor, and facilities that lie just a bit further are not considered at all. This is solved by including a distance function $d_{ij}(y)$, measuring traveltime within $G$ from $i$ to $j$, and a gravity decay parameter $\beta >0$. A larger $\beta$ will result in a higher penalty for further travel. % Add figure to illustrate the point?
 
 As the users can choose between facilities, a competition-related metric $F_j(y)$ is used to find the crowdedness of facilities. It is defined as
 \begin{equation*}
@@ -76,7 +76,7 @@ Note that the objective function will be evaluated many times, and that the $\K$
 
 The parameter $\K$ needs to be chosen between 1 and $|\tilde V^+|$, where extreme values are not benificial to the outcome. Low values for $\K$, like 1, may result in minor improvements to a single community with no regard for the relatively large effect on other communities. High values, like $|\tilde V^+|$, may result in making large improvements to the highly accessible communities at a cost of making the less eccessible communities even worse, as long as the total accessibility increases.
 
-\subsection{The model}
+\section{The model}
 The SAMP model takes the shape of the following nonlinear program
 \begin{flalign}
     \text{max}_y \hspace{2mm}
@@ -91,5 +91,4 @@ The SAMP model takes the shape of the following nonlinear program
 \end{flalign}
 Where (\ref{model:1}) is the objective function described in section \ref{sec:access}, (\ref{model:2}) constrains the total number of vehicles to not increase from the initial amount, (\ref{model:3}) ensures upper and lower bounds for vehicle allocation, (\ref{model:4}) ensures a whole number of vehicles is allocated to each line, (\ref{model:5}) defines user flow as discussed in section \ref{sec:assignment} and (\ref{model:6}) gives an upper bound to the increase in user cost.
 
-\subsection{General algorithm}
-
+\section{General algorithm}\label{sec:generalalgorithm}

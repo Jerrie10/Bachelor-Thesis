@@ -1,4 +1,5 @@
-\documentclass{article}
+\documentclass{report}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
 \usepackage{graphicx}
 \graphicspath{{./images/}}
 \usepackage{dsfont}
@@ -7,6 +8,7 @@
 \usepackage{comment}
 \usepackage{mathtools}
 \usepackage{hyperref}
+\usepackage[noEnd=true]{algpseudocodex}
 
 \newcommand{\hs}{\hspace{2mm}}
 \newcommand{\N}{\mathds{N}}
@@ -21,20 +23,25 @@
 
 \begin{document}
 \thispagestyle{empty}
-\include{sections/titlepage}
+\include{chapters/titlepage}
 
 \tableofcontents
 \newpage
-\include{sections/introduction}
-\include{sections/relevantmath}
-\include{sections/generalmodel}
-\include{sections/application}
-\include{sections/acquiring data}
+\include{chapters/introduction}
+\include{chapters/relevantmath}
+\include{chapters/generalmodel}
+\include{chapters/application}
+\include{chapters/acquiring data}
 
 \section{Explanation of experiment}
 \section{Results}
 
 \section{Discussion}
+
+\appendix
+\include{chapters/appendix}
+
+\begin{comment}
 
 \begin{itemize}
     \item intro
@@ -44,6 +51,7 @@
     \item data used
     \item results5
 \end{itemize}
+\end{comment}
 
 \printbibliography
 \end{document}

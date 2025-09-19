@@ -1,28 +1,33 @@
-\section{Acquiring data}\label{sec:acquiringdata}
-To run the algorithm, some data needs to be acquired. This section will provide the methodology of how this data was acquired, full tables of data can be found in the appendix.
-\subsection{Busses}
+\chapter{Acquiring data}\label{sec:acquiringdata}
+To run the algorithm, some data needs to be acquired. This secCtion will provide the methodology of how this data was acquired, full tables of data can be found in the appendix.
+\section{Busses}
 
-\subsubsection{Buslines}
+\subsection{Buslines}
 Only buslines that travel at least partially through the study area are taken into account for this study. Lines that are not entirely inside the study area are truncated to only have stops within it. The stop were such lines enter or leave the municipality are treated as starting- or ending stops, respectivily. This gives that some lines that differ outside the municipality appear identical in our study.
-\subsubsection{Busschedule}
+\subsection{Busschedule}
 After the buslines were selected, a schedule was retreived from \cite{Qbuzz}. The chosen schedule was for monday the 10th of february of 2025, between 14:00 and 15:00 in the afternoon. This weekday and timeframe was chosen as a ordinary, non-rush hour time, that represents ordinary bus travel.
 
 The infromation given by a schedule is average traveltime between stops, wait time at a stop and amount of busses per line per hour. The algorithm used takes busses per line per timeframe and averages this out to arrive at the frequency of a line, where more busses per timeframe would mean a higher frequency of service.
 
-\subsubsection{Busstops}
+\subsection{Busstops}
 Traveltime between busstops was extracted from the schedule, as was their name. The other information needed was their location, so that distances between origin or destination points can be found and walking arcs could be connected between busstops, GP offices and community centers. As most busstops consist of a pair of physical locations, one for each direction, their midpoint is taken as the location of the pair overall.
 
-\subsection{Destination points}
+\section{Destination points}
 The destination points are given by the location of general practitioners (GP's) in Leiden. The GP-offices have a location and a quality metric. A full list of GP's in Leiden can be found on \cite{zorgkaart}, including a link for each individual office's website. This also gives the location and amount of full-time employed doctors. The latter was taken as the quality of a GP-office, where more doctors would imply a higher capacity of patients and thus a higher quality.
 
-\subsection{Population}
+\section{Population}
 All trips originate from a community center. Each community center is a point, representing a region. All trips within a region are assumed to originate from that regions community center. From this center, walking arcs are made connecting nearby bus stops. Each community center has a location and a population. The location determines which busstops can be connected by a walking arc and the population is used by the algorithm to determine the amount of trips originating from a community. Two methods of dividing the municipality into regions are used and compared, namely the PC4 regions and voronoi regions.
-\subsubsection{PC4}
+\subsection{PC4}
 Each adress in the Netherlands has a postcode, consisting of four numbers and two letters. If one only uses the four numbers, the Netherlands can be divided into pc4 regions. This division roughly resembles which areas were built at the same time.
 
 The location of each community center is taken as the rough middlepoint of the region, and the population is taken from \cite{allecijfers}.
 
-\subsubsection{Voronoi regions}
+\subsection{Voronoi regions}
+\begin{comment}
+TODO:
+- rewrite refferencing section 2
+- note that euclidean disctance is used, where obstacles like large buildings or impassable canals are ignored under the assumption that these are distributed equally across the region
+\end{comment}
 According to \cite{wang}, travelers prefer to take a bus at the nearest bus stop, even when that involves a transfer instead of a direct route. To apply this effect on our study, the regions we choose should reflect trips that start at the closest bus stop. A voronoi diagram is the ideal method for this.
 
 A voronoi diagram is created by using a set of weightpoints in a plane, we use the busstops as weightpoints. Via an algorithm, the plane is divided in polygons. Each polygon contains exactly one weightpoint and all points in a polygon have that weightpoint as their closest weightpoint.

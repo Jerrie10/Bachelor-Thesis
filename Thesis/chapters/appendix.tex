@@ -1,0 +1,116 @@
+\chapter{Pseudocode}
+The pseudocode for the soluion algorithm discussed in section \ref{sec:generalalgorithm}, directly taken from \cite{rumpf}.
+
+$x$ represents the entirety of the flow vector. The vector $e_l \in \{0,1\}^{|L|}$ represents a vector with a 1 in coordinate $l$ and 0 elsewhere. Sets $\tilde N^+, \tilde N^-, \tilde N^\times$ represent the ADD, DROP and SWAP neighbors kept as candidates after the first pass of the neighborhood search, respectively, while $N^+, N^-, N^\times$ are the second-pass candidates. Bounds $\tilde N_{\text{max}}, N_{\text{max}}$ are the required numbers of candidates to be gathered during each pass. $Q^{\text{max}}_{\text{in}}, Q^{\text{max}}_{\text{out}}$ are the inner and outer nonimprovement counter bounds, respectively.
+
+\begin{algorithmic}[1]
+    \State // INITIALIZATION
+    \State \quad $y^{(0)} \gets y^*$ \Comment{current real-world fleete sizes}
+    \State \quad $y_{\text{best}} \gets y^{(0)}$\Comment{best known solution and objective}
+    \State \quad BestAccess $\gets$ Access$(y^{(0)})$\Comment{best known objective}
+    \State \quad STM $\gets \emptyset$\Comment{tabu move list, equipped with tabu tenures}
+    \State \quad LTM $\gets \emptyset$ \Comment{attractive solution set}
+    \State \quad $T \gets T_0$\Comment{simulated annealing temperature}
+    \State \quad $t \gets t_0$\Comment{tabu tenure}
+    \State \quad $Q_{\text{in}} \gets 0$\Comment{inner noninmrovement counter}
+    \State \quad $Q_{\text{out}} \gets 0$\Comment{outer noninmrovement counter}
+    \For{$k = 1, \dots, K$} \Comment{search for a predetermined number $K$ of local moves}
+    \State // NEIGHBORHOOD SEARCH
+    \State $\tilde N^+ \gets \emptyset$ \Comment{tentative ADD neighborhood}
+    \Repeat \Comment{first pass (ADD)}
+    \State $l \gets$ random element of $L$ not yet considered during this loop
+    \If{$y^{(k)} + e_l$ satisfies vehicle limit bounds (\ref{model:1} - \ref{model:3})} \Comment{consider only design-fesible moves}
+    \If{$e_l \notin$ STM or Access$(y^{(k)} + e_l) >$ BestAccess}
+    \State $\tilde N^+ \gets \tilde N^+ \cup \{l\}$\Comment{keep non-tabu candidates (unless improved best)}
+    \EndIf
+    \EndIf
+    \Until{$|\tilde N^+| \geq \tilde N_{\text{max}}$ or all lines in $L$ have been considered}
+    \State $N^+ \gets \emptyset$ \Comment{final ADD neighborhood}
+    \Repeat
+    \State $l\gets $ unprocessed element of $\tilde N^+$ with maximum Access$(y^{(k)} +e_l$)
+    \State $x^{(k)} \gets $ TransitAssignment$(y^{(k)}+e_l)$\Comment{calculate user flows for given move}
+    \If{$(y^{(k)} +e_l, x^{(k)})$ satisfy operator and user cost constraints (\ref{model:5} - \ref{model:6})}
+    \State $N^+ \gets N^+ \cup \{l\}$\Comment{keep only feasible candidates}
+    \EndIf
+    \Until{$|N^+|\geq N_{\text{max}}$ or all lines in $\tilde N^+$ have been processed}
+    \State $\tilde N ^- \gets \emptyset$ \Comment{tentative DROP neighborhood}
+    \Repeat \Comment{first pass (DROP)}
+    \State$l\gets $random element of $L$ not yet considered during this loop
+    \If{$y^{(k)} - e_l$ satisfies vehicle limit bounds (\ref{model:1} - \ref{model:3})} \Comment{consider only design-fesible moves}
+    \If{$-e_l \notin$ STM or Access$(y^{(k)} - e_l) >$ BestAccess}
+    \State $\tilde N^- \gets \tilde N^- \cup \{l\}$\Comment{keep non-tabu candidates (unless improved best)}
+    \EndIf
+    \EndIf
+    \Until{$|\tilde N^-| \geq \tilde N_{\text{max}}$ or all lines in $L$ have been considered}
+    \State $N^- \gets \emptyset$ \Comment{final DROP neighborhood}
+    \Repeat
+    \State $l\gets $ unprocessed element of $\tilde N^-$ with maximum Access$(y^{(k)} -e_l$)
+    \State $x^{(k)} \gets $ TransitAssignment$(y^{(k)}-e_l)$\Comment{calculate user flows for given move}
+    \If{$(y^{(k)} -e_l, x^{(k)})$ satisfy operator and user cost constraints (\ref{model:5} - \ref{model:6})}
+    \State $N^- \gets N^- \cup \{l\}$\Comment{keep only feasible candidates}
+    \EndIf
+    \Until{$|N^-|\geq N_{\text{max}}$ or all lines in $\tilde N^-$ have been processed}
+    \If{$|N^+| = |N^-| = 0$}\Comment{handle the event of a failed search}
+    \If{bounds $\tilde N_{\text{max}}$ were used in the previous neighborhood search}
+    \State restart neighborhood search while ignoring the bounds $\tilde N_{\text{max}}$
+    \Else
+    \State $Q_{\text{out}} \gets Q_{\text{out}} +1$ \Comment{work towards diversification}
+    \State delete from STM the tabu rule with the shortest remaining tenure
+    \State restart neighborhood search
+    \EndIf
+    \EndIf
+    %47
+    \State $\tilde N^\times \gets \{(m,l)\in N^- \times N^+ : z_m = z_l\}$ \Comment{set of all compatible DROP/ADD pairs}
+    \State $N^\times \gets \emptyset$ \Comment{final SWAP neighborhood}
+    \Repeat
+    \State $(m,l)\gets $unprocessed element of $N^\times$ with maximum Access$(y^{(k)} - e_m)+$ Access $(y^{(k)} + e_l)$
+    \State $x^{(k)}\gets $ TransitAssignment$(y^{(k)} - e_m +e_l)$
+    \If{$y^{(k)} - e_m +e_l, x^{(k)}$ satisfy operator and user cost constraints (\ref{model:5} - \ref{model:6})}
+    \State $N^\times \gets N^\times \cup \{(m,l)\}$\Comment{keep only feasible candidates}
+    \EndIf
+    \Until{$|N^\times| \geq N_{\text{max}}$ or all moves in $\tilde N^\times$ have been processed}
+    %56
+    \State $\tilde y^{(k,1)} \gets $ element of $N^+ \cup N^-\cup N^times$ with greatest access \Comment{returning two best neighbors}
+    \State $\tilde y^{(k,2)} \gets $ element of $N^+ \cup N^-\cup N^times$ with second-greatest access
+    \State // NEIGHBOR PROCESSING
+    \If{Access$(\tilde y^{(k,1)})$ - Access$(\tilde y^{(k)})> $}
+    \State $Q_{\text{out}} \gets 0$\Comment{improvement iteration}
+    \State $t\gets t_0$
+    \State $y^{(k,1)} \gets \tilde y^{(k,1)}$ \Comment{move to improving neighbor}
+    \State add rules with tenure $t$ to STM to prevent undoing the DROP/ADD moves of $y^{(k, 1)}$
+    \If{Access$(\tilde y^{(k,1)})$> BestAccess}
+    \State $y_{\text{best}}\gets \tilde y^{(k,1)}$\Comment{update best known solution}
+    \State BestAccess $\gets$ Access$(\tilde y^{(k,1)})$
+    \EndIf
+    \Else%67 
+    \State $Q_{\text{out}} \gets Q_{\text{out}} +1$ \Comment{nonimprovement iteration}
+    \State $Q_{\text{in}} \gets Q_{\text{in}} +1$
+    \State $r \sim U[0,1]$\Comment{random variable drawn uniformly from $[0,1]$}
+    \If{$r <\text{exp}\{-[\text{Access}(y^{(k)}) - \text{Access}(\tilde y^{(k, 1)})]/T\}}$
+    \State increment $t$ \Comment{SA criterion passed}
+    \State $y^{(k+1)} \gets \tilde y^{(k,1)}$ \Comment{move to non-improving neighbor}
+    \State make undoing the DROP/ADD moves of $y^{(k+1)}$ tabu with tenure $t$
+    \State $Q_{\text{in}} \gets 0$
+    \State LTM $\gets$ LTM $\cup\{\tilde y^{(k,2)}\}$ \Comment{keep second-best neighbor as an attractive solution}
+    \Else
+    \State LTM $\gets$ LTM $\cup\{\tilde y^{(k,1)}\}$ \Comment{keep best neighbor as an attractive solution}
+    \EndIf
+    \EndIf
+    \State // UPKEEP %79
+    \If{$Q_{\text{in}} \geq Q_{\text{in}}^{\text{max}}$}
+    \State $Q_{\text{in}} \gets 0$\Comment{attempt to diversify}
+    \State $Q_{\text{out}} \gets Q_{\text{out}} +1$
+    \State $y\gets $ randomly chosen element of LTM
+    \State LTM $\gets$ LTM $ \backslash \{y\}$
+    \State $y^{(k+1)} \gets y$\Comment{move to a random attractive solution}
+    \State increment $t$
+    \EndIf
+    \If{$Q_{\text{out}} \geq Q_{\text{out}}^{\text{max}}$}
+    \State $t\gets t_0$\Comment{attempt to intensify}
+    \EndIf
+    \State remove moves from STM whose tenures have elapsed
+    \State apply cooling schedule to $T$
+    \EndFor
+    \State \Return $(y_\text{best}, \text{BestAcess})$
+\end{algorithmic}
+After the algortihm terminates and we obtain the best known solution, we conduct an exhaustive local search starting at $y_\text{best}$. In each iteration of this local search we consider every possible ADD, DROP, and SWAP move without considering tabu rules, always taking the best neighbor and terminating when no neighbors offer any improvement. The final result is guaranteed to be locally optimal.

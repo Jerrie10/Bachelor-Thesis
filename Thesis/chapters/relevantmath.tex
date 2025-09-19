@@ -1,0 +1,30 @@
+\chapter{Relevant mathematics}\label{sec:relevantmath}
+\section{Voronoi}
+Following the definition in \cite{voronoibook}, a voronoi diagram is given by a set $\Phi = \{x_i\}$ of weightpoints in a metric space $X$.  Each weightpoint generates a region
+\begin{equation*}
+    C(x_i | \Phi) = \{y\in X:  d(x_i, y)  \leq
+    d(x_j,y) \hs \forall x_j \in \Phi\}
+\end{equation*}
+where $d$ denotes some distance function. It follows that each voronoi region $C(x_i|\Phi)$ contains all points that have $x_i$ as nearest weightpoint.
+
+Applications of voronoi diagrams can be found in many fields. Consider for example the placement of automated external defibrillator (AED) boxes in a city. An even spread of these boxes would theoretically save the most people. The positions of these boxes could be used as weightpoints, with the euclidian distance in $\R^2$. This results in a voronoi diagram where smaller regions represent boxes that are relativily close to each other, while larger regions represent boxes that are far from others. This information could be used to move or add boxes, and thus getting a more even distribution.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{vorGorlaeus.jpg}
+    \caption{Entrance of Gorlaeus building of Leiden University, with voronoi diagram as decoration. Picture taken from \cite{vorGorlaeus}.}
+\end{figure}
+
+\section{Neighborhood search algorithms}
+When a optimization problem has a large but finite solution space, a method of traversing possible solutions is a neighborhood search (NS) procedure. Given a solution space $S$, a neighborhood function $N: S \rightarrow \mathcal{P}$ and a feasible solution $s\in S$, a neighborhood $N(s)$ of $s$ can be found. This contains all feasible solutions that can be reached from $s$ after doing one \emph{move}.
+
+General NS algorithms are heuristic approaches and use a starting solution $s^*$ and try to find a solution in $N(s^*)$ that has a more optimal value than $s^*$. If such solution $s$ exists, a new iteration is done where a more optimal solution is sought in $N(s)$. This iteration loops until a solution does not have a more optimal solution in its neighborhood.
+
+NS algorithms have no method of leaving local optima, and thus get stuck often. To prevent this behaviour, many methods haven been developed. We dicuss two of those methods, both relying on making suboptimal moves. Just like NS, these are heuristic approaches to optimization problems.
+
+\subsection{Tabu search}
+Tabu Search (TS) is a NS algorithm that uses \emph{Tabu lists} to escape local maxima. Visited solutions or executed moves are stored in \emph{short-term memory} (STM) and can`t be revisited or redone for a small number of iterations, this is to prevent cycling. The length of time that solutions/moves are stored in STM is dependent on \emph{Tabu tenures}. \emph{Long-term memory} (LTM) is used to store solutions with a good objective value, so they, and their neighbors, can be revisited after the algorithm becomes trapped.
+
+\emph{Tenures} can be adjusted dynamically while running the algorithm. This is to allow a greater focus on \emph{diversification}, the exploring of many different solutions, or on \emph{intensification}, the exploiting of good solutions.
+
+\subsection{Simulated annealing}
+Simulated Annealing (SA) is named after a technique in metallurgy where a material is heated and cooled in a controlled fashion, resulting in a change in physical properties. SA uses the same iteration as a basic NS algorithm, comparing different neighbors to choose a good next move. When choosing a next step, a teperature parameter $T$ is used to randomly choose a worse option. This parameter decreases while running, resulting in erratic moves in the beginning and more controlled moves towards the end of running.
