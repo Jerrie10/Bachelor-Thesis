@@ -45,7 +45,7 @@ km_walk_time = 60/4  # minutes to walk 1km when walking 4km/h
 
 # Misc. data
 finite_infinity = 10000000000 # large value to use in place of infinity
-bus_capacity = 39 # seating capacity of New Flyer D40LF, could be updated to dutch standard
+bus_capacity = 50 # seating capacity of Iveco Crossway EV 13m
 type_bus = 0 # type ID to use for buses
 cost_bus = -1 # operating cost for a bus
 op_coef_names = ["Operating_Cost", "Fares"] # operator cost term names

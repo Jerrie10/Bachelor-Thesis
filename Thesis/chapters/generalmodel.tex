@@ -92,3 +92,13 @@ The SAMP model takes the shape of the following nonlinear program
 Where (\ref{model:1}) is the objective function described in section \ref{sec:access}, (\ref{model:2}) constrains the total number of vehicles to not increase from the initial amount, (\ref{model:3}) ensures upper and lower bounds for vehicle allocation, (\ref{model:4}) ensures a whole number of vehicles is allocated to each line, (\ref{model:5}) defines user flow as discussed in section \ref{sec:assignment} and (\ref{model:6}) gives an upper bound to the increase in user cost.
 
 \section{General algorithm}\label{sec:generalalgorithm}
+The SAMP model can be solved heuristically with the following algorithm. It is a combination of \emph{Tabu search} (TS) and \emph{Simmulated annealing} (SA), two versions of neigborhood search mentioned in sections \ref{sec:tabu} and \ref{sec:simann}. Full pseudocode can be found in appendix \ref{app:pseudocode}.
+
+Using the current transitschedule as a starting point, a neighborhood search is conducted, where neighbors of a solution $s$ are defined as valid solutions that differ only from $s$ by removing one vehicle from a transitline, and adding that vehicle to another line.
+
+During each iteration, the two best neighbors are determined. The best neighbor is chosen as the solution for the next iteration, unless the SA process forces the second best option to be chosen. The option that is not chosen gets put in \emph{long term memory} to be revisited later, while the adding/removing vehicle moves are put in \emph{short term memory} to not be repeated soon, according to TS.
+
+The chance that suboptimal neighbors are chosen is determined by a temperature parameter $T$, that decreases while the algorithm is running. This ensures more erratic exploration at the start of the algortihm and more exploitation of good solutions towards the end.
+
+After a predetermined amount of iterations is completed, all solutions in the long term memory and their neighbors are revisited. The most optimal solution that is found is then locally optimal.
+

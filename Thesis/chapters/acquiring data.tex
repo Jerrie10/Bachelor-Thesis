@@ -1,9 +1,9 @@
 \chapter{Acquiring data}\label{sec:acquiringdata}
-To run the algorithm, some data needs to be acquired. This secCtion will provide the methodology of how this data was acquired, full tables of data can be found in the appendix.
+To run the algorithm, some data needs to be acquired. This section will provide the methodology of how this data was acquired, full tables of data can be found in the appendix.
 \section{Busses}
 
 \subsection{Buslines}
-Only buslines that travel at least partially through the study area are taken into account for this study. Lines that are not entirely inside the study area are truncated to only have stops within it. The stop were such lines enter or leave the municipality are treated as starting- or ending stops, respectivily. This gives that some lines that differ outside the municipality appear identical in our study.
+Only buslines that travel at least partially through the study area are taken into account for this study. Lines that are not entirely inside the study area are truncated to only have stops within it. The stop were such lines enter or leave the municipality are treated as starting- or ending stops, respectivily. This gives that some lines that differ outside the municipality appear identically in our study.
 \subsection{Busschedule}
 After the buslines were selected, a schedule was retreived from \cite{Qbuzz}. The chosen schedule was for monday the 10th of february of 2025, between 14:00 and 15:00 in the afternoon. This weekday and timeframe was chosen as a ordinary, non-rush hour time, that represents ordinary bus travel.
 
@@ -46,3 +46,5 @@ Then, the population of a voronoi region $v$ is given by
 \begin{equation*}
     s_v \sum_{p\in P} d_p f(v,p).
 \end{equation*}
+
+

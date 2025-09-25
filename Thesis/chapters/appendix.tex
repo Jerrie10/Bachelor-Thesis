@@ -1,4 +1,4 @@
-\chapter{Pseudocode}
+\chapter{Pseudocode} \label{app:pseudocode}
 The pseudocode for the soluion algorithm discussed in section \ref{sec:generalalgorithm}, directly taken from \cite{rumpf}.
 
 $x$ represents the entirety of the flow vector. The vector $e_l \in \{0,1\}^{|L|}$ represents a vector with a 1 in coordinate $l$ and 0 elsewhere. Sets $\tilde N^+, \tilde N^-, \tilde N^\times$ represent the ADD, DROP and SWAP neighbors kept as candidates after the first pass of the neighborhood search, respectively, while $N^+, N^-, N^\times$ are the second-pass candidates. Bounds $\tilde N_{\text{max}}, N_{\text{max}}$ are the required numbers of candidates to be gathered during each pass. $Q^{\text{max}}_{\text{in}}, Q^{\text{max}}_{\text{out}}$ are the inner and outer nonimprovement counter bounds, respectively.
@@ -113,4 +113,12 @@ $x$ represents the entirety of the flow vector. The vector $e_l \in \{0,1\}^{|L|
     \EndFor
     \State \Return $(y_\text{best}, \text{BestAcess})$
 \end{algorithmic}
+
 After the algortihm terminates and we obtain the best known solution, we conduct an exhaustive local search starting at $y_\text{best}$. In each iteration of this local search we consider every possible ADD, DROP, and SWAP move without considering tabu rules, always taking the best neighbor and terminating when no neighbors offer any improvement. The final result is guaranteed to be locally optimal.
+
+\chapter{Data used}
+\section{Busschedule}\label{app:schedule}
+\section{Busstops}\label{app:stops}
+\section{General Practitioners}\label{app:gp}
+\section{Communities}\label{app:communities}
+\section{Travel data}\label{app:traveldata}
