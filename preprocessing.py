@@ -384,13 +384,6 @@ def add_walking(stop_file, arc_file, cutoff = 0.25):
 
     pass
 
-
-#TODO ---------------------------------------------------------------------------------------------
-#def cluster_boarding   (need user data)
-#def gamma              (need user data)
-#def all_times          (need user data)
-#def od_matrix          (need user data)
-
 # -------------------------------------------------------------------------------------------------
 def network_assemble(input_stop_nodes, input_line_arcs, input_pop_nodes,
                      input_fac_nodes, input_stops, output_nodes, output_arcs, cutoff=0.25):
