@@ -1,4 +1,4 @@
-﻿ID;Halte;lat;lng
+ID;Halte;lat;lng
 1;Albinusdreef, Leiden;52,170112;4,476591
 2;Alrijne Ziekenhuis, Leiden;52,173307;4,481789
 3;Anne Frankweg, Leiden;52,150761;4,456047
@@ -100,3 +100,23 @@
 99;Zwartemeerlaan, Leiden;52,167034;4,511677
 100;Zweilandlaan, Leiden;52,172564;4,486935
 101;Zwembad de Zijl, Leiden;52,167034;4,511677
+102;Vuurtorenplein, Noordwijk;52,247917;4,434715
+103;Nieuw Vennep, Station;52,2591382;4,6448461
+104;Pickeplein, Noordwijk;52,240687;4,432088
+105;Willem vd Bergh, Noordwijk;52,218883;4,433316
+106;Hangaar 1, Katwijk;52,170541;4,411106
+107;Meer en Duin, Lisse;52,27075;4,562952
+108;Starrenburg, Voorschoten;52,115213;4,447137
+109;Voorhout Station;52,225784;4,484557
+110;Sassenheim;52,215361;4,516215
+111;Stationstraat, Roelofarendsveen;52,204227;4,632706
+112;Alphen ad Rijn;52,124904;4,658244
+113;Boskoop;52,076809;4,647006
+114;Haarlem;52,387424;4,63914
+115;Schiphol;52,309247;4,761093
+116;Leimuiden;52,225219;4,675527
+117;ESA Estec;52,21582;4,416026
+118;Zoetermeer;52,047047;4,477288
+119;Boulevard Zuid, Katwijk;52,1975074;4,3872674
+120;Ziekenhuis, Leiderdorp;52,158072;4,541271
+121;Oranjewijk;52,1437588;4,5286790

@@ -1,522 +1,554 @@
 route_ID,name,bus_stop,StopID,traveltime to next stop
-1,1 - De Vink,"Leiderdorpsebrug, Leiden",48,1
-1,1 - De Vink,"Meerburgerkade, Leiden",52,1
-1,1 - De Vink,"Wilhelminabrug, Leiden",93,1
-1,1 - De Vink,"Burggravenlaan, Leiden",13,2
-1,1 - De Vink,"Moddermanstraat, Leiden",54,1
-1,1 - De Vink,"Lorentzkade, Leiden",51,1
-1,1 - De Vink,"Station Lammenschans, Leiden",72,2
-1,1 - De Vink,"Leliestraat, Leiden",49,2
-1,1 - De Vink,"Korevaarstraat, Leiden",45,1
-1,1 - De Vink,"Breestraat, Leiden",11,2
-1,1 - De Vink,"Prinsessekade, Leiden",66,1
-1,1 - De Vink,"Nieuwe Beestenmarkt, Leiden",57,3
-1,1 - De Vink,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-1,1 - De Vink,"Station Leiden Centraal, Leiden (Vertrek)",74,3
-1,1 - De Vink,"Gerard Brandtstraat, Leiden",29,1
-1,1 - De Vink,"Damlaan, Leiden",18,1
-1,1 - De Vink,"Opaalstraat, Leiden",61,1
-1,1 - De Vink,"Robijnstraat, Leiden",67,2
-1,1 - De Vink,"Turkooislaan, Leiden",82,0
-1,1 - De Vink,"Gandhistraat, Leiden",28,1
-1,1 - De Vink,"Helena Verburgstraat, Leiden",34,2
-1,1 - De Vink,"Stevensbloem, Leiden",76,1
-1,1 - De Vink,"Anne Frankweg, Leiden",3,3
-1,1 - De Vink,"Station De Vink, Leiden",71,0
-2,1 - Leyhof,"Station De Vink, Leiden",71,2
-2,1 - Leyhof,"Anne Frankweg, Leiden",3,1
-2,1 - Leyhof,"Stevensbloem, Leiden",76,1
-2,1 - Leyhof,"Helena Verburgstraat, Leiden",34,1
-2,1 - Leyhof,"Gandhistraat, Leiden",28,1
-2,1 - Leyhof,"Turkooislaan, Leiden",82,1
-2,1 - Leyhof,"Robijnstraat, Leiden",67,1
-2,1 - Leyhof,"Opaalstraat, Leiden",61,1
-2,1 - Leyhof,"Damlaan, Leiden",18,1
-2,1 - Leyhof,"Gerard Brandtstraat, Leiden",29,3
-2,1 - Leyhof,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-2,1 - Leyhof,"Station Leiden Centraal, Leiden (Vertrek)",74,2
-2,1 - Leyhof,"Steenstraat, Leiden",75,3
-2,1 - Leyhof,"Breestraat, Leiden",11,1
-2,1 - Leyhof,"Korevaarstraat, Leiden",45,2
-2,1 - Leyhof,"Leliestraat, Leiden",49,2
-2,1 - Leyhof,"Station Lammenschans, Leiden",72,1
-2,1 - Leyhof,"Lorentzkade, Leiden",51,1
-2,1 - Leyhof,"Moddermanstraat, Leiden",54,2
-2,1 - Leyhof,"Burggravenlaan, Leiden",13,2
-2,1 - Leyhof,"Meerburgerkade, Leiden",52,1
-2,1 - Leyhof,"Leiderdorpsebrug, Leiden",48,2
-4,2 - Oranjewijk,"Station De Vink, Leiden",71,2
-4,2 - Oranjewijk,"Zeldenrustweg, Leiden",96,1
-4,2 - Oranjewijk,"Charley Tooropweg, Leiden",14,1
-4,2 - Oranjewijk,"Heintje Davidsweg, Leiden",33,2
-4,2 - Oranjewijk,"Hadewychlaan, Leiden",32,0
-4,2 - Oranjewijk,"van Hoornkade, Leiden",86,1
-4,2 - Oranjewijk,"Helena Verburgstraat, Leiden",34,1
-4,2 - Oranjewijk,"Gandhistraat, Leiden",28,1
-4,2 - Oranjewijk,"Turkooislaan, Leiden",82,1
-4,2 - Oranjewijk,"Robijnstraat, Leiden",67,2
-4,2 - Oranjewijk,"Opaalstraat, Leiden",61,2
-4,2 - Oranjewijk,"Dr. Lelylaan, Leiden",24,1
-4,2 - Oranjewijk,"Cruquiuslaan, Leiden",17,1
-4,2 - Oranjewijk,"Jan Luykenlaan, Leiden",39,1
-4,2 - Oranjewijk,"Muiderkring, Leiden",55,1
-4,2 - Oranjewijk,"Gerard Brandtstraat, Leiden",29,2
-4,2 - Oranjewijk,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-4,2 - Oranjewijk,"Station Leiden Centraal, Leiden (Vertrek)",74,2
-4,2 - Oranjewijk,"Steenstraat, Leiden",75,3
-4,2 - Oranjewijk,"Breestraat, Leiden",11,1
-4,2 - Oranjewijk,"Korevaarstraat, Leiden",45,2
-4,2 - Oranjewijk,"Leliestraat, Leiden",49,2
-4,2 - Oranjewijk,"Station Lammenschans, Leiden",72,1
-4,2 - Oranjewijk,"Lorentzkade, Leiden",51,1
-4,2 - Oranjewijk,"Moddermanstraat, Leiden",54,2
-4,2 - Oranjewijk,"Burggravenlaan, Leiden",13,2
-4,2 - Oranjewijk,"Meerburgerkade, Leiden",52,1
-4,2 - Oranjewijk,"Leiderdorpsebrug, Leiden",48,2
-3,2 - De Vink,"Leiderdorpsebrug, Leiden",48,1
-3,2 - De Vink,"Meerburgerkade, Leiden",52,1
-3,2 - De Vink,"Wilhelminabrug, Leiden",93,1
-3,2 - De Vink,"Burggravenlaan, Leiden",13,2
-3,2 - De Vink,"Moddermanstraat, Leiden",54,1
-3,2 - De Vink,"Lorentzkade, Leiden",51,1
-3,2 - De Vink,"Station Lammenschans, Leiden",72,2
-3,2 - De Vink,"Leliestraat, Leiden",49,2
-3,2 - De Vink,"Korevaarstraat, Leiden",45,1
-3,2 - De Vink,"Breestraat, Leiden",11,2
-3,2 - De Vink,"Prinsessekade, Leiden",66,1
-3,2 - De Vink,"Nieuwe Beestenmarkt, Leiden",57,3
-3,2 - De Vink,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-3,2 - De Vink,"Station Leiden Centraal, Leiden (Vertrek)",74,3
-3,2 - De Vink,"Gerard Brandtstraat, Leiden",29,1
-3,2 - De Vink,"Muiderkring, Leiden",55,0
-3,2 - De Vink,"Jan Luykenlaan, Leiden",39,1
-3,2 - De Vink,"Cruquiuslaan, Leiden",17,2
-3,2 - De Vink,"Dr. Lelylaan, Leiden",24,1
-3,2 - De Vink,"Opaalstraat, Leiden",61,1
-3,2 - De Vink,"Robijnstraat, Leiden",67,2
-3,2 - De Vink,"Turkooislaan, Leiden",82,0
-3,2 - De Vink,"Gandhistraat, Leiden",28,1
-3,2 - De Vink,"Helena Verburgstraat, Leiden",34,1
-3,2 - De Vink,"van Hoornkade, Leiden",86,1
-3,2 - De Vink,"Hadewychlaan, Leiden",32,1
-3,2 - De Vink,"Heintje Davidsweg, Leiden",33,1
-3,2 - De Vink,"Charley Tooropweg, Leiden",14,2
-3,2 - De Vink,"Zeldenrustweg, Leiden",96,3
-3,2 - De Vink,"Station De Vink, Leiden",71,0
-6,3 - Broekweg,"Sumatrabrug, Leiden",77,2
-6,3 - Broekweg,"Zwembad de Zijl, Leiden",101,1
-6,3 - Broekweg,"Sumatrastraat, Leiden",78,1
-6,3 - Broekweg,"Surinamestraat, Leiden",79,1
-6,3 - Broekweg,"Kooipark, Leiden",43,3
-6,3 - Broekweg,"Zijlsingel, Leiden",97,1
-6,3 - Broekweg,"Oosterkerkstraat, Leiden",60,2
-6,3 - Broekweg,"Hogewoerd, Leiden",36,2
-6,3 - Broekweg,"Korevaarstraat, Leiden",45,1
-6,3 - Broekweg,"Breestraat, Leiden",11,2
-6,3 - Broekweg,"Prinsessekade, Leiden",66,1
-6,3 - Broekweg,"Nieuwe Beestenmarkt, Leiden",57,3
-6,3 - Broekweg,"Station Leiden Centraal, Leiden (Aankomst)",73,4
-6,3 - Broekweg,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-6,3 - Broekweg,"Leiden CS Westzijde, Leiden",47,3
-6,3 - Broekweg,"Schipholweg, Leiden",70,2
-6,3 - Broekweg,"Groenoord, Leiden",31,3
-6,3 - Broekweg,"De Rode's, Leiden",22,1
-6,3 - Broekweg,"Arendshorst, Leiden",4,1
-6,3 - Broekweg,"Valkenhorst, Leiden",84,1
-6,3 - Broekweg,"Zwartemeerlaan, Leiden",99,1
-6,3 - Broekweg,"Vossemeerlaan, Leiden",91,1
-6,3 - Broekweg,"Broekweg, Leiden",12,0
-5,3 - Leyhof,"Broekweg, Leiden",12,1
-5,3 - Leyhof,"Vossemeerlaan, Leiden",91,2
-5,3 - Leyhof,"Zwartemeerlaan, Leiden",99,1
-5,3 - Leyhof,"Valkenhorst, Leiden",84,1
-5,3 - Leyhof,"Arendshorst, Leiden",4,2
-5,3 - Leyhof,"De Rode's, Leiden",22,2
-5,3 - Leyhof,"Groenoord, Leiden",31,1
-5,3 - Leyhof,"Schipholweg, Leiden",70,3
-5,3 - Leyhof,"Leiden CS Westzijde, Leiden",47,2
-5,3 - Leyhof,"Station Leiden Centraal, Leiden (Aankomst)",73,3
-5,3 - Leyhof,"Station Leiden Centraal, Leiden (Vertrek)",74,2
-5,3 - Leyhof,"Steenstraat, Leiden",75,3
-5,3 - Leyhof,"Breestraat, Leiden",11,1
-5,3 - Leyhof,"Korevaarstraat, Leiden",45,1
-5,3 - Leyhof,"Hogewoerd, Leiden",36,1
-5,3 - Leyhof,"Hooigracht, Leiden",37,1
-5,3 - Leyhof,"Oosterkerkstraat, Leiden",60,1
-5,3 - Leyhof,"Zijlsingel, Leiden",97,3
-5,3 - Leyhof,"Kooipark, Leiden",43,1
-5,3 - Leyhof,"Surinamestraat, Leiden",79,2
-5,3 - Leyhof,"Sumatrastraat, Leiden",78,1
-5,3 - Leyhof,"Zwembad de Zijl, Leiden",101,1
-5,3 - Leyhof,"Sumatrabrug, Leiden",77,2
-7,4 - De Vink,"Broekweg, Leiden",12,1
-7,4 - De Vink,"Fakkelgras, Leiden",26,2
-7,4 - De Vink,"Vossebes, Leiden",90,2
-7,4 - De Vink,"De Rode's, Leiden",22,2
-7,4 - De Vink,"Groenoord, Leiden",31,1
-7,4 - De Vink,"Schipholweg, Leiden",70,2
-7,4 - De Vink,"Leiden CS Westzijde, Leiden",47,2
-7,4 - De Vink,"Station Leiden Centraal, Leiden (Aankomst)",73,3
-7,4 - De Vink,"Station Leiden Centraal, Leiden (Vertrek)",74,2
-7,4 - De Vink,"Steenstraat, Leiden",75,3
-7,4 - De Vink,"Breestraat, Leiden",11,1
-7,4 - De Vink,"Korevaarstraat, Leiden",45,2
-7,4 - De Vink,"Leliestraat, Leiden",49,2
-7,4 - De Vink,"Station Lammenschans, Leiden",72,1
-7,4 - De Vink,"Meloenstraat, Leiden",53,2
-7,4 - De Vink,"Rosenburch, Leiden",69,1
-7,4 - De Vink,"Vijf Meiplein, Leiden",89,3
-7,4 - De Vink,"De Bazelstraat, Leiden",19,1
-7,4 - De Vink,"Kennedylaan, Leiden",41,2
-7,4 - De Vink,"Brahmslaan, Leiden",9,1
-7,4 - De Vink,"Debussystraat, Leiden",23,1
-7,4 - De Vink,"Bizetpad, Leiden",7,3
-7,4 - De Vink,"Trompweg, Voorschoten",81,2
-7,4 - De Vink,"Station De Vink, Leiden",71,0
-8,4 - Broekweg,"Station De Vink, Leiden",71,1
-8,4 - Broekweg,"Trompweg, Voorschoten",81,1
-8,4 - Broekweg,"Bizetpad, Leiden",7,2
-8,4 - Broekweg,"Verdistraat, Leiden",88,1
-8,4 - Broekweg,"Brahmslaan, Leiden",9,1
-8,4 - Broekweg,"Kennedylaan, Leiden",41,2
-8,4 - Broekweg,"van der Helmlaan, Leiden",85,3
-8,4 - Broekweg,"Vijf Meiplein, Leiden",89,1
-8,4 - Broekweg,"Rosenburch, Leiden",69,2
-8,4 - Broekweg,"Meloenstraat, Leiden",53,1
-8,4 - Broekweg,"Station Lammenschans, Leiden",72,2
-8,4 - Broekweg,"Leliestraat, Leiden",49,2
-8,4 - Broekweg,"Korevaarstraat, Leiden",45,1
-8,4 - Broekweg,"Breestraat, Leiden",11,2
-8,4 - Broekweg,"Prinsessekade, Leiden",66,1
-8,4 - Broekweg,"Nieuwe Beestenmarkt, Leiden",57,3
-8,4 - Broekweg,"Station Leiden Centraal, Leiden (Aankomst)",73,3
-8,4 - Broekweg,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-8,4 - Broekweg,"Leiden CS Westzijde, Leiden",47,3
-8,4 - Broekweg,"Schipholweg, Leiden",70,2
-8,4 - Broekweg,"Groenoord, Leiden",31,3
-8,4 - Broekweg,"De Rode's, Leiden",22,1
-8,4 - Broekweg,"Vossebes, Leiden",90,1
-8,4 - Broekweg,"Fakkelgras, Leiden",26,1
-8,4 - Broekweg,"Broekweg, Leiden",12,0
-9,14 - Leiden Centraal,"Station De Vink, Leiden",71,2
-9,14 - Leiden Centraal,"Trompweg, Voorschoten",81,1
-9,14 - Leiden Centraal,"Bizetpad, Leiden",7,3
-9,14 - Leiden Centraal,"Vijf Meiplein, Leiden",89,1
-9,14 - Leiden Centraal,"Rosenburch, Leiden",69,1
-9,14 - Leiden Centraal,"Fruitweg, Leiden",27,1
-9,14 - Leiden Centraal,"Herenstraat, Leiden",35,2
-9,14 - Leiden Centraal,"Koninginnelaan, Leiden",42,1
-9,14 - Leiden Centraal,"Leliestraat, Leiden",49,2
-9,14 - Leiden Centraal,"Korevaarstraat, Leiden",45,1
-9,14 - Leiden Centraal,"Breestraat, Leiden",11,3
-9,14 - Leiden Centraal,"Prinsessekade, Leiden",66,1
-9,14 - Leiden Centraal,"Nieuwe Beestenmarkt, Leiden",57,2
-9,14 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-10,14 - De Vink,"Station Leiden Centraal, Leiden (Vertrek)",74,2
-10,14 - De Vink,"Steenstraat, Leiden",75,3
-10,14 - De Vink,"Breestraat, Leiden",11,1
-10,14 - De Vink,"Korevaarstraat, Leiden",45,2
-10,14 - De Vink,"Leliestraat, Leiden",49,1
-10,14 - De Vink,"Herenstraat, Leiden",35,1
-10,14 - De Vink,"Fruitweg, Leiden",27,1
-10,14 - De Vink,"Rosenburch, Leiden",69,1
-10,14 - De Vink,"Vijf Meiplein, Leiden",89,2
-10,14 - De Vink,"Bizetpad, Leiden",7,3
-10,14 - De Vink,"Trompweg, Voorschoten",81,2
-10,14 - De Vink,"Station De Vink, Leiden",71,0
-11,20 - Leiden Centraal,"Lijsterstraat, Leiden",50,2
-11,20 - Leiden Centraal,"Posthof, Leiden",65,2
-11,20 - Leiden Centraal,"Leiden CS Westzijde, Leiden",47,1
-11,20 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-12,20 - Vuurtorenplein,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-12,20 - Vuurtorenplein,"Leiden CS Westzijde, Leiden",47,1
-12,20 - Vuurtorenplein,"Posthof, Leiden",65,2
-12,20 - Vuurtorenplein,"Lijsterstraat, Leiden",50,1
-13,21 - Leiden Centraal,"Lijsterstraat, Leiden",50,2
-13,21 - Leiden Centraal,"Posthof, Leiden",65,2
-13,21 - Leiden Centraal,"Leiden CS Westzijde, Leiden",47,1
-13,21 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-14,21 - Vuurtorenplein,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-14,21 - Vuurtorenplein,"Leiden CS Westzijde, Leiden",47,1
-14,21 - Vuurtorenplein,"Posthof, Leiden",65,2
-14,21 - Vuurtorenplein,"Lijsterstraat, Leiden",50,1
-16,"22 - Nieuw Vennep, Station","Station Leiden Centraal, Leiden (Vertrek)",74,3
-16,"22 - Nieuw Vennep, Station","Verbeekstraat, Leiden",87,1
-16,"22 - Nieuw Vennep, Station","Bio Science Park-Oost, Leiden",6,0
-15,22 - Leiden Centraal,"Bio Science Park-Oost, Leiden",6,1
-15,22 - Leiden Centraal,"Verbeekstraat, Leiden",87,3
-15,22 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-17,23 - Leiden Centraal,"Bio Science Park-Oost, Leiden",6,1
-17,23 - Leiden Centraal,"Verbeekstraat, Leiden",87,3
-17,23 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-18,23 - Picképlein,"Station Leiden Centraal, Leiden (Vertrek)",74,3
-18,23 - Picképlein,"Verbeekstraat, Leiden",87,1
-18,23 - Picképlein,"Bio Science Park-Oost, Leiden",6,0
-20,30 - Willem vd Bergh,"Station Leiden Centraal, Leiden (Vertrek)",74,4
-20,30 - Willem vd Bergh,"Noodhalte Naturalis, Leiden",58,2
-20,30 - Willem vd Bergh,"Universiteitsterrein, Leiden",83,2
-20,30 - Willem vd Bergh,"Niels Bohrweg, Leiden",56,0
-19,30 - Leiden Centraal,"Niels Bohrweg, Leiden",56,2
-19,30 - Leiden Centraal,"Universiteitsterrein, Leiden",83,2
-19,30 - Leiden Centraal,"Noodhalte Naturalis, Leiden",58,6
-19,30 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-21,31 - Leiden Centraal,"Niels Bohrweg, Leiden",56,2
-21,31 - Leiden Centraal,"Universiteitsterrein, Leiden",83,2
-21,31 - Leiden Centraal,"Noodhalte Naturalis, Leiden",58,6
-21,31 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-22,31 - Willem vd Bergh,"Station Leiden Centraal, Leiden (Vertrek)",74,4
-22,31 - Willem vd Bergh,"Noodhalte Naturalis, Leiden",58,2
-22,31 - Willem vd Bergh,"Universiteitsterrein, Leiden",83,1
-22,31 - Willem vd Bergh,"Niels Bohrweg, Leiden",56,0
-24,38 - Hangaar 1,"Station Leiden Centraal, Leiden (Vertrek)",74,5
-24,38 - Hangaar 1,"Noodhalte Naturalis, Leiden",58,2
-24,38 - Hangaar 1,"Universiteitsterrein, Leiden",83,1
-24,38 - Hangaar 1,"Niels Bohrweg, Leiden",56,0
-23,38 - Leiden Centraal,"Niels Bohrweg, Leiden",56,1
-23,38 - Leiden Centraal,"Universiteitsterrein, Leiden",83,2
-23,38 - Leiden Centraal,"Noodhalte Naturalis, Leiden",58,6
-23,38 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-25,50 - Leiden Centraal,"Lijsterstraat, Leiden",50,4
-25,50 - Leiden Centraal,"Posthof, Leiden",65,3
-25,50 - Leiden Centraal,"Leiden CS Westzijde, Leiden",47,1
-25,50 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-26,50 - Meer en Duin,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-26,50 - Meer en Duin,"Leiden CS Westzijde, Leiden",47,1
-26,50 - Meer en Duin,"Posthof, Leiden",65,1
-26,50 - Meer en Duin,"Lijsterstraat, Leiden",50,1
-28,55 - Voorhout Station,"Trompweg, Voorschoten",81,2
-28,55 - Voorhout Station,"Bizetpad, Leiden",7,1
-28,55 - Voorhout Station,"Sweelincklaan, Leiden",80,1
-28,55 - Voorhout Station,"Cornelis Schuytlaan, Leiden",16,1
-28,55 - Voorhout Station,"Brandts Buyskade, Leiden",10,1
-28,55 - Voorhout Station,"Churchillbrug, Leiden",15,2
-28,55 - Voorhout Station,"De Genestetstraat, Leiden",20,1
-28,55 - Voorhout Station,"Noordeinde, Leiden",59,1
-28,55 - Voorhout Station,"Prinsessekade, Leiden",66,1
-28,55 - Voorhout Station,"Nieuwe Beestenmarkt, Leiden",57,2
-28,55 - Voorhout Station,"Station Leiden Centraal, Leiden (Aankomst)",73,5
-28,55 - Voorhout Station,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-28,55 - Voorhout Station,"Leiden CS Westzijde, Leiden",47,2
-28,55 - Voorhout Station,"Posthof, Leiden",65,1
-28,55 - Voorhout Station,"Alrijne Ziekenhuis, Leiden",2,1
-28,55 - Voorhout Station,"Zweilandlaan, Leiden",100,3
-27,55 - Starrenburg,"Zweilandlaan, Leiden",100,2
-27,55 - Starrenburg,"Alrijne Ziekenhuis, Leiden",2,3
-27,55 - Starrenburg,"Posthof, Leiden",65,2
-27,55 - Starrenburg,"Leiden CS Westzijde, Leiden",47,1
-27,55 - Starrenburg,"Station Leiden Centraal, Leiden (Aankomst)",73,4
-27,55 - Starrenburg,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-27,55 - Starrenburg,"Steenstraat, Leiden",75,2
-27,55 - Starrenburg,"Noordeinde, Leiden",59,2
-27,55 - Starrenburg,"De Genestetstraat, Leiden",20,1
-27,55 - Starrenburg,"Churchillbrug, Leiden",15,2
-27,55 - Starrenburg,"Brandts Buyskade, Leiden",10,1
-27,55 - Starrenburg,"Cornelis Schuytlaan, Leiden",16,1
-27,55 - Starrenburg,"Sweelincklaan, Leiden",80,1
-27,55 - Starrenburg,"Bizetpad, Leiden",7,1
-27,55 - Starrenburg,"Trompweg, Voorschoten",81,0
-29,56 - Stationsstraat,"Gorlaeus Laboratorium, Leiden",30,2
-29,56 - Stationsstraat,"Blauwe Vogelweg, Leiden",8,3
-29,56 - Stationsstraat,"Alrijne Ziekenhuis, Leiden",2,1
-29,56 - Stationsstraat,"Posthof, Leiden",65,2
-29,56 - Stationsstraat,"Leiden CS Westzijde, Leiden",47,1
-29,56 - Stationsstraat,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-29,56 - Stationsstraat,"Station Leiden Centraal, Leiden (Vertrek)",74,2
-29,56 - Stationsstraat,"Steenstraat, Leiden",75,3
-29,56 - Stationsstraat,"Breestraat, Leiden",11,1
-29,56 - Stationsstraat,"Korevaarstraat, Leiden",45,1
-29,56 - Stationsstraat,"Hogewoerd, Leiden",36,2
-29,56 - Stationsstraat,"Pelikaan, Leiden",63,0
-29,56 - Stationsstraat,"Houtmarkt, Leiden",38,2
-29,56 - Stationsstraat,"Kooipark, Leiden",43,1
-29,56 - Stationsstraat,"Surinamestraat, Leiden",79,1
-29,56 - Stationsstraat,"Sumatrastraat, Leiden",78,3
-30,56 - Sassenheim,"Sumatrastraat, Leiden",78,1
-30,56 - Sassenheim,"Surinamestraat, Leiden",79,1
-30,56 - Sassenheim,"Kooipark, Leiden",43,2
-30,56 - Sassenheim,"Houtmarkt, Leiden",38,0
-30,56 - Sassenheim,"Pelikaan, Leiden",63,2
-30,56 - Sassenheim,"Hogewoerd, Leiden",36,1
-30,56 - Sassenheim,"Korevaarstraat, Leiden",45,1
-30,56 - Sassenheim,"Breestraat, Leiden",11,2
-30,56 - Sassenheim,"Prinsessekade, Leiden",66,1
-30,56 - Sassenheim,"Nieuwe Beestenmarkt, Leiden",57,3
-30,56 - Sassenheim,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-30,56 - Sassenheim,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-30,56 - Sassenheim,"Leiden CS Westzijde, Leiden",47,1
-30,56 - Sassenheim,"Posthof, Leiden",65,2
-30,56 - Sassenheim,"Alrijne Ziekenhuis, Leiden",2,2
-30,56 - Sassenheim,"Albinusdreef, Leiden",1,1
-30,56 - Sassenheim,"Blauwe Vogelweg, Leiden",8,1
-30,56 - Sassenheim,"Gorlaeus Laboratorium, Leiden",30,1
-32,169 - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Vertrek)",74,2
-32,169 - Alphen ad Rijn,"Steenstraat, Leiden",75,3
-32,169 - Alphen ad Rijn,"Breestraat, Leiden",11,2
-32,169 - Alphen ad Rijn,"Korevaarstraat, Leiden",45,2
-32,169 - Alphen ad Rijn,"Kraaierstraat, Leiden",46,1
-32,169 - Alphen ad Rijn,"Plantage, Leiden",64,2
-32,169 - Alphen ad Rijn,"Burggravenlaan, Leiden",13,2
-32,169 - Alphen ad Rijn,"Meerburgerkade, Leiden",52,1
-32,169 - Alphen ad Rijn,"Leiderdorpsebrug, Leiden",48,1
-31,169 - Leiden Centraal,"Leiderdorpsebrug, Leiden",48,1
-31,169 - Leiden Centraal,"Meerburgerkade, Leiden",52,1
-31,169 - Leiden Centraal,"Wilhelminabrug, Leiden",93,1
-31,169 - Leiden Centraal,"Burggravenlaan, Leiden",13,2
-31,169 - Leiden Centraal,"Plantage, Leiden",64,1
-31,169 - Leiden Centraal,"Kraaierstraat, Leiden",46,2
-31,169 - Leiden Centraal,"Korevaarstraat, Leiden",45,1
-31,169 - Leiden Centraal,"Breestraat, Leiden",11,4
-31,169 - Leiden Centraal,"Prinsessekade, Leiden",66,1
-31,169 - Leiden Centraal,"Nieuwe Beestenmarkt, Leiden",57,3
-31,169 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-33,182 - Leiden Centraal,"Leiderdorpsebrug, Leiden",48,1
-33,182 - Leiden Centraal,"Meerburgerkade, Leiden",52,1
-33,182 - Leiden Centraal,"Wilhelminabrug, Leiden",93,1
-33,182 - Leiden Centraal,"Burggravenlaan, Leiden",13,1
-33,182 - Leiden Centraal,"Plantage, Leiden",64,1
-33,182 - Leiden Centraal,"Kraaierstraat, Leiden",46,2
-33,182 - Leiden Centraal,"Jan van Houtkade, Leiden",40,2
-33,182 - Leiden Centraal,"Witte Rozenstraat, Leiden",94,1
-33,182 - Leiden Centraal,"Paterstraat, Leiden",62,1
-33,182 - Leiden Centraal,"Noordeinde, Leiden",59,1
-33,182 - Leiden Centraal,"Prinsessekade, Leiden",66,1
-33,182 - Leiden Centraal,"Nieuwe Beestenmarkt, Leiden",57,4
-33,182 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-34,182 - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-34,182 - Alphen ad Rijn,"Steenstraat, Leiden",75,1
-34,182 - Alphen ad Rijn,"Noordeinde, Leiden",59,1
-34,182 - Alphen ad Rijn,"Paterstraat, Leiden",62,2
-34,182 - Alphen ad Rijn,"Witte Rozenstraat, Leiden",94,2
-34,182 - Alphen ad Rijn,"Jan van Houtkade, Leiden",40,2
-34,182 - Alphen ad Rijn,"Kraaierstraat, Leiden",46,1
-34,182 - Alphen ad Rijn,"Plantage, Leiden",64,2
-34,182 - Alphen ad Rijn,"Burggravenlaan, Leiden",13,2
-34,182 - Alphen ad Rijn,"Meerburgerkade, Leiden",52,1
-34,182 - Alphen ad Rijn,"Leiderdorpsebrug, Leiden",48,2
-36,183 - Alphen ad Rijn,"Niels Bohrweg, Leiden",56,1
-36,183 - Alphen ad Rijn,"Universiteitsterrein, Leiden",83,2
-36,183 - Alphen ad Rijn,"Noodhalte Naturalis, Leiden",58,6
-36,183 - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-36,183 - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-36,183 - Alphen ad Rijn,"Steenstraat, Leiden",75,1
-36,183 - Alphen ad Rijn,"Noordeinde, Leiden",59,1
-36,183 - Alphen ad Rijn,"Paterstraat, Leiden",62,2
-36,183 - Alphen ad Rijn,"Witte Rozenstraat, Leiden",94,2
-36,183 - Alphen ad Rijn,"Jan van Houtkade, Leiden",40,1
-36,183 - Alphen ad Rijn,"Kraaierstraat, Leiden",46,1
-36,183 - Alphen ad Rijn,"Plantage, Leiden",64,1
-36,183 - Alphen ad Rijn,"Burggravenlaan, Leiden",13,2
-36,183 - Alphen ad Rijn,"Meerburgerkade, Leiden",52,2
-36,183 - Alphen ad Rijn,"Leiderdorpsebrug, Leiden",48,2
-35,183 - Corpus,"Leiderdorpsebrug, Leiden",48,0
-35,183 - Corpus,"Meerburgerkade, Leiden",52,1
-35,183 - Corpus,"Wilhelminabrug, Leiden",93,1
-35,183 - Corpus,"Burggravenlaan, Leiden",13,1
-35,183 - Corpus,"Plantage, Leiden",64,1
-35,183 - Corpus,"Kraaierstraat, Leiden",46,2
-35,183 - Corpus,"Jan van Houtkade, Leiden",40,2
-35,183 - Corpus,"Witte Rozenstraat, Leiden",94,1
-35,183 - Corpus,"Paterstraat, Leiden",62,1
-35,183 - Corpus,"Noordeinde, Leiden",59,1
-35,183 - Corpus,"Prinsessekade, Leiden",66,1
-35,183 - Corpus,"Nieuwe Beestenmarkt, Leiden",57,2
-35,183 - Corpus,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-35,183 - Corpus,"Station Leiden Centraal, Leiden (Vertrek)",74,5
-35,183 - Corpus,"Noodhalte Naturalis, Leiden",58,3
-35,183 - Corpus,"Universiteitsterrein, Leiden",83,1
-35,183 - Corpus,"Niels Bohrweg, Leiden",56,1
-37,187 - Leiden Centraal,Zaalbergweg/DZB Leiden,95,1
-37,187 - Leiden Centraal,"De Heyderweg, Leiden",21,2
-37,187 - Leiden Centraal,"Roomburg, Leiden",68,1
-37,187 - Leiden Centraal,"Augustuspad, Leiden",5,2
-37,187 - Leiden Centraal,"Zorgcentrum Roomburgh, Leiden",98,2
-37,187 - Leiden Centraal,"Wilhelminabrug, Leiden",93,1
-37,187 - Leiden Centraal,"Burggravenlaan, Leiden",13,1
-37,187 - Leiden Centraal,"Plantage, Leiden",64,1
-37,187 - Leiden Centraal,"Kraaierstraat, Leiden",46,2
-37,187 - Leiden Centraal,"Jan van Houtkade, Leiden",40,1
-37,187 - Leiden Centraal,"Witte Rozenstraat, Leiden",94,1
-37,187 - Leiden Centraal,"Paterstraat, Leiden",62,0
-37,187 - Leiden Centraal,"Noordeinde, Leiden",59,1
-37,187 - Leiden Centraal,"Prinsessekade, Leiden",66,1
-37,187 - Leiden Centraal,"Nieuwe Beestenmarkt, Leiden",57,4
-37,187 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-38,187 - Boskoop,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-38,187 - Boskoop,"Steenstraat, Leiden",75,2
-38,187 - Boskoop,"Noordeinde, Leiden",59,1
-38,187 - Boskoop,"Paterstraat, Leiden",62,1
-38,187 - Boskoop,"Witte Rozenstraat, Leiden",94,1
-38,187 - Boskoop,"Jan van Houtkade, Leiden",40,2
-38,187 - Boskoop,"Kraaierstraat, Leiden",46,0
-38,187 - Boskoop,"Plantage, Leiden",64,2
-38,187 - Boskoop,"Burggravenlaan, Leiden",13,2
-38,187 - Boskoop,"Zorgcentrum Roomburgh, Leiden",98,1
-38,187 - Boskoop,"Augustuspad, Leiden",5,1
-38,187 - Boskoop,"Roomburg, Leiden",68,2
-38,187 - Boskoop,"De Heyderweg, Leiden",21,1
-38,187 - Boskoop,Zaalbergweg/DZB Leiden,95,2
-40,250 - Haarlem,"Station Leiden Centraal, Leiden (Vertrek)",74,3
-40,250 - Haarlem,"Verbeekstraat, Leiden",87,1
-40,250 - Haarlem,"Bio Science Park-Oost, Leiden",6,0
-39,250 - Leiden Centraal,"Bio Science Park-Oost, Leiden",6,1
-39,250 - Leiden Centraal,"Verbeekstraat, Leiden",87,3
-39,250 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-42,365 - Schiphol,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-42,365 - Schiphol,"Leiden CS Westzijde, Leiden",47,3
-42,365 - Schiphol,"Groenoord, Leiden",31,2
-42,365 - Schiphol,"Kooiplein, Leiden",44,2
-41,365 - Leiden Centraal,"Kooiplein, Leiden",44,2
-41,365 - Leiden Centraal,"Groenoord, Leiden",31,6
-41,365 - Leiden Centraal,"Leiden CS Westzijde, Leiden",47,1
-41,365 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-43,366 - Leiden Centraal,"Kooiplein, Leiden",44,2
-43,366 - Leiden Centraal,"Groenoord, Leiden",31,4
-43,366 - Leiden Centraal,"Leiden CS Westzijde, Leiden",47,1
-43,366 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-44,366 - Leimuiden,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-44,366 - Leimuiden,"Leiden CS Westzijde, Leiden",47,3
-44,366 - Leimuiden,"Groenoord, Leiden",31,2
-44,366 - Leimuiden,"Kooiplein, Leiden",44,2
-46,400 - Zoetermeer,"Bio Science Park-Oost, Leiden",6,1
-46,400 - Zoetermeer,"Verbeekstraat, Leiden",87,4
-46,400 - Zoetermeer,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-46,400 - Zoetermeer,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-46,400 - Zoetermeer,"Leiden CS Westzijde, Leiden",47,3
-46,400 - Zoetermeer,"Energiepark, Leiden",25,2
-46,400 - Zoetermeer,"Pelikaan, Leiden",63,3
-46,400 - Zoetermeer,"Hogewoerd, Leiden",36,3
-46,400 - Zoetermeer,"Station Lammenschans, Leiden",72,0
-45,400 - ESA Estec,"Station Lammenschans, Leiden",72,3
-45,400 - ESA Estec,"Hogewoerd, Leiden",36,2
-45,400 - ESA Estec,"Pelikaan, Leiden",63,2
-45,400 - ESA Estec,"Energiepark, Leiden",25,2
-45,400 - ESA Estec,"Leiden CS Westzijde, Leiden",47,2
-45,400 - ESA Estec,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-45,400 - ESA Estec,"Station Leiden Centraal, Leiden (Vertrek)",74,3
-45,400 - ESA Estec,"Verbeekstraat, Leiden",87,1
-45,400 - ESA Estec,"Bio Science Park-Oost, Leiden",6,0
-47,401 - Boulevard Zuid,"Station Lammenschans, Leiden",72,3
-47,401 - Boulevard Zuid,"Hogewoerd, Leiden",36,2
-47,401 - Boulevard Zuid,"Pelikaan, Leiden",63,2
-47,401 - Boulevard Zuid,"Energiepark, Leiden",25,2
-47,401 - Boulevard Zuid,"Leiden CS Westzijde, Leiden",47,2
-47,401 - Boulevard Zuid,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-47,401 - Boulevard Zuid,"Station Leiden Centraal, Leiden (Vertrek)",74,3
-47,401 - Boulevard Zuid,"Verbeekstraat, Leiden",87,1
-48,401 - Zoetermeer,"Bio Science Park-Oost, Leiden",6,1
-48,401 - Zoetermeer,"Verbeekstraat, Leiden",87,4
-48,401 - Zoetermeer,"Station Leiden Centraal, Leiden (Aankomst)",73,2
-48,401 - Zoetermeer,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-48,401 - Zoetermeer,"Leiden CS Westzijde, Leiden",47,3
-48,401 - Zoetermeer,"Energiepark, Leiden",25,2
-48,401 - Zoetermeer,"Pelikaan, Leiden",63,3
-48,401 - Zoetermeer,"Hogewoerd, Leiden",36,3
-48,401 - Zoetermeer,"Station Lammenschans, Leiden",72,0
-49,410 - Leiden Centraal,"Kooiplein, Leiden",44,2
-49,410 - Leiden Centraal,"Groenoord, Leiden",31,4
-49,410 - Leiden Centraal,"Leiden CS Westzijde, Leiden",47,1
-49,410 - Leiden Centraal,"Station Leiden Centraal, Leiden (Aankomst)",73,0
-50,410 - Ziekenhuis,"Station Leiden Centraal, Leiden (Vertrek)",74,1
-50,410 - Ziekenhuis,"Leiden CS Westzijde, Leiden",47,3
-50,410 - Ziekenhuis,"Groenoord, Leiden",31,2
-50,410 - Ziekenhuis,"Kooiplein, Leiden",44,3
+1,1-3-4 Chain 1,"Station De Vink, Leiden",71,2
+1,1-3-4 Chain 1,"Anne Frankweg, Leiden",3,1
+1,1-3-4 Chain 1,"Stevensbloem, Leiden",76,1
+1,1-3-4 Chain 1,"Helena Verburgstraat, Leiden",34,1
+1,1-3-4 Chain 1,"Gandhistraat, Leiden",28,1
+1,1-3-4 Chain 1,"Turkooislaan, Leiden",82,1
+1,1-3-4 Chain 1,"Robijnstraat, Leiden",67,1
+1,1-3-4 Chain 1,"Opaalstraat, Leiden",61,1
+1,1-3-4 Chain 1,"Damlaan, Leiden",18,1
+1,1-3-4 Chain 1,"Gerard Brandtstraat, Leiden",29,3
+1,1-3-4 Chain 1,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+1,1-3-4 Chain 1,"Station Leiden Centraal, Leiden (Vertrek)",74,2
+1,1-3-4 Chain 1,"Steenstraat, Leiden",75,3
+1,1-3-4 Chain 1,"Breestraat, Leiden",11,1
+1,1-3-4 Chain 1,"Korevaarstraat, Leiden",45,2
+1,1-3-4 Chain 1,"Leliestraat, Leiden",49,2
+1,1-3-4 Chain 1,"Station Lammenschans, Leiden",72,1
+1,1-3-4 Chain 1,"Lorentzkade, Leiden",51,1
+1,1-3-4 Chain 1,"Moddermanstraat, Leiden",54,2
+1,1-3-4 Chain 1,"Burggravenlaan, Leiden",13,2
+1,1-3-4 Chain 1,"Meerburgerkade, Leiden",52,1
+1,1-3-4 Chain 1,"Leiderdorpsebrug, Leiden",48,19
+1,1-3-4 Chain 1,"Sumatrabrug, Leiden",77,2
+1,1-3-4 Chain 1,"Zwembad de Zijl, Leiden",101,1
+1,1-3-4 Chain 1,"Sumatrastraat, Leiden",78,1
+1,1-3-4 Chain 1,"Surinamestraat, Leiden",79,1
+1,1-3-4 Chain 1,"Kooipark, Leiden",43,3
+1,1-3-4 Chain 1,"Zijlsingel, Leiden",97,1
+1,1-3-4 Chain 1,"Oosterkerkstraat, Leiden",60,2
+1,1-3-4 Chain 1,"Hogewoerd, Leiden",36,2
+1,1-3-4 Chain 1,"Korevaarstraat, Leiden",45,1
+1,1-3-4 Chain 1,"Breestraat, Leiden",11,2
+1,1-3-4 Chain 1,"Prinsessekade, Leiden",66,1
+1,1-3-4 Chain 1,"Nieuwe Beestenmarkt, Leiden",57,3
+1,1-3-4 Chain 1,"Station Leiden Centraal, Leiden (Aankomst)",73,4
+1,1-3-4 Chain 1,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+1,1-3-4 Chain 1,"Leiden CS Westzijde, Leiden",47,3
+1,1-3-4 Chain 1,"Schipholweg, Leiden",70,2
+1,1-3-4 Chain 1,"Groenoord, Leiden",31,3
+1,1-3-4 Chain 1,"De Rode's, Leiden",22,1
+1,1-3-4 Chain 1,"Arendshorst, Leiden",4,1
+1,1-3-4 Chain 1,"Valkenhorst, Leiden",84,1
+1,1-3-4 Chain 1,"Zwartemeerlaan, Leiden",99,1
+1,1-3-4 Chain 1,"Vossemeerlaan, Leiden",91,1
+1,1-3-4 Chain 1,"Broekweg, Leiden",12,1
+1,1-3-4 Chain 1,"Fakkelgras, Leiden",26,2
+1,1-3-4 Chain 1,"Vossebes, Leiden",90,2
+1,1-3-4 Chain 1,"De Rode's, Leiden",22,2
+1,1-3-4 Chain 1,"Groenoord, Leiden",31,1
+1,1-3-4 Chain 1,"Schipholweg, Leiden",70,2
+1,1-3-4 Chain 1,"Leiden CS Westzijde, Leiden",47,2
+1,1-3-4 Chain 1,"Station Leiden Centraal, Leiden (Aankomst)",73,3
+1,1-3-4 Chain 1,"Station Leiden Centraal, Leiden (Vertrek)",74,2
+1,1-3-4 Chain 1,"Steenstraat, Leiden",75,3
+1,1-3-4 Chain 1,"Breestraat, Leiden",11,1
+1,1-3-4 Chain 1,"Korevaarstraat, Leiden",45,2
+1,1-3-4 Chain 1,"Leliestraat, Leiden",49,2
+1,1-3-4 Chain 1,"Station Lammenschans, Leiden",72,1
+1,1-3-4 Chain 1,"Meloenstraat, Leiden",53,2
+1,1-3-4 Chain 1,"Rosenburch, Leiden",69,1
+1,1-3-4 Chain 1,"Vijf Meiplein, Leiden",89,3
+1,1-3-4 Chain 1,"De Bazelstraat, Leiden",19,1
+1,1-3-4 Chain 1,"Kennedylaan, Leiden",41,2
+1,1-3-4 Chain 1,"Brahmslaan, Leiden",9,1
+1,1-3-4 Chain 1,"Debussystraat, Leiden",23,1
+1,1-3-4 Chain 1,"Bizetpad, Leiden",7,3
+1,1-3-4 Chain 1,"Trompweg, Voorschoten",81,2
+1,1-3-4 Chain 1,"Station De Vink, Leiden",71,0
+2,1-3-4 Chain 2,"Station De Vink, Leiden",71,1
+2,1-3-4 Chain 2,"Trompweg, Voorschoten",81,1
+2,1-3-4 Chain 2,"Bizetpad, Leiden",7,2
+2,1-3-4 Chain 2,"Verdistraat, Leiden",88,1
+2,1-3-4 Chain 2,"Brahmslaan, Leiden",9,1
+2,1-3-4 Chain 2,"Kennedylaan, Leiden",41,2
+2,1-3-4 Chain 2,"van der Helmlaan, Leiden",85,3
+2,1-3-4 Chain 2,"Vijf Meiplein, Leiden",89,1
+2,1-3-4 Chain 2,"Rosenburch, Leiden",69,2
+2,1-3-4 Chain 2,"Meloenstraat, Leiden",53,1
+2,1-3-4 Chain 2,"Station Lammenschans, Leiden",72,2
+2,1-3-4 Chain 2,"Leliestraat, Leiden",49,2
+2,1-3-4 Chain 2,"Korevaarstraat, Leiden",45,1
+2,1-3-4 Chain 2,"Breestraat, Leiden",11,2
+2,1-3-4 Chain 2,"Prinsessekade, Leiden",66,1
+2,1-3-4 Chain 2,"Nieuwe Beestenmarkt, Leiden",57,3
+2,1-3-4 Chain 2,"Station Leiden Centraal, Leiden (Aankomst)",73,3
+2,1-3-4 Chain 2,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+2,1-3-4 Chain 2,"Leiden CS Westzijde, Leiden",47,3
+2,1-3-4 Chain 2,"Schipholweg, Leiden",70,2
+2,1-3-4 Chain 2,"Groenoord, Leiden",31,3
+2,1-3-4 Chain 2,"De Rode's, Leiden",22,1
+2,1-3-4 Chain 2,"Vossebes, Leiden",90,1
+2,1-3-4 Chain 2,"Fakkelgras, Leiden",26,1
+2,1-3-4 Chain 2,"Broekweg, Leiden",12,1
+2,1-3-4 Chain 2,"Vossemeerlaan, Leiden",91,2
+2,1-3-4 Chain 2,"Zwartemeerlaan, Leiden",99,1
+2,1-3-4 Chain 2,"Valkenhorst, Leiden",84,1
+2,1-3-4 Chain 2,"Arendshorst, Leiden",4,2
+2,1-3-4 Chain 2,"De Rode's, Leiden",22,2
+2,1-3-4 Chain 2,"Groenoord, Leiden",31,1
+2,1-3-4 Chain 2,"Schipholweg, Leiden",70,3
+2,1-3-4 Chain 2,"Leiden CS Westzijde, Leiden",47,2
+2,1-3-4 Chain 2,"Station Leiden Centraal, Leiden (Aankomst)",73,3
+2,1-3-4 Chain 2,"Station Leiden Centraal, Leiden (Vertrek)",74,2
+2,1-3-4 Chain 2,"Steenstraat, Leiden",75,3
+2,1-3-4 Chain 2,"Breestraat, Leiden",11,1
+2,1-3-4 Chain 2,"Korevaarstraat, Leiden",45,1
+2,1-3-4 Chain 2,"Hogewoerd, Leiden",36,1
+2,1-3-4 Chain 2,"Hooigracht, Leiden",37,1
+2,1-3-4 Chain 2,"Oosterkerkstraat, Leiden",60,1
+2,1-3-4 Chain 2,"Zijlsingel, Leiden",97,3
+2,1-3-4 Chain 2,"Kooipark, Leiden",43,1
+2,1-3-4 Chain 2,"Surinamestraat, Leiden",79,2
+2,1-3-4 Chain 2,"Sumatrastraat, Leiden",78,1
+2,1-3-4 Chain 2,"Zwembad de Zijl, Leiden",101,1
+2,1-3-4 Chain 2,"Sumatrabrug, Leiden",77,20
+2,1-3-4 Chain 2,"Leiderdorpsebrug, Leiden",48,1
+2,1-3-4 Chain 2,"Meerburgerkade, Leiden",52,1
+2,1-3-4 Chain 2,"Wilhelminabrug, Leiden",93,1
+2,1-3-4 Chain 2,"Burggravenlaan, Leiden",13,2
+2,1-3-4 Chain 2,"Moddermanstraat, Leiden",54,1
+2,1-3-4 Chain 2,"Lorentzkade, Leiden",51,1
+2,1-3-4 Chain 2,"Station Lammenschans, Leiden",72,2
+2,1-3-4 Chain 2,"Leliestraat, Leiden",49,2
+2,1-3-4 Chain 2,"Korevaarstraat, Leiden",45,1
+2,1-3-4 Chain 2,"Breestraat, Leiden",11,2
+2,1-3-4 Chain 2,"Prinsessekade, Leiden",66,1
+2,1-3-4 Chain 2,"Nieuwe Beestenmarkt, Leiden",57,3
+2,1-3-4 Chain 2,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+2,1-3-4 Chain 2,"Station Leiden Centraal, Leiden (Vertrek)",74,3
+2,1-3-4 Chain 2,"Gerard Brandtstraat, Leiden",29,1
+2,1-3-4 Chain 2,"Damlaan, Leiden",18,1
+2,1-3-4 Chain 2,"Opaalstraat, Leiden",61,1
+2,1-3-4 Chain 2,"Robijnstraat, Leiden",67,2
+2,1-3-4 Chain 2,"Turkooislaan, Leiden",82,0
+2,1-3-4 Chain 2,"Gandhistraat, Leiden",28,1
+2,1-3-4 Chain 2,"Helena Verburgstraat, Leiden",34,2
+2,1-3-4 Chain 2,"Stevensbloem, Leiden",76,1
+2,1-3-4 Chain 2,"Anne Frankweg, Leiden",3,3
+2,1-3-4 Chain 2,"Station De Vink, Leiden",71,0
+3,2: De Vink - Oranjewijk,"Station De Vink, Leiden",71,2
+3,2: De Vink - Oranjewijk,"Zeldenrustweg, Leiden",96,1
+3,2: De Vink - Oranjewijk,"Charley Tooropweg, Leiden",14,1
+3,2: De Vink - Oranjewijk,"Heintje Davidsweg, Leiden",33,2
+3,2: De Vink - Oranjewijk,"Hadewychlaan, Leiden",32,0
+3,2: De Vink - Oranjewijk,"van Hoornkade, Leiden",86,1
+3,2: De Vink - Oranjewijk,"Helena Verburgstraat, Leiden",34,1
+3,2: De Vink - Oranjewijk,"Gandhistraat, Leiden",28,1
+3,2: De Vink - Oranjewijk,"Turkooislaan, Leiden",82,1
+3,2: De Vink - Oranjewijk,"Robijnstraat, Leiden",67,2
+3,2: De Vink - Oranjewijk,"Opaalstraat, Leiden",61,2
+3,2: De Vink - Oranjewijk,"Dr. Lelylaan, Leiden",24,1
+3,2: De Vink - Oranjewijk,"Cruquiuslaan, Leiden",17,1
+3,2: De Vink - Oranjewijk,"Jan Luykenlaan, Leiden",39,1
+3,2: De Vink - Oranjewijk,"Muiderkring, Leiden",55,1
+3,2: De Vink - Oranjewijk,"Gerard Brandtstraat, Leiden",29,2
+3,2: De Vink - Oranjewijk,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+3,2: De Vink - Oranjewijk,"Station Leiden Centraal, Leiden (Vertrek)",74,2
+3,2: De Vink - Oranjewijk,"Steenstraat, Leiden",75,3
+3,2: De Vink - Oranjewijk,"Breestraat, Leiden",11,1
+3,2: De Vink - Oranjewijk,"Korevaarstraat, Leiden",45,2
+3,2: De Vink - Oranjewijk,"Leliestraat, Leiden",49,2
+3,2: De Vink - Oranjewijk,"Station Lammenschans, Leiden",72,1
+3,2: De Vink - Oranjewijk,"Lorentzkade, Leiden",51,1
+3,2: De Vink - Oranjewijk,"Moddermanstraat, Leiden",54,2
+3,2: De Vink - Oranjewijk,"Burggravenlaan, Leiden",13,2
+3,2: De Vink - Oranjewijk,"Meerburgerkade, Leiden",52,1
+3,2: De Vink - Oranjewijk,"Leiderdorpsebrug, Leiden",48,18
+3,2: De Vink - Oranjewijk,Oranjewijk,121,16
+3,2: De Vink - Oranjewijk,"Leiderdorpsebrug, Leiden",48,1
+3,2: De Vink - Oranjewijk,"Meerburgerkade, Leiden",52,1
+3,2: De Vink - Oranjewijk,"Wilhelminabrug, Leiden",93,1
+3,2: De Vink - Oranjewijk,"Burggravenlaan, Leiden",13,2
+3,2: De Vink - Oranjewijk,"Moddermanstraat, Leiden",54,1
+3,2: De Vink - Oranjewijk,"Lorentzkade, Leiden",51,1
+3,2: De Vink - Oranjewijk,"Station Lammenschans, Leiden",72,2
+3,2: De Vink - Oranjewijk,"Leliestraat, Leiden",49,2
+3,2: De Vink - Oranjewijk,"Korevaarstraat, Leiden",45,1
+3,2: De Vink - Oranjewijk,"Breestraat, Leiden",11,2
+3,2: De Vink - Oranjewijk,"Prinsessekade, Leiden",66,1
+3,2: De Vink - Oranjewijk,"Nieuwe Beestenmarkt, Leiden",57,3
+3,2: De Vink - Oranjewijk,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+3,2: De Vink - Oranjewijk,"Station Leiden Centraal, Leiden (Vertrek)",74,3
+3,2: De Vink - Oranjewijk,"Gerard Brandtstraat, Leiden",29,1
+3,2: De Vink - Oranjewijk,"Muiderkring, Leiden",55,0
+3,2: De Vink - Oranjewijk,"Jan Luykenlaan, Leiden",39,1
+3,2: De Vink - Oranjewijk,"Cruquiuslaan, Leiden",17,2
+3,2: De Vink - Oranjewijk,"Dr. Lelylaan, Leiden",24,1
+3,2: De Vink - Oranjewijk,"Opaalstraat, Leiden",61,1
+3,2: De Vink - Oranjewijk,"Robijnstraat, Leiden",67,2
+3,2: De Vink - Oranjewijk,"Turkooislaan, Leiden",82,0
+3,2: De Vink - Oranjewijk,"Gandhistraat, Leiden",28,1
+3,2: De Vink - Oranjewijk,"Helena Verburgstraat, Leiden",34,1
+3,2: De Vink - Oranjewijk,"van Hoornkade, Leiden",86,1
+3,2: De Vink - Oranjewijk,"Hadewychlaan, Leiden",32,1
+3,2: De Vink - Oranjewijk,"Heintje Davidsweg, Leiden",33,1
+3,2: De Vink - Oranjewijk,"Charley Tooropweg, Leiden",14,2
+3,2: De Vink - Oranjewijk,"Zeldenrustweg, Leiden",96,3
+3,2: De Vink - Oranjewijk,"Station De Vink, Leiden",71,0
+4,14: Leiden Centraal - De Vink,"Station De Vink, Leiden",71,2
+4,14: Leiden Centraal - De Vink,"Trompweg, Voorschoten",81,1
+4,14: Leiden Centraal - De Vink,"Bizetpad, Leiden",7,3
+4,14: Leiden Centraal - De Vink,"Vijf Meiplein, Leiden",89,1
+4,14: Leiden Centraal - De Vink,"Rosenburch, Leiden",69,1
+4,14: Leiden Centraal - De Vink,"Fruitweg, Leiden",27,1
+4,14: Leiden Centraal - De Vink,"Herenstraat, Leiden",35,2
+4,14: Leiden Centraal - De Vink,"Koninginnelaan, Leiden",42,1
+4,14: Leiden Centraal - De Vink,"Leliestraat, Leiden",49,2
+4,14: Leiden Centraal - De Vink,"Korevaarstraat, Leiden",45,1
+4,14: Leiden Centraal - De Vink,"Breestraat, Leiden",11,3
+4,14: Leiden Centraal - De Vink,"Prinsessekade, Leiden",66,1
+4,14: Leiden Centraal - De Vink,"Nieuwe Beestenmarkt, Leiden",57,2
+4,14: Leiden Centraal - De Vink,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+4,14: Leiden Centraal - De Vink,"Station Leiden Centraal, Leiden (Vertrek)",74,2
+4,14: Leiden Centraal - De Vink,"Steenstraat, Leiden",75,3
+4,14: Leiden Centraal - De Vink,"Breestraat, Leiden",11,1
+4,14: Leiden Centraal - De Vink,"Korevaarstraat, Leiden",45,2
+4,14: Leiden Centraal - De Vink,"Leliestraat, Leiden",49,1
+4,14: Leiden Centraal - De Vink,"Herenstraat, Leiden",35,1
+4,14: Leiden Centraal - De Vink,"Fruitweg, Leiden",27,1
+4,14: Leiden Centraal - De Vink,"Rosenburch, Leiden",69,1
+4,14: Leiden Centraal - De Vink,"Vijf Meiplein, Leiden",89,2
+4,14: Leiden Centraal - De Vink,"Bizetpad, Leiden",7,3
+4,14: Leiden Centraal - De Vink,"Trompweg, Voorschoten",81,2
+4,14: Leiden Centraal - De Vink,"Station De Vink, Leiden",71,0
+5,20: Leiden Centraal - Vuurtorenplein,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+5,20: Leiden Centraal - Vuurtorenplein,"Leiden CS Westzijde, Leiden",47,1
+5,20: Leiden Centraal - Vuurtorenplein,"Posthof, Leiden",65,2
+5,20: Leiden Centraal - Vuurtorenplein,"Lijsterstraat, Leiden",50,30
+5,20: Leiden Centraal - Vuurtorenplein,"Vuurtorenplein, Noordwijk",102,28
+5,20: Leiden Centraal - Vuurtorenplein,"Lijsterstraat, Leiden",50,2
+5,20: Leiden Centraal - Vuurtorenplein,"Posthof, Leiden",65,2
+5,20: Leiden Centraal - Vuurtorenplein,"Leiden CS Westzijde, Leiden",47,1
+5,20: Leiden Centraal - Vuurtorenplein,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+6,21: Leiden Centraal - Vuurtorenplein,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+6,21: Leiden Centraal - Vuurtorenplein,"Leiden CS Westzijde, Leiden",47,1
+6,21: Leiden Centraal - Vuurtorenplein,"Posthof, Leiden",65,2
+6,21: Leiden Centraal - Vuurtorenplein,"Lijsterstraat, Leiden",50,29
+6,21: Leiden Centraal - Vuurtorenplein,"Vuurtorenplein, Noordwijk",102,27
+6,21: Leiden Centraal - Vuurtorenplein,"Lijsterstraat, Leiden",50,2
+6,21: Leiden Centraal - Vuurtorenplein,"Posthof, Leiden",65,2
+6,21: Leiden Centraal - Vuurtorenplein,"Leiden CS Westzijde, Leiden",47,1
+6,21: Leiden Centraal - Vuurtorenplein,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+7,"22: Leiden Centraal - Nieuw Vennep, Station","Station Leiden Centraal, Leiden (Vertrek)",74,3
+7,"22: Leiden Centraal - Nieuw Vennep, Station","Verbeekstraat, Leiden",87,1
+7,"22: Leiden Centraal - Nieuw Vennep, Station","Bio Science Park-Oost, Leiden",6,61
+7,"22: Leiden Centraal - Nieuw Vennep, Station","Nieuw Vennep, Station",103,41
+7,"22: Leiden Centraal - Nieuw Vennep, Station","Bio Science Park-Oost, Leiden",6,1
+7,"22: Leiden Centraal - Nieuw Vennep, Station","Verbeekstraat, Leiden",87,3
+7,"22: Leiden Centraal - Nieuw Vennep, Station","Station Leiden Centraal, Leiden (Aankomst)",73,0
+8,23: Leiden Centraal - Pickeplein,"Station Leiden Centraal, Leiden (Vertrek)",74,3
+8,23: Leiden Centraal - Pickeplein,"Verbeekstraat, Leiden",87,1
+8,23: Leiden Centraal - Pickeplein,"Bio Science Park-Oost, Leiden",6,23
+8,23: Leiden Centraal - Pickeplein,"Pickeplein, Noordwijk",104,25
+8,23: Leiden Centraal - Pickeplein,"Bio Science Park-Oost, Leiden",6,1
+8,23: Leiden Centraal - Pickeplein,"Verbeekstraat, Leiden",87,3
+8,23: Leiden Centraal - Pickeplein,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+9,30: Leiden Centraal - Willem vd Bergh,"Station Leiden Centraal, Leiden (Vertrek)",74,4
+9,30: Leiden Centraal - Willem vd Bergh,"Noodhalte Naturalis, Leiden",58,2
+9,30: Leiden Centraal - Willem vd Bergh,"Universiteitsterrein, Leiden",83,2
+9,30: Leiden Centraal - Willem vd Bergh,"Niels Bohrweg, Leiden",56,30
+9,30: Leiden Centraal - Willem vd Bergh,"Willem vd Bergh, Noordwijk",105,27
+9,30: Leiden Centraal - Willem vd Bergh,"Niels Bohrweg, Leiden",56,2
+9,30: Leiden Centraal - Willem vd Bergh,"Universiteitsterrein, Leiden",83,2
+9,30: Leiden Centraal - Willem vd Bergh,"Noodhalte Naturalis, Leiden",58,6
+9,30: Leiden Centraal - Willem vd Bergh,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+10,31: Leiden Centraal - Willem vd Bergh,"Station Leiden Centraal, Leiden (Vertrek)",74,4
+10,31: Leiden Centraal - Willem vd Bergh,"Noodhalte Naturalis, Leiden",58,2
+10,31: Leiden Centraal - Willem vd Bergh,"Universiteitsterrein, Leiden",83,1
+10,31: Leiden Centraal - Willem vd Bergh,"Niels Bohrweg, Leiden",56,36
+10,31: Leiden Centraal - Willem vd Bergh,"Willem vd Bergh, Noordwijk",105,33
+10,31: Leiden Centraal - Willem vd Bergh,"Niels Bohrweg, Leiden",56,2
+10,31: Leiden Centraal - Willem vd Bergh,"Universiteitsterrein, Leiden",83,2
+10,31: Leiden Centraal - Willem vd Bergh,"Noodhalte Naturalis, Leiden",58,6
+10,31: Leiden Centraal - Willem vd Bergh,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+11,38: Leiden Centraal - Hangaar 1,"Station Leiden Centraal, Leiden (Vertrek)",74,5
+11,38: Leiden Centraal - Hangaar 1,"Noodhalte Naturalis, Leiden",58,2
+11,38: Leiden Centraal - Hangaar 1,"Universiteitsterrein, Leiden",83,1
+11,38: Leiden Centraal - Hangaar 1,"Niels Bohrweg, Leiden",56,19
+11,38: Leiden Centraal - Hangaar 1,"Hangaar 1, Katwijk",106,19
+11,38: Leiden Centraal - Hangaar 1,"Niels Bohrweg, Leiden",56,1
+11,38: Leiden Centraal - Hangaar 1,"Universiteitsterrein, Leiden",83,2
+11,38: Leiden Centraal - Hangaar 1,"Noodhalte Naturalis, Leiden",58,6
+11,38: Leiden Centraal - Hangaar 1,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+12,50: Leiden Centraal - Meer en Duin,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+12,50: Leiden Centraal - Meer en Duin,"Leiden CS Westzijde, Leiden",47,1
+12,50: Leiden Centraal - Meer en Duin,"Posthof, Leiden",65,1
+12,50: Leiden Centraal - Meer en Duin,"Lijsterstraat, Leiden",50,39
+12,50: Leiden Centraal - Meer en Duin,"Meer en Duin, Lisse",107,38
+12,50: Leiden Centraal - Meer en Duin,"Lijsterstraat, Leiden",50,4
+12,50: Leiden Centraal - Meer en Duin,"Posthof, Leiden",65,3
+12,50: Leiden Centraal - Meer en Duin,"Leiden CS Westzijde, Leiden",47,1
+12,50: Leiden Centraal - Meer en Duin,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+13,55: Starrenburg - Voorhout Station,"Starrenburg, Voorschoten",108,16
+13,55: Starrenburg - Voorhout Station,"Trompweg, Voorschoten",81,2
+13,55: Starrenburg - Voorhout Station,"Bizetpad, Leiden",7,1
+13,55: Starrenburg - Voorhout Station,"Sweelincklaan, Leiden",80,1
+13,55: Starrenburg - Voorhout Station,"Cornelis Schuytlaan, Leiden",16,1
+13,55: Starrenburg - Voorhout Station,"Brandts Buyskade, Leiden",10,1
+13,55: Starrenburg - Voorhout Station,"Churchillbrug, Leiden",15,2
+13,55: Starrenburg - Voorhout Station,"De Genestetstraat, Leiden",20,1
+13,55: Starrenburg - Voorhout Station,"Noordeinde, Leiden",59,1
+13,55: Starrenburg - Voorhout Station,"Prinsessekade, Leiden",66,1
+13,55: Starrenburg - Voorhout Station,"Nieuwe Beestenmarkt, Leiden",57,2
+13,55: Starrenburg - Voorhout Station,"Station Leiden Centraal, Leiden (Aankomst)",73,5
+13,55: Starrenburg - Voorhout Station,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+13,55: Starrenburg - Voorhout Station,"Leiden CS Westzijde, Leiden",47,2
+13,55: Starrenburg - Voorhout Station,"Posthof, Leiden",65,1
+13,55: Starrenburg - Voorhout Station,"Alrijne Ziekenhuis, Leiden",2,1
+13,55: Starrenburg - Voorhout Station,"Zweilandlaan, Leiden",100,25
+13,55: Starrenburg - Voorhout Station,Voorhout Station,109,21
+13,55: Starrenburg - Voorhout Station,"Zweilandlaan, Leiden",100,2
+13,55: Starrenburg - Voorhout Station,"Alrijne Ziekenhuis, Leiden",2,3
+13,55: Starrenburg - Voorhout Station,"Posthof, Leiden",65,2
+13,55: Starrenburg - Voorhout Station,"Leiden CS Westzijde, Leiden",47,1
+13,55: Starrenburg - Voorhout Station,"Station Leiden Centraal, Leiden (Aankomst)",73,4
+13,55: Starrenburg - Voorhout Station,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+13,55: Starrenburg - Voorhout Station,"Steenstraat, Leiden",75,2
+13,55: Starrenburg - Voorhout Station,"Noordeinde, Leiden",59,2
+13,55: Starrenburg - Voorhout Station,"De Genestetstraat, Leiden",20,1
+13,55: Starrenburg - Voorhout Station,"Churchillbrug, Leiden",15,2
+13,55: Starrenburg - Voorhout Station,"Brandts Buyskade, Leiden",10,1
+13,55: Starrenburg - Voorhout Station,"Cornelis Schuytlaan, Leiden",16,1
+13,55: Starrenburg - Voorhout Station,"Sweelincklaan, Leiden",80,1
+13,55: Starrenburg - Voorhout Station,"Bizetpad, Leiden",7,1
+13,55: Starrenburg - Voorhout Station,"Trompweg, Voorschoten",81,19
+13,55: Starrenburg - Voorhout Station,"Starrenburg, Voorschoten",108,0
+14,56: Stationsstraat - Sassenheim,Sassenheim,110,20
+14,56: Stationsstraat - Sassenheim,"Wassenaarseweg/Corpus, Leiden",92,1
+14,56: Stationsstraat - Sassenheim,"Gorlaeus Laboratorium, Leiden",30,2
+14,56: Stationsstraat - Sassenheim,"Blauwe Vogelweg, Leiden",8,3
+14,56: Stationsstraat - Sassenheim,"Alrijne Ziekenhuis, Leiden",2,1
+14,56: Stationsstraat - Sassenheim,"Posthof, Leiden",65,2
+14,56: Stationsstraat - Sassenheim,"Leiden CS Westzijde, Leiden",47,1
+14,56: Stationsstraat - Sassenheim,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+14,56: Stationsstraat - Sassenheim,"Station Leiden Centraal, Leiden (Vertrek)",74,2
+14,56: Stationsstraat - Sassenheim,"Steenstraat, Leiden",75,3
+14,56: Stationsstraat - Sassenheim,"Breestraat, Leiden",11,1
+14,56: Stationsstraat - Sassenheim,"Korevaarstraat, Leiden",45,1
+14,56: Stationsstraat - Sassenheim,"Hogewoerd, Leiden",36,2
+14,56: Stationsstraat - Sassenheim,"Pelikaan, Leiden",63,0
+14,56: Stationsstraat - Sassenheim,"Houtmarkt, Leiden",38,2
+14,56: Stationsstraat - Sassenheim,"Kooipark, Leiden",43,1
+14,56: Stationsstraat - Sassenheim,"Surinamestraat, Leiden",79,1
+14,56: Stationsstraat - Sassenheim,"Sumatrastraat, Leiden",78,29
+14,56: Stationsstraat - Sassenheim,"Stationstraat, Roelofarendsveen",111,27
+14,56: Stationsstraat - Sassenheim,"Sumatrastraat, Leiden",78,1
+14,56: Stationsstraat - Sassenheim,"Surinamestraat, Leiden",79,1
+14,56: Stationsstraat - Sassenheim,"Kooipark, Leiden",43,2
+14,56: Stationsstraat - Sassenheim,"Houtmarkt, Leiden",38,0
+14,56: Stationsstraat - Sassenheim,"Pelikaan, Leiden",63,2
+14,56: Stationsstraat - Sassenheim,"Hogewoerd, Leiden",36,1
+14,56: Stationsstraat - Sassenheim,"Korevaarstraat, Leiden",45,1
+14,56: Stationsstraat - Sassenheim,"Breestraat, Leiden",11,2
+14,56: Stationsstraat - Sassenheim,"Prinsessekade, Leiden",66,1
+14,56: Stationsstraat - Sassenheim,"Nieuwe Beestenmarkt, Leiden",57,3
+14,56: Stationsstraat - Sassenheim,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+14,56: Stationsstraat - Sassenheim,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+14,56: Stationsstraat - Sassenheim,"Leiden CS Westzijde, Leiden",47,1
+14,56: Stationsstraat - Sassenheim,"Posthof, Leiden",65,2
+14,56: Stationsstraat - Sassenheim,"Alrijne Ziekenhuis, Leiden",2,2
+14,56: Stationsstraat - Sassenheim,"Albinusdreef, Leiden",1,1
+14,56: Stationsstraat - Sassenheim,"Blauwe Vogelweg, Leiden",8,1
+14,56: Stationsstraat - Sassenheim,"Gorlaeus Laboratorium, Leiden",30,1
+14,56: Stationsstraat - Sassenheim,"Wassenaarseweg/Corpus, Leiden",92,20
+14,56: Stationsstraat - Sassenheim,Sassenheim,110,0
+15,169: Leiden Centraal - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Vertrek)",74,2
+15,169: Leiden Centraal - Alphen ad Rijn,"Steenstraat, Leiden",75,3
+15,169: Leiden Centraal - Alphen ad Rijn,"Breestraat, Leiden",11,2
+15,169: Leiden Centraal - Alphen ad Rijn,"Korevaarstraat, Leiden",45,2
+15,169: Leiden Centraal - Alphen ad Rijn,"Kraaierstraat, Leiden",46,1
+15,169: Leiden Centraal - Alphen ad Rijn,"Plantage, Leiden",64,2
+15,169: Leiden Centraal - Alphen ad Rijn,"Burggravenlaan, Leiden",13,2
+15,169: Leiden Centraal - Alphen ad Rijn,"Meerburgerkade, Leiden",52,1
+15,169: Leiden Centraal - Alphen ad Rijn,"Leiderdorpsebrug, Leiden",48,43
+15,169: Leiden Centraal - Alphen ad Rijn,Alphen ad Rijn,112,41
+15,169: Leiden Centraal - Alphen ad Rijn,"Leiderdorpsebrug, Leiden",48,1
+15,169: Leiden Centraal - Alphen ad Rijn,"Meerburgerkade, Leiden",52,1
+15,169: Leiden Centraal - Alphen ad Rijn,"Wilhelminabrug, Leiden",93,1
+15,169: Leiden Centraal - Alphen ad Rijn,"Burggravenlaan, Leiden",13,2
+15,169: Leiden Centraal - Alphen ad Rijn,"Plantage, Leiden",64,1
+15,169: Leiden Centraal - Alphen ad Rijn,"Kraaierstraat, Leiden",46,2
+15,169: Leiden Centraal - Alphen ad Rijn,"Korevaarstraat, Leiden",45,1
+15,169: Leiden Centraal - Alphen ad Rijn,"Breestraat, Leiden",11,4
+15,169: Leiden Centraal - Alphen ad Rijn,"Prinsessekade, Leiden",66,1
+15,169: Leiden Centraal - Alphen ad Rijn,"Nieuwe Beestenmarkt, Leiden",57,3
+15,169: Leiden Centraal - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+16,182: Leiden Centraal - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Steenstraat, Leiden",75,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Noordeinde, Leiden",59,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Paterstraat, Leiden",62,2
+16,182: Leiden Centraal - Alphen ad Rijn,"Witte Rozenstraat, Leiden",94,2
+16,182: Leiden Centraal - Alphen ad Rijn,"Jan van Houtkade, Leiden",40,2
+16,182: Leiden Centraal - Alphen ad Rijn,"Kraaierstraat, Leiden",46,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Plantage, Leiden",64,2
+16,182: Leiden Centraal - Alphen ad Rijn,"Burggravenlaan, Leiden",13,2
+16,182: Leiden Centraal - Alphen ad Rijn,"Meerburgerkade, Leiden",52,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Leiderdorpsebrug, Leiden",48,48
+16,182: Leiden Centraal - Alphen ad Rijn,Alphen ad Rijn,112,45
+16,182: Leiden Centraal - Alphen ad Rijn,"Leiderdorpsebrug, Leiden",48,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Meerburgerkade, Leiden",52,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Wilhelminabrug, Leiden",93,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Burggravenlaan, Leiden",13,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Plantage, Leiden",64,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Kraaierstraat, Leiden",46,2
+16,182: Leiden Centraal - Alphen ad Rijn,"Jan van Houtkade, Leiden",40,2
+16,182: Leiden Centraal - Alphen ad Rijn,"Witte Rozenstraat, Leiden",94,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Paterstraat, Leiden",62,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Noordeinde, Leiden",59,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Prinsessekade, Leiden",66,1
+16,182: Leiden Centraal - Alphen ad Rijn,"Nieuwe Beestenmarkt, Leiden",57,4
+16,182: Leiden Centraal - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+17,183: Corpus - Alphen ad Rijn,"Wassenaarseweg/Corpus, Leiden",92,1
+17,183: Corpus - Alphen ad Rijn,"Niels Bohrweg, Leiden",56,1
+17,183: Corpus - Alphen ad Rijn,"Universiteitsterrein, Leiden",83,2
+17,183: Corpus - Alphen ad Rijn,"Noodhalte Naturalis, Leiden",58,6
+17,183: Corpus - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+17,183: Corpus - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+17,183: Corpus - Alphen ad Rijn,"Steenstraat, Leiden",75,1
+17,183: Corpus - Alphen ad Rijn,"Noordeinde, Leiden",59,1
+17,183: Corpus - Alphen ad Rijn,"Paterstraat, Leiden",62,2
+17,183: Corpus - Alphen ad Rijn,"Witte Rozenstraat, Leiden",94,2
+17,183: Corpus - Alphen ad Rijn,"Jan van Houtkade, Leiden",40,1
+17,183: Corpus - Alphen ad Rijn,"Kraaierstraat, Leiden",46,1
+17,183: Corpus - Alphen ad Rijn,"Plantage, Leiden",64,1
+17,183: Corpus - Alphen ad Rijn,"Burggravenlaan, Leiden",13,2
+17,183: Corpus - Alphen ad Rijn,"Meerburgerkade, Leiden",52,2
+17,183: Corpus - Alphen ad Rijn,"Leiderdorpsebrug, Leiden",48,43
+17,183: Corpus - Alphen ad Rijn,Alphen ad Rijn,112,41
+17,183: Corpus - Alphen ad Rijn,"Leiderdorpsebrug, Leiden",48,0
+17,183: Corpus - Alphen ad Rijn,"Meerburgerkade, Leiden",52,1
+17,183: Corpus - Alphen ad Rijn,"Wilhelminabrug, Leiden",93,1
+17,183: Corpus - Alphen ad Rijn,"Burggravenlaan, Leiden",13,1
+17,183: Corpus - Alphen ad Rijn,"Plantage, Leiden",64,1
+17,183: Corpus - Alphen ad Rijn,"Kraaierstraat, Leiden",46,2
+17,183: Corpus - Alphen ad Rijn,"Jan van Houtkade, Leiden",40,2
+17,183: Corpus - Alphen ad Rijn,"Witte Rozenstraat, Leiden",94,1
+17,183: Corpus - Alphen ad Rijn,"Paterstraat, Leiden",62,1
+17,183: Corpus - Alphen ad Rijn,"Noordeinde, Leiden",59,1
+17,183: Corpus - Alphen ad Rijn,"Prinsessekade, Leiden",66,1
+17,183: Corpus - Alphen ad Rijn,"Nieuwe Beestenmarkt, Leiden",57,2
+17,183: Corpus - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+17,183: Corpus - Alphen ad Rijn,"Station Leiden Centraal, Leiden (Vertrek)",74,5
+17,183: Corpus - Alphen ad Rijn,"Noodhalte Naturalis, Leiden",58,3
+17,183: Corpus - Alphen ad Rijn,"Universiteitsterrein, Leiden",83,1
+17,183: Corpus - Alphen ad Rijn,"Niels Bohrweg, Leiden",56,1
+17,183: Corpus - Alphen ad Rijn,"Wassenaarseweg/Corpus, Leiden",92,0
+18,187: Leiden Centraal - Boskoop,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+18,187: Leiden Centraal - Boskoop,"Steenstraat, Leiden",75,2
+18,187: Leiden Centraal - Boskoop,"Noordeinde, Leiden",59,1
+18,187: Leiden Centraal - Boskoop,"Paterstraat, Leiden",62,1
+18,187: Leiden Centraal - Boskoop,"Witte Rozenstraat, Leiden",94,1
+18,187: Leiden Centraal - Boskoop,"Jan van Houtkade, Leiden",40,2
+18,187: Leiden Centraal - Boskoop,"Kraaierstraat, Leiden",46,0
+18,187: Leiden Centraal - Boskoop,"Plantage, Leiden",64,2
+18,187: Leiden Centraal - Boskoop,"Burggravenlaan, Leiden",13,2
+18,187: Leiden Centraal - Boskoop,"Zorgcentrum Roomburgh, Leiden",98,1
+18,187: Leiden Centraal - Boskoop,"Augustuspad, Leiden",5,1
+18,187: Leiden Centraal - Boskoop,"Roomburg, Leiden",68,2
+18,187: Leiden Centraal - Boskoop,"De Heyderweg, Leiden",21,1
+18,187: Leiden Centraal - Boskoop,Zaalbergweg/DZB Leiden,95,23
+18,187: Leiden Centraal - Boskoop,Boskoop,113,28
+18,187: Leiden Centraal - Boskoop,Zaalbergweg/DZB Leiden,95,1
+18,187: Leiden Centraal - Boskoop,"De Heyderweg, Leiden",21,2
+18,187: Leiden Centraal - Boskoop,"Roomburg, Leiden",68,1
+18,187: Leiden Centraal - Boskoop,"Augustuspad, Leiden",5,2
+18,187: Leiden Centraal - Boskoop,"Zorgcentrum Roomburgh, Leiden",98,2
+18,187: Leiden Centraal - Boskoop,"Wilhelminabrug, Leiden",93,1
+18,187: Leiden Centraal - Boskoop,"Burggravenlaan, Leiden",13,1
+18,187: Leiden Centraal - Boskoop,"Plantage, Leiden",64,1
+18,187: Leiden Centraal - Boskoop,"Kraaierstraat, Leiden",46,2
+18,187: Leiden Centraal - Boskoop,"Jan van Houtkade, Leiden",40,1
+18,187: Leiden Centraal - Boskoop,"Witte Rozenstraat, Leiden",94,1
+18,187: Leiden Centraal - Boskoop,"Paterstraat, Leiden",62,0
+18,187: Leiden Centraal - Boskoop,"Noordeinde, Leiden",59,1
+18,187: Leiden Centraal - Boskoop,"Prinsessekade, Leiden",66,1
+18,187: Leiden Centraal - Boskoop,"Nieuwe Beestenmarkt, Leiden",57,4
+18,187: Leiden Centraal - Boskoop,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+19,250: Leiden Centraal - Haarlem,"Station Leiden Centraal, Leiden (Vertrek)",74,3
+19,250: Leiden Centraal - Haarlem,"Verbeekstraat, Leiden",87,1
+19,250: Leiden Centraal - Haarlem,"Bio Science Park-Oost, Leiden",6,70
+19,250: Leiden Centraal - Haarlem,Haarlem,114,72
+19,250: Leiden Centraal - Haarlem,"Bio Science Park-Oost, Leiden",6,1
+19,250: Leiden Centraal - Haarlem,"Verbeekstraat, Leiden",87,3
+19,250: Leiden Centraal - Haarlem,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+20,365: Leiden Centraal - Schiphol,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+20,365: Leiden Centraal - Schiphol,"Leiden CS Westzijde, Leiden",47,3
+20,365: Leiden Centraal - Schiphol,"Groenoord, Leiden",31,2
+20,365: Leiden Centraal - Schiphol,"Kooiplein, Leiden",44,40
+20,365: Leiden Centraal - Schiphol,Schiphol,115,39
+20,365: Leiden Centraal - Schiphol,"Kooiplein, Leiden",44,2
+20,365: Leiden Centraal - Schiphol,"Groenoord, Leiden",31,6
+20,365: Leiden Centraal - Schiphol,"Leiden CS Westzijde, Leiden",47,1
+20,365: Leiden Centraal - Schiphol,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+21,366: Leiden Centraal - Leimuiden,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+21,366: Leiden Centraal - Leimuiden,"Leiden CS Westzijde, Leiden",47,3
+21,366: Leiden Centraal - Leimuiden,"Groenoord, Leiden",31,2
+21,366: Leiden Centraal - Leimuiden,"Kooiplein, Leiden",44,33
+21,366: Leiden Centraal - Leimuiden,Leimuiden,116,33
+21,366: Leiden Centraal - Leimuiden,"Kooiplein, Leiden",44,2
+21,366: Leiden Centraal - Leimuiden,"Groenoord, Leiden",31,4
+21,366: Leiden Centraal - Leimuiden,"Leiden CS Westzijde, Leiden",47,1
+21,366: Leiden Centraal - Leimuiden,"Station Leiden Centraal, Leiden (Aankomst)",73,0
+22,400: ESA Estec - Zoetermeer,ESA Estec,117,17
+22,400: ESA Estec - Zoetermeer,"Bio Science Park-Oost, Leiden",6,1
+22,400: ESA Estec - Zoetermeer,"Verbeekstraat, Leiden",87,4
+22,400: ESA Estec - Zoetermeer,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+22,400: ESA Estec - Zoetermeer,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+22,400: ESA Estec - Zoetermeer,"Leiden CS Westzijde, Leiden",47,3
+22,400: ESA Estec - Zoetermeer,"Energiepark, Leiden",25,2
+22,400: ESA Estec - Zoetermeer,"Pelikaan, Leiden",63,3
+22,400: ESA Estec - Zoetermeer,"Hogewoerd, Leiden",36,3
+22,400: ESA Estec - Zoetermeer,"Station Lammenschans, Leiden",72,17
+22,400: ESA Estec - Zoetermeer,Zoetermeer,118,17
+22,400: ESA Estec - Zoetermeer,"Station Lammenschans, Leiden",72,3
+22,400: ESA Estec - Zoetermeer,"Hogewoerd, Leiden",36,2
+22,400: ESA Estec - Zoetermeer,"Pelikaan, Leiden",63,2
+22,400: ESA Estec - Zoetermeer,"Energiepark, Leiden",25,2
+22,400: ESA Estec - Zoetermeer,"Leiden CS Westzijde, Leiden",47,2
+22,400: ESA Estec - Zoetermeer,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+22,400: ESA Estec - Zoetermeer,"Station Leiden Centraal, Leiden (Vertrek)",74,3
+22,400: ESA Estec - Zoetermeer,"Verbeekstraat, Leiden",87,1
+22,400: ESA Estec - Zoetermeer,"Bio Science Park-Oost, Leiden",6,17
+22,400: ESA Estec - Zoetermeer,ESA Estec,117,0
+23,401: Boulevard Zuid - Zoetermeer,Zoetermeer,118,17
+23,401: Boulevard Zuid - Zoetermeer,"Station Lammenschans, Leiden",72,3
+23,401: Boulevard Zuid - Zoetermeer,"Hogewoerd, Leiden",36,2
+23,401: Boulevard Zuid - Zoetermeer,"Pelikaan, Leiden",63,2
+23,401: Boulevard Zuid - Zoetermeer,"Energiepark, Leiden",25,2
+23,401: Boulevard Zuid - Zoetermeer,"Leiden CS Westzijde, Leiden",47,2
+23,401: Boulevard Zuid - Zoetermeer,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+23,401: Boulevard Zuid - Zoetermeer,"Station Leiden Centraal, Leiden (Vertrek)",74,3
+23,401: Boulevard Zuid - Zoetermeer,"Verbeekstraat, Leiden",87,1
+23,401: Boulevard Zuid - Zoetermeer,"Bio Science Park-Oost, Leiden",6,20
+23,401: Boulevard Zuid - Zoetermeer,"Boulevard Zuid, Katwijk",119,20
+23,401: Boulevard Zuid - Zoetermeer,"Bio Science Park-Oost, Leiden",6,1
+23,401: Boulevard Zuid - Zoetermeer,"Verbeekstraat, Leiden",87,4
+23,401: Boulevard Zuid - Zoetermeer,"Station Leiden Centraal, Leiden (Aankomst)",73,2
+23,401: Boulevard Zuid - Zoetermeer,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+23,401: Boulevard Zuid - Zoetermeer,"Leiden CS Westzijde, Leiden",47,3
+23,401: Boulevard Zuid - Zoetermeer,"Energiepark, Leiden",25,2
+23,401: Boulevard Zuid - Zoetermeer,"Pelikaan, Leiden",63,3
+23,401: Boulevard Zuid - Zoetermeer,"Hogewoerd, Leiden",36,3
+23,401: Boulevard Zuid - Zoetermeer,"Station Lammenschans, Leiden",72,17
+23,401: Boulevard Zuid - Zoetermeer,Zoetermeer,118,0
+24,410: Leiden Centraal - Ziekenhuis,"Station Leiden Centraal, Leiden (Vertrek)",74,1
+24,410: Leiden Centraal - Ziekenhuis,"Leiden CS Westzijde, Leiden",47,3
+24,410: Leiden Centraal - Ziekenhuis,"Groenoord, Leiden",31,2
+24,410: Leiden Centraal - Ziekenhuis,"Kooiplein, Leiden",44,9
+24,410: Leiden Centraal - Ziekenhuis,"Ziekenhuis, Leiderdorp",120,8
+24,410: Leiden Centraal - Ziekenhuis,"Kooiplein, Leiden",44,2
+24,410: Leiden Centraal - Ziekenhuis,"Groenoord, Leiden",31,4
+24,410: Leiden Centraal - Ziekenhuis,"Leiden CS Westzijde, Leiden",47,1
+24,410: Leiden Centraal - Ziekenhuis,"Station Leiden Centraal, Leiden (Aankomst)",73,0

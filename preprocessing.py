@@ -25,6 +25,7 @@ route_times = "Intermediate/stopID_times.csv"
 
 line_nodes = "Intermediate/line_nodes.txt"
 line_arcs = "Intermediate/line_arcs.txt"
+transit_data = "Intermediate/intermediate_transit_data.txt"
 
 
 # Output network file parameters
@@ -65,7 +66,7 @@ obj_parameters = [8, 1.0, 1000000000] # objective function parameters
 uc_percent = 0.01 # allowed relative increase in user cost
 oc_percent = 0.01 # allowed relative increase in operator cost
 misc_names = ["Horizon"] # misc parameter names
-misc_parameters = [1440.0] # misc parameters
+misc_parameters = [540.0] # misc parameters, Timehorizon: opening hours gp 8:00-17:00 in minutes
 
 vehicle_file = "Data/vehicle_data.txt"
 oc_file = "Data/operator_cost_data.txt"
@@ -78,6 +79,7 @@ problem_file = "Data/problem_data.txt"
 # Functions
 #==============================================================================
 
+
 def address_to_coords(inputfile, outputfile):
     """Uses the MapQuestAPI to get coordinates of locations, based on adress
     """
@@ -87,9 +89,11 @@ def address_to_coords(inputfile, outputfile):
     df = pd.read_csv(inputfile, sep=';')
     pd.set_option('display.max_rows', None)
 
+    lat, lng = [[],[]]#attempt at fixing error, have not run this
+
     for i, row in df.iterrows():
-        apiAddress = str(df.at[i,'Adres'])
-        
+        #apiAddress = str(df.at[i,'Adres']) 
+        apiAddress = str(row['Adres']) #attempt at fixing error, have not run this
         parameters = {
             "key": api_key,
             "location": apiAddress
@@ -99,12 +103,17 @@ def address_to_coords(inputfile, outputfile):
         
         data = response.text
         dataJ = json.loads(data)['results']
-        lat = (dataJ[0]['locations'][0]['latLng']['lat'])
-        lng = (dataJ[0]['locations'][0]['latLng']['lng'])
+        rowlat = (dataJ[0]['locations'][0]['latLng']['lat'])
+        rowlng = (dataJ[0]['locations'][0]['latLng']['lng'])
         
-        df.at[i,'lat'] = lat
-        df.at[i,'lng'] = lng
-        
+        lat.append(rowlat)#attempt at fixing error, have not run this
+        lng.append(rowlng)#attempt at fixing error, have not run this
+
+        #df.at[i,'lat'] = lat
+        #df.at[i,'lng'] = lng
+
+    df.insert(len(df.columns), 'lat', lat)#attempt at fixing error, have not run this
+    df.insert(len(df.columns), 'lng', lng)#attempt at fixing error, have not run this
     df.to_csv(outputfile, index= False)
 
 def distance(x, y, taxicab=False):
@@ -153,7 +162,7 @@ def stop_processing(stop_file, raw_times, processed_times):
 
 # -------------------------------------------------------------------------------------------------
 def transit_processing(stop_file, route_file, stop_time_file,
-                       node_output_file, arc_output_file):
+                       node_output_file, arc_output_file, route_output_file):
     """Preprocessing for transit network data.
 
     Requires the following file names (respectively): GTFS stop data, GTFS trip
@@ -169,12 +178,14 @@ def transit_processing(stop_file, route_file, stop_time_file,
     nodenum = -1 # current node ID
     arcnum = -1 # current arc ID
 
-    # Write header for arc file
+    # Write header for arc and transit files
+    with open(route_output_file, 'w') as f:
+        print("ID\tName\tType\tFleet\tCircuit\tScaling", file=f)
     with open(arc_output_file, 'w') as f:
         print("ID\tType\tLine\tTail\tHead\tTime", file=f)
 
     # Dictionary linking stop ID to coordinates
-    stops = {}
+    stops = {}  #StopID : Coordinate
 
     # Read cluster file while writing the initial node file
     with open(node_output_file, 'w') as fout:
@@ -195,6 +206,7 @@ def transit_processing(stop_file, route_file, stop_time_file,
     
     # Create list of all routes
     routes = []
+    route_frequencies = {}
     with open(route_file, 'r') as f:
         i = -1
         for line in f:
@@ -203,12 +215,13 @@ def transit_processing(stop_file, route_file, stop_time_file,
                 # Skip comment line
                 dum = line.split(';')
                 routes.append(int(dum[0]))
+                route_frequencies[int(dum[0])] = int(dum[2])
     
     # Collect stops for each route
     stoptimes_frame = pd.read_csv(stop_time_file)
 
     for r in routes: 
-
+        
         # Initialize dict for each route, stopID: next traveltime
         # Still needed?
         route_stops = {}
@@ -221,6 +234,7 @@ def transit_processing(stop_file, route_file, stop_time_file,
         arcs = {}
         u = -1
         time = -1
+        circuittime = 0    #time to make a round trip
         for i, row in stoptimes_frame.iterrows():
             if (int(row['route_ID']) == r):
                 v = row['StopID']
@@ -228,6 +242,7 @@ def transit_processing(stop_file, route_file, stop_time_file,
                     arcs[(u,v)] = time
                 u = v
                 time = row['traveltime to next stop']
+                circuittime += int(time) 
         #print(arcs)
         
         # Create boarding nodes and arcs
@@ -266,7 +281,21 @@ def transit_processing(stop_file, route_file, stop_time_file,
                 arcnum += 1
                 print(str(arcnum)+"\t"+str(aid_alight)+"\t"+str(r)+"\t"+
                       str(boarding[u])+"\t"+str(u)+"\t0", file=f)
-
+        
+        # Add route to transit file
+        fleet = np.ceil((circuittime/60) * route_frequencies[r]) 
+        with open(route_output_file, 'a') as f:
+            #"ID, Name, Type, Fleet, Circuit, Scaling"
+            print(str(r)+"\t"+
+                  "Route"+str(r)+"\t"+
+                  str(type_bus)+"\t"+
+                  str(fleet)+"\t"+
+                  str(circuittime)+"\t"+
+                  "1.0", 
+                  file= f)
+        
+        
+        
         print("Done processing route "+str(r))
 
 # -------------------------------------------------------------------------------------------------
@@ -378,8 +407,8 @@ def network_assemble(input_stop_nodes, input_line_arcs, input_pop_nodes,
         final arc output
 
     Accepts an optional keyword "cutoff" for use in generating walking arcs
-    between population centers/facilities/stops. Defaults to 0.5. Represents
-    taxicab distance (miles) within wich to generate walking arcs.
+    between population centers/facilities/stops. Defaults to 0.25. Represents
+    taxicab distance (km) within wich to generate walking arcs.
 
     The network assembly process consists mostly of incorporating the
     population centers and facilities into the main network. This is done in
@@ -619,24 +648,37 @@ def transit_finalization(transit_input, transit_output):
         print("ID\tName\tType\tFleet\tCircuit\tScaling\tLB\tUB\tFare\t"+
               "Frequency\tCapacity", file=fout)
         
-        routes_df = pd.read_csv(transit_input, sep=';')
-        for i, row in routes_df.iterrows():
-            labels = row['name']
-            line_type = type_bus
-            fleet = row['frequency']
+        # Read through the initial file and process each line
+        with open(transit_input, 'r') as fin:
+            i = -1
+            for line in fin:
+                i += 1
+                if i > 0:
+                    # Skip comment line
+                    dum = line.split()
 
-            # Set bounds
-            lb = min(2, fleet)
-            ub = finite_infinity
-            vcap = bus_capacity
-            # Calculate initial frequency and line capacity
-            freq = fleet/1
-            cap = vcap*freq*(1440*1)
-            # Write line
-            print(labels+"\t"+str(line_type)+"\t"+str(fleet)+"\t"+
-                    str(1)+"\t"+str(1)+"\t"+str(lb)+"\t"+
-                    str(ub)+"\t"+str(1)+"\t"+str(freq)+"\t"+
-                    str(cap), file=fout)
+                    # Read existing values
+                    # ID	Name	Type	Fleet	Circuit	Scaling
+                    labels = dum[0]+"\t"+dum[1]+"\t" # ID and Name
+                    line_type = int(dum[2]) # vehicle type
+                    fleet = int(np.ceil(float(dum[3]))) # fleet size
+                    circuit = float(dum[4]) # circuit time
+                    scaling = float(dum[5]) # active fraction of day
+
+                    # Set bounds
+                    lb = 2 * circuit/60     # Minimum frequency of 2 per hour
+                    ub = finite_infinity    # No upper bound
+                    vcap = bus_capacity
+
+                    freq = (fleet*60)/circuit
+                    cap = vcap*freq*540*scaling # Capacity per time horizon (=540 minutes)
+
+                    # Write line
+                    print(labels+"\t"+str(line_type)+"\t"+str(fleet)+"\t"+
+                            str(circuit)+"\t"+str(scaling)+"\t"+str(lb)+"\t"+
+                            str(ub)+"\t"+str(0)+"\t"+str(freq)+"\t"+
+                            str(cap), file=fout)
+            
 
 # -------------------------------------------------------------------------------------------------
 def misc_files(vehicle_output, operator_output, user_output, assignment_output,
@@ -662,19 +704,26 @@ def misc_files(vehicle_output, operator_output, user_output, assignment_output,
 
     # Read transit data to calculate vehicle totals
     bus_total = 0
-    routes_df = pd.read_csv(transit_input, sep=';')
-    for i, row in routes_df.iterrows():
-        bus_total += row['frequency']
+    with open(transit_input, 'r') as f:
+        i = -1
+        for line in f:
+            i += 1
+            if i > 0:
+                # Skip comment line
+                dum = line.split()
+                vtype = int(dum[2])
+                fleet = int(np.ceil(float(dum[3])))
+                bus_total += fleet
     print("Total of "+str(bus_total)+" buses")
 
     # Vehicle file
     with open(vehicle_output, 'w') as f:
         # Comment line
         print("Type\tName\tUB\tCapacity\tCost", file=f)
-        print(str(type_bus)+"\tBus_New_Flyer_D40LF\t"+str(bus_total)+"\t"+
+        print(str(type_bus)+"\tIveco_Crossway_LE_Elec_13m\t"+str(bus_total)+"\t"+
               str(bus_capacity)+"\t"+str(cost_bus), file=f)
         
-     # Operator cost file
+    # Operator cost file
     with open(operator_output, 'w') as f:
         print("Field\tValue", file=f)
         print("Initial\t-1", file=f)
@@ -739,17 +788,17 @@ def main():
     
     #stop_processing(stop_data, time_data, route_times)
     
-    #transit_processing(stop_data, route_data, route_times, line_nodes, line_arcs)
+    #transit_processing(stop_data, route_data, route_times, line_nodes, line_arcs, transit_data)
     
     #add_walking(stop_data, line_arcs)
         
     #network_assemble(line_nodes, line_arcs, population_clustered, facility_in,
     #             stop_data, final_node_data, final_arc_data)
     
-    #transit_finalization(route_data, final_transit_data)
+    #transit_finalization(transit_data, final_transit_data)
     
-    #misc_files(vehicle_file, oc_file, uc_file, assignment_file, objective_file, 
-    #           problem_file, route_data)
+    misc_files(vehicle_file, oc_file, uc_file, assignment_file, objective_file, 
+               problem_file, transit_data)
     
     pass
 main()
