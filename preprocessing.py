@@ -790,8 +790,8 @@ def main():
     
     #transit_finalization(transit_data, final_transit_data)
     
-    misc_files(vehicle_file, oc_file, uc_file, assignment_file, objective_file, 
-               problem_file, transit_data)
+    #misc_files(vehicle_file, oc_file, uc_file, assignment_file, objective_file, 
+    #           problem_file, transit_data)
     
     pass
 main()

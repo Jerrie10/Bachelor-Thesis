@@ -1,0 +1,10 @@
+^C:\USERS\JEROE\DOCUMENTS\WISKUNDE\JAAR 3\SCRIPTIE\BACHELOR-THESIS - GITHUB\TRANSIT SOLVER\BUILD\CMAKEFILES\37CBB64A5F06C842E530CB5B8116B83A\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/jeroe/Documents/Wiskunde/Jaar 3/Scriptie/Bachelor-Thesis - GitHub/Transit Solver" "-BC:/Users/jeroe/Documents/Wiskunde/Jaar 3/Scriptie/Bachelor-Thesis - GitHub/Transit Solver/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/jeroe/Documents/Wiskunde/Jaar 3/Scriptie/Bachelor-Thesis - GitHub/Transit Solver/build/MyProject.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

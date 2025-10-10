@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\jeroe\Documents\Wiskunde\Jaar 3\Scriptie\Bachelor-Thesis - GitHub\Transit Solver\build\CMakeFiles\37cbb64a5f06c842e530cb5b8116b83a\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{5BBEC720-D46B-3946-AE9D-4CAF1E32AFA4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -3,7 +3,7 @@
 Following the definition in \cite{voronoibook}, a voronoi diagram is given by a set $\Phi = \{x_i\}$ of weightpoints in a metric space $X$.  Each weightpoint generates a region
 \begin{equation*}
     C(x_i | \Phi) = \{y\in X:  d(x_i, y)  \leq
-    d(x_j,y) \hs \forall x_j \in \Phi\}
+    d(x_j,y) \hs \forall x_j \in \Phi\},
 \end{equation*}
 where $d$ denotes some distance function. It follows that each voronoi region $C(x_i|\Phi)$ contains all points that have $x_i$ as nearest weightpoint.
 
@@ -17,12 +17,12 @@ Applications of voronoi diagrams can be found in many fields. Consider for examp
 \section{Neighborhood search algorithms}
 When a optimization problem has a large but finite solution space, a method of traversing possible solutions is a neighborhood search (NS) procedure. Given a solution space $S$, a neighborhood function $N: S \rightarrow \mathcal{P}$ and a feasible solution $s\in S$, a neighborhood $N(s)$ of $s$ can be found. This contains all feasible solutions that can be reached from $s$ after doing one \emph{move}.
 
-General NS algorithms are heuristic approaches and use a starting solution $s^*$ and try to find a solution in $N(s^*)$ that has a more optimal value than $s^*$. If such solution $s$ exists, a new iteration is done where a more optimal solution is sought in $N(s)$. This iteration loops until a solution does not have a more optimal solution in its neighborhood.
+General NS algorithms are heuristic approaches and use a starting solution $s^*$ and try to find a solution in $N(s^*)$ that has a better value than $s^*$. If such solution $s$ exists, a new iteration is done where a more optimal solution is sought in $N(s)$. This iteration loops until a solution does not have a more optimal solution in its neighborhood.
 
 NS algorithms have no method of leaving local optima, and thus get stuck often. To prevent this behaviour, many methods haven been developed. We dicuss two of those methods, both relying on making suboptimal moves. Just like NS, these are heuristic approaches to optimization problems.
 
 \subsection{Tabu search}\label{sec:tabu}
-Tabu Search (TS) is a NS algorithm that uses \emph{Tabu lists} to escape local maxima. Visited solutions or executed moves are stored in \emph{short-term memory} (STM) and can`t be revisited or redone for a small number of iterations, this is to prevent cycling. The length of time that solutions/moves are stored in STM is dependent on \emph{Tabu tenures}. \emph{Long-term memory} (LTM) is used to store solutions with a good objective value, so they, and their neighbors, can be revisited after the algorithm becomes trapped.
+Tabu Search (TS) is an NS algorithm that uses \emph{Tabu lists} to escape local maxima. Visited solutions or executed moves are stored in \emph{short-term memory} (STM) and can not be revisited or redone for a small number of iterations, this is to prevent cycling. The length of time that solutions/moves are stored in STM is dependent on \emph{Tabu tenures}. \emph{Long-term memory} (LTM) is used to store solutions with a good objective value, so they, and their neighbors, can be revisited after the algorithm becomes trapped.
 
 \emph{Tenures} can be adjusted dynamically while running the algorithm. This is to allow a greater focus on \emph{diversification}, the exploring of many different solutions, or on \emph{intensification}, the exploiting of good solutions.
 

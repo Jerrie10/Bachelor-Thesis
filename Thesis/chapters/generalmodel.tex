@@ -1,34 +1,35 @@
 \chapter{General model}\label{sec:generalmodel}
 This section summarizes the general model and algorithm developed by Rumpf and Kaul in \cite{rumpf}. As the model and algorithm is made by them, a more detailed explanation can be found in their paper. In this section we will give a summary so the later parts of this study can be understood.
 \section{SAMP}
+% TODO rewrite: less dry, less ramming definitions, more flow. Fix foutieve contaminaties
 The algorithm made by Rumpf and Kaul in \cite{rumpf} was made to solve the \emph{social access maximization problem} (SAMP). The formulation of the problem is very general as to be aplicable to many situations.
 
-Let $L$ be the set of considered transitlines, where a transitline $l\in L$ is a series of stops with a given traveltime between each stop. A schedule $y$ is a vector with $y_l \in \N$ the amount of vehicles assigned to line $l$ in a given time period. The vehicles are distributed evenly over the time period, so 5 vehicles in an hour gives 1 trip every 12 minutes.
+Let $L$ be the set of considered transit lines, where a transit line $l\in L$ is a series of stops with a given travel time between each stop. A schedule $y$ is a vector with $y_l \in \N$ the amount of vehicles assigned to line $l$ in a given time period. The vehicles are distributed evenly over the time period, so 5 vehicles in an hour gives 1 trip every 12 minutes.
 
-The initial schedule is denoted as $y^*$. The model has upper and lower bounds $y_l^{\text{min}} \leq y_l \leq y_l^{\text{max}} \hspace{2mm}$ for all $l\in L$. These can be set to 0 and infinity if no ristriction is needed, or both to $y^*_l$ if no change is wanted.
+The initial schedule is denoted as $y^*$. The model has upper and lower bounds $y_l^{\text{min}} \leq y_l \leq y_l^{\text{max}} \hspace{2mm}$ for all $l\in L$. These can be set to 0 and infinity if no restriction is needed, or both to $y^*_l$ if no change is wanted.
 
-Let $x$ be the user flow vector for the transit network, $x^*$ the initial flow vecor. User flow represents how busy parts of the network are, which is influenced by the schedule $y$ and found by the TransitAssignment$(y)$ function, which will be explained further in Section \ref{sec:assignment}.
+Let $x$ be the user flow vector for the transit network, $x^*$ the initial flow vector. User flow represents how busy parts of the network are, which is influenced by the schedule $y$ and found by the TransitAssignment$(y)$ function, which will be explained further in Section \ref{sec:assignment}.
 
-Other restraints of the model are given by operating- and user costs with upper bounds $B_{operator},B_{user}$ respectively. Operating costs are mostly made up by monetary costs of running the transit network and monetary gain of users paying to use the service. User costs are made up of difficulty in traversing the network, be that in monetary cost or time spent in the system. More on these costs in Sections \ref{sec:costs}.
+Other restraints of the model are given by operator and user costs with upper bounds $B_{operator},B_{user}$ respectively. Operating costs are mostly made up by monetary costs of running the transit network and monetary gain of users paying to use the service. User costs are made up of difficulty in traversing the network, be that in monetary cost or time spent in the system. More on these costs in Section \ref{sec:costs}.
 
-Let Access$(y)$ be a function describing the social access objective. This value only depends on the design of the network $y$ and not on user flow $x$, because the model is designed for a small group of individuals following assumption \ref{assum:smallgroup} Different choices for Access$(y)$ are given in \ref{sec:access}.
+Let Access$(y)$ be a function describing the social access objective. This value only depends on the design of the network $y$ and not on user flow $x$, because the model is designed for a small group of individuals following Assumption \ref{assum:smallgroup} Different choices for Access$(y)$ are given in Section \ref{sec:access}.
 
 \section{Network structure}
-The model uses a representation of the transit network to calculate traveltime and routechoises. For this, a directed graph $G = (V,A)$ is used. $V$ is the set of all relevant nodes, be that origin-, destination-, transitstopnodes. $A$ is the set of arrows linking the nodes together, these represent different modes of travel like walking, bus- or trainriding.
+The model uses a representation of the transit network to calculate traveltime and routechoises. For this, a directed graph $G = (V,A)$ is used. $V$ is the set of all relevant nodes, be that origin, destination, transit stop nodes. $A$ is the set of arrows linking the nodes together, these represent different modes of travel like walking, bus or trainriding.
 
-The node set is partitioned in subsets, each containing specific nodes. Let $V_{stop}\subset V$ contian nodes representing the physical location of transitstops. Let $V_{board}\subset V$ be the set of boarding nodes. Each stopnode $i\in V_{stop}$ has boardingnodes $j\in V_{board}$ for every line $l\in L$ that stops at that stop. Boarding nodes are used to distinguish between transitlines. Let $V^+, V^- \subset V$ be origin- and destination nodes, respectively. These represent the physical places where trips begin and end. To calculate social access, subsets $\tilde V^+, \tilde V^-\subset V$ are added, representing community and facility nodes, respectively.
+The node set is partitioned in subsets, each containing specific nodes. Let $V_{stop}\subset V$ contian nodes representing the physical location of transitstops. Let $V_{board}\subset V$ be the set of boarding nodes. Each stopnode $i\in V_{stop}$ has boardingnodes $j\in V_{board}$ for every line $l\in L$ that stops at that stop. Boarding nodes are used to distinguish between transit lines. Let $V^+, V^- \subset V$ be origin- and destination nodes, respectively. These represent the physical places where trips begin and end. To calculate social access, subsets $\tilde V^+, \tilde V^-\subset V$ are added, representing community and facility nodes, respectively.
 
-Just like the node set, the arc set $A$ is partitioned in subsets. Let $A_{line}\subset A$ be the arcs that represent the journey made by transitlines and let $A_{board},\allowbreak A_{alight}\subset A$  be the arcs representing entering or leaving a transit vehicle at a certain stop. Let $A_{walking}\subset A$ be walking arcs, connecting different nodes if their physical distance is walkable.
+Just like the node set, the arc set $A$ is partitioned in subsets. Let $A_{line}\subset A$ be the arcs that represent the journey made by transit lines and let $A_{board},\allowbreak A_{alight}\subset A$  be the arcs representing entering or leaving a transit vehicle at a certain stop. Let $A_{walking}\subset A$ be walking arcs, connecting different nodes if their physical distance is walkable.
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{transitnetwork.png}
     \label{fig:transitnetwork}
-    \caption{Example of network representation containing two lines and three stops. Each stop has nodes in $V_{stop}$. Line 1 stops at all stops and thus has three boarding nodes, line 2 only has boarding nodes at stop A and stop C. Boarding nodes are conected to their stops with boarding arcs and alighting arcs. Boarding nodes are connected by line arcs if a transitline connects their respective stops. Stop A and stop B are connected by walking arc, because they are close enough. Figure taken from \cite{rumpf}.}
+    \caption{Example of network representation containing two lines and three stops. Each stop has nodes in $V_{stop}$. Line 1 stops at all stops and thus has three boarding nodes, line 2 only has boarding nodes at stop A and stop C. Boarding nodes are conected to their stops with boarding arcs and alighting arcs. Boarding nodes are connected by line arcs if a transit line connects their respective stops. Stop A and stop B are connected by walking arc, because they are close enough. Figure taken from \cite{rumpf}.}
 \end{figure}
 
 \section{Transit Assignment}\label{sec:assignment}
-The transit aassignment model, TransitAssignment$(y)$, models the way daily users interact with a given schedule $y$. It assumes users try to take their optimal route, wich may not be the fastest due to overcrowdedness. The flow produced by the model is called \emph{user-optimal flow} and is often less optimal then when all flow is controlled directly.
+The transit assignment model, TransitAssignment$(y)$, models the way daily users interact with a given schedule $y$. It assumes users try to take their optimal route, wich may not be the fastest due to overcrowdedness. The flow produced by the model is called \emph{user-optimal flow} and is often less optimal then when all flow is controlled directly.
 
 There are many such models, but Rumpf and Kaul choose the nonlinear model by Spiess and Florian in \cite{spiess}. This model increases arc cost based on crowdedness, discouraging flows from exceeding line capacity. The user-optimal flow output can not be changed in a way that individual users benefit from changes in only their route. The model is relatively simple, a desired property, as the model is run many times during the algorithm.
 
@@ -94,7 +95,7 @@ Where (\ref{model:1}) is the objective function described in section \ref{sec:ac
 \section{General algorithm}\label{sec:generalalgorithm}
 The SAMP model can be solved heuristically with the following algorithm. It is a combination of \emph{Tabu search} (TS) and \emph{Simmulated annealing} (SA), two versions of neigborhood search mentioned in sections \ref{sec:tabu} and \ref{sec:simann}. Full pseudocode can be found in appendix \ref{app:pseudocode}.
 
-Using the current transitschedule as a starting point, a neighborhood search is conducted, where neighbors of a solution $s$ are defined as valid solutions that differ only from $s$ by removing one vehicle from a transitline, and adding that vehicle to another line.
+Using the current transit schedule as a starting point, a neighborhood search is conducted, where neighbors of a solution $s$ are defined as valid solutions that differ only from $s$ by removing one vehicle from a transit line, and adding that vehicle to another line.
 
 During each iteration, the two best neighbors are determined. The best neighbor is chosen as the solution for the next iteration, unless the SA process forces the second best option to be chosen. The option that is not chosen gets put in \emph{long term memory} to be revisited later, while the adding/removing vehicle moves are put in \emph{short term memory} to not be repeated soon, according to TS.
 
