@@ -1,3 +1,0 @@
-C:/Users/jeroe/Documents/Wiskunde/Jaar 3/Scriptie/Bachelor-Thesis - GitHub/Transit Solver/build/CMakeFiles/solver.dir
-C:/Users/jeroe/Documents/Wiskunde/Jaar 3/Scriptie/Bachelor-Thesis - GitHub/Transit Solver/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/jeroe/Documents/Wiskunde/Jaar 3/Scriptie/Bachelor-Thesis - GitHub/Transit Solver/build/CMakeFiles/ZERO_CHECK.dir

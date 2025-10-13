@@ -10,7 +10,7 @@ The initial schedule is denoted as $y^*$. The model has upper and lower bounds $
 
 Let $x$ be the user flow vector for the transit network, $x^*$ the initial flow vector. User flow represents how busy parts of the network are, which is influenced by the schedule $y$ and found by the TransitAssignment$(y)$ function, which will be explained further in Section \ref{sec:assignment}.
 
-Other restraints of the model are given by operator and user costs with upper bounds $B_{operator},B_{user}$ respectively. Operating costs are mostly made up by monetary costs of running the transit network and monetary gain of users paying to use the service. User costs are made up of difficulty in traversing the network, be that in monetary cost or time spent in the system. More on these costs in Section \ref{sec:costs}.
+Other restraints of the model are given by operator and user costs with upper bounds $B_{operator},\allowbreak B_{user}$ respectively. Operating costs are mostly made up by monetary costs of running the transit network and monetary gain of users paying to use the service. User costs are made up of difficulty in traversing the network, be that in monetary cost or time spent in the system. More on these costs in Section \ref{sec:costs}.
 
 Let Access$(y)$ be a function describing the social access objective. This value only depends on the design of the network $y$ and not on user flow $x$, because the model is designed for a small group of individuals following Assumption \ref{assum:smallgroup} Different choices for Access$(y)$ are given in Section \ref{sec:access}.
 
@@ -44,7 +44,7 @@ User costs are time costs made by using the system. Things like travel time, wai
 \end{equation*}
 where $\omega\in \R$ is the total time spent waiting at busstops by all users combined.
 
-Due to assumption \ref{assum:smallgroup} we do not want the total user cost to increase too much, so we introduce a parameter $\varepsilon$ to give a constant upper bound
+Due to Assumption \ref{assum:smallgroup} we do not want the total user cost to increase too much, so we introduce a parameter $\varepsilon$ to give a constant upper bound
 \begin{equation*}
     \text{UserCost}(x, \omega) \leq (1+\varepsilon)\text{UserCost}(x^*, \omega^*).
 \end{equation*}
@@ -90,10 +90,10 @@ The SAMP model takes the shape of the following nonlinear program
     %& \text{OperatorCost}(y,x) \leq (1+\varepsilon)\text{OperatorCost}(y^*,x^*)    \\
      & \label{model:6} \text{UserCost}(x, \omega) \leq (1+\varepsilon)\text{UserCost}(x^*, \omega^*)
 \end{flalign}
-Where (\ref{model:1}) is the objective function described in section \ref{sec:access}, (\ref{model:2}) constrains the total number of vehicles to not increase from the initial amount, (\ref{model:3}) ensures upper and lower bounds for vehicle allocation, (\ref{model:4}) ensures a whole number of vehicles is allocated to each line, (\ref{model:5}) defines user flow as discussed in section \ref{sec:assignment} and (\ref{model:6}) gives an upper bound to the increase in user cost.
+Where Eq. (\ref{model:1}) is the objective function described in section \ref{sec:access}, Eq. (\ref{model:2}) constrains the total number of vehicles to not increase from the initial amount, Eq. (\ref{model:3}) ensures upper and lower bounds for vehicle allocation, Eq. (\ref{model:4}) ensures a whole number of vehicles is allocated to each line, Eq. (\ref{model:5}) defines user flow as discussed in section \ref{sec:assignment} and Eq. (\ref{model:6}) gives an upper bound to the increase in user cost.
 
 \section{General algorithm}\label{sec:generalalgorithm}
-The SAMP model can be solved heuristically with the following algorithm. It is a combination of \emph{Tabu search} (TS) and \emph{Simmulated annealing} (SA), two versions of neigborhood search mentioned in sections \ref{sec:tabu} and \ref{sec:simann}. Full pseudocode can be found in appendix \ref{app:pseudocode}.
+The SAMP model can be solved heuristically with the following algorithm. It is a combination of \emph{Tabu search} (TS) and \emph{Simmulated annealing} (SA), two versions of neigborhood search mentioned in Sections \ref{sec:tabu} and \ref{sec:simann}. Full pseudocode can be found in Appendix \ref{app:pseudocode}.
 
 Using the current transit schedule as a starting point, a neighborhood search is conducted, where neighbors of a solution $s$ are defined as valid solutions that differ only from $s$ by removing one vehicle from a transit line, and adding that vehicle to another line.
 
@@ -102,4 +102,15 @@ During each iteration, the two best neighbors are determined. The best neighbor 
 The chance that suboptimal neighbors are chosen is determined by a temperature parameter $T$, that decreases while the algorithm is running. This ensures more erratic exploration at the start of the algortihm and more exploitation of good solutions towards the end.
 
 After a predetermined amount of iterations is completed, all solutions in the long term memory and their neighbors are revisited. The most optimal solution that is found is then locally optimal.
+
+\section{Chicago application}
+In their paper, Rumpf and Kaul applied their model to the transitsystem of Chicago \cite{rumpf}. In their application, a transit stop set $V_{\text{stop}}$ with 997 different stops was used. These stops were also used as origin-destination (OD) pairs for day-to-day travel volume. Community nodes $\tilde V^+$ were defined using the $|\tilde V^+| =$ 77 Chicago community areas, where node position was taken as population-weighted centroids, based on 2010 cencus data. Facility nodes $\tilde V^-$ were the primary care facilities, of which $|\tilde V^-|=$ 119 are within the Chicago area. Each facility was given a quality of $S_j = 1,\hs \forall j\in  \tilde V^-$. Walking arcs were created when different locations were 0.75 miles (approximately 1.2 km) within eachother, walking speed was set at 4 ft/sec (approximately 4.4 km/h).
+
+Transit lines were aquired from General Transit Feed Specification (GTFS) data. It includes 126 bus lines and 8 train lines. It was also used to estimate the current number of vehicles $y^*_l$ for each line $l\in L$. The time horizon $\tau$ was taken as 24-hour period. It was assumed a single type of bus was used, with capacity $b_l = 39$ for all buslines, and a single type of train with capacity $b_l = 228$ for all trainlines. Fleet bounds $y^\text{min}_l, y^\text{max}_l$ were set to equal $y^*_l$ for all train lines to force these to remain the same. For bus lines $y^\text{min}_l$ was set to an amount to achieve at least one arrival per 30 minutes, no maximum $y^\text{max}_l$ was set.
+
+Their computational trials also used express lines, existing bus lines only servicing approximately 20\% of their initial stops. With less stops, a lower circuit completion time $\tau^l$ could be achieved, thus increasing their effective frequency $f_l$. The stops that remained were in highly accessible communities or in badly accessible communities, so the lines could connect badly accesibble communities to facilities. These express lines had initial fleet sizes of $y^*_l = 0$.
+
+The algorithm was run for 500 iterations, followed by a neighborhood search of the best found solution to ensure local optimality. The access function in Section \ref{sec:access} was evaluated with gravitational decay parameter $\beta = 1.0$ and community count of $\K = 8$ (approximately 10.39\% of 77 communities). The user cost function in Section \ref{sec:costs} used equal mode weights $\theta_1=\theta_2=\theta_3 = 1$ and maximum relative increase $\varepsilon = 0.01$.
+
+They also ran trials where either user cost constraints were ignored, only allowing vehicle swaps between lines and their express lines, and excluding express lines.
 
