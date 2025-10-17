@@ -1,5 +1,5 @@
 Elements	16
-Continue	1
+Continue	0
 Iterations	500
 Temp_Init	10000000000000000.0
 Temp_Factor	0.999

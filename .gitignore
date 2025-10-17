@@ -1,7 +1,6 @@
 *.code-workspace
 gtfs-nl/
 private.json
-.vscode/
 *.aux
 *.fdb_latexmk
 *.fls
@@ -13,3 +12,6 @@ private.json
 *.toc
 *.xdv
 *.bbl
+*.obj
+*.ilk
+*.pdb

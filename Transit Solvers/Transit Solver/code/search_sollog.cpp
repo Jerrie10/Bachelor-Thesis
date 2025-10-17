@@ -21,12 +21,13 @@ SolutionLog::SolutionLog(bool pickup)
 /// Reads a given solution log file into the solution dictionary.
 void SolutionLog::load_solution(string in_file)
 {
+	cout << "Loading solution from: " << in_file << endl;
 	// Read specified file
 	ifstream log_file;
 	log_file.open(in_file);
 	if (log_file.is_open())
 	{
-		string line, piece; // whole line and line element being read
+		string line, piece;		 // whole line and line element being read
 		getline(log_file, line); // skip comment line
 
 		while (log_file.eof() == false)
@@ -89,8 +90,7 @@ void SolutionLog::save_solution()
 	if (log_file.is_open())
 	{
 		// Write comment line
-		log_file << "Solution\tFeasible\tUC_Riding\tUC_Walking\tUC_Waiting\tCon_Time\tObjective\tObj_Time" << fixed <<
-			setprecision(15) << endl;
+		log_file << "Solution\tFeasible\tUC_Riding\tUC_Walking\tUC_Waiting\tCon_Time\tObjective\tObj_Time" << fixed << setprecision(15) << endl;
 
 		// Write rows by iterating through dictionary (order is arbitrary)
 		for (auto it = sol_log.begin(); it != sol_log.end(); it++)
@@ -98,8 +98,7 @@ void SolutionLog::save_solution()
 			log_file << it->first << '\t' << get<SOL_LOG_FEAS>(it->second) << '\t';
 			for (int i = 0; i < UC_COMPONENTS; i++)
 				log_file << get<SOL_LOG_UC>(it->second)[i] << '\t';
-			log_file << get<SOL_LOG_CON_TIME>(it->second) << '\t' << get<SOL_LOG_OBJ>(it->second) << '\t' <<
-				get<SOL_LOG_OBJ_TIME>(it->second) << endl;
+			log_file << get<SOL_LOG_CON_TIME>(it->second) << '\t' << get<SOL_LOG_OBJ>(it->second) << '\t' << get<SOL_LOG_OBJ_TIME>(it->second) << endl;
 		}
 
 		log_file.close();
@@ -119,7 +118,7 @@ If the solution vector was not already present in the log, this will add a new r
 overwrite its previous information.
 */
 void SolutionLog::create_row(const vector<int> &sol, int feas, const vector<double> &ucc, double uc_time,
-	double obj, double obj_time)
+							 double obj, double obj_time)
 {
 	sol_log[vec2str(sol)] = make_tuple(feas, ucc, uc_time, obj, obj_time);
 }

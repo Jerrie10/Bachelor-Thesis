@@ -165,7 +165,7 @@ void Objective::population_to_all_facilities(int source, const vector<double> &c
 	dist_queue.push(make_pair(0.0, Net->population_nodes[source]->id));			 // init queue with only source node with dist 0
 
 	// Main Dijkstra loop
-	while (unsearched_sinks.empty() == false /*&& !dist_queue.empty()*/) // change: added !dist_queue.empty()
+	while (unsearched_sinks.empty() == false)
 	{
 		// Get current minimum distance
 		double chosen_dist = dist_queue.top().first; // lowest distance
@@ -189,10 +189,6 @@ void Objective::population_to_all_facilities(int source, const vector<double> &c
 				// If new distance is an improvement, update the out-neighbor's distance and add a new copy to the queue
 				dist[head] = new_dist;
 				dist_queue.push(make_pair(new_dist, head));
-			}
-			if (dist_queue.empty()) // change
-			{
-				cout << "Queue is empty after trying" << endl;
 			}
 		}
 

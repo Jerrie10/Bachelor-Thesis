@@ -13,19 +13,19 @@ import json
 #==============================================================================
 
 # Raw Data input/output files
-population_clustered = "RawData/pc4.csv"
-facility_raw = "RawData/healthlocations.csv"
-facility_in = "Intermediate/healthdata.csv"
-facility_out = "Intermediate/facility.csv"
+population_clustered = "Preprocessing/RawData/pc4.csv"
+facility_raw = "Preprocessing/RawData/healthlocations.csv"
+facility_in = "Preprocessing/Intermediate/healthdata.csv"
+facility_out = "Preprocessing/Intermediate/facility.csv"
 
-stop_data = "RawData/busstops.csv"
-time_data = "RawData/route_times.csv"
-route_data = "RawData/routes.csv"
-route_times = "Intermediate/stopID_times.csv"
+stop_data = "Preprocessing/RawData/busstops.csv"
+time_data = "Preprocessing/RawData/route_times.csv"
+route_data = "Preprocessing/RawData/routes.csv"
+route_times = "Preprocessing/Intermediate/stopID_times.csv"
 
-line_nodes = "Intermediate/line_nodes.txt"
-line_arcs = "Intermediate/line_arcs.txt"
-transit_data = "Intermediate/intermediate_transit_data.txt"
+line_nodes = "Preprocessing/Intermediate/line_nodes.txt"
+line_arcs = "Preprocessing/Intermediate/line_arcs.txt"
+transit_data = "Preprocessing/Intermediate/intermediate_transit_data.txt"
 
 
 # Output network file parameters
@@ -38,9 +38,9 @@ aid_board = 1 # boarding arc type
 aid_alight = 2 # alighting arc type
 aid_walk = 3 # standard walking arc type
 aid_walk_health = 4 # walking arc type to connect pop centers and facilities
-final_arc_data = "Data/arc_data.txt"
-final_node_data = "Data/node_data.txt"
-final_transit_data = "Data/transit_data.txt"
+final_arc_data = "Preprocessing/Data/arc_data.txt"
+final_node_data = "Preprocessing/Data/node_data.txt"
+final_transit_data = "Preprocessing/Data/transit_data.txt"
 km_walk_time = 60/4  # minutes to walk 1km when walking 4km/h
 
 
@@ -68,12 +68,12 @@ oc_percent = 0.01 # allowed relative increase in operator cost
 misc_names = ["Horizon"] # misc parameter names
 misc_parameters = [540.0] # misc parameters, Timehorizon: opening hours gp 8:00-17:00 in minutes
 
-vehicle_file = "Data/vehicle_data.txt"
-oc_file = "Data/operator_cost_data.txt"
-uc_file = "Data/user_cost_data.txt"
-assignment_file = "Data/assignment_data.txt"
-objective_file = "Data/objective_data.txt"
-problem_file = "Data/problem_data.txt"
+vehicle_file = "Preprocessing/Data/vehicle_data.txt"
+oc_file = "Preprocessing/Data/operator_cost_data.txt"
+uc_file = "Preprocessing/Data/user_cost_data.txt"
+assignment_file = "Preprocessing/Data/assignment_data.txt"
+objective_file = "Preprocessing/Data/objective_data.txt"
+problem_file = "Preprocessing/Data/problem_data.txt"
 
 #==============================================================================
 # Functions
@@ -165,11 +165,9 @@ def transit_processing(stop_file, route_file, stop_time_file,
                        node_output_file, arc_output_file, route_output_file):
     """Preprocessing for transit network data.
 
-    Requires the following file names (respectively): GTFS stop data, GTFS trip
-    data, GTFS route data, GTFS stop time data, output file for node list,
-    output file for arc list, and output file for line info.
+    Requires the following file names (respectively): stop data, route data, stop time data, output 
+    file for node list, output file for arc list, and output file for line info.
 
-    
     The node and arc output files treat the cluster IDs as the stop node IDs,
     and include the boarding nodes, boarding arcs, alighting arcs, and line
     arcs for each line, along with the correct base travel times.
@@ -179,12 +177,13 @@ def transit_processing(stop_file, route_file, stop_time_file,
     arcnum = -1 # current arc ID
 
     # Write header for arc and transit files
-    with open(route_output_file, 'w') as f:
-        print("ID\tName\tType\tFleet\tCircuit\tScaling", file=f)
     with open(arc_output_file, 'w') as f:
         print("ID\tType\tLine\tTail\tHead\tTime", file=f)
-
+    with open(route_output_file, 'w') as f:
+        print("ID\tName\tType\tFleet\tCircuit\tScaling", file=f)
+    
     # Dictionary linking stop ID to coordinates
+    # still needed?
     stops = {}  #StopID : Coordinate
 
     # Read cluster file while writing the initial node file
@@ -221,15 +220,16 @@ def transit_processing(stop_file, route_file, stop_time_file,
     stoptimes_frame = pd.read_csv(stop_time_file)
 
     for r in routes: 
-        
+        """
         # Initialize dict for each route, stopID: next traveltime
         # Still needed?
         route_stops = {}
         for i, row in stoptimes_frame.iterrows():
             if (int(row['route_ID']) == r):
                 route_stops[row['StopID']] = row['traveltime to next stop']
-        
-        
+        """
+        # Initialize list of stops for this route
+        route_stops = []    
         # Initialize weighted arc list. (u, v) : traveltime
         arcs = {}
         u = -1
@@ -238,6 +238,8 @@ def transit_processing(stop_file, route_file, stop_time_file,
         for i, row in stoptimes_frame.iterrows():
             if (int(row['route_ID']) == r):
                 v = row['StopID']
+                if (v not in route_stops):
+                    route_stops.append(v)
                 if (u > -1):
                     arcs[(u,v)] = time
                 u = v
@@ -246,9 +248,9 @@ def transit_processing(stop_file, route_file, stop_time_file,
         #print(arcs)
         
         # Create boarding nodes and arcs
-        boarding = {}
-        for u in stops:
-            if(u in boarding) == False:
+        boarding = {} 
+        for u in route_stops:
+            if (u in boarding) == False:
                 nodenum += 1
                 boarding[u] = nodenum
 
@@ -270,18 +272,15 @@ def transit_processing(stop_file, route_file, stop_time_file,
                       str(boarding[a[0]])+"\t"+str(boarding[a[1]])+"\t"+
                       str(arcs[a]), file=f)
 
-            # Boarding arcs
-            for u in stops:
+            # Boarding & alighting arcs
+            for u in route_stops:
                 arcnum += 1
                 print(str(arcnum)+"\t"+str(aid_board)+"\t"+str(r)+"\t"+
                       str(u)+"\t"+str(boarding[u])+"\t0", file=f)
-
-            # Alighting arcs
-            for u in stops:
                 arcnum += 1
                 print(str(arcnum)+"\t"+str(aid_alight)+"\t"+str(r)+"\t"+
-                      str(boarding[u])+"\t"+str(u)+"\t0", file=f)
-        
+                      str(boarding[u])+"\t"+str(u)+"\t0", file=f)                
+                
         # Add route to transit file
         fleet = np.ceil((circuittime/60) * route_frequencies[r]) 
         with open(route_output_file, 'a') as f:
@@ -293,8 +292,6 @@ def transit_processing(stop_file, route_file, stop_time_file,
                   str(circuittime)+"\t"+
                   "1.0", 
                   file= f)
-        
-        
         
         print("Done processing route "+str(r))
 
@@ -379,10 +376,6 @@ def add_walking(stop_file, arc_file, cutoff = 0.25):
             arcnum += 1
 
     print("Done. Added a total of "+str(count)+" pairs of walking arcs.")
-
-
-
-    pass
 
 # -------------------------------------------------------------------------------------------------
 def network_assemble(input_stop_nodes, input_line_arcs, input_pop_nodes,
@@ -652,11 +645,11 @@ def transit_finalization(transit_input, transit_output):
 
                     # Read existing values
                     # ID	Name	Type	Fleet	Circuit	Scaling
-                    labels = dum[0]+"\t"+dum[1]+"\t" # ID and Name
-                    line_type = int(dum[2]) # vehicle type
+                    labels = dum[0]+"\t"+dum[1]         # ID and Name
+                    line_type = int(dum[2])             # vehicle type
                     fleet = int(np.ceil(float(dum[3]))) # fleet size
-                    circuit = float(dum[4]) # circuit time
-                    scaling = float(dum[5]) # active fraction of day
+                    circuit = float(dum[4])             # circuit time
+                    scaling = float(dum[5])             # active fraction of day
 
                     # Set bounds
                     lb = 2 * circuit/60     # Minimum frequency of 2 per hour
@@ -775,12 +768,14 @@ def misc_files(vehicle_output, operator_output, user_output, assignment_output,
 def main():
     #(un)comment lines based on what needs to be processed-----------------------------------------
     
+    ## Facility processing ================================
     #address_to_coords(facility_raw, facility_in)
-    
     #facility_processing(facility_in, facility_out) #redundant
     
+    ## Stop processing ====================================
     #stop_processing(stop_data, time_data, route_times)
     
+    ## Network processing =================================
     #transit_processing(stop_data, route_data, route_times, line_nodes, line_arcs, transit_data)
     
     #add_walking(stop_data, line_arcs)

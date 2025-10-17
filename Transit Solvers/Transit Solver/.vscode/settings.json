@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "xutility": "cpp",
+    "queue": "cpp",
+    "charconv": "cpp",
+    "vector": "cpp",
+    "iterator": "cpp",
+    "memory": "cpp",
+    "xstring": "cpp"
+  }
+}

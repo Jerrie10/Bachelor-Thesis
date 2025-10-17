@@ -487,7 +487,8 @@ neighbor_pair Search::neighborhood_search()
 				// If the solution is new, calculate its objective and create a tentative log entry
 				new_candidate = true;
 				new_obj++;
-				clock_t start = clock();					   // objective calculation timer
+				clock_t start = clock(); // objective calculation timer
+
 				obj_candidate = Obj->calculate(sol_candidate); // calculate objective value
 				cout << "New solution" << endl;
 				double candidate_time = (1.0 * clock() - start) / CLOCKS_PER_SEC;		  // objective calculation time
