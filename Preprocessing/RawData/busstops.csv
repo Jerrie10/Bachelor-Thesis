@@ -71,13 +71,13 @@ ID;Halte;lat;lng
 69;Schipholweg, Leiden;52,169867;4,488101
 70;Station De Vink, Leiden;52,146891;4,455354
 71;Station Lammenschans, Leiden;52,147308;4,492968
-72;Station Leiden Centraal, Leiden (Aankomst);52,165519;4,482503
+72;Station Leiden Centraal, Leiden (Aankomst);52,165520;4,482504
 73;Station Leiden Centraal, Leiden (Vertrek);52,165519;4,482503
 74;Steenstraat, Leiden;52,162264;4,484644
 75;Stevensbloem, Leiden;52,152559;4,452693
 76;Sumatrabrug, Leiden;52,163155;4,512309
 77;Sumatrastraat, Leiden;52,166456;4,50647
-78;Surinamestraat, Leiden;52,166456;4,50647
+78;Surinamestraat, Leiden;52,166466;4,50642
 79;Sweelincklaan, Leiden;52,14815;4,470362
 80;Trompweg, Voorschoten;52,145792;4,460797
 81;Turkooislaan, Leiden;52,157464;4,459196
@@ -97,7 +97,7 @@ ID;Halte;lat;lng
 95;Zeldenrustweg, Leiden;52,147558;4,449948
 96;Zijlsingel, Leiden;52,158554;4,505135
 97;Zorgcentrum Roomburgh, Leiden;52,1519;4,514531
-98;Zwartemeerlaan, Leiden;52,167034;4,511677
+98;Zwartemeerlaan, Leiden;52,175294;4,512719
 99;Zweilandlaan, Leiden;52,172564;4,486935
 100;Zwembad de Zijl, Leiden;52,167034;4,511677
 101;Vuurtorenplein, Noordwijk;52,247917;4,434715

@@ -13,7 +13,7 @@ import json
 #==============================================================================
 
 # Raw Data input/output files
-population_clustered = "Preprocessing/RawData/pc4.csv"
+population_clustered = "Preprocessing/RawData/vorpopulations.csv"
 facility_raw = "Preprocessing/RawData/healthlocations.csv"
 facility_in = "Preprocessing/Intermediate/healthdata.csv"
 facility_out = "Preprocessing/Intermediate/facility.csv"
@@ -421,7 +421,7 @@ def network_assemble(input_stop_nodes, input_line_arcs, input_pop_nodes,
     pop_id = -1
     for i, row in pop_df.iterrows():
         pop_id = pop_id + 1
-        populations[pop_id]=int(str(row['Inwoners']).replace('.',''))
+        populations[pop_id]=int(str(row['Population']).replace('.',''))
         pop_names[pop_id] = row['ID']
         pop_coords[pop_id] =((float(row['lat'].replace(',', '.')), 
                             float(row['lng'].replace(',', '.'))))
@@ -472,8 +472,7 @@ def network_assemble(input_stop_nodes, input_line_arcs, input_pop_nodes,
             # and must be repeated
             if len(pop_links[i]) == 0:
                 effective_cutoff *= 2
-                print("No links found. Trying again with cutoff "+
-                      str(effective_cutoff))
+                print("No links found. Trying again with cutoff "+ str(effective_cutoff))
 
     print("Adding a total of "+str(count)+" population walking arcs.")
 
@@ -763,7 +762,14 @@ def misc_files(vehicle_output, operator_output, user_output, assignment_output,
         for i in range(len(misc_parameters)):
             print(str(misc_names[i])+"\t"+str(misc_parameters[i]), file=f)
     
-
+def network_processing():
+    transit_processing(stop_data, route_data, route_times, line_nodes, line_arcs, transit_data)
+    add_walking(stop_data, line_arcs)
+    network_assemble(line_nodes, line_arcs, population_clustered, facility_in,
+                    stop_data, final_node_data, final_arc_data)
+    transit_finalization(transit_data, final_transit_data)
+    misc_files(vehicle_file, oc_file, uc_file, assignment_file, objective_file, 
+               problem_file, transit_data)
 
 def main():
     #(un)comment lines based on what needs to be processed-----------------------------------------
@@ -776,17 +782,7 @@ def main():
     #stop_processing(stop_data, time_data, route_times)
     
     ## Network processing =================================
-    #transit_processing(stop_data, route_data, route_times, line_nodes, line_arcs, transit_data)
-    
-    #add_walking(stop_data, line_arcs)
-        
-    #network_assemble(line_nodes, line_arcs, population_clustered, facility_in,
-    #             stop_data, final_node_data, final_arc_data)
-    
-    #transit_finalization(transit_data, final_transit_data)
-    
-    #misc_files(vehicle_file, oc_file, uc_file, assignment_file, objective_file, 
-    #           problem_file, transit_data)
-    
+    network_processing()
+
     pass
 main()
