@@ -15,16 +15,179 @@ Applications of voronoi diagrams can be found in many fields. Consider for examp
 \end{figure}
 
 \section{Neighborhood search algorithms}
-When a optimization problem has a large but finite solution space, a method of traversing possible solutions is a neighborhood search (NS) procedure. Given a solution space $S$, a neighborhood function $N: S \rightarrow \mathcal{P}$ and a feasible solution $s\in S$, a neighborhood $N(s)$ of $s$ can be found. This contains all feasible solutions that can be reached from $s$ after doing one \emph{move}.
+Given a solution space $S$ and an objective function $f: S \rightarrow \R$, a general optimization problem can be $\max_{s\in S} f(s)$. Given large enough solution spaces, or computationally heavy objective functions, evaluating every $s\in S$ can become too cumbersome. To avoid calculating all solutions, a \emph{neighborhood search} (NS) could be done.
 
-General NS algorithms are heuristic approaches and use a starting solution $s^*$ and try to find a solution in $N(s^*)$ that has a better value than $s^*$. If such solution $s$ exists, a new iteration is done where a more optimal solution is sought in $N(s)$. This iteration loops until a solution does not have a more optimal solution in its neighborhood.
+A general NS algorithm needs a solution space $S$ and objective $f$, as well as predefined \emph{moves} $N$. Like \cite{tabu}, we define a move $m$ to consist of a mapping defined on a subset $S(m) \subseteq S$, $m: S(m) \rightarrow S$. These moves allow the transition between different solution, thus the algorithm can `walk' from a starting solution $s'$ to an optimal solution. For all solutions $s\in S$, a set $N(s) = \{m\in N: s\in S(m)\}$ can be defined, containing all possible moves for $s$. This set $N(s)$ is called the neighborhood of $s$.
 
-NS algorithms have no method of leaving local optima, and thus get stuck often. To prevent this behaviour, many methods haven been developed. We dicuss two of those methods, both relying on making suboptimal moves. Just like NS, these are heuristic approaches to optimization problems.
+A simple example of an NS algorithm is the so-called \emph{Hill climb heuristic}, where each iteration looks at all nearby positions and moves to the highest one. When there is no higher position than the current one, the algorithm terminates. This algorithm has the following pseudocode
+
+\hfill
+\begin{algorithmic}[1]
+    \BeginBox
+    \Statex \textbf{HILL CLIMB HEURISTIC}
+    \State Select initial $s\in S$.
+    \Loop
+    \State Compute $N(s)$ and $f(m(s))$ for all $m\in N(s)$.
+    \State Find $s^* = m^*(s) \in N(s)$ such that $f(m^*(s)) \geq f(m(s))$ for all $m(s) \in N(s)$.
+    \If{$f(s^*) > f(s)$}
+    \State Set $s = s^*$.
+    \Else
+    \State $s$ is a local optima, \textbf{STOP}.
+    \EndIf
+    \EndLoop
+    \EndBox
+\end{algorithmic}
+
+\hfill
+
+We will use this algorithm to find the highest value in the following grid, starting in the lower left corner. We define a move to be one step in any (orthogonal or diagonal) direction.
+
+\def\matrixdata{
+    { 10, 3, 5, 8, 9},
+    { 1, 3, 3, 6, 3},
+    { 3, 5, 4, 3, 3},
+    { 1, 3, 1, 7, 1},
+    { 1, 2, 1, 2, 6},
+}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[
+        cell/.style={minimum size=0.8cm, draw=black, font=\small, align=center},
+        arrow/.style={-{Stealth[length=3mm]}, thick, black},
+        scale = 1
+        ]
+        \foreach \row [count=\y] in \matrixdata {
+            \foreach \val [count=\x] in \row {
+                \node[cell] (c\x\y) at (\x, -\y) {\val};
+            }
+        }
+
+        \draw[arrow] (c15) -- (c24);
+        \draw[arrow] (c24) -- (c23);
+    \end{tikzpicture}
+    \caption{Hill climb heuristic in a grid. Optimal value (10) is not achieved.}
+    \label{fig:hillclimb}
+\end{figure}
+
+Note that we get stuck in a cell with value 5, while there are multiple cells with higher values. The cells near our endpoint is higher than its neighbors, we call this a \emph{local optimum}. To avoid getting stuck in local optima, many methods haven been developed. We dicuss two of those methods, both relying on allowing suboptimal moves. Just like NS, these are heuristic approaches to optimization problems.
 
 \subsection{Tabu search}\label{sec:tabu}
-Tabu Search (TS) is an NS algorithm that uses \emph{Tabu lists} to escape local maxima. Visited solutions or executed moves are stored in \emph{short-term memory} (STM) and can not be revisited or redone for a small number of iterations, this is to prevent cycling. The length of time that solutions/moves are stored in STM is dependent on \emph{Tabu tenures}. \emph{Long-term memory} (LTM) is used to store solutions with a good objective value, so they, and their neighbors, can be revisited after the algorithm becomes trapped.
+Tabu Search (TS) is an NS algorithm that avoids getting stuck early by using a subset $M \subset N$ containing \emph{tabu moves}, or forbidden moves. The process of adding or removing moves to or from $M$ can be defined in many ways, we will go over the ones used in this study. An example of general TS pseudocode is the following.
 
-\emph{Tenures} can be adjusted dynamically while running the algorithm. This is to allow a greater focus on \emph{diversification}, the exploring of many different solutions, or on \emph{intensification}, the exploiting of good solutions.
+\hfill
+
+\begin{algorithmic}[1]
+    \BeginBox
+    \Statex \textbf{TABU SEARCH}
+    \State Select initial $s\in S$, let best known solution $s^* = s$.
+    \State Set $M = \emptyset$ and iteration counter $k=0$.
+    \Loop
+    \State Compute $N(s)$ and $f(m(s))$ for all $m\in N(s) \setminus M$.
+    \If{$N(s) \setminus M = \emptyset$} \textbf{STOP}.
+    \EndIf
+    \State Set $k= k+1$.
+    \State Find $m_k(s) \in N(s)\setminus M$ such that $f(m_k(s)) \geq f(m(s))$ for all $m(s) \in N(s)\setminus M$. \label{alg:tabu:noself}
+    \State Set $s = m_k(s)$.
+    \If{$f(s) > f(s^*)$}
+    \State Set $s^* = s$. \Comment{Update best known solution}
+    \EndIf
+    \If{A chosen number of iterations is reached, in total or since last improvement} \label{alg:tabu:iterstop}
+    \State \textbf{STOP}
+    \EndIf
+    \State Update $M$. \label{alg:tabu:update}
+    \EndLoop
+    \EndBox
+\end{algorithmic}
+
+\hfill
+
+Although it resembles the previous hill climb heuristic, it differs in some subtle ways. The first thing we note is that line~\ref{alg:tabu:noself} does not compare neighboring solutions to the current solution $s$. This enables the algorithm to walk away from a local optimum, while still remembering the best known solution for later.
+
+The algorithm also keeps track of how long it has been running, terminating in line~\ref{alg:tabu:iterstop} when improving takes too long. This is to ensure it does not walk in circles forever.
+
+In line~\ref{alg:tabu:update} we `update $M$', the rules we use to do this are called \emph{tabu tenures}. We will look at some tenures that can be used. One way is to remember some or all of the previous solutions that are visited. Moves that go to those solutions are tabu, others are not.
+
+Another way is to remember what kind of moves have been done recently. In our example of Figure~\ref{fig:hillclimb}, the moves are (up-and-right) and (up). We could update $M$ by making the reversal of these moves tabu for a number $h$ of iterations. The set $M$ would then be defined by $M = \{m\inv : m = m_l \text{ for } l > k - h\}$, where $m\inv$ is the inverse of $m$, $m\inv(m(s)) = s$. The tabu moves in our example would then be (down-and-left) and (down). By not allowing the reversal of moves, the algorithm looks to diversify the evaluated solutions agressively. Because these moves become non-tabu after a relatively small number of iterations, we call this the \emph{Short Term Memory} (STM).
+
+We can also define \emph{Long Term Memory} (LTM) in multiple ways. One of which is by remembering second-best solutions that were not chosen during an iteration. These could be revisited if the algorithm does not improve for a set amount of iterations (line~\ref{alg:tabu:iterstop}).
+
+If we say moves can not be inverted for $h = 2$ iterations, we take a maximum of $K = 12$ total and $I = 4$ non-improvent iterations and apply the TS to the grid in Figure~\ref{fig:hillclimb}, we get the path displayed in Figure~\ref{fig:tabusearch}.
+
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[
+        cell/.style={minimum size=0.8cm, draw=black, font=\small, align=center},
+        arrow/.style={-{Stealth[length=3mm]}, thick, black},
+        scale = 1
+        ]
+        \foreach \row [count=\y] in \matrixdata {
+            \foreach \val [count=\x] in \row {
+                \node[cell] (c\x\y) at (\x, -\y) {\val};
+            }
+        }
+
+        % Normal hill climb
+        \draw[arrow] (c15) -- (c24);            % 1-2
+        \draw[arrow] (c24) -- (c23);            % 3-5
+        % Downhill
+        \draw[arrow, red] (c23) -- (c33);       % 5-4
+        % Loop lower right
+        \draw[arrow] (c33) -- (c44);            % 4-7
+        \draw[arrow] (c44) -- (c55);            % 7-6
+        \draw[arrow] (c55) -- (c45);            % 6-2
+        \draw[arrow] (c45) -- (c44);            % 2-7
+        \draw[arrow] (c44) -- (c55);            % 7-6    
+        % Revisit second best
+        \draw[arrow, blue] (c55) -- (c42);      % 6-6
+        \draw[arrow] (c42) -- (c51);            % 6-9
+        \draw[arrow] (c51) -- (c41);            % 9-8
+        \draw[arrow, green] (c41) -- (c42);     % 8-6
+        %\draw[arrow] (c) -- (c); %  - 
+    \end{tikzpicture}
+    \caption{TS heuristic in a grid. The first `downhill' move is marked red, this is not immediately reversed due to the STM tenure. The search then chooses the cell with value 7 and remembers the cell valued 6 in LTM. It loops in the lower left corner until 4 iterations without improvement force the revisiting of the cell valued 6, marked in blue. The algorithm terminates after the iteration marked in green, with the best known solution having value 9.}
+    \label{fig:tabusearch}
+\end{figure}
+
+Note that this path still does not give the optimal value. In this case the optimal value would probably be achieved by increasing tenure $h$, forcing less loops to be walked. Exactly knowing which tenure rules and associated parameters (in our case $h, K, I$) is impossible. Through trial and error we can come close, but Tabu Search will always be a heuristic approach.
 
 \subsection{Simulated annealing}\label{sec:simann}
-Simulated Annealing (SA) is named after a technique in metallurgy where a material is heated and cooled in a controlled fashion, resulting in a change in physical properties. SA uses the same iteration as a basic NS algorithm, comparing different neighbors to choose a good next move. When choosing a next step, a teperature parameter $T$ is used to randomly choose a worse option. This parameter decreases while running, resulting in erratic moves in the beginning and more controlled moves towards the end of running.
+Where TS agressively searches for different options, \emph{Simulated Annealing} (SA) gently moves around, believing the final local optimum it visits to be close in value to a global optimum. It is named after a technique in metallurgy where a material is heated and cooled in a slow, controlled fashion, resulting in a change in physical properties.
+
+Just like the hill climb heuristic and TS, each iteration generates neighbors $N(s)$ of current solution $s$. Instead of choosing the neighbor with optimal value, it picks one solution $s^*$ at random. It then compares the two solutions by defining the difference in \emph{Energy} (SA's term for the objective value)
+\begin{equation*}
+    \delta E = f(s^*) - f(s).
+\end{equation*}
+
+If $\delta E$ is positive, neighbor $s^*$ is a better solution than $s$, so SA always makes the move to $s^*$. If $\delta E$ is negative, SA makes the move with probability $\exp(\delta E / T)$, where $T$ is the temparture of the model. A small decrease in energy or a large temperature make the probability of making sub-optimal moves higher. After each iteration, a cooling schedule is used to lower $T$ for the next iteration. This stimulates that the algorithm can make lots of suboptimal moves at the start, and almost no suboptimal moves towards the end, with the hope that it is near a global maximum after some time. One example of pseudocode is the following
+
+\hfill
+\begin{algorithmic}[1]
+    \BeginBox
+    \Statex \textbf{SIMULATED ANNEALING}
+    \State Select initial $s\in S$, set $T = T_0$.
+    \Repeat
+    \State Compute $N(s)$.
+    \State Pick $s^* = m^*(s) \in N(s)$ at random.
+    \State Set $\delta E = f(s^*) - f(s)$.
+    \If{$\delta E > 0$}
+    \State Set $s = s^*$.
+    \Else
+    \State Set $r \sim U[0,1]$. \Comment{random variable drawn uniformly form $[0,1]$}
+    \If{$r < \exp(\delta E / T)$}
+    \State Set $s = s^*$.
+    \EndIf
+    \EndIf
+    \State Cool $T$\label{alg:sa:cooling}
+    \Until{$T < T'$}
+    \EndBox
+\end{algorithmic}
+
+\hfill
+
+As SA is random, exact paths for the grid in Figure~\ref{fig:hillclimb} can not be made. There is also a choice to be made about the cooling procedure at line~\ref{alg:sa:cooling}. Common choices can be to multiply $T$ by some other parameter $\alpha$, decreasing the temperature by say $5\%$ per iteration, or letting $T$ decrease linearly. Different choices in cooling procedure influence how erratic the alogrithm behaves during runtime.
+
+The starting and ending temperatures $T_0, T'$ can also be chosen, where total runtime, and energy of a given solution need to be considered.
+
+% TOdO talk about convergence?
