@@ -53,7 +53,7 @@ We will use this algorithm to find the highest value in the following grid, star
 \begin{figure}[h]
     \centering
     \begin{tikzpicture}[
-        cell/.style={minimum size=0.8cm, draw=black, font=\small, align=center},
+        cell/.style={minimum size=0.5cm, draw=black, font=\small, align=center},
         arrow/.style={-{Stealth[length=3mm]}, thick, black},
         scale = 1
         ]
@@ -118,7 +118,7 @@ If we say moves can not be inverted for $h = 2$ iterations, we take a maximum of
 \begin{figure}[h]
     \centering
     \begin{tikzpicture}[
-        cell/.style={minimum size=0.8cm, draw=black, font=\small, align=center},
+        cell/.style={minimum size=0.5cm, draw=black, font=\small, align=center},
         arrow/.style={-{Stealth[length=3mm]}, thick, black},
         scale = 1
         ]
@@ -186,8 +186,60 @@ If $\delta E$ is positive, neighbor $s^*$ is a better solution than $s$, so SA a
 
 \hfill
 
-As SA is random, exact paths for the grid in Figure~\ref{fig:hillclimb} can not be made. There is also a choice to be made about the cooling procedure at line~\ref{alg:sa:cooling}. Common choices can be to multiply $T$ by some other parameter $\alpha$, decreasing the temperature by say $5\%$ per iteration, or letting $T$ decrease linearly. Different choices in cooling procedure influence how erratic the alogrithm behaves during runtime.
+There is also a choice to be made about the cooling procedure at line~\ref{alg:sa:cooling}. Common choices can be to multiply $T$ by some other parameter $\alpha$, decreasing the temperature by say $5\%$ per iteration, or letting $T$ decrease linearly. Cooling can also change dinamically while running. Different choices in cooling procedure influence how erratic the alogrithm behaves during runtime.
 
 The starting and ending temperatures $T_0, T'$ can also be chosen, where total runtime, and energy of a given solution need to be considered.
+
+As SA is random, exact paths for the grid in Figure~\ref{fig:hillclimb} can not be made. To illustrate the random nature of SA, we apply it to the grid with the same starting position (bottom left) for ten runs. The following parameters are used: starting temperature $T_0 = 10$, ending temperature $T' = 0.5$ and we cool the system by multiplying with $\alpha = 0.95$ after eacht iteration. The results are shown in Figure~\ref{fig:simanealling}. The algorithm terminates in the values 7 (bottom right), 8 and 9 (top right) each three times and the 10 in the top left a single time.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \begin{tikzpicture}[
+            cell/.style={minimum size=0.5cm, draw=black, font=\small, align=center},
+            arrow/.style={-{Stealth[length=3mm]}, thick, black, opacity=0.25},
+            scale = 1
+            ]
+            \foreach \row [count=\y] in \matrixdata {
+                \foreach \val [count=\x] in \row {
+                    \node[cell] (c\x\y) at (\x, -\y) {\val};
+                }
+            }
+
+            \draw[opacity=0.25] (c15) -- (c24)-- (c15)-- (c14)-- (c24)-- (c33)-- (c34)-- (c44)-- (c45)-- (c34)-- (c44)-- (c55)-- (c44)-- (c45)-- (c55)-- (c44)-- (c53)-- (c52)-- (c53)-- (c43)-- (c32)-- (c23)-- (c12)-- (c22)-- (c32)-- (c22)-- (c33)-- (c42)-- (c31)-- (c42)-- (c41)-- (c51)-- (c41)-- (c51)-- (c41);
+
+        \end{tikzpicture}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \begin{tikzpicture}[
+            cell/.style={minimum size=0.5cm, draw=black, font=\small, align=center},
+            arrow/.style={-{Stealth[length=3mm]}, thick, black, opacity=0.25},
+            scale = 1
+            ]
+            \foreach \row [count=\y] in \matrixdata {
+                \foreach \val [count=\x] in \row {
+                    \node[cell] (c\x\y) at (\x, -\y) {\val};
+                }
+            }
+
+            \draw[opacity=0.25] (c15) -- (c24)-- (c15)-- (c14)-- (c24)-- (c33)-- (c34)-- (c44)-- (c45)-- (c34)-- (c44)-- (c55)-- (c44)-- (c45)-- (c55)-- (c44)-- (c53)-- (c52)-- (c53)-- (c43)-- (c32)-- (c23)-- (c12)-- (c22)-- (c32)-- (c22)-- (c33)-- (c42)-- (c31)-- (c42)-- (c41)-- (c51)-- (c41)-- (c51)-- (c41);
+            \draw[opacity=0.25] (c15) -- (c25)-- (c35)-- (c25)-- (c34)-- (c24)-- (c25)-- (c24)-- (c25)-- (c15)-- (c24)-- (c14)-- (c24)-- (c13)-- (c23)-- (c22)-- (c33)-- (c22)-- (c31)-- (c41)-- (c52)-- (c43)-- (c53)-- (c52)-- (c41)-- (c51)-- (c42)-- (c41)-- (c42)-- (c41)-- (c31)-- (c41);
+            \draw[opacity=0.25] (c15) -- (c25)-- (c14)-- (c15)-- (c25)-- (c34)-- (c44)-- (c53)-- (c42)-- (c53)-- (c52)-- (c42)-- (c41)-- (c42)-- (c31)-- (c42)-- (c32)-- (c42)-- (c32)-- (c41)-- (c42)-- (c33)-- (c23)-- (c24)-- (c34)-- (c33)-- (c44)-- (c33)-- (c43)-- (c52)-- (c51)-- (c41)-- (c51);
+            \draw[opacity=0.25] (c15) -- (c24)-- (c14)-- (c15)-- (c14)-- (c13)-- (c24)-- (c13)-- (c22)-- (c23)-- (c34)-- (c24)-- (c23)-- (c14)-- (c25)-- (c34)-- (c43)-- (c44)-- (c33)-- (c32)-- (c33)-- (c44);
+            \draw[opacity=0.25] (c15) -- (c24)-- (c34)-- (c25)-- (c35)-- (c44)-- (c43)-- (c52)-- (c43)-- (c53)-- (c44)-- (c55)-- (c54)-- (c44)-- (c55)-- (c54)-- (c43)-- (c54)-- (c44)-- (c55)-- (c44)-- (c55)-- (c44)-- (c55)-- (c44)-- (c55)-- (c44);
+            \draw[opacity=0.25] (c15) -- (c25)-- (c14)-- (c23)-- (c32)-- (c42)-- (c43)-- (c52)-- (c53)-- (c44)-- (c45)-- (c54)-- (c55)-- (c44)-- (c45)-- (c44)-- (c45)-- (c34)-- (c43)-- (c42)-- (c43)-- (c42)-- (c51)-- (c41)-- (c42)-- (c51)-- (c41)-- (c51)-- (c41)-- (c51)-- (c41);
+            \draw[opacity=0.25] (c15) -- (c24)-- (c35)-- (c44)-- (c54)-- (c45)-- (c44)-- (c33)-- (c23)-- (c14)-- (c23)-- (c33)-- (c43)-- (c32)-- (c41)-- (c51)-- (c41)-- (c42)-- (c51)-- (c41)-- (c51)-- (c41)-- (c51)-- (c41)-- (c51);
+            \draw[opacity=0.25] (c15) -- (c14)-- (c24)-- (c15)-- (c25)-- (c35)-- (c45)-- (c44)-- (c33)-- (c44)-- (c35)-- (c34)-- (c43)-- (c32)-- (c22)-- (c21)-- (c22)-- (c13)-- (c24)-- (c34)-- (c35)-- (c25)-- (c24)-- (c23)-- (c13)-- (c24)-- (c13)-- (c23)-- (c33)-- (c24)-- (c13)-- (c12)-- (c21)-- (c11);
+            \draw[opacity=0.25] (c15) -- (c14)-- (c23)-- (c34)-- (c35)-- (c24)-- (c25)-- (c15)-- (c14)-- (c25)-- (c35)-- (c45)-- (c44)-- (c43)-- (c53)-- (c42)-- (c53)-- (c43)-- (c33)-- (c22)-- (c21)-- (c22)-- (c33)-- (c24)-- (c14)-- (c24)-- (c13)-- (c22)-- (c21)-- (c31)-- (c41)-- (c51)-- (c41)-- (c51);
+            \draw[opacity=0.25] (c15) -- (c25)-- (c34)-- (c23)-- (c13)-- (c23)-- (c14)-- (c13)-- (c23)-- (c24)-- (c13)-- (c24)-- (c33)-- (c24)-- (c23)-- (c33)-- (c22)-- (c11)-- (c21)-- (c32)-- (c43)-- (c33)-- (c23)-- (c34)-- (c25)-- (c35)-- (c45)-- (c55)-- (c44);
+
+
+        \end{tikzpicture}
+    \end{subfigure}
+    \caption{SA heuristic on a grid, chosen parameters are $T_0 = 10,\hs \alpha = 0.95,\hs T' = 0.5$, with $T := T\cdot \alpha$ as the cooling method . Left grid displays a single run of the SA algorithm, it walks seemingly at random until terminating at the cell valued 8 in the top right. The right grid displays ten different runs of the algorithm. Terminal values are: 7 in bottom right, 8 and 9 top right each three times and the 10 in the top left a single time.}
+    \label{fig:simanealling}
+\end{figure}
 
 % TOdO talk about convergence?
