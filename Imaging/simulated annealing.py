@@ -4,15 +4,6 @@ import math
 import matplotlib.pyplot as plt
 
 
-class Cell:
-    value = 0
-    location = (0,0)
-
-    def __init__(self, value, x, y) -> None:
-        self.value = value
-        self.location = (x, y)
-
-
 # Global variables      ============================================================================
 grid = [
     [ 10, 3, 5, 8, 9],
@@ -23,14 +14,19 @@ grid = [
 ]
 
 startpoint = (4,0)      # Lower left
-T_start = 10                # Starting Temp
+T_start = 10            # Starting Temp
 T_end = 0.5             # Ending Temp
 alpha = 0.95            # Cooling multiplier
 
 
 
 def select_neighbor(point: tuple) -> tuple:
-    ''' Function that takes in a point in the grid and picks a random neighbor'''
+    ''' Function that takes in a point in the grid and picks a random neighbor,
+    
+    Parameters
+    ---
+    point : tuple (x, y) of ints, denoting position in grid
+    '''
     (x_p, y_p) = point
     Nx = [x_p]
     Ny = [y_p]
@@ -59,6 +55,13 @@ def select_neighbor(point: tuple) -> tuple:
 
 
 def print_points(points: list):
+    ''' Function that takes in a list of points and prints them to be copy-pasted in a latex file, 
+    as part of a tikz figure. Staying in a point does not plot anything.
+    
+    Parameters
+    -----
+    points : list of tuples (x, y) of ints denoting position in grid. Order of appearance is important
+    '''
     output_file = './Imaging/simulated annealing.txt'
     u = (-1, -1)
     output = '\\draw '
@@ -76,6 +79,16 @@ def print_points(points: list):
         print(output, file=fout)
 
 def sim_annealing():
+    ''' Function that uses global variabels to do a single run of simulated annealing. The cooling
+    procedure is coded into this function, but could be in its own function if needed. Sequence of
+    visited points is printed afterwards.
+    
+    Parameters
+    ------
+    T_start : float containing starting temperature
+    startpoint : tuple (x,y) of ints denoting starting postition in grid
+
+    '''
     temp= T_start
     current_point = startpoint
     points_to_print = [current_point]           # For printing
