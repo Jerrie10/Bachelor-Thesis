@@ -4,20 +4,27 @@ This section summarizes the general model and algorithm developed by Rumpf and K
 % TODO rewrite: less dry, less ramming definitions, more flow. Fix foutieve contaminaties
 The algorithm made by Rumpf and Kaul in \cite{rumpf} was made to solve the \emph{social access maximization problem} (SAMP). The formulation of the problem is very general as to be aplicable to many situations.
 
-Let $L$ be the set of considered transit lines, where a transit line $l\in L$ is a series of stops with a given travel time between each stop. A schedule $y$ is a vector with $y_l \in \N$ the amount of vehicles assigned to line $l$ in a given time period. The vehicles are distributed evenly over the time period, so 5 vehicles in an hour gives 1 trip every 12 minutes.
+The network is made up of considered transit lines in set $L$. Here, each transit line $l\in L$ is a series of stops with a given travel time between each stop. Each line can have a type of vehicle assigned to it, so a network with different modes (like trains and busses) is possible.
+
+Each line $l$ has an amount of vehicles, called fleet size, assigned $y_l \in \N$ to it. These vehicles are allocated for the entire time horizon $\tau$. Each line also has a circuit time $\tau_l$, being the time it takes to travel a single loop of its schedule. After its circuit time is elapsed, the vehicle starts its next trip. Overall frequency of a line is thus dependent on amount of vehicles $y_l$ and circuit time $\tau_l$, it is given by
+\begin{equation*}
+    f_l = \frac{y_l \cdot \tau}{\tau_l}.
+\end{equation*}
+
+Frequency is derived from fleet size instead of the other way around, because operating costs are mostly dependent on fleet size. This makes schedule vector $y$, containing all fleet sizes $y_l$, the decision variable for the model.
 
 The initial schedule is denoted as $y^*$. The model has upper and lower bounds $y_l^{\text{min}} \leq y_l \leq y_l^{\text{max}} \hspace{2mm}$ for all $l\in L$. These can be set to 0 and infinity if no restriction is needed, or both to $y^*_l$ if no change is wanted.
 
-Let $x$ be the user flow vector for the transit network, $x^*$ the initial flow vector. User flow represents how busy parts of the network are, which is influenced by the schedule $y$ and found by the TransitAssignment$(y)$ function, which will be explained further in Section \ref{sec:assignment}.
+To simulate people traveling in the network, a user flow vector $x$ is used. User flow represents how busy parts of the network are, which is influenced by the schedule $y$ and found by the TransitAssignment$(y)$ function, which will be explained further in Section \ref{sec:assignment}. The initial user flow vector is denoted $x^*$ and is found by TransitAssignment$(y^*)$.
 
 Other restraints of the model are given by operator and user costs with upper bounds $B_{operator},\allowbreak B_{user}$ respectively. Operating costs are mostly made up by monetary costs of running the transit network and monetary gain of users paying to use the service. User costs are made up of difficulty in traversing the network, be that in monetary cost or time spent in the system. More on these costs in Section \ref{sec:costs}.
 
 Let Access$(y)$ be a function describing the social access objective. This value only depends on the design of the network $y$ and not on user flow $x$, because the model is designed for a small group of individuals following Assumption \ref{assum:smallgroup} Different choices for Access$(y)$ are given in Section \ref{sec:access}.
 
 \section{Network structure}
-The model uses a representation of the transit network to calculate traveltime and routechoises. For this, a directed graph $G = (V,A)$ is used. $V$ is the set of all relevant nodes, be that origin, destination, transit stop nodes. $A$ is the set of arrows linking the nodes together, these represent different modes of travel like walking, bus or trainriding.
+The model uses a representation of the transit network to calculate travel time and route choices. For this, a directed graph $G = (V,A)$ is used. $V$ is the set of all relevant nodes, be that origin, destination, transit stop nodes. $A$ is the set of arrows linking the nodes together, these represent different modes of travel like walking, bus or train riding.
 
-The node set is partitioned in subsets, each containing specific nodes. Let $V_{stop}\subset V$ contian nodes representing the physical location of transitstops. Let $V_{board}\subset V$ be the set of boarding nodes. Each stopnode $i\in V_{stop}$ has boardingnodes $j\in V_{board}$ for every line $l\in L$ that stops at that stop. Boarding nodes are used to distinguish between transit lines. Let $V^+, V^- \subset V$ be origin- and destination nodes, respectively. These represent the physical places where trips begin and end. To calculate social access, subsets $\tilde V^+, \tilde V^-\subset V$ are added, representing community and facility nodes, respectively.
+The node set is partitioned in subsets, each containing specific nodes. Let $V_{stop}\subset V$ contian nodes representing the physical location of transit stops. Let $V_{board}\subset V$ be the set of boarding nodes. Each stop node $i\in V_{stop}$ has boarding nodes $j\in V_{board}$ for every line $l\in L$ that stops at that stop. Boarding nodes are used to distinguish between transit lines. Let $V^+, V^- \subset V$ be origin and destination nodes, respectively. These represent the physical places where trips begin and end. To calculate social access, subsets $\tilde V^+, \tilde V^-\subset V$ are added, representing community and facility nodes, respectively.
 
 Just like the node set, the arc set $A$ is partitioned in subsets. Let $A_{line}\subset A$ be the arcs that represent the journey made by transit lines and let $A_{board},\allowbreak A_{alight}\subset A$  be the arcs representing entering or leaving a transit vehicle at a certain stop. Let $A_{walking}\subset A$ be walking arcs, connecting different nodes if their physical distance is walkable.
 
@@ -36,7 +43,7 @@ There are many such models, but Rumpf and Kaul choose the nonlinear model by Spi
 \section{Costs}\label{sec:costs}
 Generally, operator costs are monetary costs relevant to running the transit system. Things like purchasing and maintaining vehicles, employing drivers and other staff and other costs. In this study, we restrict the total number of busses to not increase. This gives no reason to purchase new vehicles or employ more drivers, so we assume that operator costs will not increase with a new schedule. This means that we can omit the operator cost constraint from the model.
 
-User costs are time costs made by using the system. Things like travel time, wait time, number of transfers and discomfort. All the user costs can be weighted based on transfer mode, 5 minutes of walking may weigh more than 5 minutes of busriding for example. For each $(i,j)\in A$ a flow amount $x_{ij}$ and cost $c_{ij}$ can be implemented. Flow amount represents the amount of users taking that arc, while cost represents some penalty in using that arc, like time needed to traverse it. The user cost function takes the form
+User costs are time costs made by using the system. Things like travel time, wait time, number of transfers and discomfort. All the user costs can be weighted based on transfer mode, 5 minutes of walking may weigh more than 5 minutes of bus riding for example. For each $(i,j)\in A$ a flow amount $x_{ij}$ and cost $c_{ij}$ can be implemented. Flow amount represents the amount of users taking that arc, while cost represents some penalty in using that arc, like time needed to traverse it. The user cost function takes the form
 \begin{equation*}
     \text{UserCost}(x, \omega) = \theta_1 \sum_{ij\in A_{line}} c_{ij}x_{ij}
     +\theta_2 \sum_{ij\in A_{walk}} c_{ij}x_{ij}
@@ -93,15 +100,28 @@ The SAMP model takes the shape of the following nonlinear program
 Where Eq. (\ref{model:1}) is the objective function described in section \ref{sec:access}, Eq. (\ref{model:2}) constrains the total number of vehicles to not increase from the initial amount, Eq. (\ref{model:3}) ensures upper and lower bounds for vehicle allocation, Eq. (\ref{model:4}) ensures a whole number of vehicles is allocated to each line, Eq. (\ref{model:5}) defines user flow as discussed in section \ref{sec:assignment} and Eq. (\ref{model:6}) gives an upper bound to the increase in user cost.
 
 \section{General algorithm}\label{sec:generalalgorithm}
-The SAMP model can be solved heuristically with the following algorithm. It is a combination of \emph{Tabu search} (TS) and \emph{Simmulated annealing} (SA), two versions of neigborhood search mentioned in Sections \ref{sec:tabu} and \ref{sec:simann}. Full pseudocode can be found in Appendix \ref{app:pseudocode}.
+The SAMP model can be solved heuristically with the following algorithm. It is a combination of \emph{Tabu search} (TS) and \emph{Simmulated annealing} (SA), two versions of neigborhood search mentioned in Sections \ref{sec:tabu} and \ref{sec:simann}.
 
-Using the current transit schedule as a starting point, a neighborhood search is conducted, where neighbors of a solution $s$ are defined as valid solutions that differ only from $s$ by removing one vehicle from a transit line, and adding that vehicle to another line.
+Pure neighborhood search runs the risk of getting stuck in local optima, so both SA and TS try to avoid this by sometimes making suboptimal moves. For current solution $s$ we have a neighborhood $N(s)$ of solutions reachable within one move $m$. SA picks a random neighbor $s'\in N(s)$ and goes there with probability
+\begin{equation}\label{eq:sacriterion}
+    \mathds{P}(\text{accept}\hs s') =
+    \begin{cases}
+        1                                       & \text{if } f(s') > f(s) \\
+        \exp\left(\frac{f(s') - f(s)}{T}\right) & \text{ else.}
+    \end{cases}
+\end{equation}
 
-During each iteration, the two best neighbors are determined. The best neighbor is chosen as the solution for the next iteration, unless the SA process forces the second best option to be chosen. The option that is not chosen gets put in \emph{long term memory} to be revisited later, while the adding/removing vehicle moves are put in \emph{short term memory} to not be repeated soon, according to TS.
+Where $f$ is the objective function that we want to maximize and $T$ is a model parameter called temperature that decreases after each iteration. TS always picks the best neighbor, even if that neighbor has a lower objective value. It then stores the last neighbor in \emph{short term memory} (STM) to make that neighbor \emph{tabu} or forbidden. STM can also be used to store the reversal of recent moves, forcing the algorithm to `walk away' from recent solutions. It also stores notable good solutions that were not visited or local maxima in \emph{long term memory} (LTM) to be revisited later. How long moves and solutions are stored in memory depends on \emph{tabu tenures}. The algorithm used for this study uses a hybrid between the two. Full pseudocode can be found in Appendix \ref{app:pseudocode}.
 
-The chance that suboptimal neighbors are chosen is determined by a temperature parameter $T$, that decreases while the algorithm is running. This ensures more erratic exploration at the start of the algortihm and more exploitation of good solutions towards the end.
+Using the current transit schedule as a starting point, a neighborhood search is conducted. The neighborhood $N(s)$ of a solution $s$ is defined as all other solutions that are reachable within one move $m$. A move, in this instance, is defined as swapping one allocated vehicle from one line to another for the entire time horizon. Each SWAP consist of an ADD move and a DROP move, where a vehicle is added or dropped from a line, respectively.
 
-After a predetermined amount of iterations is completed, all solutions in the long term memory and their neighbors are revisited. The most optimal solution that is found is then locally optimal.
+During each iteration, the two best neighbors $s'_1, s'_2$ are determined. If the best neighbor is an improvement over the current solution, that move is made and the next iteration starts. Reset the inner nonimprovement counter, save the chosen ADD and DROP move in STM.
+
+If there is no improvement, the SA criterion (\ref{eq:sacriterion}) is used and inner nonimprovement counter is increased. The best neighbor is chosen with probability $\exp(f(s_1') - f(s)/T)$, and $s'_2$ is saved in LTM. If $s'_1$ is not chosen, solution $s$ is kept as current solution and $s'_1$ is saved in LTM. If a move is made, save the ADD and DROP moves in STM.
+
+If the inner nonimprovement counter has met its maximum, reset it, increase the outer nonimprovemnt counter and move to a random solution in LTM. If the outer nonimprovement counter has met its maximum, reset tabu tenures, thereby dropping moves from STM. After each iteration, apply a cooling schedule to $T$.
+
+After a preset amount of iterations, an exhaustive local search is done for the best known solution. This ensures that the final solution is locally optimal.
 
 \section{Chicago application}
 In their paper, Rumpf and Kaul applied their model to the transitsystem of Chicago \cite{rumpf}. In their application, a transit stop set $V_{\text{stop}}$ with 997 different stops was used. These stops were also used as origin-destination (OD) pairs for day-to-day travel volume. Community nodes $\tilde V^+$ were defined using the $|\tilde V^+| =$ 77 Chicago community areas, where node position was taken as population-weighted centroids, based on 2010 cencus data. Facility nodes $\tilde V^-$ were the primary care facilities, of which $|\tilde V^-|=$ 119 are within the Chicago area. Each facility was given a quality of $S_j = 1,\hs \forall j\in  \tilde V^-$. Walking arcs were created when different locations were 0.75 miles (approximately 1.2 km) within eachother, walking speed was set at 4 ft/sec (approximately 4.4 km/h).

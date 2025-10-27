@@ -35,7 +35,7 @@ def draw_regions(region_file, vertices_file):
     and more."""
     
     regions = pd.read_csv(region_file, sep=';', skipinitialspace=True)
-    vertices = pd.read_csv(vertices_file, sep=';', skipinitialspace=True, index_col='ID')
+    vertices = pd.read_csv(vertices_file, skipinitialspace=True, index_col='ID')
     
     
     #coords = get_coords_csv(vertices_file, sep=';', skipinitialspace=True)
@@ -43,14 +43,16 @@ def draw_regions(region_file, vertices_file):
     img = plt.imread('./Imaging/Images/pc4_cropped.png')
     ax.imshow(img, extent=(4.435435, 4.550754, 52.116441, 52.18667))
     X, Y, ID = vertices['lat'], vertices['lng'], vertices.index
-
+    """
     # Drawing point numbers
-    ax.scatter(X, Y, c='skyblue')
+    ax.scatter(X, Y)
     for i in ID:
         ax.text(vertices.at[i, 'lat'], vertices.at[i, 'lng'], i, color='black', fontsize=8) # type: ignore
-    
+    """
     # Drawing used edges
     for i, region in regions.iterrows():
+        if i in [13, 0, 12, 26, 55, 7, 24, 48, 47, 6, 1, 4, 8, 3, 2, 15, 5, 15, 16, 10]:
+            continue
         points = ast.literal_eval(region['Vertices'])
         if points == []: 
             # Empty list representing a point at infinity
@@ -58,7 +60,7 @@ def draw_regions(region_file, vertices_file):
         X, Y = [[],[]]
         for v in points:
             if v == -1:
-                print(f'Found -1 in region {region}')
+                print(f'Found -1 in region {i}')
                 ax.plot(X, Y, c='darkgrey', alpha=1)
                 X, Y = [[],[]]
                 continue
@@ -68,21 +70,23 @@ def draw_regions(region_file, vertices_file):
         Y.append(vertices.at[points[0], 'lng'])
         ax.plot(X, Y, c='darkgrey', alpha=1)
     
-    """
+    
     # Drawing Voronoi weight points
-    vor_weightpoints = pd.read_csv('./Voronoi regions/vorPoints.csv', skipinitialspace=True)
-    vor_surface = pd.read_csv('./Voronoi regions/vorsurface.csv', sep=';', skipinitialspace=True)
+    vor_weightpoints = pd.read_csv('./Preprocessing/Voronoi regions - redo/vorPoints.csv', skipinitialspace=True)
+    #vor_surface = pd.read_csv('./Voronoi regions/vorsurface.csv', sep=';', skipinitialspace=True)
     Xbus, Ybus, IDbus = vor_weightpoints['lat'], vor_weightpoints['lng'], vor_weightpoints['ID']    
-    ax.scatter(Xbus, Ybus, color='maroon')
+    ax.scatter(Xbus, Ybus)
     for i in range(len(Ybus)):
-        id = vor_weightpoints.at[i, 'region']
+        id = IDbus[i] #vor_weightpoints.at[i, 'region']
         #if vor_surface.at[id, 'Accounted'] == 1:
         #    continue
         ax.text(Xbus[i], Ybus[i], id, color='black', fontsize=8) # type: ignore
-    """
+    
     
     plt.ylim(52.1195913, 52.18385562)
     plt.xlim(4.439670482, 4.52402989)
+    plt.xticks([])
+    plt.yticks([])
     plt.show()
 
 # Obsolete?
@@ -109,7 +113,7 @@ def vor_region():
             coords.append([float(row['lng'].replace(',', '.')), 
                            float(row['lat'].replace(',', '.'))])
     vor = Voronoi(np.array(coords))
-    
+    """
     with open('./Preprocessing/Voronoi regions - redo/vorRegions.csv', 'w') as fout:
         print('ID ; Vertices', file=fout)
         id = 0
@@ -131,7 +135,7 @@ def vor_region():
         for coord in vor.points:
             print(f'{id}, {coord[0]}, {coord[1]}, {vor.point_region[id]}', file=fout)
             id += 1
-    
+    """
     voronoi_plot_2d(vor)
     
     plt.ylim(52.1195913, 52.18385562)
@@ -318,8 +322,59 @@ def vor_pop(intersections: dict, densities: list, vor_in: str, vor_out: str):
     vor_frame.insert(len(vor_frame.columns)-1, 'Population', populations)
     vor_frame.to_csv(vor_out, sep=';')
 
+def draw_vor_regions(polygons: dict):
+    ''' Function that draws all voronoi polygons on picture of pc4 region, as well as bus stop points
     
+    Parameters
+    ---------
+    polygons : dictionary of form 
+        ID : Polygon
+    '''
+    fig, ax = plt.subplots()
+    img = plt.imread('./Imaging/Images/pc4_cropped.png')
+    ax.imshow(img, extent=(4.435435, 4.550754, 52.116441, 52.18667))
+
+    for p in polygons.values():
+        plot = plot_polygon(p, add_points=False, edgecolor='gray', facecolor='lightgray', alpha=0.5)
+
+    # Drawing Voronoi weight points
+    points_file = './Preprocessing/Voronoi regions - redo/vorPoints.csv'
+    vor_weightpoints = pd.read_csv(points_file, skipinitialspace=True)
+    Xbus, Ybus, IDbus = vor_weightpoints['lat'], vor_weightpoints['lng'], vor_weightpoints['ID']    
+    ax.scatter(Xbus, Ybus)
+    for i in range(len(Ybus)):
+        id = IDbus[i] 
+        ax.text(Xbus[i], Ybus[i], id, color='black', fontsize=12) # type: ignore
+
+    plt.ylim(52.1195913, 52.18385562)
+    plt.xlim(4.439670482, 4.52402989)
+    plt.xticks([])
+    plt.yticks([])
+    #plt.savefig('./Imaging/Images/vor_community_centers_2', bbox_inches='tight')
+    plt.show()
+    pass
     
+def unionize_voronoi(intersections: dict, voronoi: list) -> dict:
+    ''' Function that puts all polygons back together, based on parent voronoi region. Difference 
+    between this and make_vor_polygonlist is that the intersections also recognize boundary of Leiden.
+    
+    Parameters
+    --------
+    intersections : dict of shapely polygons
+        (a, b) : Polygon, where a is pc4 parent and b is voronoi parent
+    voronoi : list of shapely polygons
+    '''
+    unions = {}
+
+    for parents in intersections:
+        if parents[1] not in unions:
+            unions[parents[1]] = intersections[parents]
+        else:
+            unions[parents[1]] = unary_union((unions[parents[1]], intersections[parents]))
+
+
+    return unions
+
 
 def ignore():
     ''' Bugfixing stuff that would be really annoying to type again. Can be ignored
@@ -345,8 +400,10 @@ def main():
     vor_list = make_vor_polygonlist(vor_region_file, vor_vertex_file, vor_points_file)
     intersections = find_intersections(pc4_list, vor_list)
     
-    vor_pop(intersections, pc4_densities, vor_points_file, vor_pop_output)
-
-
+    #vor_pop(intersections, pc4_densities, vor_points_file, vor_pop_output)
+    
+    unions = unionize_voronoi(intersections, vor_list)
+    
+    draw_vor_regions(unions)
     pass
 main()
