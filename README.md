@@ -4,78 +4,96 @@ This repository contains all data and programs used for my Bachelor Thesis.
 
 Most scripts are taken from [this](https://github.com/adam-rumpf/social-transit) GitHub page by Adam Rumpf. He made a C++ program to make health services in Chicago more accessible by bus. I'm trying to apply his method to the health services in Leiden.
 
-To do this, GTFS data about bus travel in the Netherlands is included. Scripts that weed out data that is irrelevent for my scope are going to be made and included.
-
-_Currently, the GTFS files are to large to upload to GitHub, so will need to be processed locally. The script included will be written to work on general GTFS files taken from [this website](https://gtfs.ovapi.nl/nl/)._
-
 # General Idea
 
-The goal of making health services more accessible by bus is reached by changing the number of busses assigned to each bus line. This has a direct effect on the frequencies each bus stop is serviced, thus having an effect on the waiting times between transfers. Because the amount of people using busses to travel to their health service is small relative to the overall amount of people using the bus for commuting, a constraint is added to limit the extra travel time for the general population. The C++ program uses a hybrid between Tabu- and Simulated anealing local search algorithms. 
+The goal of making health services more accessible by bus is reached by changing the number of busses assigned to each bus line. This has a direct effect on the frequencies each bus stop is serviced, thus having an effect on the waiting times between transfers. Because the amount of people using busses to travel to their health service is small relative to the overall amount of people using the bus for commuting, a constraint is added to limit the extra travel time for the general population. The C++ program uses a hybrid between Tabu- and Simulated anealing local search algorithms.
 
-# Input files
+# Preprocessing
 
-The C++ script uses certain inputfiles to work correctly. We will construct these files by using a python script called `preprocessing.py`. This file condenses the GTFS data to be only the usefull parts. As the bulk of the code is taken from Adam Rumpf, the explantation of the code and the ouline of the input files can be found [here](https://github.com/adam-rumpf/social-transit-solver). All input files should be put in a `data/` folder. Most datafiles contain ID's to identify their entries, these are assumed to be consecutive numbers starting at `0`.
+The C++ script uses certain inputfiles to work correctly. We will construct these files by using a python script called `preprocessing.py`. This file condenses the input data to be only the usefull parts. As the bulk of the code is taken from Adam Rumpf, the explantation of the code and the ouline of the input files can be found [here](https://github.com/adam-rumpf/social-transit-solver). All input files should be put in a `data/` folder. Most datafiles contain ID's to identify their entries, these are assumed to be consecutive numbers starting at `0`.
 
-### `node_data.txt`
+## [`node_data.txt`]
 
 Information related to all nodes. Due to the internal network storage all population center and primary care facility nodes (types 2 and 3) must be listed in a contiguous block at the end of the node list.
 
 Contains the following columns:
 
-+ `ID`: Unique identifying number. Used to reference specific nodes in the other data files.
-+ `Name`: Name of the node. Most stops are simply called "Stop" followed by their ID number. Boarding nodes also append the name of their line. Population centers and primary care facilities use their real names.
-+ `Type`: Node type ID. The types in use are:
-    + `0`: stop node
-    + `1`: boarding node
-    + `2`: population center
-    + `3`: primary care facility
-+ `Line`: Line ID of a boarding node, and -1 otherwise.
-+ `Value`: Population of a population center, facility weight of a primary care facility, and -1 otherwise
+- `ID`: Unique identifying number. Used to reference specific nodes in the other data files.
+- `Name`: Name of the node. Most stops are simply called "Stop" followed by their ID number. Boarding nodes also append the name of their line. Population centers and primary care facilities use their real names.
+- `Type`: Node type ID. The types in use are:
+  - `0`: stop node
+  - `1`: boarding node
+  - `2`: population center
+  - `3`: primary care facility
+- `Line`: Line ID of a boarding node, and -1 otherwise.
+- `Value`: Population of a population center, facility weight of a primary care facility, and -1 otherwise
 
+# Transit Solver - Single
 
-## GTFS data
+After running the python script, a certain number of files wille be created. These are usefull, but not formatted in a way that is instantly readable. Just like the input files, the structure of the output files is explained [here](https://github.com/adam-rumpf/social-transit-solver).
 
-As mentioned before, the GTFS data on bus travel in the Netherlands is too large to be included. An example dataset is included in this repository to illustrate how the raw data is formatted. This dataset is created by trimming the large files and only keeping the first ~400 lines of data. The arbitrary deletion of data will probably make this dataset not functional, because routes, lines, trips, and bus-stops can not be cross-refferenced between files. It is solely included to get a vague understanding of the raw data that is used. Below is a short overview of what each file is used for, the official documentation of general GTFS data can be found [here](https://gtfs.org/documentation/schedule/reference/). 
+The `social-transit-solver-single` program gives the current flow distribution of the network, as well as the objective values of the current schedule. Regions can be compared based on how accessible health services are when starting a journey in a given region.
 
-###  `agency`
+## Input files
 
-Lists all transit agencies that are included in the dataset. In Leiden there are two bus agencies: EBS and Qbuzz. EBS runs regional routes between cities and has a couple stops in Leiden, Qbuzz also runs regional busses, but has special lines that are completely contained within Leiden.
+This program reads input files from a local `data/` folder. The following data files should be included in this folder:
 
-###  `calendar_dates`
+- [`arc_data.txt`]
+- [`assignment_data.txt`]
+- [`node_data.txt`]
+- [`objective_data.txt`]
+- [`od_data.txt`]
+- [`problem_data.txt`]
+- [`transit_data.txt`]
+- [`user_cost_data.txt`]
+- [`vehicle_data.txt`]
 
-Lists dates where bus service is different, like national holidays or during maintenance. As we are concerned with general planning, this file is omitted later.
+## Output files
 
-###  `feed_info`
+This program writes output files to a local `output/` folder. The following files are produced:
 
-Contains information about the dataset, like the author and where it was found.
+- `gravity_metrics.txt`: A full listing of the gravity access metrics of all population centers for the initial solution vector. This is meant for comparing the initial and final results on a center-by-center basis.
+- `initial_solution_log.txt`: An initial version of the solution log file for the main solver. Formatted correctly for the main solver, and contains a single row which logs the initial solution along with its constriant and objective values.
+- `initial_flows.txt`: The flow vector produced by the nonlinear assignment model for the initial fleet size vector. Includes core arcs only. This file is also used to allow the assignment process to be halted (using `[Ctrl]+[C]`) and resumed. If present it is used as an initial flow vector to speed up the assignment model. It is updated during each iteration of the assignment model's Frank-Wolfe algorithm.
+- `user_cost_data.txt`: A copy of the `user_cost_data.txt` input file with the initial user cost filled in based on the results of the single run.
 
-###  `routes`
+# Transit Solver
 
-Lists all routes, with certain properties like operating agency, route name and route color.
+The `social-transit-solver` uses the initial values given by the `preprocessing` and `social-transit-solver-single` scripts to find a more optimal solution. The objective values are also given. This can then be compared to the initial values to see if large improvements to the bus schedule can be made.
 
-###  `shapes`
+## Input files
 
-Lists all shapes a route can take. A shape consist of a series of points that are connected by straight lines. The order in which the points are entered in the file is the order of travel.
+This program reads input files from a local `data/` folder. The following data files should be included in this folder:
 
-###  `stops`
+### From [Transit solver - single `data/` folder]
 
-Lists all bus stops with their ID, name and other properties. Exact location via coordinates is included. 
+- [`arc_data.txt`]
+- [`assignment_data.txt`]
+- [`node_data.txt`]
+- [`objective_data.txt`]
+- [`od_data.txt`]
+- [`problem_data.txt`]
+- [`transit_data.txt`]
+- [`vehicle_data.txt`]
 
-###  `transfers`
+### From [Transit solver - single `output/` folder]
 
-Connects stops or trips when transfers are possible, can give minimum transfer time for a given transfer.
+- [`initial_flows.txt`]
+- [`initial_solution_log.txt`]
+- [`user_cost_data.txt`]
 
-###  `trips`
+### New files
 
-Lists all trips. Note that a route may be serviced multiple times a day, giving multiple unique trips. Contains direction and shape of trip, among other properties.
-
+- [`search_parameters.txt`]
 
 # Output files
 
-After running the script, a certain number of files wille be created. These are usefull, but not formatted in a way that is instantly readable. Just like the input files, the structure of the output files is explained [here](https://github.com/adam-rumpf/social-transit-solver). 
+This program writes outputs to a local `log/` folder. The following files are produced:
 
-## What can be learned?
+- [`event.txt`]: A log giving a summary of the events during each iteration of the solution process. See below for details.
+- `final.txt`: Includes the best known solution vector along with its objective value.
+- [`memory.txt`]: The memory structures associated with the tabu search/simulated annealing hybrid search process. Used to continue a halted search process. Not meant meant to be easily interpreted, but details are included below just in case.
+- `metrics.txt`: Accessibility metrics of each population center for the best known solution.
+- `solution.txt`: Log of all previously-searched solutions along with their feasibility status, constraint function elements, objective values, and evaluation times. Used to maintain a solution dictionary in order to avoid having to process searched solutions a second time. Its format is the same as that of the input file [`initial_solution_log.txt`], but due to the unordered map used to store solutions internally during execution the order of the rows is arbitrary and may change between executions.
 
-The `social-transit-solver-single` program gives the current flow distribution of the network, as well as the objective values of the current schedule. Regions can be compared based on how accessible health services are when starting a journey in a given region. 
-
-The `social-transit-solver` uses the initial values given by the `preprocessing` and `social-transit-solver-single` scripts to find a more optimal solution. The objective values are also given. This can then be compared to the initial values to see if large improvements to the bus schedule can be made.
+The program also prints to the command line as it runs in order to report the main algorithm iteration number and other major events. During the neighborhood search, which is the most time-consuming part of the process, it prints a sequence of characters as an indication that it is still working (specifically, it prints `|` when starting or restarting the first pass, `a` whenever considering a new ADD move during the first pass, `d` for a DROP move, `*` when beginning a constraint calculation, and `.` for each iteration of Frank-Wolfe during constraint calculation).

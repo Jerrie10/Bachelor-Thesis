@@ -1,0 +1,6 @@
+Field	Value
+Initial	-1
+Percent	0.01
+Elements	2
+Operating_Cost	1
+Fares	1

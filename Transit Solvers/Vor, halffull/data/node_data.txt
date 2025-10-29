@@ -475,141 +475,161 @@ ID	Name	Type	Line	Value
 473	Stop43_Route23	1	23	-1
 474	Stop119_Route23	1	23	-1
 475	Stop72_Route23	1	23	-1
-476	0_0.0	2	-1	5180
-477	1_1.0	2	-1	9960
-478	2_2.0	2	-1	11450
-479	3_3.0	2	-1	18040
-480	4_4.0	2	-1	12060
-481	5_5.0	2	-1	7820
-482	6_6.0	2	-1	8630
-483	7_7.0	2	-1	6720
-484	8_8.0	2	-1	19010
-485	9_9.0	2	-1	16540
-486	10_10.0	2	-1	22810
-487	11_11.0	2	-1	14180
-488	12_12.0	2	-1	18160
-489	13_13.0	2	-1	10250
-490	14_14.0	2	-1	8620
-491	15_15.0	2	-1	8950
-492	16_16.0	2	-1	5370
-493	17_17.0	2	-1	7200
-494	18_18.0	2	-1	27160
-495	19_19.0	2	-1	12850
-496	20_20.0	2	-1	11080
-497	21_21.0	2	-1	25210
-498	22_22.0	2	-1	4950
-499	23_23.0	2	-1	5460
-500	24_24.0	2	-1	25260
-501	25_25.0	2	-1	15010
-502	26_26.0	2	-1	11250
-503	27_27.0	2	-1	11600
-504	28_28.0	2	-1	6960
-505	29_29.0	2	-1	2910
-506	30_30.0	2	-1	29550
-507	31_31.0	2	-1	8460
-508	32_32.0	2	-1	12460
-509	33_33.0	2	-1	9440
-510	34_34.0	2	-1	11460
-511	35_35.0	2	-1	8700
-512	36_36.0	2	-1	11670
-513	37_37.0	2	-1	22770
-514	38_38.0	2	-1	3400
-515	39_39.0	2	-1	16810
-516	40_40.0	2	-1	20390
-517	41_41.0	2	-1	5860
-518	42_42.0	2	-1	16330
-519	43_43.0	2	-1	22010
-520	44_44.0	2	-1	8460
-521	45_45.0	2	-1	14070
-522	46_46.0	2	-1	5200
-523	47_47.0	2	-1	14840
-524	48_48.0	2	-1	10370
-525	49_49.0	2	-1	5360
-526	50_50.0	2	-1	22200
-527	51_51.0	2	-1	11600
-528	52_52.0	2	-1	30350
-529	53_53.0	2	-1	23170
-530	54_54.0	2	-1	4960
-531	55_55.0	2	-1	10960
-532	56_56.0	2	-1	11130
-533	57_57.0	2	-1	3830
-534	58_58.0	2	-1	15310
-535	59_59.0	2	-1	14630
-536	60_60.0	2	-1	10410
-537	61_61.0	2	-1	14700
-538	62_62.0	2	-1	16700
-539	63_63.0	2	-1	17650
-540	64_64.0	2	-1	3760
-541	65_65.0	2	-1	14240
-542	66_66.0	2	-1	15100
-543	67_67.0	2	-1	11000
-544	68_68.0	2	-1	16330
-545	69_69.0	2	-1	13560
-546	70_70.0	2	-1	9940
-547	71_71.0	2	-1	20520
-548	72_72.0	2	-1	6580
-549	73_73.0	2	-1	5140
-550	74_74.0	2	-1	7320
-551	75_75.0	2	-1	6830
-552	76_76.0	2	-1	25460
-553	77_77.0	2	-1	4830
-554	78_78.0	2	-1	2250
-555	79_79.0	2	-1	8210
-556	80_80.0	2	-1	2200
-557	81_81.0	2	-1	7950
-558	82_82.0	2	-1	2570
-559	83_83.0	2	-1	19980
-560	84_84.0	2	-1	7260
-561	85_85.0	2	-1	15420
-562	86_86.0	2	-1	3450
-563	87_87.0	2	-1	4130
-564	88_88.0	2	-1	15830
-565	89_89.0	2	-1	5430
-566	90_90.0	2	-1	22400
-567	91_91.0	2	-1	1290
-568	92_92.0	2	-1	19690
-569	93_93.0	2	-1	29710
-570	94_94.0	2	-1	13380
-571	95_95.0	2	-1	26250
-572	96_96.0	2	-1	20730
-573	97_97.0	2	-1	8360
-574	98_98.0	2	-1	32570
-575	99_99.0	2	-1	8840
-576	100_100.0	2	-1	26370
-577	Wiersma-van der Hulst Huisartsen	3	-1	2
-578	Huisartspraktijk Vreehof – Backes & Dekker	3	-1	2
-579	Huisartsenpraktijk Cazander	3	-1	2
-580	Huisartsenpraktijk op 11	3	-1	3
-581	Huisartspraktijk Bevrijdingsplein	3	-1	2
-582	Huisartsencentrum Leiden, Huisartsenpraktijk R.A. van Randeraat	3	-1	1
-583	Jonkers en Otten, huisartsenzorg	3	-1	2
-584	Huisartsenpraktijk W.E. Schrader	3	-1	1
-585	Zuiderpraktijk	3	-1	3
-586	Huisartsenpraktijk Minken	3	-1	4
-587	Huisartsenpraktijk Roomburgh	3	-1	4
-588	De Singel Huisartsen, Praktijk Sanders	3	-1	2
-589	Huisartsencentrum Leiden, Huisartsenpraktijk Bloem en Van Berkel	3	-1	2
-590	Huisartsenpraktijk Zwaan	3	-1	1
-591	Huisartsenpraktijk Meskers	3	-1	2
-592	Huisartsencentrum Leiden, Huisartsenpraktijk Boels	3	-1	1
-593	Huisartsenpraktijk Stevenshof	3	-1	4
-594	Huisartsenpraktijk Pluimgras	3	-1	2
-595	Huisartsenpraktijk Piest	3	-1	2
-596	Huisartspraktijk A.M. van den Braken	3	-1	3
-597	Huisartsenpraktijk Boender	3	-1	1
-598	Gezondheidscentrum Vondellaan, Huisartsenpraktijk De Vondel	3	-1	2
-599	Huisartsen Centrum Roodenburg	3	-1	3
-600	Huisartsen De Laat de Kanterstraat	3	-1	3
-601	Huisartsenpraktijk Vernhout	3	-1	2
-602	Huisartsenpraktijk 't Joppe	3	-1	4
-603	Huisartsenpraktijk Wendel en van Heezik	3	-1	2
-604	Huisartspraktijk A. Goslinga	3	-1	1
-605	Huisartsenpraktijk Zuidwest	3	-1	2
-606	Praktijk Boshuizen	3	-1	2
-607	Gezondheidscentrum Merenwijk, Huisartsen	3	-1	6
-608	De Singel Huisartsen, Praktijk Weijenborg	3	-1	2
-609	Huisartsenpraktijk Prinsenstraat	3	-1	2
-610	Huisartsencentrum Leiden, Huisartsenpraktijk Siegman	3	-1	3
-611	Huisartsenpraktijk Hortus	3	-1	4
-612	Huisartsenpraktijk Vrijheidslaan	3	-1	3
-613	Huisartspraktijk J. Lindenhovius	3	-1	2
+476	0_0	2	-1	518
+477	1_1	2	-1	996
+478	2_2	2	-1	1145
+479	3_3	2	-1	1804
+480	4_4	2	-1	1206
+481	5_5	2	-1	782
+482	6_6	2	-1	863
+483	7_7	2	-1	672
+484	8_8	2	-1	1901
+485	9_9	2	-1	1654
+486	10_10	2	-1	2281
+487	11_11	2	-1	1418
+488	12_12	2	-1	1816
+489	13_13	2	-1	1025
+490	14_14	2	-1	862
+491	15_15	2	-1	895
+492	16_16	2	-1	537
+493	17_17	2	-1	720
+494	18_18	2	-1	2716
+495	19_19	2	-1	1285
+496	20_20	2	-1	1108
+497	21_21	2	-1	2521
+498	22_22	2	-1	495
+499	23_23	2	-1	546
+500	24_24	2	-1	2526
+501	25_25	2	-1	1501
+502	26_26	2	-1	1125
+503	27_27	2	-1	1160
+504	28_28	2	-1	696
+505	29_29	2	-1	291
+506	30_30	2	-1	2955
+507	31_31	2	-1	846
+508	32_32	2	-1	1246
+509	33_33	2	-1	944
+510	34_34	2	-1	1146
+511	35_35	2	-1	870
+512	36_36	2	-1	1167
+513	37_37	2	-1	2277
+514	38_38	2	-1	340
+515	39_39	2	-1	1681
+516	40_40	2	-1	2039
+517	41_41	2	-1	586
+518	42_42	2	-1	1633
+519	43_43	2	-1	2201
+520	44_44	2	-1	846
+521	45_45	2	-1	1407
+522	46_46	2	-1	520
+523	47_47	2	-1	1484
+524	48_48	2	-1	1037
+525	49_49	2	-1	536
+526	50_50	2	-1	2220
+527	51_51	2	-1	1160
+528	52_52	2	-1	3035
+529	53_53	2	-1	2317
+530	54_54	2	-1	496
+531	55_55	2	-1	1096
+532	56_56	2	-1	1113
+533	57_57	2	-1	383
+534	58_58	2	-1	1531
+535	59_59	2	-1	1463
+536	60_60	2	-1	1041
+537	61_61	2	-1	1470
+538	62_62	2	-1	1670
+539	63_63	2	-1	1765
+540	64_64	2	-1	376
+541	65_65	2	-1	1424
+542	66_66	2	-1	1510
+543	67_67	2	-1	1100
+544	68_68	2	-1	1633
+545	69_69	2	-1	1356
+546	70_70	2	-1	994
+547	71_71	2	-1	2052
+548	72_72	2	-1	658
+549	73_73	2	-1	514
+550	74_74	2	-1	732
+551	75_75	2	-1	683
+552	76_76	2	-1	2546
+553	77_77	2	-1	483
+554	78_78	2	-1	225
+555	79_79	2	-1	821
+556	80_80	2	-1	220
+557	81_81	2	-1	795
+558	82_82	2	-1	257
+559	83_83	2	-1	1998
+560	84_84	2	-1	726
+561	85_85	2	-1	1542
+562	86_86	2	-1	345
+563	87_87	2	-1	413
+564	88_88	2	-1	1583
+565	89_89	2	-1	578
+566	90_90	2	-1	2240
+567	91_91	2	-1	129
+568	92_92	2	-1	1969
+569	93_93	2	-1	2971
+570	94_94	2	-1	1338
+571	95_95	2	-1	2625
+572	96_96	2	-1	2073
+573	97_97	2	-1	836
+574	98_98	2	-1	3257
+575	99_99	2	-1	884
+576	100_100	2	-1	2637
+577	101_101	2	-1	0
+578	102_102	2	-1	0
+579	103_103	2	-1	0
+580	104_104	2	-1	0
+581	105_105	2	-1	0
+582	106_106	2	-1	0
+583	107_107	2	-1	0
+584	108_108	2	-1	0
+585	109_109	2	-1	0
+586	110_110	2	-1	0
+587	111_111	2	-1	0
+588	112_112	2	-1	0
+589	113_113	2	-1	0
+590	114_114	2	-1	0
+591	115_115	2	-1	0
+592	116_116	2	-1	0
+593	117_117	2	-1	0
+594	118_118	2	-1	0
+595	119_119	2	-1	0
+596	120_120	2	-1	0
+597	Wiersma-van der Hulst Huisartsen	3	-1	2
+598	Huisartspraktijk Vreehof – Backes & Dekker	3	-1	2
+599	Huisartsenpraktijk Cazander	3	-1	2
+600	Huisartsenpraktijk op 11	3	-1	3
+601	Huisartspraktijk Bevrijdingsplein	3	-1	2
+602	Huisartsencentrum Leiden, Huisartsenpraktijk R.A. van Randeraat	3	-1	1
+603	Jonkers en Otten, huisartsenzorg	3	-1	2
+604	Huisartsenpraktijk W.E. Schrader	3	-1	1
+605	Zuiderpraktijk	3	-1	3
+606	Huisartsenpraktijk Minken	3	-1	4
+607	Huisartsenpraktijk Roomburgh	3	-1	4
+608	De Singel Huisartsen, Praktijk Sanders	3	-1	2
+609	Huisartsencentrum Leiden, Huisartsenpraktijk Bloem en Van Berkel	3	-1	2
+610	Huisartsenpraktijk Zwaan	3	-1	1
+611	Huisartsenpraktijk Meskers	3	-1	2
+612	Huisartsencentrum Leiden, Huisartsenpraktijk Boels	3	-1	1
+613	Huisartsenpraktijk Stevenshof	3	-1	4
+614	Huisartsenpraktijk Pluimgras	3	-1	2
+615	Huisartsenpraktijk Piest	3	-1	2
+616	Huisartspraktijk A.M. van den Braken	3	-1	3
+617	Huisartsenpraktijk Boender	3	-1	1
+618	Gezondheidscentrum Vondellaan, Huisartsenpraktijk De Vondel	3	-1	2
+619	Huisartsen Centrum Roodenburg	3	-1	3
+620	Huisartsen De Laat de Kanterstraat	3	-1	3
+621	Huisartsenpraktijk Vernhout	3	-1	2
+622	Huisartsenpraktijk 't Joppe	3	-1	4
+623	Huisartsenpraktijk Wendel en van Heezik	3	-1	2
+624	Huisartspraktijk A. Goslinga	3	-1	1
+625	Huisartsenpraktijk Zuidwest	3	-1	2
+626	Praktijk Boshuizen	3	-1	2
+627	Gezondheidscentrum Merenwijk, Huisartsen	3	-1	6
+628	De Singel Huisartsen, Praktijk Weijenborg	3	-1	2
+629	Huisartsenpraktijk Prinsenstraat	3	-1	2
+630	Huisartsencentrum Leiden, Huisartsenpraktijk Siegman	3	-1	3
+631	Huisartsenpraktijk Hortus	3	-1	4
+632	Huisartsenpraktijk Vrijheidslaan	3	-1	3
+633	Huisartspraktijk J. Lindenhovius	3	-1	2

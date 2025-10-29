@@ -13,19 +13,19 @@ import json
 #==============================================================================
 
 # Raw Data input/output files
-population_clustered = "Preprocessing/RawData/vorpopulations.csv"
-facility_raw = "Preprocessing/RawData/healthlocations.csv"
-facility_in = "Preprocessing/Intermediate/healthdata.csv"
-facility_out = "Preprocessing/Intermediate/facility.csv"
+population_clustered = "./Preprocessing/RawData/vorpop.csv"
+facility_raw = "./Preprocessing/RawData/healthlocations.csv"
+facility_in = "./Preprocessing/Intermediate/healthdata.csv"
+facility_out = "./Preprocessing/Intermediate/facility.csv"
 
-stop_data = "Preprocessing/RawData/busstops.csv"
-time_data = "Preprocessing/RawData/route_times.csv"
-route_data = "Preprocessing/RawData/routes.csv"
-route_times = "Preprocessing/Intermediate/stopID_times.csv"
+stop_data = "./Preprocessing/RawData/busstops.csv"
+time_data = "./Preprocessing/RawData/route_times.csv"
+route_data = "./Preprocessing/RawData/routes.csv"
+route_times = "./Preprocessing/Intermediate/stopID_times.csv"
 
-line_nodes = "Preprocessing/Intermediate/line_nodes.txt"
-line_arcs = "Preprocessing/Intermediate/line_arcs.txt"
-transit_data = "Preprocessing/Intermediate/intermediate_transit_data.txt"
+line_nodes = "./Preprocessing/Intermediate/line_nodes.txt"
+line_arcs = "./Preprocessing/Intermediate/line_arcs.txt"
+transit_data = "./Preprocessing/Intermediate/intermediate_transit_data.txt"
 
 
 # Output network file parameters
@@ -38,9 +38,9 @@ aid_board = 1 # boarding arc type
 aid_alight = 2 # alighting arc type
 aid_walk = 3 # standard walking arc type
 aid_walk_health = 4 # walking arc type to connect pop centers and facilities
-final_arc_data = "Preprocessing/Data/arc_data.txt"
-final_node_data = "Preprocessing/Data/node_data.txt"
-final_transit_data = "Preprocessing/Data/transit_data.txt"
+final_arc_data = "./Preprocessing/Data/arc_data.txt"
+final_node_data = "./Preprocessing/Data/node_data.txt"
+final_transit_data = "./Preprocessing/Data/transit_data.txt"
 km_walk_time = 60/4  # minutes to walk 1km when walking 4km/h
 
 
@@ -62,18 +62,18 @@ alpha = 4.0
 beta = (2*alpha-1)/(2*alpha-2)
 latency_parameters = [alpha, beta] # list of latency function parameters
 obj_names = ["Lowest", "Gravity Falloff", "Multiplier"] # obj fun par names
-obj_parameters = [4, 1.0, 1000000000] # objective function parameters
+obj_parameters = [10, 1.0, 1000000000] # objective function parameters
 uc_percent = 0.01 # allowed relative increase in user cost
 oc_percent = 0.01 # allowed relative increase in operator cost
 misc_names = ["Horizon"] # misc parameter names
 misc_parameters = [540.0] # misc parameters, Timehorizon: opening hours gp 8:00-17:00 in minutes
 
-vehicle_file = "Preprocessing/Data/vehicle_data.txt"
-oc_file = "Preprocessing/Data/operator_cost_data.txt"
-uc_file = "Preprocessing/Data/user_cost_data.txt"
-assignment_file = "Preprocessing/Data/assignment_data.txt"
-objective_file = "Preprocessing/Data/objective_data.txt"
-problem_file = "Preprocessing/Data/problem_data.txt"
+vehicle_file = "./Preprocessing/Data/vehicle_data.txt"
+oc_file = "./Preprocessing/Data/operator_cost_data.txt"
+uc_file = "./Preprocessing/Data/user_cost_data.txt"
+assignment_file = "./Preprocessing/Data/assignment_data.txt"
+objective_file = "./Preprocessing/Data/objective_data.txt"
+problem_file = "./Preprocessing/Data/problem_data.txt"
 
 #==============================================================================
 # Functions
@@ -81,7 +81,7 @@ problem_file = "Preprocessing/Data/problem_data.txt"
 
 
 def address_to_coords(inputfile, outputfile):
-    """Uses the MapQuestAPI to get coordinates of locations, based on adress
+    """Uses the MapQuestAPI to get coordinates of locations, based on adress, outputs to csv file
     """
     private = json.load(open("private.json", 'r'))
     api_key = private['MapQuest']
@@ -409,8 +409,12 @@ def network_assemble(input_stop_nodes, input_line_arcs, input_pop_nodes,
     stop_df = pd.read_csv(input_stops, sep=';')
     for i, row in stop_df.iterrows():
         stop_ids.append(row['ID'])
-        stop_coords.append((float(row['lat'].replace(',', '.')), 
+        
+        if isinstance(row['lat'], str) == True:
+            stop_coords.append((float(row['lat'].replace(',', '.')), 
                             float(row['lng'].replace(',', '.'))))
+        else:
+            stop_coords.append((row['lat'], row['lng']))
         
     # Read in dictionaries indexed by population center IDs to contain the
     # population values, center names, and coordinates
@@ -423,8 +427,11 @@ def network_assemble(input_stop_nodes, input_line_arcs, input_pop_nodes,
         pop_id = pop_id + 1
         populations[pop_id]=int(str(row['Population']).replace('.',''))
         pop_names[pop_id] = row['ID']
-        pop_coords[pop_id] =((float(row['lat'].replace(',', '.')), 
-                            float(row['lng'].replace(',', '.'))))
+        if isinstance(row['lat'], str) == True:
+            pop_coords[pop_id] = (float(row['lat'].replace(',', '.')), 
+                                    float(row['lng'].replace(',', '.')))
+        else:
+            pop_coords[pop_id] = (row['lat'], row['lng'])
 
     # Go through each population center and generate a dictionary of stop IDs
     # that should be linked to each center
@@ -443,6 +450,7 @@ def network_assemble(input_stop_nodes, input_line_arcs, input_pop_nodes,
             for j in range(len(stop_coords)):
                 # Calculate pairwise distance
                 dist = distance(pop_coords[i], stop_coords[j], taxicab=True)
+                #print(f'Pop coords {pop_coords[i]}, stop coords {stop_coords[j]}, distance: {dist}')
                 if dist <= effective_cutoff:
                     keep = True # whether to keep the current pair
 
@@ -651,9 +659,11 @@ def transit_finalization(transit_input, transit_output):
                     scaling = float(dum[5])             # active fraction of day
 
                     # Set bounds
-                    lb = 2 * circuit/60     # Minimum frequency of 2 per hour
-                    ub = finite_infinity    # No upper bound
                     vcap = bus_capacity
+                    ub = finite_infinity                # No upper bound
+                    lb = np.ceil(2 * circuit/60)        # Minimum frequency of 2 per hour
+                    if fleet < lb:                      # Some lines dont need 2 per hour
+                        lb = fleet
 
                     freq = (fleet*60)/circuit
                     cap = vcap*freq*540*scaling # Capacity per time horizon (=540 minutes)

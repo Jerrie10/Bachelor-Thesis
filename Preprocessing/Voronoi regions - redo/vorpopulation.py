@@ -301,11 +301,22 @@ def find_intersections(A: list, B: list) -> dict:
 
 def vor_pop(intersections: dict, densities: list, vor_in: str, vor_out: str):
     ''' Function that finds population for all voronoi regions
-    - loop over intersections, calculating surface area, assigning population based on parent pc4
+    
+    First loop over intersections, calculating surface area, assigning population based on parent pc4
     intersection population is added to parent vor total
 
     final voronoi file is written containing
      - ID (based on bus stops), Population, lat, lng
+
+    Parameters
+    --------------
+    intersections : dict of (a, b) = Shapely Polygon where tuple denotes pc4 parent and vor parent
+
+    densities : list indexed to pc4 parents, containing population densities for each pc4-(sub)region
+
+    vor_in : string to voronoi csv file with vor ID to vor parents
+
+    vor_out : string to output voronoi file, copy of vor_in with column added, sep=;
     '''
 
     vor_frame = pd.read_csv(vor_in, index_col='ID', skipinitialspace=True)
@@ -317,19 +328,54 @@ def vor_pop(intersections: dict, densities: list, vor_in: str, vor_out: str):
         area = poly.area
         (pc4_parent, vor_parent) = tup
         pop = area * densities[pc4_parent]
+
+        if vor_parent > 100: # Ignore busstops outside municipality     ============================
+            print(f'Ignoring intersection between pc4 {pc4_parent} and vor {vor_parent}, would have contained {pop} people!')
+            continue
         populations[vor_parent] += round(pop)
     
     vor_frame.insert(len(vor_frame.columns)-1, 'Population', populations)
+
+    # Remove vor regions with no population (outside municipality)      ============================
+    vor_frame = vor_frame[vor_frame.Population != 0]
+
     vor_frame.to_csv(vor_out, sep=';')
 
-def draw_vor_regions(polygons: dict):
+# Imaging                       ====================================================================
+def unionize_voronoi(intersections: dict, voronoi: list) -> dict:
+    ''' Function that puts all polygons back together, based on parent voronoi region. Difference 
+    between this and make_vor_polygonlist is that the intersections also recognize boundary of Leiden.
+
+    Mostly used for imaging.
+    
+    Parameters
+    --------
+    intersections : dict of shapely polygons
+        (a, b) : Polygon, where a is pc4 parent and b is voronoi parent
+    voronoi : list of shapely polygons
+    '''
+    unions = {}
+
+    for parents in intersections:
+        if parents[1] not in unions:
+            unions[parents[1]] = intersections[parents]
+        else:
+            unions[parents[1]] = unary_union((unions[parents[1]], intersections[parents]))
+
+    return unions
+
+def draw_vor_regions(intersections: dict, vor_list: list):
     ''' Function that draws all voronoi polygons on picture of pc4 region, as well as bus stop points
     
     Parameters
     ---------
-    polygons : dictionary of form 
-        ID : Polygon
+    intersections : dict of shapely polygons
+        (a, b) = Polygon, where a is pc4 parent and b is voronoi parent
+    voronoi : list of shapely polygons
     '''
+
+    polygons = unionize_voronoi(intersections, vor_list)
+
     fig, ax = plt.subplots()
     img = plt.imread('./Imaging/Images/pc4_cropped.png')
     ax.imshow(img, extent=(4.435435, 4.550754, 52.116441, 52.18667))
@@ -354,43 +400,6 @@ def draw_vor_regions(polygons: dict):
     plt.show()
     pass
     
-def unionize_voronoi(intersections: dict, voronoi: list) -> dict:
-    ''' Function that puts all polygons back together, based on parent voronoi region. Difference 
-    between this and make_vor_polygonlist is that the intersections also recognize boundary of Leiden.
-    
-    Parameters
-    --------
-    intersections : dict of shapely polygons
-        (a, b) : Polygon, where a is pc4 parent and b is voronoi parent
-    voronoi : list of shapely polygons
-    '''
-    unions = {}
-
-    for parents in intersections:
-        if parents[1] not in unions:
-            unions[parents[1]] = intersections[parents]
-        else:
-            unions[parents[1]] = unary_union((unions[parents[1]], intersections[parents]))
-
-
-    return unions
-
-
-def ignore():
-    ''' Bugfixing stuff that would be really annoying to type again. Can be ignored
-    '''
-    # print all regions in pc4list
-    pc4_list= []
-    for p in pc4_list:
-        fig, ax = plt.subplots()
-        img = plt.imread('./Imaging/Images/pc4_cropped.png')
-        #ax.imshow(img, extent=(4.435435, 4.550754, 52.116441, 52.18667))
-        ax.imshow(img, extent=(4.435435, 4.550754, 52.116441, 52.18667))
-        plot = plot_polygon(p)
-        plt.ylim(52.1195913, 52.18385562)
-        plt.xlim(4.439670482, 4.52402989)
-        plt.show()
-
 
 def main():
     #pc4_region(known_population_file, pc4_pop_output, pc4_shape_output)
@@ -400,10 +409,10 @@ def main():
     vor_list = make_vor_polygonlist(vor_region_file, vor_vertex_file, vor_points_file)
     intersections = find_intersections(pc4_list, vor_list)
     
-    #vor_pop(intersections, pc4_densities, vor_points_file, vor_pop_output)
-    
-    unions = unionize_voronoi(intersections, vor_list)
-    
-    draw_vor_regions(unions)
+    # Calculate populations     ====================================================================
+    vor_pop(intersections, pc4_densities, vor_points_file, vor_pop_output)
+
+    # Imaging                   ====================================================================
+    #draw_vor_regions(intersections, vor_list)
     pass
 main()
