@@ -12,22 +12,6 @@ The goal of making health services more accessible by bus is reached by changing
 
 The C++ script uses certain inputfiles to work correctly. We will construct these files by using a python script called `preprocessing.py`. This file condenses the input data to be only the usefull parts. As the bulk of the code is taken from Adam Rumpf, the explantation of the code and the ouline of the input files can be found [here](https://github.com/adam-rumpf/social-transit-solver). All input files should be put in a `data/` folder. Most datafiles contain ID's to identify their entries, these are assumed to be consecutive numbers starting at `0`.
 
-## [`node_data.txt`]
-
-Information related to all nodes. Due to the internal network storage all population center and primary care facility nodes (types 2 and 3) must be listed in a contiguous block at the end of the node list.
-
-Contains the following columns:
-
-- `ID`: Unique identifying number. Used to reference specific nodes in the other data files.
-- `Name`: Name of the node. Most stops are simply called "Stop" followed by their ID number. Boarding nodes also append the name of their line. Population centers and primary care facilities use their real names.
-- `Type`: Node type ID. The types in use are:
-  - `0`: stop node
-  - `1`: boarding node
-  - `2`: population center
-  - `3`: primary care facility
-- `Line`: Line ID of a boarding node, and -1 otherwise.
-- `Value`: Population of a population center, facility weight of a primary care facility, and -1 otherwise
-
 # Transit Solver - Single
 
 After running the python script, a certain number of files wille be created. These are usefull, but not formatted in a way that is instantly readable. Just like the input files, the structure of the output files is explained [here](https://github.com/adam-rumpf/social-transit-solver).
@@ -38,15 +22,15 @@ The `social-transit-solver-single` program gives the current flow distribution o
 
 This program reads input files from a local `data/` folder. The following data files should be included in this folder:
 
-- [`arc_data.txt`]
-- [`assignment_data.txt`]
-- [`node_data.txt`]
-- [`objective_data.txt`]
-- [`od_data.txt`]
-- [`problem_data.txt`]
-- [`transit_data.txt`]
-- [`user_cost_data.txt`]
-- [`vehicle_data.txt`]
+- `arc_data.txt`
+- `assignment_data.txt`
+- `node_data.txt`
+- `objective_data.txt`
+- `od_data.txt`
+- `problem_data.txt`
+- `transit_data.txt`
+- `user_cost_data.txt`
+- `vehicle_data.txt`
 
 ## Output files
 
@@ -65,35 +49,35 @@ The `social-transit-solver` uses the initial values given by the `preprocessing`
 
 This program reads input files from a local `data/` folder. The following data files should be included in this folder:
 
-### From [Transit solver - single `data/` folder]
+### From Transit solver - single `data/` folder
 
-- [`arc_data.txt`]
-- [`assignment_data.txt`]
-- [`node_data.txt`]
-- [`objective_data.txt`]
-- [`od_data.txt`]
-- [`problem_data.txt`]
-- [`transit_data.txt`]
-- [`vehicle_data.txt`]
+- `arc_data.txt`
+- `assignment_data.txt`
+- `node_data.txt`
+- `objective_data.txt`
+- `od_data.txt`
+- `problem_data.txt`
+- `transit_data.txt`
+- `vehicle_data.txt`
 
-### From [Transit solver - single `output/` folder]
+### From Transit solver - single `output/` folder
 
-- [`initial_flows.txt`]
-- [`initial_solution_log.txt`]
-- [`user_cost_data.txt`]
+- `initial_flows.txt`
+- `initial_solution_log.txt`
+- `user_cost_data.txt`
 
 ### New files
 
-- [`search_parameters.txt`]
+- `search_parameters.txt`
 
 # Output files
 
 This program writes outputs to a local `log/` folder. The following files are produced:
 
-- [`event.txt`]: A log giving a summary of the events during each iteration of the solution process. See below for details.
+- `event.txt`: A log giving a summary of the events during each iteration of the solution process. See below for details.
 - `final.txt`: Includes the best known solution vector along with its objective value.
-- [`memory.txt`]: The memory structures associated with the tabu search/simulated annealing hybrid search process. Used to continue a halted search process. Not meant meant to be easily interpreted, but details are included below just in case.
+- `memory.txt`: The memory structures associated with the tabu search/simulated annealing hybrid search process. Used to continue a halted search process. Not meant meant to be easily interpreted, but details are included below just in case.
 - `metrics.txt`: Accessibility metrics of each population center for the best known solution.
-- `solution.txt`: Log of all previously-searched solutions along with their feasibility status, constraint function elements, objective values, and evaluation times. Used to maintain a solution dictionary in order to avoid having to process searched solutions a second time. Its format is the same as that of the input file [`initial_solution_log.txt`], but due to the unordered map used to store solutions internally during execution the order of the rows is arbitrary and may change between executions.
+- `solution.txt`: Log of all previously-searched solutions along with their feasibility status, constraint function elements, objective values, and evaluation times. Used to maintain a solution dictionary in order to avoid having to process searched solutions a second time. Its format is the same as that of the input file `initial_solution_log.txt`, but due to the unordered map used to store solutions internally during execution the order of the rows is arbitrary and may change between executions.
 
 The program also prints to the command line as it runs in order to report the main algorithm iteration number and other major events. During the neighborhood search, which is the most time-consuming part of the process, it prints a sequence of characters as an indication that it is still working (specifically, it prints `|` when starting or restarting the first pass, `a` whenever considering a new ADD move during the first pass, `d` for a DROP move, `*` when beginning a constraint calculation, and `.` for each iteration of Frank-Wolfe during constraint calculation).
