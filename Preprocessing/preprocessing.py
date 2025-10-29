@@ -13,7 +13,7 @@ import json
 #==============================================================================
 
 # Raw Data input/output files
-population_clustered = "./Preprocessing/RawData/vorpop.csv"
+population_clustered = "./Preprocessing/RawData/pc4pop.csv"
 facility_raw = "./Preprocessing/RawData/healthlocations.csv"
 facility_in = "./Preprocessing/Intermediate/healthdata.csv"
 facility_out = "./Preprocessing/Intermediate/facility.csv"

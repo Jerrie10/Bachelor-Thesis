@@ -1,0 +1,2 @@
+Type	Name	UB	Capacity	Cost
+0	Iveco_Crossway_LE_Elec_13m	95	50	-1

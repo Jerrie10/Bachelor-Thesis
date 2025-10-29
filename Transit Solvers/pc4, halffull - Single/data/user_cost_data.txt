@@ -1,0 +1,7 @@
+Field	Value
+Initial	-1
+Percent	0.01
+Elements	3
+Riding	1
+Walking	1
+Waiting	1
