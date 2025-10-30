@@ -1,6 +1,37 @@
 \chapter{Introduction}
-\section{Assumptions}
-The following things are assumed to be true
-\begin{enumerate}
-    \item The group of people that the model is made for is very small compared to daily travelers, therefore this small group will have no effect on overcrowdedness or other usage related metrics. \label{assum:smallgroup}
-\end{enumerate}
+
+This study expands on an article written by A. Rumpf and H. Kaul, where they develop a model to optimize the social accessibility of a transit network, under the constraint that user costs do not increase too much and that there is no need for purchasing more vehicles or redrawing buslines. This results in a new schedule that can immediatly be implemented with minimal effort, thus increasing the likelihood it will be. Their approach consists of reallocating vehicles between lines, consequently altering line frequencies and thus the distance one can travel within a reasonable time.
+
+This model uses a transit network, a set of community centers as origins, and a set of facility locations as destinations. They define an accessibility metric for a given origin region, putting a numerical value on how accessible the facilities are from that region, higher being better. The model then tries to maximize the worst regions, thus making the social access more equitable. They also develop an algorithm to solve it, and then use it on the real transit network of the Chicago area. They also run computational trials on an artificial network.
+
+Their definition of social access stems from the fact that some people are too poor to have a car, thus limiting their mobility. Since wealth is generally not uniformly distributed over a city like Chicago, some communities being significantly wealthier than others, and the poorer regions generally having less healthcare facilities, not having a car significantly limits a persons access to healthcare. The group with limited mobility is assumed to be quite small, this is the main reason for the constraint where user costs can not icrease too much. We formulate this in the following assumption:
+
+\begin{assumption}\label{assum:smallgroup}
+    The group of people the model is made for is very small compared to daily travelers. Therfore, this small group will have no effect on overcrowdedness or other usage related metrics.
+\end{assumption}
+
+In this study, we use a different cause of limited mobility for a person, not being able to walk or bike long distances. This applies mainly to (temporarily) disabled people and the elderly, which are groups that are more likely to need healthcare. We also note that the Chicago area used in \cite{rumpf} is very large, the total area can include both Rotterdam, The Hague and everything in between.
+
+\begin{comment}
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.18\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{chicago.png}
+
+    \end{subfigure}
+    \hspace{0.02\textwidth}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{zuid_holland_kaart.pdf}
+    \end{subfigure}
+    \caption{To scale maps of City of Chicago (left, taken from \cite{rumpf}) and province of South-Holland containing Rotterdam and The Hague (right, taken from \cite{zhkaart}).}
+\end{figure}
+\end{comment}
+
+This study uses a much smaller study area, namely the municipality of Leiden and its bus system. This area will be divided into community regions in two ways. Firstly by the PC4 regions originating from the postcode system used in the Netherlands. It will also be divided by Voronoi regions to simulate everyone using their nearest bus stop, instead of one that is further away.
+
+Both these methods result in smaller regions and thus in more accurate results at the cost of larger computing times. This study aims to find out how large this penalty in computing time is, relative to the increase in performance. Resulting schedules will also be compared to see if and how they differ.
+
+\paragraph{Structure of this Thesis}
+In Section~\ref{sec:relevantmath} we introduce some mathematical background used, namely Voronoi regions and two neighborhood search algorithms: Tabu search and Simulated Annealing. In Section~\ref{sec:generalmodel} we lay out the general model developed by Rumpf and Kaul, as well as their application on the transit system of Chicago. In Section~\ref{sec:appliedmodel} we explain our application of the model on the bus system of Leiden and the chosen parameters. Section~\ref{sec:experiment} contains the setup of our experiment, with results in Section~\ref{sec:results} and discussion in Section~\ref{sec:discussion}. Appendix~\ref{app:pseudocode} contains pseudocode for the algorithm explained in Section~\ref{sec:generalmodel} and Appendix~\ref{app:data} contains data used in Section~\ref{sec:appliedmodel}.
