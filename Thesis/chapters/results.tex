@@ -1,1 +1,91 @@
 \chapter{Results}\label{sec:results}
+\begin{comment}
+= Short intro                       V
+= Accessibility metrics             V
+- Descriptions table                V
+- Plaatje met driehoek per regio?   ~
+= Computational time                V
+- Objective values per iteration    V
+- Computation time                  V
+= Resulting schedule
+- Uiteindelijke dienstregeling
+- Kruistesten?
+\end{comment}
+
+The model explained in Section~\ref{sec:generalmodel} was run three times for both the PC4 case and the Voronoi case, with parameters laid out in Section~\ref{sec:appliedmodel}. For both cases, there was no difference in end result or method of arriving there between the three runnings. This section summarizes these results.
+
+\section{Accessibility metrics}
+Table~\ref{tab:descriptions} contains a summary of the accessibility metrics, detailed results can be found in Appendix~\ref{app:results}. The initial metrics denote the accessibility metrics before running the algorithm and the final metrics are measured after running.
+
+The best and worst PC4 regions, in terms of accessibility, remain the same with 2323 being the worst and 2312 the best. This is true before and after applying the algorithm, 2323 increases by 12.2\%, while 2312 decreases by 2.8\%. Eight of the regions start below average and eight start above average, this remains the case after running. The standard deviation does change after running, lowering by 12.3\%. Under the regions that improve, the mean improvement is by 8.2\%, whith the largest being 25.6\% for region 2333. Seven regions worsen, with an average of -4.5\% and a largest drop being 9.1\% for region 2313.
+
+In the Voronoi case, the best and worst regions also remain the same. Here region 95 is worst, increasing 33.3\%, and region 60 is best, remaining near constant with an increase of 0.2\%. The distribution is a lot more skewed however, with only 35 out of 101 regions starting above average and 34 finishinig above average. 58 regions improve, averaging a 17.4\% increase. Region 14 sees the largest improvement, increasing by 36.5\%. 43 regions decrease in accessibility, with an average decrease of 5.7\%. The largest decrease is for region 98, with a 16.7\% decrease.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|r|r|r|c}
+                  & \multicolumn{4}{c}{\textbf{PC4}}                                                                                                       \\
+                  & \multicolumn{1}{c}{\textbf{Initial}} & \multicolumn{1}{c}{\textbf{Final}} & \multicolumn{1}{c}{\textbf{Change}} & \textbf{Change (\%)} \\
+        \hline
+        Mean      & 6.58825e+04                          & 6.62419e+04                        & 3.59470e+02                         & 0.5\%                \\
+        Std. Dev. & 2.50976e+04                          & 2.20015e+04                        & -3.09610e+03                        & -12.3\%              \\
+        Min       & 3.60476e+04                          & 4.04438e+04                        & 4.39628e+03                         & 12.2\%               \\
+        Median    & 6.29643e+04                          & 6.39534e+04                        & 9.89076e+02                         & 1.6\%                \\
+        Max       & 1.15278e+05                          & 1.12094e+05                        & -3.18463e+03                        & -2.8\%               \\
+        \multicolumn{5}{c}{}                                                                                                                               \\
+        \multicolumn{5}{c}{}                                                                                                                               \\
+                  & \multicolumn{4}{c}{\textbf{Voronoi}}                                                                                                   \\
+                  & \multicolumn{1}{c}{\textbf{Initial}} & \multicolumn{1}{c}{\textbf{Final}} & \multicolumn{1}{c}{\textbf{Change}} & \textbf{Change (\%)} \\
+        \hline
+        Mean      & 6.76228e+04                          & 6.75005e+04                        & -1.22272e+02                        & -0.2\%               \\
+        Std. Dev. & 7.09073e+04                          & 6.56188e+04                        & -5.28850e+03                        & -7.5\%               \\
+        Min       & 1.63976e+04                          & 2.18657e+04                        & 5.46814e+03                         & 33.3\%               \\
+        Median    & 3.57470e+04                          & 4.10719e+04                        & 5.32493e+03                         & 14.9\%               \\
+        Max       & 4.91661e+05                          & 4.92784e+05                        & 1.12339e+03                         & 0.2\%                \\
+    \end{tabular}
+    \caption{Descriptive statistics for accessibility metrics for all regions (16 for PC4, 101 for Voronoi).}
+    \label{tab:descriptions}
+\end{table}
+
+\section{Computational load}
+These metrics were arrived at after 500 iterations, each evaluating the neighborhood of a solution. Figure~\ref{fig:objective_values} displays the objective values for each iteration. The PC4 case sees an change in objective value from 154343 to 174160, for an increase of 12.8\%. The Voronoi case goes from 566317 to 669524, increasing by 18.2\%. Both cases have a initial steep rise in objective value, encountering the eventual best known solution after 25 and 38 iterations for the PC4 and Voronoi cases respectively. After this steep rise, objective values look periodic for both cases, suggesting that the algorithm walks through the same neighborhoods repetitively.
+
+Visited solution have their objective values saved in memory to be looked up later. This saves computing time as each objective value only needs to be looked up instead of computed, and is also the cause of the drop in computation time per iteration. Over the three times the algorithm was run, the average total computing time was 622.175 seconds for the PC4 case and 406.122 seconds for the Voronoi case.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pc4_objectivevalue.png}
+        \caption{PC4 Objective values}
+        \label{fig:obj:pc4}
+    \end{subfigure}
+    \hspace{5mm}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{vor_objectivevalue.png}
+        \caption{Vor Objective values}
+        \label{fig:obj:vor}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pc4_timespent.png}
+        \caption{PC4 computation time}
+        \label{fig:comp:pc4}
+    \end{subfigure}
+    \hspace{5mm}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{vor_timespent.png}
+        \caption{Voronoi computing time}
+        \label{fig:comp:vor}
+    \end{subfigure}
+    \caption{Objective values of solutions and computing times during all 500 iterations. Solid lines in (\ref{fig:obj:pc4}-\ref{fig:obj:vor}) denote objective value of current solution, dashed lines denote best known objective value. Different colors in (\ref{fig:comp:pc4}-\ref{fig:comp:vor}) denote the three different times the algorithms was run.}
+    \label{fig:objective_values}
+\end{figure}
+
+\section{Fleet allocation}
+The final solutions for both cases can be found in Appendix~\ref{app:fleet}. Both cases result no change for most lines. Reductions in fleet sizes occur for lines 250, 400, 401 and 410. These lines are incidentally the only ones where reductions are allowed, and these are all reduced to their minimum frequency of 2 arrivals per hour.
+
+Increases in fleet sizes occur for lines 1-3-4 (Chain 1), 2, 56 in both cases; line 1-3-4 (Chain 2) in the PC4 case only; and lines 14, 38, 187 in the Voronoi case only.
+

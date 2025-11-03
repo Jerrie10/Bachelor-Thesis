@@ -80,7 +80,7 @@ def accesibility_table(file_header: str, columns=1):
 
     columns : optional variable, determines how many 
     '''
-
+    
     # Make dataframe containing initial and final values
     init = pd.read_csv(file_header + 'gravity_metrics.txt', 
                        sep='\t', header=0,
@@ -90,7 +90,9 @@ def accesibility_table(file_header: str, columns=1):
                         names=['Final'])
     results = pd.concat([init, final], axis=1)
 
+    
     # Write all results to file
+    results.to_csv(file_header + file_header[10:13] + '_all_results.csv')
     all_results_file = file_header + file_header[10:13] + '_all_results.txt'
     all_results_list = [] 
     for i, row in results.iterrows():
@@ -99,8 +101,8 @@ def accesibility_table(file_header: str, columns=1):
         bar = row['Final']
         abs_diff = bar - foo
         rel_diff = round((abs_diff / foo) * 100, 1)
-        res1 = str(id) + '&' + '{:.5e}'.format(foo) + '&' + '{:.5e}'.format(bar) + '&' 
-        res2 = '{:.5e}'.format(abs_diff) + '&' + str(rel_diff) +'\\%'
+        res1 = str(id) + '&' + '{:.3e}'.format(foo) + '&' + '{:.3e}'.format(bar) + '&' 
+        res2 = '{:.3e}'.format(abs_diff) + '&' + str(rel_diff) +'\\%'
         all_results_list.append(res1 + res2) 
     
     with open(all_results_file, 'w') as fout:
@@ -111,18 +113,25 @@ def accesibility_table(file_header: str, columns=1):
     # Calculate descriptions and write to file
     descriptions_file = file_header + file_header[10:13] + '_descriptions.txt'
     
+    # Descriptions, gives mean, std, median (as 50%), min, max
     description = results.describe(percentiles=[])
-    description = description.drop(index=['count', '50%'])
+    description = description.drop(index=['count'])
     descriptions_list = []
+    
+    translate = {'mean' : 'Mean', 
+                 'std' : 'Std. Dev.',
+                 'min' : 'Min',
+                 '50%' : 'Median',
+                 'max' : 'Max'}
     
     
     for i, row in description.iterrows():
-        id = i
+        name = translate[str(i)]
         foo = row['Initial']
         bar = row['Final']
         abs_diff = bar - foo
         rel_diff = round((abs_diff / foo) * 100, 1)
-        res1 = str(id) + '&' + '{:.5e}'.format(foo) + '&' + '{:.5e}'.format(bar) + '&' 
+        res1 = str(name) + '&' + '{:.5e}'.format(foo) + '&' + '{:.5e}'.format(bar) + '&' 
         res2 = '{:.5e}'.format(abs_diff) + '&' + str(rel_diff) +'\\%'
         descriptions_list.append(res1 + res2)
 
@@ -131,9 +140,44 @@ def accesibility_table(file_header: str, columns=1):
             print(line + '\\\\', file=fout)
             # TODO: rework zodat columns slim worden gedaan
 
+def computation_line(file_header: str):
+    '''Function that makes a diagram of computing time per iteration'''
+    colors = ['mediumaquamarine', 'mediumslateblue', 'mediumorchid']
+    
+    iterations = range(501)
+    ymax = 0
+
+    total_time = 0
+    for iteration in range(1, 4):
+        file = file_header + '/log' + str(iteration) +'/event.txt'
+        events = pd.read_csv(file, sep='\t')
+
+        times = pd.Series(events['Total_Time'])
+        
+        #print(f'Total time spent in {file_header[10:13]}: {times.sum()}')
+        total_time += times.sum()
+
+        if (times.max() > ymax):
+            ymax = times.max()
+
+        plt.scatter(iterations, times, c=colors[iteration -1], s=8)
+
+    plt.xlabel('Iteration')
+    plt.ylabel('Time spent (s)')
+    print(f'Average time spent for {file_header[10:13]}: {total_time/3}')
+    plt.axis((-20, 500, 0, ymax*1.1))
+    #plt.show()
+    plt.savefig(file_header + file_header[10:13] + '_timespent', bbox_inches = 'tight')
+
 def main():    
     #solution_line(vor_header)
-    accesibility_table(vor_header)
+    #accesibility_table(pc4_header)
+
+    headers = [pc4_header, vor_header]
+
+    header = headers[1]
+    computation_line(header)
+
 
     pass
 main()
