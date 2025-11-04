@@ -2,7 +2,7 @@
 This section summarizes the general model and algorithm developed by Rumpf and Kaul in \cite{rumpf}. As the model and algorithm is made by them, a more detailed explanation can be found in their paper. In this section we will give a summary so the later parts of this study can be understood.
 \section{SAMP}
 % TODO rewrite: less dry, less ramming definitions, more flow. Fix foutieve contaminaties
-The algorithm made by Rumpf and Kaul in \cite{rumpf} was made to solve the \emph{social access maximization problem} (SAMP). The formulation of the problem is very general as to be aplicable to many situations.
+The algorithm made by Rumpf and Kaul in \cite{rumpf} was made to solve the \emph{social access maximization problem} (SAMP). The formulation of the problem is very general as to be applicable to many situations.
 
 The network is made up of considered transit lines in set $L$. Here, each transit line $l\in L$ is a series of stops with a given travel time between each stop. Each line can have a type of vehicle assigned to it, so a network with different modes (like trains and busses) is possible.
 
@@ -24,7 +24,7 @@ Let Access$(y)$ be a function describing the social access objective. This value
 \section{Network structure}
 The model uses a representation of the transit network to calculate travel time and route choices. For this, a directed graph $G = (V,A)$ is used. $V$ is the set of all relevant nodes, be that origin, destination, transit stop nodes. $A$ is the set of arrows linking the nodes together, these represent different modes of travel like walking, bus or train riding.
 
-The node set is partitioned in subsets, each containing specific nodes. Let $V_{stop}\subset V$ contian nodes representing the physical location of transit stops. Let $V_{board}\subset V$ be the set of boarding nodes. Each stop node $i\in V_{stop}$ has boarding nodes $j\in V_{board}$ for every line $l\in L$ that stops at that stop. Boarding nodes are used to distinguish between transit lines. Let $V^+, V^- \subset V$ be origin and destination nodes, respectively. These represent the physical places where trips begin and end. To calculate social access, subsets $\tilde V^+, \tilde V^-\subset V$ are added, representing community and facility nodes, respectively.
+The node set is partitioned in subsets, each containing specific nodes. Let $V_{stop}\subset V$ contain nodes representing the physical location of transit stops. Let $V_{board}\subset V$ be the set of boarding nodes. Each stop node $i\in V_{stop}$ has boarding nodes $j\in V_{board}$ for every line $l\in L$ that stops at that stop. Boarding nodes are used to distinguish between transit lines. Let $V^+, V^- \subset V$ be origin and destination nodes, respectively. These represent the physical places where trips begin and end. To calculate social access, subsets $\tilde V^+, \tilde V^-\subset V$ are added, representing community and facility nodes, respectively.
 
 Just like the node set, the arc set $A$ is partitioned in subsets. Let $A_{line}\subset A$ be the arcs that represent the journey made by transit lines and let $A_{board},\allowbreak A_{alight}\subset A$  be the arcs representing entering or leaving a transit vehicle at a certain stop. Let $A_{walking}\subset A$ be walking arcs, connecting different nodes if their physical distance is walkable.
 
@@ -32,11 +32,11 @@ Just like the node set, the arc set $A$ is partitioned in subsets. Let $A_{line}
     \centering
     \includegraphics[width=\textwidth]{transitnetwork.png}
     \label{fig:transitnetwork}
-    \caption{Example of network representation containing two lines and three stops. Each stop has nodes in $V_{stop}$. Line 1 stops at all stops and thus has three boarding nodes, line 2 only has boarding nodes at stop A and stop C. Boarding nodes are conected to their stops with boarding arcs and alighting arcs. Boarding nodes are connected by line arcs if a transit line connects their respective stops. Stop A and stop B are connected by walking arc, because they are close enough. Figure taken from \cite{rumpf}.}
+    \caption{Example of network representation containing two lines and three stops. Each stop has nodes in $V_{stop}$. Line 1 stops at all stops and thus has three boarding nodes, line 2 only has boarding nodes at stop A and stop C. Boarding nodes are connected to their stops with boarding arcs and alighting arcs. Boarding nodes are connected by line arcs if a transit line connects their respective stops. Stop A and stop B are connected by walking arc, because they are close enough. Figure taken from \cite{rumpf}.}
 \end{figure}
 
 \section{Transit Assignment}\label{sec:assignment}
-The transit assignment model, TransitAssignment$(y)$, models the way daily users interact with a given schedule $y$. It assumes users try to take their optimal route, wich may not be the fastest due to overcrowdedness. The flow produced by the model is called \emph{user-optimal flow} and is often less optimal then when all flow is controlled directly.
+The transit assignment model, TransitAssignment$(y)$, models the way daily users interact with a given schedule $y$. It assumes users try to take their optimal route, which may not be the fastest due to over-crowdedness. The flow produced by the model is called \emph{user-optimal flow} and is often less optimal then when all flow is controlled directly.
 
 There are many such models, but Rumpf and Kaul choose the nonlinear model by Spiess and Florian in \cite{spiess}. This model increases arc cost based on crowdedness, discouraging flows from exceeding line capacity. The user-optimal flow output can not be changed in a way that individual users benefit from changes in only their route. The model is relatively simple, a desired property, as the model is run many times during the algorithm.
 
@@ -49,7 +49,7 @@ User costs are time costs made by using the system. Things like travel time, wai
     +\theta_2 \sum_{ij\in A_{walk}} c_{ij}x_{ij}
     +\theta_3 \omega,
 \end{equation*}
-where $\omega\in \R$ is the total time spent waiting at busstops by all users combined.
+where $\omega\in \R$ is the total time spent waiting at bus stops by all users combined.
 
 Due to Assumption \ref{assum:smallgroup} we do not want the total user cost to increase too much, so we introduce a parameter $\varepsilon$ to give a constant upper bound
 \begin{equation*}
@@ -60,7 +60,7 @@ When choosing $\varepsilon$, a balance needs to be found between a large increas
 \section{Access}\label{sec:access}
 The objective function Access$(y)$ should describe how easy it is to travel from a general community to a general facility, with a focus on equity of access. To do this, a metric is made to measure the accessibility for a specific community $i\in \tilde V^+$.
 
-The chosen metric $A_i(y)$ is \emph{gravity-based}, meaning that the attractiveness of facilities reduces gradually as distance increases. An alternative is a discrete distance based approach, where facilities $j\in \tilde V^-$ are considered only if they are within a certain distance from the source community $i$. This approach is not preferred, as facilities that lie just inside the considered radius are weighted equally to facilities that are nextdoor, and facilities that lie just a bit further are not considered at all. This is solved by including a distance function $d_{ij}(y)$, measuring traveltime within $G$ from $i$ to $j$, and a gravity decay parameter $\beta >0$. A larger $\beta$ will result in a higher penalty for further travel. % Add figure to illustrate the point?
+The chosen metric $A_i(y)$ is \emph{gravity-based}, meaning that the attractiveness of facilities reduces gradually as distance increases. An alternative is a discrete distance based approach, where facilities $j\in \tilde V^-$ are considered only if they are within a certain distance from the source community $i$. This approach is not preferred, as facilities that lie just inside the considered radius are weighted equally to facilities that are nextdoor, and facilities that lie just a bit further are not considered at all. This is solved by including a distance function $d_{ij}(y)$, measuring travel time within $G$ from $i$ to $j$, and a gravity decay parameter $\beta >0$. A larger $\beta$ will result in a higher penalty for further travel. % Add figure to illustrate the point?
 
 As the users can choose between facilities, a competition-related metric $F_j(y)$ is used to find the crowdedness of facilities. It is defined as
 \begin{equation*}
@@ -72,17 +72,17 @@ The accessibility metric for a given region is then defined as
 \begin{equation*}
     A_i(y) = \sum_{j\in\tilde V^-} \frac{S_j d_{ij}^{-\beta}(y)}{F_j(y)}\quad \forall i \in \tilde V^+.
 \end{equation*}
-This metric was first developed in \cite{weibull} to decribe differential access to employement opportunities, but can also be used for other competition based access cases.
+This metric was first developed in \cite{weibull} to describe differential access to employment opportunities, but can also be used for other competition based access cases.
 
 \newcommand{\K}{\mathcal{K}}
 
-Since the goal is to create more equity in accisibility, not all communities should be included in the overall objective function. Instead, the communities with the worst accessibility should be improved. By maximizing the minimum communities, a more equitable scenario is achieved. The model parameter $\K$ is introduced to achieve this. The objective function is then defined as
+Since the goal is to create more equity in accessibility, not all communities should be included in the overall objective function. Instead, the communities with the worst accessibility should be improved. By maximizing the minimum communities, a more equitable scenario is achieved. The model parameter $\K$ is introduced to achieve this. The objective function is then defined as
 \begin{equation*}
     \text{Access}(y) = \sum_{\substack{\K \text{ minimum elements of }\\ {\{A_i(y)| i\in \tilde V^+\}}}} A_i(y).
 \end{equation*}
 Note that the objective function will be evaluated many times, and that the $\K$ worst communities are dependent on the $y$ of the current iteration, so the evaluated and improved communities changes while the algorithm is running.
 
-The parameter $\K$ needs to be chosen between 1 and $|\tilde V^+|$, where extreme values are not benificial to the outcome. Low values for $\K$, like 1, may result in minor improvements to a single community with no regard for the relatively large effect on other communities. High values, like $|\tilde V^+|$, may result in making large improvements to the highly accessible communities at a cost of making the less eccessible communities even worse, as long as the total accessibility increases.
+The parameter $\K$ needs to be chosen between 1 and $|\tilde V^+|$, where extreme values are not beneficial to the outcome. Low values for $\K$, like 1, may result in minor improvements to a single community with no regard for the relatively large effect on other communities. High values, like $|\tilde V^+|$, may result in making large improvements to the highly accessible communities at a cost of making the less accessible communities even worse, as long as the total accessibility increases.
 
 \section{The model}
 The SAMP model takes the shape of the following nonlinear program
@@ -100,7 +100,7 @@ The SAMP model takes the shape of the following nonlinear program
 Where Eq. (\ref{model:1}) is the objective function described in section \ref{sec:access}, Eq. (\ref{model:2}) constrains the total number of vehicles to not increase from the initial amount, Eq. (\ref{model:3}) ensures upper and lower bounds for vehicle allocation, Eq. (\ref{model:4}) ensures a whole number of vehicles is allocated to each line, Eq. (\ref{model:5}) defines user flow as discussed in section \ref{sec:assignment} and Eq. (\ref{model:6}) gives an upper bound to the increase in user cost.
 
 \section{General algorithm}\label{sec:generalalgorithm}
-The SAMP model can be solved heuristically with the following algorithm. It is a combination of \emph{Tabu search} (TS) and \emph{Simmulated annealing} (SA), two versions of neigborhood search mentioned in Sections \ref{sec:tabu} and \ref{sec:simann}.
+The SAMP model can be solved heuristically with the following algorithm. It is a combination of \emph{Tabu search} (TS) and \emph{Simulated annealing} (SA), two versions of neighborhood search mentioned in Sections \ref{sec:tabu} and \ref{sec:simann}.
 
 Pure neighborhood search runs the risk of getting stuck in local optima, so both SA and TS try to avoid this by sometimes making suboptimal moves. For current solution $s$ we have a neighborhood $N(s)$ of solutions reachable within one move $m$. SA picks a random neighbor $s'\in N(s)$ and goes there with probability
 \begin{equation}\label{eq:sacriterion}
@@ -115,18 +115,18 @@ Where $f$ is the objective function that we want to maximize and $T$ is a model 
 
 Using the current transit schedule as a starting point, a neighborhood search is conducted. The neighborhood $N(s)$ of a solution $s$ is defined as all other solutions that are reachable within one move $m$. A move, in this instance, is defined as swapping one allocated vehicle from one line to another for the entire time horizon. Each SWAP consist of an ADD move and a DROP move, where a vehicle is added or dropped from a line, respectively.
 
-During each iteration, the two best neighbors $s'_1, s'_2$ are determined. If the best neighbor is an improvement over the current solution, that move is made and the next iteration starts. Reset the inner nonimprovement counter, save the chosen ADD and DROP move in STM.
+During each iteration, the two best neighbors $s'_1, s'_2$ are determined. If the best neighbor is an improvement over the current solution, that move is made and the next iteration starts. Reset the inner non-improvement counter, save the chosen ADD and DROP move in STM.
 
-If there is no improvement, the SA criterion (\ref{eq:sacriterion}) is used and inner nonimprovement counter is increased. The best neighbor is chosen with probability $\exp(f(s_1') - f(s)/T)$, and $s'_2$ is saved in LTM. If $s'_1$ is not chosen, solution $s$ is kept as current solution and $s'_1$ is saved in LTM. If a move is made, save the ADD and DROP moves in STM.
+If there is no improvement, the SA criterion (\ref{eq:sacriterion}) is used and inner non-improvement counter is increased. The best neighbor is chosen with probability $\exp(f(s_1') - f(s)/T)$, and $s'_2$ is saved in LTM. If $s'_1$ is not chosen, solution $s$ is kept as current solution and $s'_1$ is saved in LTM. If a move is made, save the ADD and DROP moves in STM.
 
-If the inner nonimprovement counter has met its maximum, reset it, increase the outer nonimprovemnt counter and move to a random solution in LTM. If the outer nonimprovement counter has met its maximum, reset tabu tenures, thereby dropping moves from STM. After each iteration, apply a cooling schedule to $T$.
+If the inner non-improvement counter has met its maximum, reset it, increase the outer non-improvement counter and move to a random solution in LTM. If the outer non-improvement counter has met its maximum, reset tabu tenures, thereby dropping moves from STM. After each iteration, apply a cooling schedule to $T$.
 
 After a preset amount of iterations, an exhaustive local search is done for the best known solution. This ensures that the final solution is locally optimal.
 
 \section{Chicago application}
-In their paper, Rumpf and Kaul applied their model to the transitsystem of Chicago \cite{rumpf}. In their application, a transit stop set $V_{\text{stop}}$ with 997 different stops was used. These stops were also used as origin-destination (OD) pairs for day-to-day travel volume. Community nodes $\tilde V^+$ were defined using the $|\tilde V^+| =$ 77 Chicago community areas, where node position was taken as population-weighted centroids, based on 2010 cencus data. Facility nodes $\tilde V^-$ were the primary care facilities, of which $|\tilde V^-|=$ 119 are within the Chicago area. Each facility was given a quality of $S_j = 1,\hs \forall j\in  \tilde V^-$. Walking arcs were created when different locations were 0.75 miles (approximately 1.2 km) within eachother, walking speed was set at 4 ft/sec (approximately 4.4 km/h).
+In their paper, Rumpf and Kaul applied their model to the transit system of Chicago \cite{rumpf}. In their application, a transit stop set $V_{\text{stop}}$ with 997 different stops was used. These stops were also used as origin-destination (OD) pairs for day-to-day travel volume. Community nodes $\tilde V^+$ were defined using the $|\tilde V^+| =$ 77 Chicago community areas, where node position was taken as population-weighted centroids, based on 2010 census data. Facility nodes $\tilde V^-$ were the primary care facilities, of which $|\tilde V^-|=$ 119 are within the Chicago area. Each facility was given a quality of $S_j = 1,\hs \forall j\in  \tilde V^-$. Walking arcs were created when different locations were 0.75 miles (approximately 1.2 km) within each other, walking speed was set at 4 ft/sec (approximately 4.4 km/h).
 
-Transit lines were aquired from General Transit Feed Specification (GTFS) data. It includes 126 bus lines and 8 train lines. It was also used to estimate the current number of vehicles $y^*_l$ for each line $l\in L$. The time horizon $\tau$ was taken as 24-hour period. It was assumed a single type of bus was used, with capacity $b_l = 39$ for all buslines, and a single type of train with capacity $b_l = 228$ for all trainlines. Fleet bounds $y^\text{min}_l, y^\text{max}_l$ were set to equal $y^*_l$ for all train lines to force these to remain the same. For bus lines $y^\text{min}_l$ was set to an amount to achieve at least one arrival per 30 minutes, no maximum $y^\text{max}_l$ was set.
+Transit lines were acquired from General Transit Feed Specification (GTFS) data. It includes 126 bus lines and 8 train lines. It was also used to estimate the current number of vehicles $y^*_l$ for each line $l\in L$. The time horizon $\tau$ was taken as 24-hour period. It was assumed a single type of bus was used, with capacity $b_l = 39$ for all bus lines, and a single type of train with capacity $b_l = 228$ for all train lines. Fleet bounds $y^\text{min}_l, y^\text{max}_l$ were set to equal $y^*_l$ for all train lines to force these to remain the same. For bus lines $y^\text{min}_l$ was set to an amount to achieve at least one arrival per 30 minutes, no maximum $y^\text{max}_l$ was set.
 
 Their computational trials also used express lines, existing bus lines only servicing approximately 20\% of their initial stops. With less stops, a lower circuit completion time $\tau^l$ could be achieved, thus increasing their effective frequency $f_l$. The stops that remained were in highly accessible communities or in badly accessible communities, so the lines could connect badly accesibble communities to facilities. These express lines had initial fleet sizes of $y^*_l = 0$.
 

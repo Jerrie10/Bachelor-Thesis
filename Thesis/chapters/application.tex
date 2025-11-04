@@ -1,70 +1,70 @@
 \chapter{Case Study: Leiden}\label{sec:appliedmodel}
 This section will discuss our implementation of the same model on Leiden. It will also go over the different choices of parameters and motivate these choices.
 
-The municipality of Leiden is much smaller than the Chicago area. This naturally gives a lower amount of busstops, buslines, health facilities and so forth. Although there are multiple train stations in Leiden, the trainsystem is not taken into account for this study.
+The municipality of Leiden is much smaller than the Chicago area. This naturally gives a lower amount of bus stops, bus lines, health facilities and so forth. Although there are multiple train stations in Leiden, the train system is not taken into account for this study.
 
 \section{Transit system}
-As Qbuzz, the company running the bussytem in Leiden, operates in a greater region, most of their buslines lie partially or completely outside of the study area. For this study, only buslines that travel at least partially through the study area are considered. A busline usually drives a lineair route between two points, stopping at bus stops in between. For the purposes of this study, the back and forth trip is considered a complete circuit.
+As Qbuzz, the company running the bus system in Leiden, operates in a greater region, most of their bus lines lie partially or completely outside of the study area. For this study, only bus lines that travel at least partially through the study area are considered. A busline usually drives a linear route between two points, stopping at bus stops in between. For the purposes of this study, the back and forth trip is considered a complete circuit.
 
-Buslines that service busstops outside the study area are modeled to have all stops within the area and a single stop at their turnaround point. For example, line 20 between Leiden Centraal and Noordwijk Vuurtorenplein services 26 stops in total, 4 of which are within the study area. It is modeled to have stop nine times per circuit, twice per stop within the municipality and once at Vuurtorenplein. This way of modeling ensures the circuit time $\tau_l$ works correctly for each line $l$.
+Bus lines that service stops outside the study area are modeled to have all stops within the area and a single stop at their turnaround point. For example, line 20 between Leiden Centraal and Noordwijk Vuurtorenplein services 26 stops in total, 4 of which are within the study area. It is modeled to have stop nine times per circuit, twice per stop within the municipality and once at Vuurtorenplein. This way of modeling ensures the circuit time $\tau_l$ works correctly for each line $l$.
 
 One notable exception to this method are the linking of lines 1, 3 and 4. Their scheduled routes end where the next route begins. Line 1 travels between De Vink and Leyhof, line 3 between Leyhof and Merenwijk and line 4 between Merenwijk and De Vink. The vehicles allocated to these lines currently continue the next line after completing their given trip. We will keep this planning choice and thus model these lines as two lines, one for each direction.
 
 Since Leiden is much smaller than the Chicago area, the implementation of express lines was excluded. %TODO: more context? maybe mentioning the extensive train network in the Netherlands?
 
-After set of buslines $L$ was selected, a schedule was retreived from \cite{Qbuzz}. The chosen schedule was for monday the 10th of february of 2025, between 14:00 and 15:00 in the afternoon. This weekday and timeframe was chosen as a ordinary, non-rush hour time, that represents ordinary bus travel.
+After set of bus lines $L$ was selected, a schedule was retrieved from \cite{Qbuzz}. The chosen schedule was for Monday the 10th of February of 2025, between 14:00 and 15:00 in the afternoon. This weekday and time frame was chosen as a ordinary, non-rush hour time, that represents ordinary bus travel.
 
-The infromation given by a schedule is average traveltime between stops, wait time at a stop and amount of busses per line per hour. The used algorithm takes busses per line per time-horizon $\tau$ and averages this out to arrive at the frequency of a line, where more busses allocated over a time-horizon would mean a higher frequency of service. The circuit time $\tau_l$ of a line $l$ is the time needed to complete a round trip, after which it can be used to complete a new trip. Buslines with a lower circuit time can thus get a appropriate frequency while having a lower amount of busses allocated to them, relative to lines that have longer circuit times.
+The information given by a schedule is average travel time between stops, wait time at a stop and amount of busses per line per hour. The used algorithm takes busses per line per time-horizon $\tau$ and averages this out to arrive at the frequency of a line, where more busses allocated over a time-horizon would mean a higher frequency of service. The circuit time $\tau_l$ of a line $l$ is the time needed to complete a round trip, after which it can be used to complete a new trip. bus lines with a lower circuit time can thus get a appropriate frequency while having a lower amount of busses allocated to them, relative to lines that have longer circuit times.
 
-Names of- and traveltime between busstops can be retrieved from the schedule, giving a transitstop set $V_\text{stop}$ of 121 different busstops, of which 100 are within the study area. As most bus stops consist of a pair of physical busstops, one for each direction, the midpoint was taken to represent the physical pair in the graph. Distances to other points, like other busstops or community centers, can be determined and walking arcs can be connected accordingly.
+Names of- and travel time between bus stops can be retrieved from the schedule, giving a transit stop set $V_\text{stop}$ of 121 different bus stops, of which 100 are within the study area. As most bus stops consist of a pair of physical bus stops, one for each direction, the midpoint was taken to represent the physical pair in the graph. Distances to other points, like other bus stops or community centers, can be determined and walking arcs can be connected accordingly.
 
 For simplicity it is assumed that the operator uses a single type of bus, the Iveco Crossway EV 13m, with a capacity of $b_l = 50$ for all lines $l\in L$.
 
 \section{Facility and Community nodes}
 Facility nodes $\tilde V^-$ are defined by the general practitioners (GP) offices of Leiden. Taken from \cite{zorgkaart} a total amount of $|\tilde V^-| = 37$ are used. The amount of full-time employed doctors that work at a facility $j$ is taken as the quality $S_j$ of that facility.
 
-For this study, we compare two different methods of defining community nodes $\tilde V^+$. The first method concerns itself with postcoderegions in the Netherlands. Each adress in the Netherlands has a postcode, consisting of four numbers and two letters. If one only uses the four numbers, the Netherlands can be divided into pc4 regions. There are $|\tilde V^+_\text{pc4}| = 16$ different pc4 regions within the municipality. Center node location was taken as their middlepoint and each node was assigned population data taken from \cite{allecijfers}.
+For this study, we compare two different methods of defining community nodes $\tilde V^+$. The first method concerns itself with postcode regions in the Netherlands. Each address in the Netherlands has a postcode, consisting of four numbers and two letters. If one only uses the four numbers, the Netherlands can be divided into PC4 regions. There are $|\tilde V^+_\text{PC4}| = 16$ different PC4 regions within the municipality. Center node location was taken as their middle point and each node was assigned population data taken from \cite{allecijfers}.
 %TODO picture of regions and their center point
 
-These pc4 regions are still quite large and all, non-day to day trips are simulated to start at the center node to then walk to a bus stop. This may imply that busstops far from the middlepoint of a region are used less then in reality. To remedy this, another way of defining community nodes is found.
+These PC4 regions are still quite large and all, non-day to day trips are simulated to start at the center node to then walk to a bus stop. This may imply that bus stops far from the middle point of a region are used less then in reality. To remedy this, another way of defining community nodes is found.
 
-According to \cite{wang}, travelers prefer to take a bus at the nearest bus stop, even when that involves a transfer instead of a direct route. To apply this effect on our study, the regions we choose should reflect trips that start at the closest bus stop. Voronoi diagrams, as defined in Section \ref{sec:voronoi}, are the ideal method of dividing a plane in sections where each section contains one weightpoint and all points that have that weighpoint as the nearest weightpoint.
+According to \cite{wang}, travelers prefer to take a bus at the nearest bus stop, even when that involves a transfer instead of a direct route. To apply this effect on our study, the regions we choose should reflect trips that start at the closest bus stop. Voronoi diagrams, as defined in Section \ref{sec:voronoi}, are the ideal method of dividing a plane in sections where each section contains one weight point and all points that have that weigh point as the nearest weight point.
 
-Using this method, with busstops as weightpoints, we can divide the municipality in $|\tilde V^-_\text{vor}| = 100$ regions. We have one region less than the number of busstops, because one busstop lies outside the municipality. We estimate the population data for the voronoi regions by looking at the overlap between each voronoi region and the pc4 regions, and assuming the known population of a pc4 region is distributed evenly over its surface. Let
+Using this method, with bus stops as weight  points, we can divide the municipality in $|\tilde V^-_\text{vor}| = 100$ regions. We have one region less than the number of bus stops, because one busstop lies outside the municipality. We estimate the population data for the Voronoi regions by looking at the overlap between each Voronoi region and the PC4 regions, and assuming the known population of a PC4 region is distributed evenly over its surface. Let
 \begin{align*}
-    \tilde V^-_\text{vor} & \text{ set of voronoi regions},                             \\
-    \tilde V^+_\text{pc4} & \text{ set of postcode regions},                            \\
+    \tilde V^-_\text{vor} & \text{ set of Voronoi regions},                             \\
+    \tilde V^+_\text{PC4} & \text{ set of postcode regions},                            \\
     s_v                   & \text{ surface area for } v\in V^-_\text{vor},              \\
-    d_p                   & \text{ population density for } p\in \tilde V^+_\text{pc4}, \\
+    d_p                   & \text{ population density for } p\in \tilde V^+_\text{PC4}, \\
     f(v, p)               & \text{ fraction of }v \text{ that lies in }p.
 \end{align*}
-Then, the population of a voronoi region $v$ is given by
+Then, the population of a Voronoi region $v$ is given by
 \begin{equation*}
-    s_v \cdot \sum_{p\in \tilde V^+_\text{pc4}} d_p f(v,p).
+    s_v \cdot \sum_{p\in \tilde V^+_\text{PC4}} d_p f(v,p).
 \end{equation*}
 
-\section{Travel demand}
-No actual travel data could be aquired, so this had to be estimated. As the schedule gives the frequencies of service, it also gives the total supply of bus transit. Assuming the supply is an accurate reflection of the demand of bus transit, all busses are roughly equally filled.
+\section{Travel demand}\label{sec:OD-data}
+No actual travel data could be acquired, so this had to be estimated. As the schedule gives the frequencies of service, it also gives the total supply of bus transit. Assuming the supply is an accurate reflection of the demand of bus transit, all busses are roughly equally filled.
 
-We therefore assume that each bus is halffull. The algorithm wants traveldemand between busstops, so this data was made by counting the amount of lines servicing a pair of bus-stops directly and multiplying this by the lines' frequency and the capacity of a bus. The resulting table can be found in Appendix \ref{app:traveldata}.
+We therefore assume that each bus is half-full. The algorithm wants travel demand between bus stops, so this data was made by counting the amount of lines servicing a pair of bus-stops directly and multiplying this by the lines' frequency and the capacity of a bus. The resulting table can be found in Appendix \ref{app:traveldata}.
 
 %TODO: travel data eerlijker verdelen over eerdere stops zodat omwegen minder worden gestraft
 %TODO: 'Intressestations' anders definieren zodat het realistischer is
 
 \section{Chosen parameters for experiment}
-Since our study tries to improve accessibility for less mobile people, we want to limit the distances walked. Therefore the choice was made to connect nodes via walking arcs if they are within 250 meters of eachother, and walking speed was set at 4km/h. Since all day-to-day travel is simulated to begin and end at a busstop, this change only affects those travelers when walking between busstops for a transfer. It will have a much larger effect the group of less mobile people that the algorithm is made to optimize for.
+Since our study tries to improve accessibility for less mobile people, we want to limit the distances walked. Therefore the choice was made to connect nodes via walking arcs if they are within 250 meters of each other, and walking speed was set at 4km/h. Since all day-to-day travel is simulated to begin and end at a busstop, this change only affects those travelers when walking between bus stops for a transfer. It will have a much larger effect the group of less mobile people that the algorithm is made to optimize for.
 
-The time horizon $\tau$ was set at 540 minutes, the tipical time for a GP to be open during a weekday. The schedule taken is one based on 60 minutes outside of rush-hour, and is thus extrapolated to count for the whole day. This is slightly inaccurate, as more busses are used during rush-hour to account for the higher demand. Since the algorithm averages out both the travel-demand and the busses used, accounting for this inaccuracy would be undone by the algorithm.
+The time horizon $\tau$ was set at 540 minutes, the typical time for a GP to be open during a weekday. The schedule taken is one based on 60 minutes outside of rush-hour, and is thus extrapolated to count for the whole day. This is slightly inaccurate, as more busses are used during rush-hour to account for the higher demand. Since the algorithm averages out both the travel-demand and the busses used, accounting for this inaccuracy would be undone by the algorithm.
 
 Fleet bounds are set almost identically as in \cite{rumpf}. For all lines $l\in L$, no upper bound $y_l^\text{max}$ is used. The lower bound $y_l^\text{min}$ is set such that at least two arrivals are made per hour, unless the starting schedule has a lower frequency, in which case we use the fleet size of the starting schedule as a lower bound. Gravitational decay parameter $\beta = 1.0$, maximum relative user cost increase $\varepsilon = 0.01$ and mode weights $\theta_1=\theta_2=\theta_3 = 1$ are also kept the same as in the Chicago case.
 
-Since the experiment will compare the two different methods of constructing community regions, the previously mentioned parameters will remain the same for the pc4-case and the voronoi-case. The two cases have a different amount of regions, 16 and 101 respectively, so the chosen $\K$ that determines the amount of regions used in the Access($y$) function of Section~\ref{sec:access}, should reflect this.
+Since the experiment will compare the two different methods of constructing community regions, the previously mentioned parameters will remain the same for the PC4-case and the Voronoi-case. The two cases have a different amount of regions, 16 and 101 respectively, so the chosen $\K$ that determines the amount of regions used in the Access($y$) function of Section~\ref{sec:access}, should reflect this.
 
-Seeing as the amount of pc4 communities is quite small ($|\tilde V^+_\text{pc4}| = 16$), and two of these regions are very sparsely populated with no bus service, taking roughly 10\% of this would not suffice. Thus the community count is set higher at $\K_\text{pc4} = 4$, or 25\%. This percentage is mirrored for the voronoi case, giving $\K_\text{vor} = 25$.
+Seeing as the amount of PC4 communities is quite small ($|\tilde V^+_\text{PC4}| = 16$), and two of these regions are very sparsely populated with no bus service, taking roughly 10\% of this would not suffice. Thus the community count is set higher at $\K_\text{PC4} = 4$, or 25\%. This percentage is mirrored for the Voronoi case, giving $\K_\text{vor} = 25$.
 
 The given parameters will be used to run the experiment 3 times for both cases. Afterwards the results will be laid out in Section~\ref{sec:results} and average runtime and increase in accessibility will be compared.
 
 \begin{comment}
-The voronoi regions do not have these issues, so their community count can be set at $\K_\text{vor} = 10$ to be in line with the Chicago case. \textbf{These parameters may be finetuned after running, just like in the paper by Rumpf}
+The Voronoi regions do not have these issues, so their community count can be set at $\K_\text{vor} = 10$ to be in line with the Chicago case. \textbf{These parameters may be finetuned after running, just like in the paper by Rumpf}
 %TODO: proberen te runnen en parameters finetunen
 \end{comment}

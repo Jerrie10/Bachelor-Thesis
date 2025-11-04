@@ -1,0 +1,23 @@
+\chapter{Discussion and conclusions}\label{sec:discussion}
+In this section, we will first discuss the results laid out in Section~\ref{sec:results} and then draw some conclusions.
+
+As with the Chicago application in \cite{rumpf}, the SAMP model makes the accessibility of the Leiden case study more equitable by increasing accessibility in the worst regions, while lowering it in the better regions. The increase of the worst regions is much larger than the decrease in the better regions.
+
+In our case study, the two methods of defining regions gave different results. As previously mentioned, the objective values of the two cases can not be compared directly. Changes in objective value and a general regions access metric can be compared however.
+
+Looking at access metric per region, we see in Table~\ref{tab:descriptions} that the PC4 case has a larger reduction in standard deviation, while the Voronoi case has a higher increase in the minimum and median valued regions' accessibility. The Voronoi case also has higher improvement, when only accounting for improving regions, averaging 17.4\% increase versus a 8.2\% increase for PC4. The decreasing regions have a similar average decrease, -4.5\% for PC4 and -5.7\% for Voronoi. Overall objective values see an increase of 12.8\% for the PC4 case and an increase of 18.2\% in the Voronoi case.
+
+As for computation time, the Voronoi case computes 34.7\% faster than the PC4 case. The solution that is eventually deemed the best known solution is found very quickly, as seen in Figures~\ref{fig:obj:pc4}-~\ref{fig:obj:vor}. After the steep rise, the objective value takes a periodic pattern. This is because solutions are revisited multiple times, and each evaluated solution has its objective value saved in memory. This saves computing time as each objective value only needs to be looked up instead of computed, and is also the cause of the drop in computation time per iteration seen in Figures~\ref{fig:comp:pc4}-~\ref{fig:comp:vor}.
+
+We can thus conclude that, for this case study, defining the regions based on the populations nearest bus stop is beneficial. As the only metric in which the PC4 case performs better than the Voronoi case is the reduction of standard deviation.
+
+\paragraph{Further research}
+This could however be caused by the specifics of this case study, like the whole study area being a small, densely populated city. The bus lines that saw large reductions in fleet sizes have large parts of their scheduled stops outside of the study area. They also service the Katwijk-Leiden-Zoetermeer connection, a connection that is not serviced by train or other mode of public transit.
+
+A method of accounting for this would be to obtain actual OD-data, something we had to estimate in Section~\ref{sec:OD-data}. This could give a more accurate restriction on the amount of busses that these lines are required to have, as too few busses would mean that they are too full and thus highly discouraged picks by the algorithm.
+
+This could also be combined with simulating for the entire concession region where the current operator is active. This would mean a larger study area, where bus lines are not cut off as they would not leave the area. As this area is quite large, an argument can be made to include the train schedule in this study.
+
+We also can not attribute the better performance of the Voronoi case to the method of defining regions directly. The increase in performance could also be attributed to the regions being smaller. This could be researched by defining even smaller regions, like dividing the study area in 100m by 100m squares, and seeing if smaller regions keep getting better performance.
+
+One thing that could be holding the PC4 case back is the sparsely populated region 2322. No busses go through this regions, so it access metric is the lowest. The simulated walking time could hold this region back significantly. If this region would be omitted, the algorithm could have more freedom in increasing other regions.

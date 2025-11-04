@@ -1,25 +1,25 @@
 \chapter{Pseudocode} \label{app:pseudocode}
-The pseudocode for the soluion algorithm discussed in section \ref{sec:generalalgorithm}, directly taken from \cite{rumpf}.
+The pseudocode for the solution algorithm discussed in section \ref{sec:generalalgorithm}, directly taken from \cite{rumpf}.
 
-$x$ represents the entirety of the flow vector. The vector $e_l \in \{0,1\}^{|L|}$ represents a vector with a 1 in coordinate $l$ and 0 elsewhere. Sets $\tilde N^+, \tilde N^-, \tilde N^\times$ represent the ADD, DROP and SWAP neighbors kept as candidates after the first pass of the neighborhood search, respectively, while $N^+, N^-, N^\times$ are the second-pass candidates. Bounds $\tilde N_{\text{max}}, N_{\text{max}}$ are the required numbers of candidates to be gathered during each pass. $Q^{\text{max}}_{\text{in}}, Q^{\text{max}}_{\text{out}}$ are the inner and outer nonimprovement counter bounds, respectively.
+$x$ represents the entirety of the flow vector. The vector $e_l \in \{0,1\}^{|L|}$ represents a vector with a 1 in coordinate $l$ and 0 elsewhere. Sets $\tilde N^+, \tilde N^-, \tilde N^\times$ represent the ADD, DROP and SWAP neighbors kept as candidates after the first pass of the neighborhood search, respectively, while $N^+, N^-, N^\times$ are the second-pass candidates. Bounds $\tilde N_{\text{max}}, N_{\text{max}}$ are the required numbers of candidates to be gathered during each pass. $Q^{\text{max}}_{\text{in}}, Q^{\text{max}}_{\text{out}}$ are the inner and outer non-improvement counter bounds, respectively.
 
 \begin{algorithmic}[1]
     \State // INITIALIZATION
-    \State \quad $y^{(0)} \gets y^*$ \Comment{current real-world fleete sizes}
+    \State \quad $y^{(0)} \gets y^*$ \Comment{current real-world fleet sizes}
     \State \quad $y_{\text{best}} \gets y^{(0)}$\Comment{best known solution and objective}
     \State \quad BestAccess $\gets$ Access$(y^{(0)})$\Comment{best known objective}
     \State \quad STM $\gets \emptyset$\Comment{tabu move list, equipped with tabu tenures}
     \State \quad LTM $\gets \emptyset$ \Comment{attractive solution set}
     \State \quad $T \gets T_0$\Comment{simulated annealing temperature}
     \State \quad $t \gets t_0$\Comment{tabu tenure}
-    \State \quad $Q_{\text{in}} \gets 0$\Comment{inner noninmrovement counter}
-    \State \quad $Q_{\text{out}} \gets 0$\Comment{outer noninmrovement counter}
+    \State \quad $Q_{\text{in}} \gets 0$\Comment{inner non-improvement counter}
+    \State \quad $Q_{\text{out}} \gets 0$\Comment{outer non-improvement counter}
     \For{$k = 1, \dots, K$} \Comment{search for a predetermined number $K$ of local moves}
     \State // NEIGHBORHOOD SEARCH
     \State $\tilde N^+ \gets \emptyset$ \Comment{tentative ADD neighborhood}
     \Repeat \Comment{first pass (ADD)}
     \State $l \gets$ random element of $L$ not yet considered during this loop
-    \If{$y^{(k)} + e_l$ satisfies vehicle limit bounds (\ref{model:1} - \ref{model:3})} \Comment{consider only design-fesible moves}
+    \If{$y^{(k)} + e_l$ satisfies vehicle limit bounds (\ref{model:1} - \ref{model:3})} \Comment{consider only design-feasible moves}
     \If{$e_l \notin$ STM or Access$(y^{(k)} + e_l) >$ BestAccess}
     \State $\tilde N^+ \gets \tilde N^+ \cup \{l\}$\Comment{keep non-tabu candidates (unless improved best)}
     \EndIf
@@ -36,7 +36,7 @@ $x$ represents the entirety of the flow vector. The vector $e_l \in \{0,1\}^{|L|
     \State $\tilde N ^- \gets \emptyset$ \Comment{tentative DROP neighborhood}
     \Repeat \Comment{first pass (DROP)}
     \State$l\gets $random element of $L$ not yet considered during this loop
-    \If{$y^{(k)} - e_l$ satisfies vehicle limit bounds (\ref{model:1} - \ref{model:3})} \Comment{consider only design-fesible moves}
+    \If{$y^{(k)} - e_l$ satisfies vehicle limit bounds (\ref{model:1} - \ref{model:3})} \Comment{consider only design-feasible moves}
     \If{$-e_l \notin$ STM or Access$(y^{(k)} - e_l) >$ BestAccess}
     \State $\tilde N^- \gets \tilde N^- \cup \{l\}$\Comment{keep non-tabu candidates (unless improved best)}
     \EndIf
@@ -83,10 +83,10 @@ $x$ represents the entirety of the flow vector. The vector $e_l \in \{0,1\}^{|L|
     \State BestAccess $\gets$ Access$(\tilde y^{(k,1)})$
     \EndIf
     \Else%67 
-    \State $Q_{\text{out}} \gets Q_{\text{out}} +1$ \Comment{nonimprovement iteration}
+    \State $Q_{\text{out}} \gets Q_{\text{out}} +1$ \Comment{non-improvement iteration}
     \State $Q_{\text{in}} \gets Q_{\text{in}} +1$
     \State $r \sim U[0,1]$\Comment{random variable drawn uniformly from $[0,1]$}
-    \If{$r <\text{exp}\{-[\text{Access}(y^{(k)}) - \text{Access}(\tilde y^{(k, 1)})]/T\}}$
+    \If{$r <\text{exp}\{-[\text{Access}(y^{(k)}) - \text{Access}(\tilde y^{(k, 1)})]/T\}$}
     \State increment $t$ \Comment{SA criterion passed}
     \State $y^{(k+1)} \gets \tilde y^{(k,1)}$ \Comment{move to non-improving neighbor}
     \State make undoing the DROP/ADD moves of $y^{(k+1)}$ tabu with tenure $t$
@@ -111,13 +111,13 @@ $x$ represents the entirety of the flow vector. The vector $e_l \in \{0,1\}^{|L|
     \State remove moves from STM whose tenures have elapsed
     \State apply cooling schedule to $T$
     \EndFor
-    \State \Return $(y_\text{best}, \text{BestAcess})$
+    \State \Return $(y_\text{best}, \text{BestAccess})$
 \end{algorithmic}
 
-After the algortihm terminates and we obtain the best known solution, we conduct an exhaustive local search starting at $y_\text{best}$. In each iteration of this local search we consider every possible ADD, DROP, and SWAP move without considering tabu rules, always taking the best neighbor and terminating when no neighbors offer any improvement. The final result is guaranteed to be locally optimal.
+After the algorithm terminates and we obtain the best known solution, we conduct an exhaustive local search starting at $y_\text{best}$. In each iteration of this local search we consider every possible ADD, DROP, and SWAP move without considering tabu rules, always taking the best neighbor and terminating when no neighbors offer any improvement. The final result is guaranteed to be locally optimal.
 
 \chapter{Data used}\label{app:data}
-All data used for this study. Community and travel data was created following methodology in Section \ref{sec:appliedmodel}. Other data, like bus-schedule, bus-stops and GP-office data, was only formatted after being aquired. All used \texttt{.csv}-files can be found on \cite{dataHub}. Note that data related to the bus-schedule and general practitioners may be outdated as these are prone to modification.
+All data used for this study. Community and travel data was created following methodology in Section \ref{sec:appliedmodel}. Other data, like bus-schedule, bus-stops and GP-office data, was only formatted after being acquired. All used \texttt{.csv}-files can be found on \cite{dataHub}. Note that data related to the bus-schedule and general practitioners may be outdated as these are prone to modification.
 
 \section{Communities}\label{app:communities}
 % TODO: coordinaten weglaten (alleen in github) en dan tabellen kleiner en plaatjes groter
@@ -140,9 +140,9 @@ All data used for this study. Community and travel data was created following me
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{pc4_community_centers.png}
-    \caption{Used PC4 regions. Community center points are based on rough centerpoint of each region.}
+    \caption{Used PC4 regions. Community center points are based on rough center point of each region.}
 \end{figure}
-Population and location data for PC4 regions. Location is based on the rough centerpoint of each region, coordinates can be found on \cite{dataHub}. Population is taken from \cite{allecijfers}.
+Population and location data for PC4 regions. Location is based on the rough center point of each region, coordinates can be found on \cite{dataHub}. Population is taken from \cite{allecijfers}.
 
 \begin{center}
     \begin{tabular}{|c|c||c|c|}
@@ -165,7 +165,7 @@ Population and location data for PC4 regions. Location is based on the rough cen
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.75\textwidth]{vor_community_centers_2.png}
-    \caption{Used voronoi regions. Center points are based on bus stops defining each region. PC4 border data is taken from \cite{pc4map}.}
+    \caption{Used Voronoi regions. Center points are based on bus stops defining each region. PC4 border data is taken from \cite{pc4map}.}
 \end{figure}
 
 Population data for generated Voronoi regions, location data can be found on \cite{dataHub}.

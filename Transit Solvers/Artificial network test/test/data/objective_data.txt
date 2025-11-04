@@ -1,5 +1,0 @@
-Field	Value
-Elements	3
-Lowest	6
-Gravity_Falloff	1.0
-Multiplier	10000000000000000

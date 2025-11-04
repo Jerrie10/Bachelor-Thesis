@@ -1,17 +1,17 @@
 \chapter{Relevant mathematics}\label{sec:relevantmath}
 \section{Voronoi}\label{sec:voronoi}
-Following the definition in \cite{voronoibook}, a voronoi diagram is given by a set $\Phi = \{x_i\}$ of weightpoints in a metric space $X$.  Each weightpoint generates a region
+Following the definition in \cite{voronoibook}, a Voronoi diagram is given by a set $\Phi = \{x_i\}$ of weight  points in a metric space $X$.  Each weight  point generates a region
 \begin{equation*}
     C(x_i | \Phi) = \{y\in X:  d(x_i, y)  \leq
     d(x_j,y) \hs \forall x_j \in \Phi\},
 \end{equation*}
-where $d$ denotes some distance function. It follows that each voronoi region $C(x_i|\Phi)$ contains all points that have $x_i$ as nearest weightpoint.
+where $d$ denotes some distance function. It follows that each Voronoi region $C(x_i|\Phi)$ contains all points that have $x_i$ as nearest weight  point.
 
-Applications of voronoi diagrams can be found in many fields. Consider for example the placement of automated external defibrillator (AED) boxes in a city. An even spread of these boxes would theoretically save the most people. The positions of these boxes could be used as weightpoints, with the euclidian distance in $\R^2$. This results in a voronoi diagram where smaller regions represent boxes that are relativily close to each other, while larger regions represent boxes that are far from others. This information could be used to move or add boxes, and thus getting a more even distribution.
+Applications of Voronoi diagrams can be found in many fields. Consider for example the placement of automated external defibrillator (AED) boxes in a city. An even spread of these boxes would theoretically save the most people. The positions of these boxes could be used as weight  points, with the euclidean distance in $\R^2$. This results in a Voronoi diagram where smaller regions represent boxes that are relatively close to each other, while larger regions represent boxes that are far from others. This information could be used to move or add boxes, and thus getting a more even distribution.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{vorGorlaeus.jpg}
-    \caption{Entrance of Gorlaeus building of Leiden University, with voronoi diagram as decoration. Picture taken from \cite{vorGorlaeus}.}
+    \caption{Entrance of Gorlaeus building of Leiden University, with Voronoi diagram as decoration. Picture taken from \cite{vorGorlaeus}.}
 \end{figure}
 
 \section{Neighborhood search algorithms}
@@ -108,11 +108,11 @@ The algorithm also keeps track of how long it has been running, terminating in l
 
 In line~\ref{alg:tabu:update} we `update $M$', the rules we use to do this are called \emph{tabu tenures}. We will look at some tenures that can be used. One way is to remember some or all of the previous solutions that are visited. Moves that go to those solutions are tabu, others are not.
 
-Another way is to remember what kind of moves have been done recently. In our example of Figure~\ref{fig:hillclimb}, the moves are (up-and-right) and (up). We could update $M$ by making the reversal of these moves tabu for a number $h$ of iterations. The set $M$ would then be defined by $M = \{m\inv : m = m_l \text{ for } l > k - h\}$, where $m\inv$ is the inverse of $m$, $m\inv(m(s)) = s$. The tabu moves in our example would then be (down-and-left) and (down). By not allowing the reversal of moves, the algorithm looks to diversify the evaluated solutions agressively. Because these moves become non-tabu after a relatively small number of iterations, we call this the \emph{Short Term Memory} (STM).
+Another way is to remember what kind of moves have been done recently. In our example of Figure~\ref{fig:hillclimb}, the moves are (up-and-right) and (up). We could update $M$ by making the reversal of these moves tabu for a number $h$ of iterations. The set $M$ would then be defined by $M = \{m\inv : m = m_l \text{ for } l > k - h\}$, where $m\inv$ is the inverse of $m$, $m\inv(m(s)) = s$. The tabu moves in our example would then be (down-and-left) and (down). By not allowing the reversal of moves, the algorithm looks to diversify the evaluated solutions aggressively. Because these moves become non-tabu after a relatively small number of iterations, we call this the \emph{Short Term Memory} (STM).
 
 We can also define \emph{Long Term Memory} (LTM) in multiple ways. One of which is by remembering second-best solutions that were not chosen during an iteration. These could be revisited if the algorithm does not improve for a set amount of iterations (line~\ref{alg:tabu:iterstop}).
 
-If we say moves can not be inverted for $h = 2$ iterations, we take a maximum of $K = 12$ total and $I = 4$ non-improvent iterations and apply the TS to the grid in Figure~\ref{fig:hillclimb}, we get the path displayed in Figure~\ref{fig:tabusearch}.
+If we say moves can not be inverted for $h = 2$ iterations, we take a maximum of $K = 12$ total and $I = 4$ non-improvement iterations and apply the TS to the grid in Figure~\ref{fig:hillclimb}, we get the path displayed in Figure~\ref{fig:tabusearch}.
 
 
 \begin{figure}[h]
@@ -153,14 +153,14 @@ If we say moves can not be inverted for $h = 2$ iterations, we take a maximum of
 Note that this path still does not give the optimal value. In this case the optimal value would probably be achieved by increasing tenure $h$, forcing less loops to be walked. Exactly knowing which tenure rules and associated parameters (in our case $h, K, I$) is impossible. Through trial and error we can come close, but Tabu Search will always be a heuristic approach.
 
 \subsection{Simulated annealing}\label{sec:simann}
-Where TS agressively searches for different options, \emph{Simulated Annealing} (SA) gently moves around, believing the final local optimum it visits to be close in value to a global optimum. It is named after a technique in metallurgy where a material is heated and cooled in a slow, controlled fashion, resulting in a change in physical properties.
+Where TS aggressively searches for different options, \emph{Simulated Annealing} (SA) gently moves around, believing the final local optimum it visits to be close in value to a global optimum. It is named after a technique in metallurgy where a material is heated and cooled in a slow, controlled fashion, resulting in a change in physical properties.
 
 Just like the hill climb heuristic and TS, each iteration generates neighbors $N(s)$ of current solution $s$. Instead of choosing the neighbor with optimal value, it picks one solution $s^*$ at random. It then compares the two solutions by defining the difference in \emph{Energy} (SA's term for the objective value)
 \begin{equation*}
     \delta E = f(s^*) - f(s).
 \end{equation*}
 
-If $\delta E$ is positive, neighbor $s^*$ is a better solution than $s$, so SA always makes the move to $s^*$. If $\delta E$ is negative, SA makes the move with probability $\exp(\delta E / T)$, where $T$ is the temparture of the model. A small decrease in energy or a large temperature make the probability of making sub-optimal moves higher. After each iteration, a cooling schedule is used to lower $T$ for the next iteration. This stimulates that the algorithm can make lots of suboptimal moves at the start, and almost no suboptimal moves towards the end, with the hope that it is near a global maximum after some time. One example of pseudocode is the following
+If $\delta E$ is positive, neighbor $s^*$ is a better solution than $s$, so SA always makes the move to $s^*$. If $\delta E$ is negative, SA makes the move with probability $\exp(\delta E / T)$, where $T$ is the temparature of the model. A small decrease in energy or a large temperature make the probability of making sub-optimal moves higher. After each iteration, a cooling schedule is used to lower $T$ for the next iteration. This stimulates that the algorithm can make lots of suboptimal moves at the start, and almost no suboptimal moves towards the end, with the hope that it is near a global maximum after some time. One example of pseudocode is the following
 
 \hfill
 \begin{algorithmic}[1]
@@ -186,11 +186,11 @@ If $\delta E$ is positive, neighbor $s^*$ is a better solution than $s$, so SA a
 
 \hfill
 
-There is also a choice to be made about the cooling procedure at line~\ref{alg:sa:cooling}. Common choices can be to multiply $T$ by some other parameter $\alpha$, decreasing the temperature by say $5\%$ per iteration, or letting $T$ decrease linearly. Cooling can also change dinamically while running. Different choices in cooling procedure influence how erratic the alogrithm behaves during runtime.
+There is also a choice to be made about the cooling procedure at line~\ref{alg:sa:cooling}. Common choices can be to multiply $T$ by some other parameter $\alpha$, decreasing the temperature by say $5\%$ per iteration, or letting $T$ decrease linearly. Cooling can also change dynamically while running. Different choices in cooling procedure influence how erratic the algorithm behaves during runtime.
 
 The starting and ending temperatures $T_0, T'$ can also be chosen, where total runtime, and energy of a given solution need to be considered.
 
-As SA is random, exact paths for the grid in Figure~\ref{fig:hillclimb} can not be made. To illustrate the random nature of SA, we apply it to the grid with the same starting position (bottom left) for ten runs. The following parameters are used: starting temperature $T_0 = 10$, ending temperature $T' = 0.5$ and we cool the system by multiplying with $\alpha = 0.95$ after eacht iteration. The results are shown in Figure~\ref{fig:simanealling}. The algorithm terminates in the values 7 (bottom right), 8 and 9 (top right) each three times and the 10 in the top left a single time.
+As SA is random, exact paths for the grid in Figure~\ref{fig:hillclimb} can not be made. To illustrate the random nature of SA, we apply it to the grid with the same starting position (bottom left) for ten runs. The following parameters are used: starting temperature $T_0 = 10$, ending temperature $T' = 0.5$ and we cool the system by multiplying with $\alpha = 0.95$ after each iteration. The results are shown in Figure~\ref{fig:simanealling}. The algorithm terminates in the values 7 (bottom right), 8 and 9 (top right) each three times and the 10 in the top left a single time.
 
 \begin{figure}[h]
     \centering

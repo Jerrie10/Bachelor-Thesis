@@ -1,3 +1,0 @@
-Field	Value
-Elements	1
-Horizon	540.0
