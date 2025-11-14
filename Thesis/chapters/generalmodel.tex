@@ -64,7 +64,7 @@ The chosen metric $A_i(y)$ is \emph{gravity-based}, meaning that the attractiven
 
 As the users can choose between facilities, a competition-related metric $F_j(y)$ is used to find the crowdedness of facilities. It is defined as
 \begin{equation*}
-    F_j(y) = \sum_{k\in \tilde V^+} P_k d_{kj}^{-\beta}(y) \quad \forall j\in \tilde V^-
+    F_j(y) = \sum_{k\in \tilde V^+} P_k d_{kj}^{-\beta}(y) \quad \forall j\in \tilde V^-,
 \end{equation*}
 where $P_k$ is the population of community $k$ and $d_{kj}^{-\beta}(y)$ is the previously mentioned gravity decay. This crowdedness can be compared to the quality $S_j$ of a facility, usually taken as some metric of patient capacity.
 
@@ -88,14 +88,14 @@ The parameter $\K$ needs to be chosen between 1 and $|\tilde V^+|$, where extrem
 The SAMP model takes the shape of the following nonlinear program
 \begin{flalign}
     \text{max}_y \hspace{2mm}
-     & \label{model:1} \text{Access}(y)                                                              \\
+     & \label{model:1} \text{Access}(y)                                                               \\
     \text{s.t.}\hspace{2mm}
-     & \label{model:2} \sum_{l\in L}y_l \leq \sum_{l\in L}y_l^*                                      \\
-     & \label{model:3} y_l^{\text{min}} \leq y_l \leq y_l^{\text{max}} \hspace{2mm} \forall l \in L  \\
-     & \label{model:4} y_l \in \mathds{N}\hspace{15mm}  \forall l\in L                               \\
-     & \label{model:5} x = \text{TransitAssignment}(y)                                               \\
+     & \label{model:2} \sum_{l\in L}y_l \leq \sum_{l\in L}y_l^*                                       \\
+     & \label{model:3} y_l^{\text{min}} \leq y_l \leq y_l^{\text{max}} \hspace{2mm} \forall l \in L   \\
+     & \label{model:4} y_l \in \mathds{N}\hspace{15mm}  \forall l\in L                                \\
+     & \label{model:5} x = \text{TransitAssignment}(y)                                                \\
     %& \text{OperatorCost}(y,x) \leq (1+\varepsilon)\text{OperatorCost}(y^*,x^*)    \\
-     & \label{model:6} \text{UserCost}(x, \omega) \leq (1+\varepsilon)\text{UserCost}(x^*, \omega^*)
+     & \label{model:6} \text{UserCost}(x, \omega) \leq (1+\varepsilon)\text{UserCost}(x^*, \omega^*).
 \end{flalign}
 Where Eq. (\ref{model:1}) is the objective function described in section \ref{sec:access}, Eq. (\ref{model:2}) constrains the total number of vehicles to not increase from the initial amount, Eq. (\ref{model:3}) ensures upper and lower bounds for vehicle allocation, Eq. (\ref{model:4}) ensures a whole number of vehicles is allocated to each line, Eq. (\ref{model:5}) defines user flow as discussed in section \ref{sec:assignment} and Eq. (\ref{model:6}) gives an upper bound to the increase in user cost.
 
