@@ -3,37 +3,21 @@
 \end{abstract}
 
 \chapter{Introduction}
+The current bus schedule in the city of Leiden is focussed on daily commuters, with a heavy focus on taking people to and from Leiden Centraal, the main train station. Although this is beneficial, enabling commuters to not travel by car, not all trips are concerned with accessing a train station. Trips within the city, like a visit to someones general practitioners office, are less supported. People that can not walk or cycle very far, like the disabled and the elderly, have a lower mobility. Taking a bus should be a good alternative for them.
 
-This study expands on an article written by A. Rumpf and H. Kaul, where they develop a model to optimize the social accessibility of a transit network, under the constraint that user costs do not increase too much and that there is no need for purchasing more vehicles or redrawing bus lines. This results in a new schedule that can immediately be implemented with minimal effort, thus increasing the likelihood it will be. Their approach consists of reallocating vehicles between lines, consequently altering line frequencies and thus the distance one can travel within a reasonable time.
+To make the bus a viable alternative, we could rework the bus schedule. We do need to keep in mind that the group we are optimizing for is very small, so the cost for normal users and the transit operator should not increase too much. For this, a model was developed by A. Rumpf and H. Kaul, where they optimize the social accessibility of a transit network \cite{rumpf}.
 
-This model uses a transit network, a set of community centers as origins, and a set of facility locations as destinations. They define an accessibility metric for a given origin region, putting a numerical value on how accessible the facilities are from that region, higher being better. The model then tries to maximize the worst regions, thus making the social access more equitable. They also develop an algorithm to solve it, and then use it on the real transit network of the Chicago area. They also run computational trials on an artificial network.
+This model is constrained by not allowing user time to increase too much, and not allowing new vehicles to be purchased, or transit lines to be redrawn. The last two vastly limit the implementation cost for the operator, allowing the new transit schedule to be implemented immediately with minimal effort, thus increasing the likelyhood it will be.
 
-Their definition of social access stems from the fact that some people are too poor to have a car, thus limiting their mobility. Since wealth is generally not uniformly distributed over a city like Chicago, some communities being significantly wealthier than others, and the poorer regions generally having less healthcare facilities, not having a car significantly limits a persons access to healthcare. The group with limited mobility is assumed to be quite small, this is the main reason for the constraint where user costs can not increase too much. We formulate this in the following assumption:
+Their approach consists of reallocating vehicles between lines, consequently altering line frequencies and thus the distance one can travel within a reasonable time. This model uses a transit network, a set of community centers as origins, and a set of facility locations as destinations. They define an accessibility metric for a given origin region, putting a numerical value on how accessible the facilities are from that region, higher being better. The model then tries to maximize the worst regions, thus making the social access more equitable. They also develop an algorithm to solve it, and then use it on the real transit network of the Chicago area. They also run computational trials on an artificial network.
+
+Their definition of social access stems from the fact that some people are too poor to have a car, thus limiting their mobility. Since wealth is generally not uniformly distributed over a city like Chicago, some communities being significantly wealthier than others, and the poorer regions generally having less healthcare facilities, not having a car significantly limits a persons access to healthcare. As stated previously, the group with limited mobility is assumed to be quite small, this is the main reason for the constraint where user costs can not increase too much. We formulate this in the following assumption:
 
 \begin{assumption}\label{assum:smallgroup}
     The group of people the model is made for is very small compared to daily travelers. Therefore, this small group will have no effect on over-crowdedness or other usage related metrics.
 \end{assumption}
 
-In this study, we use a different cause of limited mobility for a person, not being able to walk or bike long distances. This applies mainly to (temporarily) disabled people and the elderly, which are groups that are more likely to need healthcare. We also note that the Chicago area used in \cite{rumpf} is very large, the total area can include both Rotterdam, The Hague and everything in between.
-
-\begin{comment}
-\begin{figure}[h]
-    \centering
-    \begin{subfigure}{0.18\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{chicago.png}
-
-    \end{subfigure}
-    \hspace{0.02\textwidth}
-    \begin{subfigure}{0.5\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{zuid_holland_kaart.pdf}
-    \end{subfigure}
-    \caption{To scale maps of City of Chicago (left, taken from \cite{rumpf}) and province of South-Holland containing Rotterdam and The Hague (right, taken from \cite{zhkaart}).}
-\end{figure}
-\end{comment}
-
-This study uses a much smaller study area, namely the municipality of Leiden and its bus system. This area will be divided into community regions in two ways. Firstly by the PC4 regions originating from the postcode system used in the Netherlands. It will also be divided by Voronoi regions to simulate everyone using their nearest bus stop, instead of one that is further away.
+Note that the Chicago area used in \cite{rumpf} is very large, the total area can include both Rotterdam, The Hague and everything in between. This study uses a much smaller study area, namely the municipality of Leiden and its bus system. This area will be divided into community regions in two ways. Firstly by the PC4 regions originating from the postcode system used in the Netherlands. It will also be divided by Voronoi regions to simulate everyone using their nearest bus stop, instead of one that is further away.
 
 Both these methods result in smaller regions and thus in more accurate results at the cost of larger computing times. This study aims to find out how large this penalty in computing time is, relative to the increase in performance. Resulting schedules will also be compared to see if and how they differ.
 
