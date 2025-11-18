@@ -70,7 +70,7 @@ We will use this algorithm to find the highest value in the following grid, star
     \label{fig:hillclimb}
 \end{figure}
 
-Note that we get stuck in a cell with value 5, while there are multiple cells with higher values. The cells near our endpoint is higher than its neighbors, we call this a \emph{local optimum}. To avoid getting stuck in local optima, many methods haven been developed. We dicuss two of those methods, both relying on allowing suboptimal moves. Just like NS, these are heuristic approaches to optimization problems.
+Note that we get stuck in a cell with value 5, while there are multiple cells with higher values. The cell with our endpoint is higher than its neighbors, we call this a \emph{local optimum}. To avoid getting stuck in local optima, many methods have been developed. We discuss two of those methods, both relying on allowing suboptimal moves. Just like NS, these are heuristic approaches to optimization problems.
 
 \subsection{Tabu search}\label{sec:tabu}
 Tabu Search (TS) is an NS algorithm that avoids getting stuck early by using a subset $M \subset N$ containing \emph{tabu moves}, or forbidden moves. The process of adding or removing moves to or from $M$ can be defined in many ways, we will go over the ones used in this study. An example of general TS pseudocode is the following.
@@ -160,7 +160,7 @@ Just like the hill climb heuristic and TS, each iteration generates neighbors $N
     \delta E = f(s^*) - f(s).
 \end{equation*}
 
-If $\delta E$ is positive, neighbor $s^*$ is a better solution than $s$, so SA always makes the move to $s^*$. If $\delta E$ is negative, SA makes the move with probability $\exp(\delta E / T)$, where $T$ is the temparature of the model. A small decrease in energy or a large temperature make the probability of making sub-optimal moves higher. After each iteration, a cooling schedule is used to lower $T$ for the next iteration. This stimulates that the algorithm can make lots of suboptimal moves at the start, and almost no suboptimal moves towards the end, with the hope that it is near a global maximum after some time. One example of pseudocode is the following
+If $\delta E$ is positive, neighbor $s^*$ is a better solution than $s$, so SA always makes the move to $s^*$. If $\delta E$ is negative, SA makes the move with probability $\exp(\delta E / T)$, where $T$ is the temperature of the model. A small decrease in energy or a large temperature make the probability of making sub-optimal moves higher. After each iteration, a cooling schedule is used to lower $T$ for the next iteration. This stimulates that the algorithm can make lots of suboptimal moves at the start, and almost no suboptimal moves towards the end, with the hope that it is near a global maximum after some time. One example of pseudocode is the following
 
 \hfill
 \begin{algorithmic}[1]
@@ -174,7 +174,7 @@ If $\delta E$ is positive, neighbor $s^*$ is a better solution than $s$, so SA a
     \If{$\delta E > 0$}
     \State Set $s = s^*$.
     \Else
-    \State Set $r \sim U[0,1]$. \Comment{random variable drawn uniformly form $[0,1]$}
+    \State Set $r \sim U[0,1]$. \Comment{random variable drawn uniformly from $[0,1]$}
     \If{$r < \exp(\delta E / T)$}
     \State Set $s = s^*$.
     \EndIf
@@ -238,7 +238,7 @@ As SA is random, exact paths for the grid in Figure~\ref{fig:hillclimb} can not 
 
         \end{tikzpicture}
     \end{subfigure}
-    \caption{SA heuristic on a grid, chosen parameters are $T_0 = 10,\hs \alpha = 0.95,\hs T' = 0.5$, with $T := T\cdot \alpha$ as the cooling method . Left grid displays a single run of the SA algorithm, it walks seemingly at random until terminating at the cell valued 8 in the top right. The right grid displays ten different runs of the algorithm. Terminal values are: 7 in bottom right, 8 and 9 top right each three times and the 10 in the top left a single time.}
+    \caption{SA heuristic on a grid, chosen parameters are $T_0 = 10,\hs \alpha = 0.95,\hs T' = 0.5$, with $T := T\cdot \alpha$ as the cooling method. Left grid displays a single run of the SA algorithm, it walks seemingly at random until terminating at the cell valued 8 in the top right. The right grid displays ten different runs of the algorithm. Terminal values are: 7 in bottom right, 8 and 9 top right each three times and the 10 in the top left a single time.}
     \label{fig:simanealling}
 \end{figure}
 

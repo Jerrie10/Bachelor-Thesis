@@ -4,7 +4,7 @@ This section summarizes the general model and algorithm developed by Rumpf and K
 % TODO rewrite: less dry, less ramming definitions, more flow. Fix foutieve contaminaties
 The algorithm made by Rumpf and Kaul in \cite{rumpf} was made to solve the \emph{social access maximization problem} (SAMP). The formulation of the problem is very general as to be applicable to many situations.
 
-The network is made up of considered transit lines in set $L$. Here, each transit line $l\in L$ is a series of stops with a given travel time between each stop. Each line can have a type of vehicle assigned to it, so a network with different modes (like trains and busses) is possible.
+The network is made up of considered transit lines in set $L$. Here, each transit line $l\in L$ is a series of stops with a given travel time between each stop. Each line can have a type of vehicle assigned to it, so a network with different modes (like trains and buses) is possible.
 
 Each line $l$ has an amount of vehicles, called fleet size, assigned $y_l \in \N$ to it. These vehicles are allocated for the entire time horizon $\tau$. Each line also has a circuit time $\tau_l$, being the time it takes to travel a single loop of its schedule. After its circuit time is elapsed, the vehicle starts its next trip. Overall frequency of a line is thus dependent on amount of vehicles $y_l$ and circuit time $\tau_l$, it is given by
 \begin{equation*}
@@ -36,12 +36,12 @@ Just like the node set, the arc set $A$ is partitioned in subsets. Let $A_{line}
 \end{figure}
 
 \section{Transit Assignment}\label{sec:assignment}
-The transit assignment model, TransitAssignment$(y)$, models the way daily users interact with a given schedule $y$. It assumes users try to take their optimal route, which may not be the fastest due to over-crowdedness. The flow produced by the model is called \emph{user-optimal flow} and is often less optimal then when all flow is controlled directly.
+The transit assignment model, TransitAssignment$(y)$, models the way daily users interact with a given schedule $y$. It assumes users try to take their optimal route, which may not be the fastest due to over-crowdedness. The flow produced by the model is called \emph{user-optimal flow} and is often less optimal than when all flow is controlled directly.
 
 There are many such models, but Rumpf and Kaul choose the nonlinear model by Spiess and Florian in \cite{spiess}. This model increases arc cost based on crowdedness, discouraging flows from exceeding line capacity. The user-optimal flow output can not be changed in a way that individual users benefit from changes in only their route. The model is relatively simple, a desired property, as the model is run many times during the algorithm.
 
 \section{Costs}\label{sec:costs}
-Generally, operator costs are monetary costs relevant to running the transit system. Things like purchasing and maintaining vehicles, employing drivers and other staff and other costs. In this study, we restrict the total number of busses to not increase. This gives no reason to purchase new vehicles or employ more drivers, so we assume that operator costs will not increase with a new schedule. This means that we can omit the operator cost constraint from the model.
+Generally, operator costs are monetary costs relevant to running the transit system. Things like purchasing and maintaining vehicles, employing drivers and other staff and other costs. In this study, we restrict the total number of buses to not increase. This gives no reason to purchase new vehicles or employ more drivers, so we assume that operator costs will not increase with a new schedule. This means that we can omit the operator cost constraint from the model.
 
 User costs are time costs made by using the system. Things like travel time, wait time, number of transfers and discomfort. All the user costs can be weighted based on transfer mode, 5 minutes of walking may weigh more than 5 minutes of bus riding for example. For each $(i,j)\in A$ a flow amount $x_{ij}$ and cost $c_{ij}$ can be implemented. Flow amount represents the amount of users taking that arc, while cost represents some penalty in using that arc, like time needed to traverse it. The user cost function takes the form
 \begin{equation*}
