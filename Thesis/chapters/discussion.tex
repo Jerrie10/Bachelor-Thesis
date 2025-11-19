@@ -16,6 +16,10 @@ This could however be caused by the specifics of this case study, like the whole
 
 A method of accounting for this would be to obtain actual OD-data, something we had to estimate in Section~\ref{sec:OD-data}. This could give a more accurate restriction on the amount of busses that these lines are required to have, as too few busses would mean that they are too full and thus highly discouraged picks by the algorithm. It would also make the user cost constraint \ref{sec:costs} much stronger, as well as any attempt at convincing the transit operator Qbuzz that the resulting schedule is worth it easier.
 
+In the Chicago case of \cite{rumpf}, they also needed to estimate the specific OD-data. They managed to acquire partial data, consisting of only the average number of people boarding at each bus stop. They then assumed all trips also return by bus, so the number of alightings at each bus stop is equal to the number of boardings over a day. The eventual OD-matrix they got was constructed by using iterative proportional fitting (IPF) \cite{PestonMauriceH1971[vBM} on the boarding and alighting data. This method could also be used to estimate the OD-data, if only boarding data is provided.
+
+Even better would be to use data kept by Translink, the company behind the OV-chipkaart and OV-pay. They may have complete OD-data, including cases where a traveler combines two buses via a transfer. This would make the user cost constraint very accurate.
+
 This could also be combined with simulating for the entire concession region where the current operator is active. This would mean a larger study area, where bus lines are not cut off as they would not leave the area. As this area is quite large, an argument can be made to include the train schedule in this study.
 
 We also can not attribute the better performance of the Voronoi case to the method of defining regions directly. The increase in performance could also be attributed to the regions being smaller. This could be researched by defining even smaller regions, like dividing the study area in 100m by 100m squares, and seeing if smaller regions keep getting better performance.
